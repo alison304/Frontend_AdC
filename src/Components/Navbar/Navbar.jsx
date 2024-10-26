@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import Tabs from '@mui/material/Tabs';
 import { AppBar, Toolbar, Typography, useMediaQuery, Tab, useTheme} from '@mui/material';
-import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
 import MyDrawer from './MyDrawer';
+import logoVajilla from '../../../public/images/logo-aura.png'
+import { FaUser } from "react-icons/fa";
+import { FiShoppingCart } from "react-icons/fi";
 
 const IconNavbar = ['Catalogo', 'Tematicas', 'Premium set', 'Contáctanos'];
 const Navbar = () => {
@@ -14,12 +16,12 @@ const Navbar = () => {
 
   return (
     <React.Fragment>
-      <AppBar position='static' sx={{background: '#ebe9e9'}}>
-        <Toolbar sx={{height: '77px', backgroundColor:"#655e5e"}}>
-          <AutoAwesomeIcon sx={{ transform: "scale(1.2)" }}/>
-          <Typography sx={{ fontSize: "1.5 rem", paddingLeft: "1%",fontWeight:'bold' }}>
-            Aurora de Cristal
-          </Typography>
+      <AppBar position='static'>
+        <Toolbar sx={{height: '77px', backgroundColor:"#ebe9e9"}}>
+        <img src={logoVajilla} width={75} height={75} alt="Logo-icon" />
+        <Typography sx={{ fontSize: "1rem", paddingLeft: "1%",fontWeight:'300', fontStyle: 'italic' }}>
+          Tus recuerdos en porcelana
+        </Typography>
             {
               isMatch ? (
                 <>
@@ -32,7 +34,7 @@ const Navbar = () => {
                   textColor='inherit' 
                   value={value} 
                   onChange={(e,value) => setValue(value)} 
-                  indicatorColor="primary"
+                  indicatorColor="secondary"
                   centered
                   >
                     {
@@ -41,6 +43,8 @@ const Navbar = () => {
                         ))
                       }
                 </Tabs>
+                <FiShoppingCart size={35} />
+                <FaUser size={30} />
                 </>
               )
             }

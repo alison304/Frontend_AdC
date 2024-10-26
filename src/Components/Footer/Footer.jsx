@@ -1,45 +1,45 @@
 import React from 'react';
-import {FooterContainer, Title, FooterLinksContainer, FooterWrap, FooterLogoItems, FooterLinksWrapper, FooterLinkTitle, FooterLink, FooterLinkItems} from './FooterElem';
-import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
-import PlaceIcon from '@mui/icons-material/Place';
-import CallIcon from '@mui/icons-material/Call';
-import MailIcon from '@mui/icons-material/Mail';
-import facebook from '../../../public/images/ico-facebook.png'
+import {FooterContainer, FooterLinksContainer, FooterWrap, FooterLogoItems, FooterLinksWrapper, FooterLinkTitle, FooterLink, FooterLinkItems} from './FooterElem';
+import { Typography } from '@mui/material';
+import { FaFacebook } from "react-icons/fa";
+import { RiInstagramFill } from "react-icons/ri";
+import { FaSquareWhatsapp } from "react-icons/fa6";
+import { FaSquareXTwitter } from "react-icons/fa6";
+import logoVajilla from '../../../public/images/logo-aura.png'
 
 const Footer = () => {
   return (
     <React.Fragment>
       <FooterContainer>
-       <FooterLogoItems>
-          <Title><AutoAwesomeIcon sx={{ transform: "scale(1)" }}/>Aura de Cristal</Title>
+        <FooterLogoItems>
+          <img src={logoVajilla} width={70} height={70} alt="Logo-icon" />
+          <Typography sx={{ fontSize: "0.8rem", paddingLeft: "1%",fontWeight:'bold' }}>
+            Copyright© 2024
+          </Typography>
         </FooterLogoItems>
         <FooterWrap>
           <FooterLinksContainer>
             <FooterLinksWrapper>
               <FooterLinkItems>
-                <PlaceIcon sx={{fontSize:'20', width: '3em'}}/>
-                <FooterLinkTitle>Oficina</FooterLinkTitle>
-                <FooterLink>Calle 13, Lima, Perú</FooterLink>
+                <FaFacebook size={30} />
               </FooterLinkItems>
             </FooterLinksWrapper>
             <FooterLinksWrapper>
               <FooterLinkItems>
-                <CallIcon sx={{fontSize:'20', width: '3em'}}/>
-                <FooterLinkTitle>Teléfonos</FooterLinkTitle>
-                <FooterLink>(51)987654321</FooterLink>
+                <RiInstagramFill size={30} />
               </FooterLinkItems>
             </FooterLinksWrapper>
             <FooterLinksWrapper>
               <FooterLinkItems>
-              <MailIcon sx={{fontSize:'20', width: '3em'}}/>
-                <FooterLinkTitle>Escribenos</FooterLinkTitle>
-                <FooterLink>info@adc.com</FooterLink>
+                <FaSquareXTwitter size={30} />
+              </FooterLinkItems>
+            </FooterLinksWrapper>
+            <FooterLinksWrapper>
+              <FooterLinkItems>
+                <FaSquareWhatsapp size={30} />
               </FooterLinkItems>
             </FooterLinksWrapper>
           </FooterLinksContainer>
-          <div className='footIcons'>
-            <img src={facebook} width={20} height={20} alt="Facebook Icon" />
-          </div>
         </FooterWrap>
       </FooterContainer>
     </React.Fragment>
