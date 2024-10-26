@@ -4,12 +4,20 @@
 ## Integrantes ✨
 
 - [Alison Paico](https://github.com/alison304)
-- [Gabriela Galvis]
+- [Gabriela Galvis](https://github.com)
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
 
 ---
 ## Acerca de ✨
 
-El repositorio de articulos de vajilla fue desarrollado: el frontend con Javascript y el backend en Java Spring Boot para el Proyecto Integrador de Digital House.
+El repositorio de articulos de vajilla fue desarrollado: el frontend con React con Vite y el backend en Java Spring Boot para el Proyecto Integrador de Digital House.
 
 ---
 
