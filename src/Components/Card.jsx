@@ -10,14 +10,14 @@ const Card = ({dato,esCategoria}) => {
       {esCategoria ? (
       <>
         <h3 className={StylesHome.nombreCategorias} >{dato.nombre}</h3>
-        <Link to={"/detail/" + dato.id} className={StylesHome.link}>
+        <Link to={'/listaProductos/'+dato.id} className={StylesHome.link}>
         <img src={dato.imagen} className={StylesHome.cardImg}/> 
         </Link>
       </>
       ) : (
         <>
          <h3 className={StylesHome.nombreCategorias} >{dato.nombre}</h3>
-         <Link to={"/detail/" + dato.id} className={StylesHome.link}>
+         <Link to={'/listaProductos/'+dato.id} className={StylesHome.link}>
         <img src={dato.imagen} className={StylesHome.cardImg}/> 
         </Link>
         <div className={StylesHome.recomendacionesPiezas}>

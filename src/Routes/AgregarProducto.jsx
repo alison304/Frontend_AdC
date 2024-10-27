@@ -12,12 +12,14 @@ function AgregarProducto({listaProductos,setListaProductos}) {
     }
 
     const [producto, setProducto] = useState({
-        id:1,
+        id:0,
         nombre: "",
         descripcion: "",
         precioAlquiler: 0.0,
         disponibilidad:0,
         inventario:0,
+        fechaRegistro: "2024-10-25",
+        categoria: { "idCategoria": 2 },
         imagenes:null
       });
     
