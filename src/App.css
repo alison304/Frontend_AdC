@@ -8,3 +8,13 @@
   font: inherit;
   vertical-align: baseline;
 }
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Ocupa toda la altura de la pantalla */
+  box-sizing: border-box; /* Evita que el padding y border sumen al tamaño total */
+  background-color: rgba(219, 189, 107, 0.4);
+  padding-bottom: 500px; /* Ajustar este valor según la altura del pie de página */
+
+}
