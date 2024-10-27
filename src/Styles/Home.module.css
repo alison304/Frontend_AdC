@@ -16,16 +16,15 @@
 .cardGrid{
     display: flex;
     justify-content: space-evenly;
-    gap: 1rem;
     height: auto;
     flex-wrap: wrap;
 }
 
 .cardImg {
-    width: 322px;
-    height: 329.49px;
-    object-fit: cover;
-    border-radius: 40px;
+    width: 70%;      /* La imagen se ajusta al ancho del contenedor */
+    height: 250px;     /* La altura se ajusta para mantener la proporción */
+    object-fit: cover; /* Asegura que la imagen llene el contenedor sin deformarse */
+    border-radius: 40px;   
 }
 
 .card{
@@ -33,9 +32,9 @@
     justify-content: space-around;
     flex-direction: column;
     align-items: center;
-    width: 200px;
-    padding: 0.5rem 0.5rem 0 0.5rem;
-    gap:30px;
+    width: 30%;  
+    padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+    margin-bottom: 5%;
   }
   
 .nombreCategorias{
@@ -45,4 +44,33 @@
     line-height: 34.82px;
     text-align: center;
 }
-  
+
+.recomendacionesPiezas{
+    width: 70%; 
+    display: flex;
+    justify-content: space-between;
+}
+
+.piezas, .calificacion{
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    font-style: italic;
+    font-weight: 400;
+    line-height: 29.05px;
+    text-align: center;  
+}
+
+.calificacion{
+    font-weight: 500;
+}
+
+.link{
+    width: 100%;
+    text-align: center;
+}
+/* Cuando la pantalla es de 900px o menos */
+@media (max-width: 900px) {
+    .piezas, .calificacion{
+        font-size: 14px;       
+    }
+}
