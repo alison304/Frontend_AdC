@@ -1,4 +1,4 @@
-import './App.css'
+import './Styles/App.css'
 import { Route, Routes } from "react-router-dom";
 import Navbar from "./Components/Navbar/Navbar";
 import Footer from "./Components/Footer/Footer";
@@ -41,12 +41,29 @@ function App() {
   ]); // Array de objetos con datos iniciales
 
   console.log(listaProductos);
+
+  const [listaCategorias, setlistaCategorias] = useState([
+    {
+        id:1,
+        nombre: "Vajilla",
+        imagen:"../public/images/vajilla.jpg"
+    },
+    {   id:2,
+        nombre: "Cubiertos",
+        imagen:"../public/images/cubierto.jpg"
+    },
+    {   id:3,
+        nombre: "Cristaleria",
+        imagen:"../public/images/cristaleria.jpg"
+    }
+  ]); // Array de objetos con datos iniciales
+
   return (
     <>
       <div>
         <Navbar/>
         <Routes>
-            <Route path='/' element={<Home/>}/>
+            <Route path='/' element={<Home listaCategorias={listaCategorias}/>}/>
             <Route path='*' element={<h2>Error 404</h2>}/>
             <Route path='/admin' element={<Administrador listaProductos={listaProductos}/>}/>/* Componente para agregar objetos */
             <Route path='/admin/agregarProducto' element={<AgregarProducto listaProductos={listaProductos} setListaProductos={setListaProductos}/>}/>

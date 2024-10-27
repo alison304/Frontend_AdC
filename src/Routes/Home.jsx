@@ -1,15 +1,19 @@
 import React from 'react'
+import StylesHome from '../Styles/Home.module.css'
+import Card from '../Components/Card'
 
-const Home = () => {
+const Home = ({listaCategorias}) => {
     
     return (
         <React.Fragment>
-            <img
-            src="https://images.pexels.com/photos/38519/macbook-laptop-ipad-apple-38519.jpeg?auto=compress&cs=tinysrgb&w=600"
-            alt="Foto"
-            width="50%"
-            height="30%"
-            />
+           <section className={StylesHome.categorias}>
+           <h3 className={StylesHome.titulo}>Categorías</h3>
+           <div className={StylesHome.cardGrid}>
+           {listaCategorias.map((categoria)=>(
+                <Card key={categoria.id} categoria={categoria}/>
+            ))}
+            </div>
+           </section>
         </React.Fragment>
     )
 }

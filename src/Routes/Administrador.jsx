@@ -17,6 +17,10 @@ function Administrador({listaProductos}) {
         navigate('/admin/agregarProducto');
     }
 
+    const botonMovil = () => {
+        navigate('/');
+    }
+
   return (
     <>
     <section className={StylesAdmin.seccionPrincipal}>
@@ -53,7 +57,11 @@ function Administrador({listaProductos}) {
                 </tbody>
             </table>   
     )}
-    <div className={StylesAdmin.mensajeMovil}>El panel de administración no esta disponible para dispositivos móviles</div>
+
+    <div className={StylesAdmin.mensajeMovil}>
+    <div className={StylesAdmin.fraseMovil}><span className={StylesAdmin.frase2Movil}>Atención</span>No es posible entrar al Panel de Administración desde este dispositivo.</div>
+    <button  onClick={botonMovil} className={StylesAdmin.botonMovil}>Volver a inicio</button>
+    </div>
     </>
 
     

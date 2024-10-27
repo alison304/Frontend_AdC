@@ -109,6 +109,18 @@
     display: none; /* Mensaje de móvil oculto */
 }
 
+.botonMovil{
+    display: none; /* Mensaje de móvil oculto */
+}
+
+.fraseMovil{
+    display: none; /* Mensaje de móvil oculto */
+}
+
+.frase2Movil{
+    display: none; /* Mensaje de móvil oculto */
+}
+
 .botonesEliminar, .botonesEditar{
     background-color: #000000;
     color: white;
@@ -158,16 +170,48 @@ th, td {
 
     .mensajeMovil{
         display: block; /* Muestra el mensaje de móvil */
+        height: 429px;
+        background-color: #FFFFFF;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-content: space-between;
+        width: 40%;
+        margin:13% auto;
+
+    }
+
+    .fraseMovil, .frase2Movil{
+        display: block; /* Muestra el mensaje de móvil */
         font-family: 'Inter', sans-serif; /* Cambia 'p' a cualquier otro selector según lo necesites */
         font-size: 30px;
         font-style: italic;
         font-weight: 600;
+        text-align: center;
+        line-height: 1.5; /* Espaciado entre líneas */
+        background-color: #FFFFFF;
+    }
+
+    .fraseMovil{
+        height: 280px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+    }
+
+    .botonMovil{
+        display: block;
+        width: 200px;
+        height: 63px;
+        border-radius: 20px;
+        border: 1px black solid;
+        background-color:#565656; 
+        font-family: 'Inter', sans-serif; /* Cambia 'p' a cualquier otro selector según lo necesites */
+        font-size: 16px;
+        font-style: italic;
+        font-weight: 600;
         line-height: 19.36px;
         text-align: center;
-        height: 450px;
-        display: flex;                /* Activa Flexbox */
-        justify-content: center;      /* Centra horizontalmente */
-        align-items: center;          /* Centra verticalmente */
-        line-height: 1.5; /* Espaciado entre líneas */
+        margin: auto;
     }
 }
