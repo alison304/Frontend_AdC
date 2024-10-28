@@ -4,6 +4,7 @@ import MyDrawer from './MyDrawer';
 import logoVajilla from '../../../public/images/logo-aura.png'
 import { FaUser } from "react-icons/fa";
 import { FiShoppingCart } from "react-icons/fi";
+import { Link } from 'react-router-dom';
 import './Navbar.css';
 
 const Navbar = () => {
@@ -44,7 +45,9 @@ const Navbar = () => {
     <React.Fragment>
       <AppBar position='static'>
         <Toolbar sx={{ height: '77px', backgroundColor: "#ebe9e9" }}>
-          <img src={logoVajilla} width={75} height={75} alt="Logo-icon" />
+          <Link to="/">
+            <img src={logoVajilla} width={75} height={75} alt="Logo-icon" />
+          </Link>
           <Typography sx={{ fontSize: "0.9rem", paddingLeft: "3%", fontWeight: '250', fontStyle: 'italic', color: '#623d2b', fontFamily: 'Kaushan Script' }}>
             Tus recuerdos <br/> en porcelana
           </Typography>
@@ -134,7 +137,7 @@ const Navbar = () => {
                   onClick={handleClickUser}
                   style={{ color: "#623d2b", paddingLeft: "5%"}}
                 >
-                  <FaUser size={30} color="#655e5e" style={{ paddingLeft: "2%" }} />
+                  <FaUser size={30} color="#655e5e" style={{ paddingLeft: "2%"}} />
                 </Button>
                 <Menu
                   id="demo-positioned-menu"
