@@ -9,7 +9,7 @@ const SearchBar = () => {
         <div className='search-bar'>
             <input
             type="text"
-            placeholder="Que esta buscando?"
+            placeholder="Que estás buscando?"
             />
             <IoSearch size={22} style={{ paddingLeft: "2%" }} />
         </div>

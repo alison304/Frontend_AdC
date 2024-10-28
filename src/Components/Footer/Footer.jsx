@@ -1,5 +1,5 @@
 import React from 'react';
-import {FooterContainer, FooterLinksContainer, FooterWrap, FooterLogoItems, FooterLinksWrapper, FooterLinkTitle, FooterLink, FooterLinkItems} from './FooterElem';
+import {FooterContainer, FooterLinksContainer, FooterWrap, FooterLogoItems, FooterLinksWrapper, FooterLinkItems} from './FooterElem';
 import { Typography } from '@mui/material';
 import { FaFacebook } from "react-icons/fa";
 import { RiInstagramFill } from "react-icons/ri";
