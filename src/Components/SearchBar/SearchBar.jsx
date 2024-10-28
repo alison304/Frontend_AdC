@@ -1,13 +1,18 @@
 import React from 'react'
+import './SearchBar.css';
+import { IoSearch } from "react-icons/io5";
 
 const SearchBar = () => {
+    
     return (
     <>
-        <input
-        type="text"
-        placeholder="Que esta buscando?"
-        style={{ padding: "8px", width: "200px", margin: "10px 0" }}
-        />
+        <div className='search-bar'>
+            <input
+            type="text"
+            placeholder="Que esta buscando?"
+            />
+            <IoSearch size={22} style={{ paddingLeft: "2%" }} />
+        </div>
     </>
     )
 }

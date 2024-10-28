@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { AppBar, Toolbar, Typography, useMediaQuery, useTheme, Button, Menu, MenuItem } from '@mui/material';
 import MyDrawer from './MyDrawer';
 import logoVajilla from '../../../public/images/logo-aura.png'
@@ -7,7 +7,7 @@ import { FiShoppingCart } from "react-icons/fi";
 import './Navbar.css';
 
 const Navbar = () => {
-  const [value, setValue] = useState();
+  //const [value, setValue] = useState();
   const theme = useTheme();
   console.log(theme);
   const isMatch = useMediaQuery(theme.breakpoints.down('md'));
