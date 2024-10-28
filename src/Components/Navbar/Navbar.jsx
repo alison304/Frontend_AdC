@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import Tabs from '@mui/material/Tabs';
-import { AppBar, Toolbar, Typography, useMediaQuery, Tab, useTheme, Button, Menu, MenuItem } from '@mui/material';
+import { AppBar, Toolbar, Typography, useMediaQuery, useTheme, Button, Menu, MenuItem } from '@mui/material';
 import MyDrawer from './MyDrawer';
 import logoVajilla from '../../../public/images/logo-aura.png'
 import { FaUser } from "react-icons/fa";
 import { FiShoppingCart } from "react-icons/fi";
+import './Navbar.css';
 
 const Navbar = () => {
   const [value, setValue] = useState();
@@ -37,7 +37,7 @@ const Navbar = () => {
         <Toolbar sx={{ height: '77px', backgroundColor: "#ebe9e9" }}>
           <img src={logoVajilla} width={75} height={75} alt="Logo-icon" />
           <Typography sx={{ fontSize: "1rem", paddingLeft: "3%", fontWeight: '300', fontStyle: 'italic', color: '#623d2b', fontFamily: 'Kaushan Script' }}>
-            Tus recuerdos en porcelana
+            Tus recuerdos <br/> en porcelana
           </Typography>
           {
             isMatch ? (
@@ -52,6 +52,7 @@ const Navbar = () => {
                   aria-haspopup="true"
                   aria-expanded={open ? 'true' : undefined}
                   onClick={handleClickCatalogo}
+                  style={{ color: "#623d2b", paddingLeft: "5%"}}
                 >
                   Catalogo
                 </Button>
@@ -70,9 +71,9 @@ const Navbar = () => {
                     horizontal: 'left',
                   }}
                 >
-                  <MenuItem onClick={handleCloseCatalogo}>Profile</MenuItem>
-                  <MenuItem onClick={handleCloseCatalogo}>My account</MenuItem>
-                  <MenuItem onClick={handleCloseCatalogo}>Logout</MenuItem>
+                  <MenuItem onClick={handleCloseCatalogo}>Vajilla</MenuItem>
+                  <MenuItem onClick={handleCloseCatalogo}>Cubiertos</MenuItem>
+                  <MenuItem onClick={handleCloseCatalogo}>Cristaleria</MenuItem>
                 </Menu>
                 <Button
                   id="demo-positioned-button"
@@ -80,6 +81,7 @@ const Navbar = () => {
                   aria-haspopup="true"
                   aria-expanded={open ? 'true' : undefined}
                   onClick={handleClickTematicas}
+                  style={{ color: "#623d2b"}}
                 >
                   Tematicas
                 </Button>
@@ -98,22 +100,24 @@ const Navbar = () => {
                     horizontal: 'left',
                   }}
                 >
-                  <MenuItem onClick={handleCloseTematicas}>Test</MenuItem>
-                  <MenuItem onClick={handleCloseTematicas}>My account</MenuItem>
-                  <MenuItem onClick={handleCloseTematicas}>Logout</MenuItem>
+                  <MenuItem onClick={handleCloseTematicas}>Halloween</MenuItem>
+                  <MenuItem onClick={handleCloseTematicas}>Navidad</MenuItem>
+                  <MenuItem onClick={handleCloseTematicas}>Accion de gracias</MenuItem>
                 </Menu>
                 <Button
                   id="demo-positioned-button"
+                  style={{ color: "#623d2b"}}
                 >
                   Premium set
                 </Button>
                 <Button
                   id="demo-positioned-button"
+                  style={{ color: "#623d2b"}}
                 >
                   Contáctanos
                 </Button>
-                <FiShoppingCart size={35} color="#655e5e" />
-                <FaUser size={30} color="#655e5e" style={{ paddingLeft: "3%" }} />
+                <FiShoppingCart size={35} color="#655e5e" style={{ paddingLeft: "40%" }} />
+                <FaUser size={30} color="#655e5e" style={{ paddingLeft: "2%" }} />
               </>
             )
           }

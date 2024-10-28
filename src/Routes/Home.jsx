@@ -1,11 +1,13 @@
 import React from 'react'
 import StylesHome from '../Styles/Home.module.css'
 import Card from '../Components/Card'
+import SearchBar from '../Components/SearchBar/SearchBar';
 
 const Home = ({listaCategorias,listaRecomendaciones}) => {
 
     return (
         <React.Fragment>
+            <SearchBar />
            <section className={StylesHome.categorias}>
            <h3 className={StylesHome.titulo}>Categorías</h3>
            <div className={StylesHome.cardGrid}>
