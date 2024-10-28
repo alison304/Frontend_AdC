@@ -19,7 +19,7 @@ const Navbar = () => {
       <AppBar position='static'>
         <Toolbar sx={{height: '77px', backgroundColor:"#ebe9e9"}}>
         <img src={logoVajilla} width={75} height={75} alt="Logo-icon" />
-        <Typography sx={{ fontSize: "1rem", paddingLeft: "1%",fontWeight:'300', fontStyle: 'italic' }}>
+        <Typography sx={{ fontSize: "1rem", paddingLeft: "3%",fontWeight:'300', fontStyle: 'italic', color:'#623d2b', fontFamily: 'Kaushan Script' }}>
           Tus recuerdos en porcelana
         </Typography>
             {
@@ -30,7 +30,7 @@ const Navbar = () => {
               ) : (
                 <>
                 <Tabs 
-                  sx={{ width: '100%', marginLeft:'auto'}}
+                  sx={{ width: '100%', marginLeft:'auto', color:'#623d2b'}}
                   textColor='inherit' 
                   value={value} 
                   onChange={(e,value) => setValue(value)} 
@@ -43,8 +43,8 @@ const Navbar = () => {
                         ))
                       }
                 </Tabs>
-                <FiShoppingCart size={35} />
-                <FaUser size={30} />
+                <FiShoppingCart size={35} color="#655e5e" />
+                <FaUser size={30} color="#655e5e" style={{ paddingLeft: "3%" }} />
                 </>
               )
             }

@@ -13,33 +13,41 @@ const Footer = () => {
       <FooterContainer>
         <FooterLogoItems>
           <img src={logoVajilla} width={70} height={70} alt="Logo-icon" />
-          <Typography sx={{ fontSize: "0.8rem", paddingLeft: "1%",fontWeight:'bold' }}>
-            Copyright© 2024
-          </Typography>
         </FooterLogoItems>
         <FooterWrap>
           <FooterLinksContainer>
             <FooterLinksWrapper>
               <FooterLinkItems>
-                <FaFacebook size={30} />
+                <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" style={{ color: "white" }}>
+                  <FaFacebook size={30} />
+                </a>
               </FooterLinkItems>
             </FooterLinksWrapper>
             <FooterLinksWrapper>
               <FooterLinkItems>
-                <RiInstagramFill size={30} />
+                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" style={{ color: "white" }}>
+                  <RiInstagramFill size={30} />
+                </a>
               </FooterLinkItems>
             </FooterLinksWrapper>
             <FooterLinksWrapper>
               <FooterLinkItems>
-                <FaSquareXTwitter size={30} />
+                <a href="https://x.com" target="_blank" rel="noopener noreferrer" style={{ color: "white" }}>
+                  <FaSquareXTwitter size={30} />
+                </a>
               </FooterLinkItems>
             </FooterLinksWrapper>
             <FooterLinksWrapper>
               <FooterLinkItems>
-                <FaSquareWhatsapp size={30} />
+                <a href="https://whatsapp.com" target="_blank" rel="noopener noreferrer" style={{ color: "white" }}>
+                  <FaSquareWhatsapp size={30} />
+                </a>
               </FooterLinkItems>
             </FooterLinksWrapper>
           </FooterLinksContainer>
+          <Typography sx={{ fontSize: "0.8rem", paddingLeft: "1%",fontWeight:'bold', color: 'white', paddingBottom: '1%',paddingTop: '1%' }}>
+            © 2024 Aurora de Cristal. Todos los derechos reservados. 
+          </Typography>
         </FooterWrap>
       </FooterContainer>
     </React.Fragment>

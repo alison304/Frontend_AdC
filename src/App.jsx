@@ -140,7 +140,7 @@ function App() {
             <Route path="/listaProductos/:id" element={<ListaProductos listaProductos={listaProductos}/>}/>
             <Route path="/detail/:id" element={<Detail/>}/>
         </Routes>
-       {/* <Footer/>*/}
+       <Footer/>
       </div>      
     </>
   )
