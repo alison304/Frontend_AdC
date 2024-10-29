@@ -5,6 +5,7 @@ import { FaFacebook } from "react-icons/fa";
 import { RiInstagramFill } from "react-icons/ri";
 import { FaSquareWhatsapp } from "react-icons/fa6";
 import { FaSquareXTwitter } from "react-icons/fa6";
+import { Link } from 'react-router-dom';
 import logo from '../../../public/images/Logo.png'
 import './Footer.css';
 
@@ -13,7 +14,9 @@ const Footer = () => {
     <React.Fragment>
       <FooterContainer>
         <FooterLogoItems>
-          <img src={logo} width={70} height={70} alt="Logo-icon" />
+          <Link to="/">
+            <img src={logo} width={70} height={70} alt="Logo-icon" />
+          </Link>
         </FooterLogoItems>
         <FooterWrap>
           <FooterLinksContainer>

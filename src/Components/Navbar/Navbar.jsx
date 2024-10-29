@@ -1,7 +1,7 @@
 import React from 'react';
 import { AppBar, Toolbar, Typography, useMediaQuery, useTheme, Button, Menu, MenuItem } from '@mui/material';
 import MyDrawer from './MyDrawer';
-import logoVajilla from '../../../public/images/logo-aura.png'
+import logo from '../../../public/images/Logo.png'
 import { FaUser } from "react-icons/fa";
 import { FiShoppingCart } from "react-icons/fi";
 import { Link } from 'react-router-dom';
@@ -46,7 +46,7 @@ const Navbar = () => {
       <AppBar position='static'>
         <Toolbar sx={{ height: '77px', backgroundColor: "#ebe9e9" }}>
           <Link to="/">
-            <img src={logoVajilla} width={75} height={75} alt="Logo-icon" />
+            <img src={logo} width={75} height={75} alt="Logo-icon" />
           </Link>
           <Typography sx={{ fontSize: "0.9rem", paddingLeft: "3%", fontWeight: '250', fontStyle: 'italic', color: '#623d2b', fontFamily: 'Kaushan Script' }}>
             Tus recuerdos <br/> en porcelana
