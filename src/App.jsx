@@ -163,7 +163,6 @@ function App() {
         }
     ]); // Array de objetos con datos iniciales
 
-
     return (
         <>
             <div>
