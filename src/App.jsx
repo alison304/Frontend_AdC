@@ -66,6 +66,33 @@ function App() {
         fechaRegistro: "2024-10-25",
         categoria: { "idCategoria": 2 },
         imagenes:"../public/images/cubierto3.jpg"
+    },
+    {   id:7,
+        nombre: "Set Distinción de Whisky",
+        descripcion: "Perfecto para los amantes del whisky, este set incluye vasos robustos y decorativos que realzan el color y el sabor de la bebida. Ideal para quienes valoran un toque de elegancia clásica.",
+        precioAlquiler: 200,
+        disponibilidad: 1,
+        fechaRegistro: "2024-10-25",
+        categoria: { "idCategoria": 3 },
+        imagenes:"../public/images/set_distincion.png"
+    },
+    {   id:8,
+        nombre: "Set Fusión Exótica",
+        descripcion: "Disfruta de margaritas como en un resort de lujo. Este set combina copas amplias y elegantes con un diseño que acentúa los sabores frescos y cítricos de esta bebida.",
+        precioAlquiler: 250,
+        disponibilidad: 1,
+        fechaRegistro: "2024-10-25",
+        categoria: { "idCategoria": 3 },
+        imagenes:"../public/images/set_difusion.png"
+    },
+    {   id:9,
+        nombre: "Set Esencia de Gin Tonic",
+        descripcion: "Estas copas diseñadas para gin tonic cuentan con un amplio cuerpo y borde fino, lo que permite apreciar mejor los aromas y la efervescencia de la bebida. Perfectas para una experiencia de coctelería premium.",
+        precioAlquiler: 100,
+        disponibilidad: 1,
+        fechaRegistro: "2024-10-25",
+        categoria: { "idCategoria": 3 },
+        imagenes:"../public/images/set_esencia.png"
     }
   ]); // Array de objetos con datos iniciales
 
