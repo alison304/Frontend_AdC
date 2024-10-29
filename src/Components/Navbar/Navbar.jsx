@@ -44,7 +44,7 @@ const Navbar = () => {
   return (
     <React.Fragment>
       <AppBar position='static'>
-        <Toolbar sx={{ height: '77px', backgroundColor: "#ebe9e9" }}>
+        <Toolbar sx={{ height: '90px', backgroundColor: "#ebe9e9" }}>
           <Link to="/">
             <img src={logo} width={75} height={75} alt="Logo-icon" />
           </Link>
