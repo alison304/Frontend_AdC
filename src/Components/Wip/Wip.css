@@ -1,0 +1,16 @@
+.manten {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;   
+}
+
+@media (max-width: 768px) {
+    .manten {
+        height: 50vh;
+    }
+
+    .manten img {
+        max-width: 80%;
+    }
+}
