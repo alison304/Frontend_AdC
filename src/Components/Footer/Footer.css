@@ -1,11 +1,10 @@
 @media (min-width: 1024px) {
-
-    .footer_container {
+    .container {
         align-items: center;
         align-self: center;
     }
 
-    .social-media {
+    .container {
         gap: 20px;
     }
 
