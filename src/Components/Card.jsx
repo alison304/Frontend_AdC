@@ -9,15 +9,15 @@ const Card = ({dato,esCategoria}) => {
     <div className={StylesHome.card}>
       {esCategoria ? (
       <>
-        <h3 className={StylesHome.nombreCategorias} >{dato.nombre}</h3>
         <Link to={'/listaProductos/'+dato.id} className={StylesHome.link}>
+        <h3 className={StylesHome.nombreCategorias} >{dato.nombre}</h3>
         <img src={dato.imagen} className={StylesHome.cardImg}/> 
         </Link>
       </>
       ) : (
         <>
+         <Link to={'/detail/'+dato.id} className={StylesHome.link}>
          <h3 className={StylesHome.nombreCategorias} >{dato.nombre}</h3>
-         <Link to={'/listaProductos/'+dato.id} className={StylesHome.link}>
         <img src={dato.imagen} className={StylesHome.cardImg}/> 
         </Link>
         <div className={StylesHome.recomendacionesPiezas}>

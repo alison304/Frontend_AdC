@@ -8,9 +8,11 @@ import Detail from './Routes/Detail';
 import { useState } from "react";
 import AgregarProducto from './Routes/AgregarProducto';
 import ListaProductos from './Routes/ListaProductos';
+import Wip from './Components/Wip/Wip';
 
 
 function App() {
+
   const [listaProductos, setListaProductos] = useState([
     {
         id:1,
@@ -66,85 +68,118 @@ function App() {
         fechaRegistro: "2024-10-25",
         categoria: { "idCategoria": 2 },
         imagenes:"../public/images/cubierto3.jpg"
+    },
+    {   id:7,
+        nombre: "Set Distinción de Whisky",
+        descripcion: "Perfecto para los amantes del whisky, este set incluye vasos robustos y decorativos que realzan el color y el sabor de la bebida. Ideal para quienes valoran un toque de elegancia clásica.",
+        precioAlquiler: 200,
+        disponibilidad: 1,
+        fechaRegistro: "2024-10-25",
+        categoria: { "idCategoria": 3 },
+        imagenes:"../public/images/set_distincion.png"
+    },
+    {   id:8,
+        nombre: "Set Fusión Exótica",
+        descripcion: "Disfruta de margaritas como en un resort de lujo. Este set combina copas amplias y elegantes con un diseño que acentúa los sabores frescos y cítricos de esta bebida.",
+        precioAlquiler: 250,
+        disponibilidad: 1,
+        fechaRegistro: "2024-10-25",
+        categoria: { "idCategoria": 3 },
+        imagenes:"../public/images/set_difusion.png"
+    },
+    {   id:9,
+        nombre: "Set Esencia de Gin Tonic",
+        descripcion: "Estas copas diseñadas para gin tonic cuentan con un amplio cuerpo y borde fino, lo que permite apreciar mejor los aromas y la efervescencia de la bebida. Perfectas para una experiencia de coctelería premium.",
+        precioAlquiler: 100,
+        disponibilidad: 1,
+        fechaRegistro: "2024-10-25",
+        categoria: { "idCategoria": 3 },
+        imagenes:"../public/images/set_esencia.png"
     }
   ]); // Array de objetos con datos iniciales
 
-  console.log(listaProductos);
+    console.log(listaProductos);
 
-  const [listaCategorias, setlistaCategorias] = useState([
-    {
-        id:1,
-        nombre: "Vajilla",
-        imagen:"../public/images/vajilla.jpg"
-    },
-    {   id:2,
-        nombre: "Cubiertos",
-        imagen:"../public/images/cubierto.jpg"
-    },
-    {   id:3,
-        nombre: "Cristaleria",
-        imagen:"../public/images/cristaleria.jpg"
-    }
-  ]); // Array de objetos con datos iniciales
+    const [listaCategorias, setlistaCategorias] = useState([
+        {
+            id: 1,
+            nombre: "Vajilla",
+            imagen: "../public/images/vajilla.jpg"
+        },
+        {
+            id: 2,
+            nombre: "Cubiertos",
+            imagen: "../public/images/cubierto.jpg"
+        },
+        {
+            id: 3,
+            nombre: "Cristaleria",
+            imagen: "../public/images/cristaleria.jpg"
+        }
+    ]); // Array de objetos con datos iniciales
 
-  const [listaRecomendaciones, setlistaRecomendaciones] = useState([
-    {
-        id:1,
-        nombre: "Vajilla Elegancia Sublime",
-        imagen:"../public/images/vajilla_elegante.jpg",
-        piezas: 24,
-        calificacion:4.7 
-    },
-    {   id:2,
-        nombre: "Vajilla Lujo Refinado",
-        imagen:"../public/images/vajilla_lujo.jpg",
-        piezas: 28,
-        calificacion:4.8 
-    },
-    {   id:3,
-        nombre: "Vajilla Gracia Sutil",
-        imagen:"../public/images/vajilla_gracia.png",
-        piezas: 20,
-        calificacion:4.6
-    },
-    {   id:4,
-        nombre: "Vajilla Esplendor Imperial",
-        imagen:"../public/images/vajilla_esplendor.png",
-        piezas: 16,
-        calificacion:4.5 
-    },
-    {   id:5,
-        nombre: "Vajilla Serenidad Noble",
-        imagen:"../public/images/vajilla_serenidad.jpg",
-        piezas: 25,
-        calificacion:4.7 
-    },
-    {   id:6,
-        nombre: "Vajilla Belleza Ancestral",
-        imagen:"../public/images/vajilla_belleza.jpg",
-        piezas: 28,
-        calificacion:4.8 
-    }
-  ]); // Array de objetos con datos iniciales
+    const [listaRecomendaciones, setlistaRecomendaciones] = useState([
+        {
+            id: 1,
+            nombre: "Vajilla Elegancia Sublime",
+            imagen: "../public/images/vajilla_elegante.jpg",
+            piezas: 24,
+            calificacion: 4.7
+        },
+        {
+            id: 2,
+            nombre: "Vajilla Lujo Refinado",
+            imagen: "../public/images/vajilla_lujo.jpg",
+            piezas: 28,
+            calificacion: 4.8
+        },
+        {
+            id: 3,
+            nombre: "Vajilla Gracia Sutil",
+            imagen: "../public/images/vajilla_gracia.png",
+            piezas: 20,
+            calificacion: 4.6
+        },
+        {
+            id: 4,
+            nombre: "Vajilla Esplendor Imperial",
+            imagen: "../public/images/vajilla_esplendor.png",
+            piezas: 16,
+            calificacion: 4.5
+        },
+        {
+            id: 5,
+            nombre: "Vajilla Serenidad Noble",
+            imagen: "../public/images/vajilla_serenidad.jpg",
+            piezas: 25,
+            calificacion: 4.7
+        },
+        {
+            id: 6,
+            nombre: "Vajilla Belleza Ancestral",
+            imagen: "../public/images/vajilla_belleza.jpg",
+            piezas: 28,
+            calificacion: 4.8
+        }
+    ]); // Array de objetos con datos iniciales
 
-
-  return (
-    <>
-      <div>
-        <Navbar/>
-        <Routes>
-            <Route path='/' element={<Home listaCategorias={listaCategorias} listaRecomendaciones={listaRecomendaciones}/>}/>
-            <Route path='*' element={<h2>Error 404</h2>}/>
-            <Route path='/admin' element={<Administrador listaProductos={listaProductos}/>}/>
-            <Route path='/admin/agregarProducto' element={<AgregarProducto listaProductos={listaProductos} setListaProductos={setListaProductos}/>}/>
-            <Route path="/listaProductos/:id" element={<ListaProductos listaProductos={listaProductos}/>}/>
-            <Route path="/detail/:id" element={<Detail/>}
-            />
-        </Routes>
-       <Footer/>
-      </div>      
-    </>
-  )
+    return (
+        <>
+            <div>
+                <Navbar />
+                <Routes>
+                    <Route path='/' element={<Home listaCategorias={listaCategorias} listaRecomendaciones={listaRecomendaciones} />} />
+                    <Route path='*' element={<h2>Error 404</h2>} />
+                    <Route path='/admin' element={<Administrador listaProductos={listaProductos} />} />
+                    <Route path='/admin/agregarProducto' element={<AgregarProducto listaProductos={listaProductos} setListaProductos={setListaProductos} />} />
+                    <Route path="/listaProductos/:id" element={<ListaProductos listaProductos={listaProductos} />} />
+                    <Route path="/detail/:id" element={<Detail />} />
+                    <Route path="/wip" element={<Wip />} />
+                </Routes>
+                <Footer />
+            </div>
+        </>
+    )
 }
 
 export default App

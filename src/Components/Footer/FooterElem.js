@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 export const FooterContainer = styled.footer`
     background-color: #655e5e;
@@ -8,7 +8,7 @@ export const FooterContainer = styled.footer`
     width: 100%;
     padding: 0px -1px;
     margin: 0px;
-    @media (max-width: 600px) {
+    @media (min-width: 600px) {
     font-size: 12px;
     }
 `;
@@ -85,13 +85,13 @@ export const FooterLinkTitle = styled.h1`
 `;
 
 export const FooterLink = styled(Link)`
-    color: #fff;
+    color: #eee7d7;
     text-decoration: none;
     margin-bottom: 0.5rem;
     font-size: 14px;
 
     &:hover {
-        color: #01bf71;
+        color: #eee7d7;
         transition: 0.3s ease-out
     }
 `;
