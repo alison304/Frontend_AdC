@@ -135,10 +135,11 @@ function App() {
         <Routes>
             <Route path='/' element={<Home listaCategorias={listaCategorias} listaRecomendaciones={listaRecomendaciones}/>}/>
             <Route path='*' element={<h2>Error 404</h2>}/>
-            <Route path='/admin' element={<Administrador listaProductos={listaProductos}/>}/>/* Componente para agregar objetos */
+            <Route path='/admin' element={<Administrador listaProductos={listaProductos}/>}/>
             <Route path='/admin/agregarProducto' element={<AgregarProducto listaProductos={listaProductos} setListaProductos={setListaProductos}/>}/>
             <Route path="/listaProductos/:id" element={<ListaProductos listaProductos={listaProductos}/>}/>
-            <Route path="/detail/:id" element={<Detail/>}/>
+            <Route path="/detail/:id" element={<Detail/>}
+            />
         </Routes>
        <Footer/>
       </div>      
