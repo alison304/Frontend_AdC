@@ -64,7 +64,7 @@ const Navbar = () => {
                   aria-haspopup="true"
                   aria-expanded={open ? 'true' : undefined}
                   onClick={handleClickCatalogo}
-                  style={{ color: "#623d2b", paddingLeft: "5%"}}
+                  style={{ color: "#623d2b", paddingLeft: "5%" }}
                 >
                   Catalogo
                 </Button>
@@ -83,9 +83,15 @@ const Navbar = () => {
                     horizontal: 'left',
                   }}
                 >
-                  <MenuItem onClick={handleCloseCatalogo}>Vajilla</MenuItem>
-                  <MenuItem onClick={handleCloseCatalogo}>Cubiertos</MenuItem>
-                  <MenuItem onClick={handleCloseCatalogo}>Cristaleria</MenuItem>
+                  <Link to="/listaProductos/1">
+                    <MenuItem onClick={handleCloseCatalogo}>Vajilla</MenuItem>
+                  </Link>
+                  <Link to="/listaProductos/2">
+                    <MenuItem onClick={handleCloseCatalogo}>Cubiertos</MenuItem>
+                  </Link>
+                  <Link to="/listaProductos/3">
+                    <MenuItem onClick={handleCloseCatalogo}>Cristaleria</MenuItem>
+                  </Link>
                 </Menu>
                 <Button
                   id="demo-positioned-button"
@@ -93,7 +99,7 @@ const Navbar = () => {
                   aria-haspopup="true"
                   aria-expanded={open ? 'true' : undefined}
                   onClick={handleClickTematicas}
-                  style={{ color: "#623d2b"}}
+                  style={{ color: "#623d2b" }}
                 >
                   Tematicas
                 </Button>
@@ -112,22 +118,32 @@ const Navbar = () => {
                     horizontal: 'left',
                   }}
                 >
-                  <MenuItem onClick={handleCloseTematicas}>Halloween</MenuItem>
-                  <MenuItem onClick={handleCloseTematicas}>Navidad</MenuItem>
-                  <MenuItem onClick={handleCloseTematicas}>Accion de gracias</MenuItem>
+                  <Link to="/wip">
+                    <MenuItem onClick={handleCloseTematicas}>Halloween</MenuItem>
+                  </Link>
+                  <Link to="/wip">
+                    <MenuItem onClick={handleCloseTematicas}>Navidad</MenuItem>
+                  </Link>
+                  <Link to="/wip">
+                    <MenuItem onClick={handleCloseTematicas}>Accion de gracias</MenuItem>
+                  </Link>
                 </Menu>
-                <Button
-                  id="demo-positioned-button"
-                  style={{ color: "#623d2b"}}
-                >
-                  Premium set
-                </Button>
-                <Button
-                  id="demo-positioned-button"
-                  style={{ color: "#623d2b"}}
-                >
-                  Contáctanos
-                </Button>
+                <Link to="/wip">
+                  <Button
+                    id="demo-positioned-button"
+                    style={{ color: "#623d2b" }}
+                  >
+                    Premium set
+                  </Button>
+                </Link>
+                <Link to="/wip">
+                  <Button
+                    id="demo-positioned-button"
+                    style={{ color: "#623d2b" }}
+                  >
+                    Contáctanos
+                  </Button>
+                </Link>
                 <FiShoppingCart size={35} color="#655e5e" style={{ paddingLeft: "40%" }} />
                 <Button
                   id="demo-positioned-button"
@@ -135,9 +151,9 @@ const Navbar = () => {
                   aria-haspopup="true"
                   aria-expanded={open ? 'true' : undefined}
                   onClick={handleClickUser}
-                  style={{ color: "#623d2b", paddingLeft: "5%"}}
+                  style={{ color: "#623d2b", paddingLeft: "5%" }}
                 >
-                  <FaUser size={30} color="#655e5e" style={{ paddingLeft: "2%"}} />
+                  <FaUser size={30} color="#655e5e" style={{ paddingLeft: "2%" }} />
                 </Button>
                 <Menu
                   id="demo-positioned-menu"
@@ -154,8 +170,12 @@ const Navbar = () => {
                     horizontal: 'left',
                   }}
                 >
-                  <MenuItem onClick={handleCloseUser}>Iniciar Sesión</MenuItem>
-                  <MenuItem onClick={handleCloseUser}>Regístrate</MenuItem>
+                  <Link to="/wip">
+                    <MenuItem onClick={handleCloseUser}>Iniciar Sesión</MenuItem>
+                  </Link>
+                  <Link to="/wip">
+                    <MenuItem onClick={handleCloseUser}>Regístrate</MenuItem>
+                  </Link>
                 </Menu>
               </>
             )
