@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Drawer, List, ListItemText, ListItemButton, ListItemIcon, IconButton } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 
-const IconNavbar = ['Catalogo', 'Tematicas', 'Premium set', 'Contáctanos', 'Iniciar Sesión','Regístrate'];
+const IconNavbar = ['Catalogo', 'Tematicas', 'Premium set', 'Contáctanos', 'Comprar', 'Iniciar Sesión','Regístrate'];
 const MyDrawer = () => {
   const [openDrawer, setOpenDrawer ] = useState(false)
   return (
