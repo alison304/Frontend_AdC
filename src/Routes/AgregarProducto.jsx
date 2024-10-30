@@ -20,7 +20,7 @@ function AgregarProducto({listaProductos,setListaProductos}) {
         inventario:0,
         fechaRegistro: "2024-10-25",
         categoria: { "idCategoria": 2 },
-        imagenes:null
+        imagenes:""
       });
     
       const [mensajeForm, setMensajeForm] = useState("")
@@ -48,7 +48,7 @@ function AgregarProducto({listaProductos,setListaProductos}) {
          // Maneja el cambio en el campo de imagen
          setProducto((prevData) => ({
           ...prevData,
-          imagenes: event.target.files[0] // Guarda el archivo de imagen en el estado
+          imagenes: event.target.value // Guarda el archivo de imagen en el estado
         }));
     
         //setProducto({...producto, imagenes: event.target.value})
@@ -79,7 +79,7 @@ function AgregarProducto({listaProductos,setListaProductos}) {
               precioAlquiler: 0.0,
               disponibilidad:0,
               inventario:0,
-              imagenes:null
+              imagenes:""
               });
               setMensajeForm(`El producto se ha guardado correctamente`)
     
@@ -118,8 +118,13 @@ function AgregarProducto({listaProductos,setListaProductos}) {
               />
             </div>
             <div className={StylesAdmin.divTituloAgregar}>
-              <label className={StylesAdmin.inputsFormulario}>Sube imágenes *</label>
-              <input className={StylesAdmin.inputsFormulario} type="file"name="image" onChange={handleChangeImagenes} />
+              <label className={StylesAdmin.inputsFormulario}>Sube las imágenes *</label>
+              <input className={StylesAdmin.inputsFormulario}
+              type="text"
+              value={producto.imagenes}
+              placeholder="Sube la url de las imágenes"
+              onChange={handleChangeImagenes}
+              />             
             </div>
             <button className={StylesAdmin.botoneRegistrar}>AGREGAR PRODUCTO</button>
         </form>
