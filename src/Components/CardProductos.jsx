@@ -6,7 +6,11 @@ function CardProductos({producto}) {
     console.log(producto)
   return (
     <div className={StylesListaProductos.card}>
-    <Link to={'/detail/'+producto.id} className={StylesListaProductos.link}>
+    <Link to={{
+      pathname: '/detail/'+producto.id
+    }} 
+    state = {{producto}}
+    className={StylesListaProductos.link}>
         <img src={producto.imagenes} className={StylesListaProductos.cardImg}/> 
     </Link>
     <div className={StylesListaProductos.datos}>
