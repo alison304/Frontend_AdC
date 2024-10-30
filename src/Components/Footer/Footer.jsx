@@ -16,7 +16,7 @@ const Footer = () => {
         <FooterContainer>
           <FooterLogoItems>
             <Link to="/">
-              <img src={logo} width={70} height={70} alt="Logo-icon" />
+              <img src={logo} width={90} height={80} alt="Logo-icon" />
             </Link>
           </FooterLogoItems>
           <FooterWrap>

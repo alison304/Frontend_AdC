@@ -2,6 +2,8 @@ import StylesListaProductos from '../Styles/ListaProductos.module.css'
 import CardProductos from '../Components/CardProductos'
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { RiArrowGoBackFill } from "react-icons/ri";
+import { Button } from '@mui/material';
 
 function ListaProductos({ listaProductos }) {
 
@@ -51,15 +53,36 @@ function ListaProductos({ listaProductos }) {
     }
 
     return (
-        <section className={StylesListaProductos.productos}>
-            <h3 className={StylesListaProductos.titulo}>{titulo}</h3>
-            <div className={StylesListaProductos.cardGrid}>
-                {productosAleatorias.map((producto) => (
-                    <CardProductos key={producto.id} producto={producto} />
-                ))}
+        <>
+            <div style={{
+                padding: '10px',
+            }}>
             </div>
-            <button className='btn-back' onClick={onBack}>Volver</button>
-        </section>
+            <Button style={{
+                backgroundColor: '#f0e4c3',
+                float: 'right',
+                border: 'none',
+                color: 'white',
+                padding: '10px 20px',
+                fontSize: '16px',
+                cursor: 'pointer',
+                borderRadius: '5px',
+                transition: 'background-color 0.3s',
+            }}
+                onMouseEnter={(e) => (e.target.style.backgroundColor = '#45a049')}
+                onMouseLeave={(e) => (e.target.style.backgroundColor = '#4CAF50')}
+                className='back' onClick={onBack}><RiArrowGoBackFill />
+                Volver
+            </Button>
+            <section className={StylesListaProductos.productos}>
+                <h3 className={StylesListaProductos.titulo}>{titulo}</h3>
+                <div className={StylesListaProductos.cardGrid}>
+                    {productosAleatorias.map((producto) => (
+                        <CardProductos key={producto.id} producto={producto} />
+                    ))}
+                </div>
+            </section>
+        </>
     )
 }
 
