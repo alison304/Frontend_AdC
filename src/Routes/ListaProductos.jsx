@@ -59,7 +59,7 @@ function ListaProductos({ listaProductos }) {
             }}>
             </div>
             <Button style={{
-                backgroundColor: '#f0e4c3',
+                backgroundColor: '#d1b362',
                 float: 'right',
                 border: 'none',
                 color: 'white',
@@ -68,9 +68,10 @@ function ListaProductos({ listaProductos }) {
                 cursor: 'pointer',
                 borderRadius: '5px',
                 transition: 'background-color 0.3s',
+                marginRight: '25px',
             }}
-                onMouseEnter={(e) => (e.target.style.backgroundColor = '#45a049')}
-                onMouseLeave={(e) => (e.target.style.backgroundColor = '#4CAF50')}
+                onMouseEnter={(e) => (e.target.style.backgroundColor = '#f2ca4e')}
+                onMouseLeave={(e) => (e.target.style.backgroundColor = '#d1b362')}
                 className='back' onClick={onBack}><RiArrowGoBackFill />
                 Volver
             </Button>
