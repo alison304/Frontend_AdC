@@ -13,7 +13,7 @@ const Footer = () => {
   return (
     <React.Fragment>
       <div className='container'>
-        <FooterContainer>
+        <FooterContainer className='foot'>
           <FooterLogoItems>
             <Link to="/">
               <img src={logo} width={70} height={70} alt="Logo-icon" />

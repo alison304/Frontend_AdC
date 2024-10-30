@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Drawer, List, ListItemText, ListItemButton, ListItemIcon, IconButton } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 
-const IconNavbar = ['Catalogo', 'Tematicas', 'Premium set', 'Contáctanos'];
+const IconNavbar = ['Catalogo', 'Tematicas', 'Premium set', 'Contáctanos', 'Comprar', 'Iniciar Sesión','Regístrate'];
 const MyDrawer = () => {
   const [openDrawer, setOpenDrawer ] = useState(false)
   return (
@@ -20,7 +20,7 @@ const MyDrawer = () => {
             }
           </List>
         </Drawer>
-        <IconButton sx={{color:'white', marginLeft:'auto'}} onClick={()=>setOpenDrawer(!openDrawer)}>
+        <IconButton sx={{color:'#623d2b', marginLeft:'auto'}} onClick={()=>setOpenDrawer(!openDrawer)}>
           <MenuIcon />
         </IconButton>
       </React.Fragment>

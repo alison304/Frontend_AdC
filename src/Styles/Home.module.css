@@ -43,6 +43,7 @@
     font-weight: 400;
     line-height: 34.82px;
     text-align: center;
+    color: black;
 }
 
 .recomendacionesPiezas{
@@ -72,5 +73,20 @@
 @media (max-width: 900px) {
     .piezas, .calificacion{
         font-size: 14px;       
+    }
+
+    .cardGrid{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* Crea dos columnas de igual tamaño */
+        gap:40px;
+    }
+
+    .card{
+        width: 80%;  
+        margin: auto;
+    }
+    
+    .titulo{
+        text-align: center;
     }
 }
