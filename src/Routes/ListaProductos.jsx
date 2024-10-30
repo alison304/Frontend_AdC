@@ -1,59 +1,90 @@
-import React from 'react'
 import StylesListaProductos from '../Styles/ListaProductos.module.css'
 import CardProductos from '../Components/CardProductos'
-import { useParams} from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { RiArrowGoBackFill } from "react-icons/ri";
+import { Button } from '@mui/material';
 
-function ListaProductos({listaProductos}) {
+function ListaProductos({ listaProductos }) {
 
     const params = useParams();
     //filtramos los que sean de esa categoria
-    const productosFiltrados = listaProductos.filter(producto => producto.categoria.idCategoria == params.id);  
+    const productosFiltrados = listaProductos.filter(producto => producto.categoria.idCategoria == params.id);
     // Copia del array original
-    let datosProductos= [...productosFiltrados];
+    let datosProductos = [...productosFiltrados];
     let productosAleatorias = [];
 
-function mostrarElementoAleatorioSinRepetir(datosRestantes) {
-    if (datosRestantes.length === 0) {
-        console.log("Ya se mostraron todos los elementos.");
-        return;
+    function mostrarElementoAleatorioSinRepetir(datosRestantes) {
+        if (datosRestantes.length === 0) {
+            console.log("Ya se mostraron todos los elementos.");
+            return;
+        }
+        // Elegir un índice aleatorio
+        const indiceAleatorio = Math.floor(Math.random() * datosRestantes.length);
+
+        // Obtener y eliminar el elemento aleatorio
+        const elementoAleatorio = datosRestantes.splice(indiceAleatorio, 1)[0];
+        return elementoAleatorio;
     }
-    // Elegir un índice aleatorio
-    const indiceAleatorio = Math.floor(Math.random() * datosRestantes.length);
 
-    // Obtener y eliminar el elemento aleatorio
-    const elementoAleatorio = datosRestantes.splice(indiceAleatorio, 1)[0];
-    return elementoAleatorio;
-}
-
-for (let i = 0; i < productosFiltrados.length; i++) {
-    let producto=mostrarElementoAleatorioSinRepetir(datosProductos);
-    productosAleatorias.push(producto);
-}
-
-
-const obtenerTituloCategoria = ()=>{
-    let titulo = 'Vajillas';
-    if(params.id==2){
-        titulo='Cubiertos';
+    for (let i = 0; i < productosFiltrados.length; i++) {
+        let producto = mostrarElementoAleatorioSinRepetir(datosProductos);
+        productosAleatorias.push(producto);
     }
-    else if(params.id==3){
-        titulo='Cristaleria';
+
+
+    const obtenerTituloCategoria = () => {
+        let titulo = 'Vajillas';
+        if (params.id == 2) {
+            titulo = 'Cubiertos';
+        }
+        else if (params.id == 3) {
+            titulo = 'Cristaleria';
+        }
+        return titulo;
     }
-    return titulo;
-}
 
-const titulo=obtenerTituloCategoria();
+    const titulo = obtenerTituloCategoria();
 
-  return (
-    <section className={StylesListaProductos.productos}>
-           <h3 className={StylesListaProductos.titulo}>{titulo}</h3>
-           <div className={StylesListaProductos.cardGrid}>
-           {productosAleatorias.map((producto)=>(
-                <CardProductos key={producto.id} producto={producto}/>
-            ))}
+    const navigate = useNavigate();
+
+    const onBack = () => {
+        navigate(-1)
+    }
+
+    return (
+        <>
+            <div style={{
+                padding: '10px',
+            }}>
             </div>
-    </section>
-  )
+            <Button style={{
+                backgroundColor: '#d1b362',
+                float: 'right',
+                border: 'none',
+                color: 'white',
+                padding: '10px 20px',
+                fontSize: '16px',
+                cursor: 'pointer',
+                borderRadius: '5px',
+                transition: 'background-color 0.3s',
+                marginRight: '25px',
+            }}
+                onMouseEnter={(e) => (e.target.style.backgroundColor = '#f2ca4e')}
+                onMouseLeave={(e) => (e.target.style.backgroundColor = '#d1b362')}
+                className='back' onClick={onBack}><RiArrowGoBackFill />
+                Volver
+            </Button>
+            <section className={StylesListaProductos.productos}>
+                <h3 className={StylesListaProductos.titulo}>{titulo}</h3>
+                <div className={StylesListaProductos.cardGrid}>
+                    {productosAleatorias.map((producto) => (
+                        <CardProductos key={producto.id} producto={producto} />
+                    ))}
+                </div>
+            </section>
+        </>
+    )
 }
 
 export default ListaProductos
