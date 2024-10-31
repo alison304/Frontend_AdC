@@ -3,7 +3,6 @@ import StylesListaProductos from '../Styles/ListaProductos.module.css'
 import { Link } from "react-router-dom";
 
 function CardProductos({producto}) {
-    console.log(producto)
   return (
     <div className={StylesListaProductos.card}>
     <Link to={{

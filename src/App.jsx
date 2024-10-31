@@ -5,6 +5,7 @@ import Footer from "./Components/Footer/Footer";
 import Home from "./Routes/Home";
 import Administrador from "./Routes/Administrador"
 import Detail from './Routes/Detail';
+import Gallery from './Routes/Gallery';
 import { useState } from "react";
 import AgregarProducto from './Routes/AgregarProducto';
 import ListaProductos from './Routes/ListaProductos';
@@ -168,12 +169,13 @@ function App() {
             <div>
                 <Navbar />
                 <Routes>
-                    <Route path='/' element={<Home listaCategorias={listaCategorias} listaRecomendaciones={listaRecomendaciones} />} />
+                    <Route path='/' element={<Home listaProductos={listaProductos} listaCategorias={listaCategorias} listaRecomendaciones={listaRecomendaciones} />} />
                     <Route path='*' element={<h2>Error 404</h2>} />
                     <Route path='/admin' element={<Administrador listaProductos={listaProductos} />} />
                     <Route path='/admin/agregarProducto' element={<AgregarProducto listaProductos={listaProductos} setListaProductos={setListaProductos} />} />
                     <Route path="/listaProductos/:id" element={<ListaProductos listaProductos={listaProductos} />} />
-                    <Route path="/detail/:id" element={<Detail />} />
+                    <Route path="/detail/:id" element={<Detail/>} />
+                    <Route path="/gallery/:id" element={<Gallery/>} />
                     <Route path="/wip" element={<Wip />} />
                 </Routes>
                 <Footer />
