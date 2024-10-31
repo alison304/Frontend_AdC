@@ -3,7 +3,7 @@ import StylesHome from '../Styles/Home.module.css'
 import Card from '../Components/Card'
 import SearchBar from '../Components/SearchBar/SearchBar';
 
-const Home = ({listaCategorias,listaRecomendaciones}) => {
+const Home = ({listaProductos,listaCategorias,listaRecomendaciones}) => {
 
     return (
         <React.Fragment>
@@ -12,7 +12,7 @@ const Home = ({listaCategorias,listaRecomendaciones}) => {
            <h3 className={StylesHome.titulo}>Categorías</h3>
            <div className={StylesHome.cardGrid}>
            {listaCategorias.map((categoria)=>(
-                <Card key={categoria.id} dato={categoria} esCategoria={true}/>
+                <Card key={categoria.id} dato={categoria} esCategoria={true} producto={listaProductos[0]}/>
             ))}
             </div>
            </section>
@@ -20,7 +20,7 @@ const Home = ({listaCategorias,listaRecomendaciones}) => {
            <h3 className={StylesHome.titulo}>Recomendaciones</h3>
            <div className={StylesHome.cardGrid}>
            {listaRecomendaciones.map((recomendacion)=>(
-                <Card key={recomendacion.id} dato={recomendacion} esCategoria={false}/>
+                <Card key={recomendacion.id} dato={recomendacion} esCategoria={false} producto={listaProductos[recomendacion.id]}/>
             ))}
             </div>
            </section>
