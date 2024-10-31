@@ -2,7 +2,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;   
+    height: 100vh;  
+    padding-top: 5%; 
 }
 
 @media (max-width: 768px) {

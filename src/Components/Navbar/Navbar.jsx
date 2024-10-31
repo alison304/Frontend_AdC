@@ -43,7 +43,7 @@ const Navbar = () => {
 
   return (
     <React.Fragment>
-      <AppBar position='static'>
+      <AppBar position='fixed'>
         <div className='nav-contain'>
           <Toolbar sx={{ height: '90px', backgroundColor: "#ebe9e9", display: "flex", justifyContent: "space-evenly" }}>
             <Link to="/">
@@ -155,7 +155,7 @@ const Navbar = () => {
                       onClick={handleClickUser}
                       style={{ color: "#623d2b", paddingLeft: "1%" }}
                     >
-                      <FaUser size={30} color="#655e5e" style={{ paddingLeft: "2%" }} />
+                      <FaUser size={30} color="#655e5e" style={{ paddingLeft: "20%" }} />
                     </Button>
                     <Menu
                       id="demo-positioned-menu"
