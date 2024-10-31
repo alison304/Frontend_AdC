@@ -41,7 +41,7 @@ function App() {
         disponibilidad: 1,
         fechaRegistro: "2024-10-25",
         categoria: { "idCategoria": 1 },
-        imagenes:"../public/images/vajilla_serenidad.png"
+        imagenes:"../public/images/vajilla_serenidad.jpg"
     },
     {   id:4,
         nombre: "Vajilla Hyra Premium",
