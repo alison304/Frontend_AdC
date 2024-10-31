@@ -4,7 +4,6 @@
     align-items: center;
     max-width: 600px;
     margin: 0 auto;
-    padding-top: 30px;
 }
 
 .search-input {
@@ -14,7 +13,7 @@
     font-size: 18px;
     width: 400px;
     height: 40px;
-    margin: 10px 0;
+    margin: 30px 0;
     text-align: center;
     background-color: rgba(235, 233, 233, 0.5);
 }
@@ -33,10 +32,10 @@
     background-color: #b48b29;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 600px) and (max-width: 1024px) {
     .search-bar {
         width: 80%;
-        padding-top: 20px;
+        padding-top: 20%;
     }
 
     .search-bar input {

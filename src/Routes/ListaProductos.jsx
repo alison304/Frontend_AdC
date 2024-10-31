@@ -55,7 +55,7 @@ function ListaProductos({ listaProductos }) {
     return (
         <>
             <div style={{
-                padding: '10px',
+                padding: '2.3rem',
             }}>
             </div>
             <Button style={{
