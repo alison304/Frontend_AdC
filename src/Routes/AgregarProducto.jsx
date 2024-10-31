@@ -87,11 +87,15 @@ function AgregarProducto({listaProductos,setListaProductos}) {
               setMensajeForm("Por favor verifique su información nuevamente. Debe ingresar todos los datos")
             }
           }   
-        }
-    
+        }  
       }
+
+    const botonMovil = () => {
+        navigate('/');
+    };
     
       return (
+        <>
         <div className={StylesAdmin.registrarProducto}>
         <div className={StylesAdmin.titulo}>Panel de Administración</div>
         <a onClick={volverAdministrador} className={StylesAdmin.tituloVolver}>Volver</a>
@@ -118,7 +122,7 @@ function AgregarProducto({listaProductos,setListaProductos}) {
               />
             </div>
             <div className={StylesAdmin.divTituloAgregar}>
-              <label className={StylesAdmin.inputsFormulario}>Sube las imágenes *</label>
+              <label className={StylesAdmin.inputsFormulario}>Sube la imagen *</label>
               <input className={StylesAdmin.inputsFormulario}
               type="text"
               value={producto.imagenes}
@@ -132,7 +136,14 @@ function AgregarProducto({listaProductos,setListaProductos}) {
         {<p className={StylesAdmin.mensajeForm}>{mensajeForm}</p>}
         
       </div>
-      )
+        <div className={StylesAdmin.mensajeMovil}>
+        <div className={StylesAdmin.fraseMovil}>
+          <span className={StylesAdmin.frase2Movil}>Atención</span>No es posible entrar al Panel de Administración desde este dispositivo.
+        </div>
+        <button onClick={botonMovil} className={StylesAdmin.botonMovil}>Volver a inicio</button>
+      </div>
+  </>
+      );
     }
     
 
