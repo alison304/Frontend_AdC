@@ -163,8 +163,8 @@ th, td {
 
 
 /* Cuando la pantalla es de 900px o menos */
-@media (max-width: 900px) {
-    .seccionPrincipal{
+@media (max-width: 600px) and (max-width: 1024px) {
+    .seccionPrincipal, .registrarProducto{
         display: none; /* Oculta el mensaje de escritorio */
     }
 
@@ -176,9 +176,8 @@ th, td {
         flex-direction: column;
         justify-content: center;
         align-content: space-between;
-        width: 40%;
-        margin:13% auto;
-
+        width: 70%;
+        margin:40% auto;
     }
 
     .fraseMovil, .frase2Movil{
