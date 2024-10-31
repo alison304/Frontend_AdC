@@ -21,7 +21,8 @@
     display: grid;
     grid-template-columns: 56% 44%;
     padding: 10px;
-    margin-bottom: 3rem;
+    margin-bottom: 1rem;
+    margin-top: 2rem;
 }
 
 .contenedorImg {

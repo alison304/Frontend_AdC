@@ -15,7 +15,8 @@ body {
   min-height: 100vh; /* Ocupa toda la altura de la pantalla */
   box-sizing: border-box; /* Evita que el padding y border sumen al tamaño total */
   background-color: rgba(219, 189, 107, 0.4);
-  padding-bottom: 230px; /*Ajustar este valor según la altura del pie de página */
+  padding-bottom: 250px; /*Ajustar este valor según la altura del pie de página */
+  padding-top: 8%;
 }
 
 footer {
