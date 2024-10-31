@@ -43,13 +43,13 @@ const Navbar = () => {
 
   return (
     <React.Fragment>
-      <div className='nav-container'>
-        <AppBar position='static'>
-          <Toolbar sx={{ height: '90px', backgroundColor: "#ebe9e9" }}>
+      <AppBar position='static'>
+        <div className='nav-contain'>
+          <Toolbar sx={{ height: '90px', backgroundColor: "#ebe9e9", display: "flex", justifyContent: "space-evenly" }}>
             <Link to="/">
               <img src={logo} width={90} height={80} alt="Logo-icon" />
             </Link>
-            <Typography sx={{ fontSize: "0.9rem", paddingLeft: "1.5%", fontWeight: '250', fontStyle: 'italic', color: '#623d2b', fontFamily: 'Kaushan Script' }}>
+            <Typography sx={{ fontSize: "0.9rem", fontWeight: '250', fontStyle: 'italic', color: '#623d2b', fontFamily: 'Kaushan Script' }}>
               Tus recuerdos <br/> en porcelana
             </Typography>
             {
@@ -184,8 +184,8 @@ const Navbar = () => {
               )
             }
           </Toolbar>
-        </AppBar>
-      </div>
+        </div>
+      </AppBar>
     </React.Fragment>
   );
 };
