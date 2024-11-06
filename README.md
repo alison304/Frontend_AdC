@@ -20,17 +20,29 @@
 El repositorio de articulos de alquiler de vajillas Aura de Cristal fue desarrollado: el frontend con React con Vite y el backend en Java Spring Boot para el Proyecto Integrador de Digital House.
 
 ---
-<!-- 
+### Inicio Rapido
+
+Para arrancar el proyecto en un ambiente local. realice lo siguiente:
+
+1- Descargue el contenido de este repositorio. Clonando el repositorio: $ git clone https://github.com/alison304/Frontend_AdC
+2- En el directorio del proyecto, instala las dependencias usando NPM: $ npm install
+3- Ir a la carpeta /Frontend_AdC y en linea de comandos corre el siguiente comando: $ npm run dev
+
+---
 ### Vistas🍸
 
-Primer Dropdown *Inicio*, muestra:
+-   *Pagina de Inicio* : Esta página inicial, se muestra la barra de busqueda, las categorias, las recomendaciones de productos. 
 
--   *Página* : . -->
+-   *Detalle de los productos* :Muestra el detalle del producto como descripcion y precio.
+
+-   *Vista por categoria* : Aquí se muestran todos los productos disponibles por categoria.
 
 ---
 ### Librerías usadas 🍷
 
 - Vite: Es una herramienta de desarrollo diseñada para ser rápida y liviana.
+- React 18: Librería de JS usada para construir interfaces de usuario.
+- React-Router: Librería utilizada para administrar las diferentes rutas de las vistas.
 - Java: Es un lenguaje de programación multiplataforma,es un lenguaje de programación orientado a objetos.
 - Java Spring Boot: Es una herramienta de código abierto que facilita el uso de marcos basados ​​en Java para crear microservicios y aplicaciones web.
 - Maven: Es un administrador de compilación y dependencia, le permite crear su código y, al mismo tiempo, administrar sus dependencias para no tener que descargar archivos jar manualmente.
