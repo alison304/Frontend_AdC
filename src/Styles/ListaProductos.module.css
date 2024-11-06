@@ -98,3 +98,8 @@ justify-content: center;
     height: 350px;     /* La altura se ajusta para mantener la proporción */
 }
 }
+.cardGrid{
+    display: grid;
+    grid-template-columns: repeat(1, 1fr); /* Crea dos columnas de igual tamaño */
+    gap:40px;
+}

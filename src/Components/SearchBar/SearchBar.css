@@ -1,16 +1,19 @@
 .search-bar {
     padding-top: 30px;
-    padding-left: 35%;
-    padding-right: 20px;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
 }
 
 .search-bar input {
     border-radius: 30px;
-    padding: 10px 50px;
     font-size: 20px;
-    width: 500px;
     height: 40px;
     margin: 10px 0;
     text-align: center;
     background-color: rgba(235, 233, 233, 0.5);
+    width: 92%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
 }
