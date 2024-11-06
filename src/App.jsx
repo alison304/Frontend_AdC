@@ -71,7 +71,7 @@ function App() {
 
   console.log(listaProductos);
 
-  const [listaCategorias, setlistaCategorias] = useState([
+  const [listaCategorias] = useState([
     {
         id:1,
         nombre: "Vajilla",
@@ -87,7 +87,7 @@ function App() {
     }
   ]); // Array de objetos con datos iniciales
 
-  const [listaRecomendaciones, setlistaRecomendaciones] = useState([
+  const [listaRecomendaciones] = useState([
     {
         id:1,
         nombre: "Vajilla Elegancia Sublime",

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import PropTypes from 'prop-types';
 import StylesAdmin from '../Styles/Administrador.module.css';
 import { useNavigate } from 'react-router-dom';
 
@@ -6,9 +7,10 @@ function Administrador({ listaProductos }) {
     const navigate = useNavigate();
     const [mostrarLista, setMostrarLista] = useState(false);
     const [productos, setProductos] = useState(listaProductos);
+    const [showConfirmPopup, setShowConfirmPopup] = useState(false);
+    const [productIdToDelete, setProductIdToDelete] = useState(null);
 
     const listarProducto = () => {
-        console.log('si');
         setMostrarLista(true);
     };
 
@@ -21,8 +23,17 @@ function Administrador({ listaProductos }) {
     };
 
     const eliminarProducto = (id) => {
-        const nuevosProductos = productos.filter(producto => producto.id !== id);
-        setProductos(nuevosProductos);
+        setProductos(productos.filter(producto => producto.id !== id));
+        setShowConfirmPopup(false); // Oculta el popup después de eliminar
+    };
+
+    const handleDeleteClick = (id) => {
+        setProductIdToDelete(id); // Guarda el id del producto a eliminar
+        setShowConfirmPopup(true); // Muestra el popup de confirmación
+    };
+
+    const confirmDelete = () => {
+        eliminarProducto(productIdToDelete); // Llama a eliminar con el id guardado
     };
 
     return (
@@ -51,13 +62,21 @@ function Administrador({ listaProductos }) {
                                 <td>
                                     <div className="cambios-estados">
                                         <button className={StylesAdmin.botonesEditar}>Editar</button>
-                                        <button onClick={() => eliminarProducto(producto.id)} className={StylesAdmin.botonesEliminar}>Eliminar</button>
+                                        <button onClick={() => handleDeleteClick(producto.id)} className={StylesAdmin.botonesEliminar}>Eliminar</button>
                                     </div>
                                 </td>
                             </tr>
                         ))}
                     </tbody>
                 </table>
+            )}
+
+            {showConfirmPopup && (
+                <div className={StylesAdmin.confirmPopup}>
+                    <p>¿Estás seguro de que quieres eliminar este producto?</p>
+                    <button onClick={confirmDelete} className={StylesAdmin.confirmButton}>Confirmar</button>
+                    <button onClick={() => setShowConfirmPopup(false)} className={StylesAdmin.cancelButton}>Cancelar</button>
+                </div>
             )}
 
             <div className={StylesAdmin.mensajeMovil}>
@@ -69,5 +88,9 @@ function Administrador({ listaProductos }) {
         </>
     );
 }
+
+Administrador.propTypes = {
+    listaProductos: PropTypes.array.isRequired,
+};
 
 export default Administrador;

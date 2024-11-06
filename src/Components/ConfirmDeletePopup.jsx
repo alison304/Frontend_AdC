@@ -1,8 +1,9 @@
-import React from 'react';
-import Styles from '../Styles/ListaProductos.module.css';
+
+import PropTypes from 'prop-types'; // Importa prop-types
+import Styles from '../Styles/ListaProductos.module.css'; // Asegúrate de que esta ruta sea correcta
 
 function ConfirmDeletePopup({ isOpen, onConfirm, onClose }) {
-    if (!isOpen) return null; // Si no está abierto, no renderiza nada.
+    if (!isOpen) return null; // No renderiza nada si el popup no está abierto
 
     return (
         <div className={Styles.popup}>
@@ -15,5 +16,12 @@ function ConfirmDeletePopup({ isOpen, onConfirm, onClose }) {
         </div>
     );
 }
+
+// Validación de las props con prop-types
+ConfirmDeletePopup.propTypes = {
+    isOpen: PropTypes.bool.isRequired, // 'isOpen' debe ser un booleano y es requerido
+    onConfirm: PropTypes.func.isRequired, // 'onConfirm' debe ser una función y es requerido
+    onClose: PropTypes.func.isRequired, // 'onClose' debe ser una función y es requerido
+};
 
 export default ConfirmDeletePopup;
