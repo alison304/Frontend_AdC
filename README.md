@@ -25,7 +25,9 @@ El repositorio de articulos de alquiler de vajillas Aura de Cristal fue desarrol
 Para arrancar el proyecto en un ambiente local. realice lo siguiente:
 
 1- Descargue el contenido de este repositorio. Clonando el repositorio: $ git clone https://github.com/alison304/Frontend_AdC
+
 2- En el directorio del proyecto, instala las dependencias usando NPM: $ npm install
+
 3- Ir a la carpeta /Frontend_AdC y en linea de comandos corre el siguiente comando: $ npm run dev
 
 ---
