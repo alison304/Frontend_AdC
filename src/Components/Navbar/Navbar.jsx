@@ -84,13 +84,13 @@ const Navbar = () => {
                       horizontal: 'left',
                     }}
                   >
-                    <Link to="/listaProductos/1">
+                    <Link style={{ color: 'inherit' }} to="/listaProductos/1">
                       <MenuItem onClick={handleCloseCatalogo}>Vajilla</MenuItem>
                     </Link>
-                    <Link to="/listaProductos/2">
+                    <Link style={{ color: 'inherit' }} to="/listaProductos/2">
                       <MenuItem onClick={handleCloseCatalogo}>Cubiertos</MenuItem>
                     </Link>
-                    <Link to="/listaProductos/3">
+                    <Link style={{ color: 'inherit' }} to="/listaProductos/3">
                       <MenuItem onClick={handleCloseCatalogo}>Cristaleria</MenuItem>
                     </Link>
                   </Menu>
@@ -119,13 +119,13 @@ const Navbar = () => {
                       horizontal: 'left',
                     }}
                   >
-                    <Link to="/wip">
+                    <Link style={{ color: 'inherit' }} to="/wip">
                       <MenuItem onClick={handleCloseTematicas}>Halloween</MenuItem>
                     </Link>
-                    <Link to="/wip">
+                    <Link style={{ color: 'inherit' }} to="/wip">
                       <MenuItem onClick={handleCloseTematicas}>Navidad</MenuItem>
                     </Link>
-                    <Link to="/wip">
+                    <Link style={{ color: 'inherit' }} to="/wip">
                       <MenuItem onClick={handleCloseTematicas}>Accion de gracias</MenuItem>
                     </Link>
                   </Menu>
@@ -172,10 +172,10 @@ const Navbar = () => {
                         horizontal: 'left',
                       }}
                     >
-                      <Link to="/wip">
+                      <Link style={{ color: 'inherit' }} to="/wip">
                         <MenuItem onClick={handleCloseUser}>Iniciar Sesión</MenuItem>
                       </Link>
-                      <Link to="/wip">
+                      <Link style={{ color: 'inherit' }} to="/wip">
                         <MenuItem onClick={handleCloseUser}>Regístrate</MenuItem>
                       </Link>
                     </Menu>
