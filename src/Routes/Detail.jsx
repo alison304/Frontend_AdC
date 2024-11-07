@@ -28,7 +28,7 @@ const Detail = () => {
       <section className={StylesDetail.contenedor}>
         {
 
-          isMobile ? (<h3 className={StylesDetail.nombre}>{location.state.producto.nombre}</h3>) : (<></>)
+          isMobile ? (<><a onClick={volverHome} className={StylesDetail.tituloVolver}>Volver</a><h3 className={StylesDetail.nombre}>{location.state.producto.nombre}</h3></> ) : (<></>)
         }
         <div className={StylesDetail.contenedorImg}>
           <img src={location.state.producto.imagenes} className={StylesDetail.imgGrande} />
@@ -42,13 +42,19 @@ const Detail = () => {
               pathname: '/gallery/' + location.state.producto.id
             }}
               state={{ producto }}>
-              <img src={location.state.producto.imagenes} className={StylesDetail.imgPequeña} />
+              <div className={StylesDetail.divImg}>
+                <img src={location.state.producto.imagenes} className={StylesDetail.imgPequeñaOpacity} />
+                {
+                  isMobile ? (<p className={StylesDetail.textImg}>Ver Más</p>) : (<p className={StylesDetail.textImg}>Ver todas las fotos</p>)
+                }
+              </div>
             </Link>
 
           </div>
         </div>
         {
-          isMobile ? (<div className={StylesDetail.contenedorDetalle}>
+          isMobile ? (
+          <div className={StylesDetail.contenedorDetalle}>
             <p className={StylesDetail.descripcion}> {location.state.producto.descripcion}</p>
             <div className={StylesDetail.contenedorAñadir}>
               <button className={StylesDetail.botonMenos} onClick={() => { actualizarContador(-1) }}>-</button>
