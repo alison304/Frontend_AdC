@@ -1,5 +1,5 @@
 import { useState } from "react";
-import PropTypes from 'prop-types'; // Asegúrate de importar PropTypes
+import PropTypes from 'prop-types';
 import StylesAdmin from '../Styles/Administrador.module.css';
 import { useNavigate } from 'react-router-dom';
 
@@ -7,9 +7,10 @@ function Administrador({ listaProductos }) {
     const navigate = useNavigate();
     const [mostrarLista, setMostrarLista] = useState(false);
     const [productos, setProductos] = useState(listaProductos);
+    const [productoAEliminar, setProductoAEliminar] = useState(null);
+    const [mostrarModal, setMostrarModal] = useState(false);
 
     const listarProducto = () => {
-        console.log('si');
         setMostrarLista(true);
     };
 
@@ -25,6 +26,19 @@ function Administrador({ listaProductos }) {
         const nuevosProductos = productos.filter(producto => producto.id !== id);
         setProductos(nuevosProductos);
     };
+
+    const cancelarEliminar = () => {
+        setMostrarModal(false);
+        setProductoAEliminar(null);
+    };
+
+    function handleDelete(id) {
+        const confirmed = window.confirm("¿Estás seguro de que deseas eliminar este producto?");
+        if (confirmed) {
+            // Lógica para eliminar el producto
+            eliminarProducto(id);
+        }
+    }
 
     return (
         <>
@@ -52,7 +66,7 @@ function Administrador({ listaProductos }) {
                                 <td>
                                     <div className="cambios-estados">
                                         <button className={StylesAdmin.botonesEditar}>Editar</button>
-                                        <button onClick={() => eliminarProducto(producto.id)} className={StylesAdmin.botonesEliminar}>Eliminar</button>
+                                        <button onClick={() => handleDelete(producto.id)} className={StylesAdmin.botonesEliminar}>Eliminar</button>
                                     </div>
                                 </td>
                             </tr>
@@ -66,11 +80,23 @@ function Administrador({ listaProductos }) {
                 </div>
                 <button onClick={botonMovil} className={StylesAdmin.botonMovil}>Volver a inicio</button>
             </div>
+
+            {/* Modal de confirmación */}
+            {mostrarModal && (
+            <div className="modal-overlay">
+                <div className="modal">
+                    <p>¿Estás seguro de que deseas eliminar este producto?</p>
+                    <div className="modal-buttons">
+                        <button onClick={cancelarEliminar} className="cancel-button">Cancelar</button>
+                        <button onClick={eliminarProducto} className="delete-button">Eliminar</button>
+                    </div>
+                </div>
+            </div>
+        )}
         </>
     );
 }
 
-// Agrega la validación de props aquí
 Administrador.propTypes = {
     listaProductos: PropTypes.array.isRequired,
 };
