@@ -42,7 +42,7 @@ const MyDrawer = () => {
           </ListItem>
           <Collapse in={openCatalogo} timeout="auto" unmountOnExit>
             <List component="div" disablePadding>
-              <Link style={{ color: 'inherit' }} to="/listaProductos/1">
+              <Link onClick={() => setOpenDrawer(false)} style={{ color: 'inherit' }} to="/listaProductos/1">
                 <ListItemButton sx={{ pl: 6 }}>
                   <ListItemIcon>
                     <StarBorder />
@@ -50,7 +50,7 @@ const MyDrawer = () => {
                   <ListItemText primary="Vajilla" />
                 </ListItemButton>
               </Link>
-              <Link style={{ color: 'inherit' }} to="/listaProductos/2">
+              <Link onClick={() => setOpenDrawer(false)} style={{ color: 'inherit' }} to="/listaProductos/2">
                 <ListItemButton sx={{ pl: 6 }}>
                   <ListItemIcon>
                     <StarBorder />
@@ -59,7 +59,7 @@ const MyDrawer = () => {
                   <ListItemText primary="Cubiertos" />
                 </ListItemButton>
               </Link>
-              <Link style={{ color: 'inherit' }} to="/listaProductos/3">
+              <Link onClick={() => setOpenDrawer(false)} style={{ color: 'inherit' }} to="/listaProductos/3">
                 <ListItemButton sx={{ pl: 6 }}>
                   <ListItemIcon>
                     <StarBorder />
