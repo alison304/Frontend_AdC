@@ -28,7 +28,7 @@ const Detail = () => {
       <section className={StylesDetail.contenedor}>
         {
 
-          isMobile ? (<><a onClick={volverHome} className={StylesDetail.tituloVolver}>Volver</a><h3 className={StylesDetail.nombre}>{location.state.producto.nombre}</h3></> ) : (<></>)
+          isMobile ? (<h3 className={StylesDetail.nombre}>{location.state.producto.nombre}</h3>) : (<></>)
         }
         <div className={StylesDetail.contenedorImg}>
           <img src={location.state.producto.imagenes} className={StylesDetail.imgGrande} />
