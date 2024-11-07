@@ -63,7 +63,7 @@ function ListaProductos({ listaProductos }) {
                 float: 'right',
                 border: 'none',
                 color: 'white',
-                padding: '10px 20px',
+                padding: '5px 15px',
                 fontSize: '16px',
                 cursor: 'pointer',
                 borderRadius: '5px',
