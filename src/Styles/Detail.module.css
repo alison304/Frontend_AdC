@@ -46,6 +46,12 @@
     width: 87%;
 }
 
+.imgPequeñaOpacity {
+    height: auto;
+    width: 100%;
+    opacity: 20%;
+}
+
 .contenedorDetalle {
     margin-left: 10%;
     ;
@@ -91,7 +97,7 @@
     font-weight: 700;
     line-height: 19.36px;
     text-align: center;
-    cursor:pointer;
+    cursor: pointer;
 
 }
 
@@ -179,16 +185,40 @@
     text-align: center;
 }
 
+.divImg {
+    position: relative;
+    width: 87%;
+}
+
+.textImg {
+    position: absolute;
+    text-align: center;
+    position-area: center;
+    color: #000000;
+    font-family: 'Kaushan Script';
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 23.22px;
+    text-align: center;
+
+}
+
 /* Cuando la pantalla es de 900px o menos */
 @media (max-width: 900px) {
+
+    .tituloVolver {
+        font-size: 11px;
+        padding-left: 0%;
+    }
     .contenedor {
         display: block;
     }
 
-    .nombre{
+    .nombre {
         font-size: 14px;
-        font-weight: 400; 
+        font-weight: 400;
     }
+
     .descripcion,
     .precio {
         font-size: 12px;
@@ -212,11 +242,15 @@
         background-color: #FFFFFF;
     }
 
-    .contenedorDetalle{
+    .contenedorDetalle {
         display: grid;
         grid-template-columns: 60% 40%;
         margin-left: auto;
         justify-items: center;
         margin-top: 10%;
+    }
+
+    .textImg {
+        font-size: 11px;
     }
 }
