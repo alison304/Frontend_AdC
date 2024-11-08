@@ -1,5 +1,5 @@
-import StylesListaProductos from '../Styles/ListaProductos.module.css'
-import CardProductos from '../Components/CardProductos'
+import StylesListaProductos from '../styles/ListaProductos.module.css'
+import CardProductos from '../components/CardProductos'
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { RiArrowGoBackFill } from "react-icons/ri";

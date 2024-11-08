@@ -1,5 +1,5 @@
 import { useState } from "react";
-import StylesAdmin from '../Styles/Administrador.module.css';
+import StylesAdmin from '../styles/Administrador.module.css';
 import { useNavigate } from 'react-router-dom';
 
 function Administrador({ listaProductos }) {

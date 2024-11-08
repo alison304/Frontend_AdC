@@ -1,6 +1,6 @@
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import StylesGallery from '../Styles/Gallery.module.css'
+import StylesGallery from '../styles/Gallery.module.css'
 import { useMediaQuery, useTheme } from '@mui/material';
 
 

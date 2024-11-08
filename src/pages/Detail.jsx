@@ -1,6 +1,6 @@
 import { useNavigate, useLocation } from "react-router-dom";
 import React from 'react'
-import StylesDetail from '../Styles/Detail.module.css'
+import StylesDetail from '../styles/Detail.module.css'
 import { useMediaQuery, useTheme } from '@mui/material';
 import { useState } from "react";
 import { Link } from "react-router-dom";
@@ -28,7 +28,7 @@ const Detail = () => {
       <section className={StylesDetail.contenedor}>
         {
 
-          isMobile ? (<><a onClick={volverHome} className={StylesDetail.tituloVolver}>Volver</a><h3 className={StylesDetail.nombre}>{location.state.producto.nombre}</h3></> ) : (<></>)
+          isMobile ? (<><a onClick={volverHome} className={StylesDetail.tituloVolver}>Volver</a><h3 className={StylesDetail.nombre}>{location.state.producto.nombre}</h3></>) : (<></>)
         }
         <div className={StylesDetail.contenedorImg}>
           <img src={location.state.producto.imagenes} className={StylesDetail.imgGrande} />
@@ -54,17 +54,17 @@ const Detail = () => {
         </div>
         {
           isMobile ? (
-          <div className={StylesDetail.contenedorDetalle}>
-            <p className={StylesDetail.descripcion}> {location.state.producto.descripcion}</p>
-            <div className={StylesDetail.contenedorAñadir}>
-              <button className={StylesDetail.botonMenos} onClick={() => { actualizarContador(-1) }}>-</button>
-              <div className={StylesDetail.cantidad}>{contador}</div>
-              <button className={StylesDetail.botonMas} onClick={() => { actualizarContador(1) }} >+</button>
-            </div>
-            <h3 className={StylesDetail.precio}>S/.{location.state.producto.precioAlquiler}</h3>
+            <div className={StylesDetail.contenedorDetalle}>
+              <p className={StylesDetail.descripcion}> {location.state.producto.descripcion}</p>
+              <div className={StylesDetail.contenedorAñadir}>
+                <button className={StylesDetail.botonMenos} onClick={() => { actualizarContador(-1) }}>-</button>
+                <div className={StylesDetail.cantidad}>{contador}</div>
+                <button className={StylesDetail.botonMas} onClick={() => { actualizarContador(1) }} >+</button>
+              </div>
+              <h3 className={StylesDetail.precio}>S/.{location.state.producto.precioAlquiler}</h3>
 
-            <button className={StylesDetail.boton}>Añadir al Carrito</button>
-          </div>) :
+              <button className={StylesDetail.boton}>Añadir al Carrito</button>
+            </div>) :
 
             (<div className={StylesDetail.contenedorDetalle}>
               <h3 className={StylesDetail.nombre}>{location.state.producto.nombre}</h3>

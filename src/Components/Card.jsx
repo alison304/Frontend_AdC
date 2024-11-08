@@ -1,5 +1,5 @@
 import React from "react";
-import StylesHome from '../Styles/Home.module.css'
+import StylesHome from '../styles/Home.module.css'
 import { Link } from "react-router-dom";
 
 const Card = ({ dato, esCategoria, producto }) => {
