@@ -17,13 +17,13 @@ const Gallery = ({ }) => {
     <div>
       <a onClick={volverHome} className={StylesGallery.tituloVolver}>Volver</a>
       {isMobile ?
-        (<><a onClick={volverHome} className={StylesGallery.tituloVolver}>Volver</a> <div className={StylesGallery.contenedorMobile}>
+        ( <div className={StylesGallery.contenedorMobile}>
           <img src={producto.imagenes} />
           <img src={producto.imagenes} />
           <img src={producto.imagenes} />
           <img src={producto.imagenes} />
           <img src={producto.imagenes} />
-        </div></>) : (
+        </div>) : (
           <div>
             <div className={StylesGallery.contenedor}>
               <img src={producto.imagenes} />
