@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import Administrador from '../Routes/Administrador';
 
 function ComponentePadre() {
     const [listaCategorias, setListaCategorias] = useState([]);
