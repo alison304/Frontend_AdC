@@ -9,6 +9,8 @@ import { useState } from "react";
 import AgregarProducto from './Routes/AgregarProducto';
 import ListaProductos from './Routes/ListaProductos';
 import Wip from './Components/Wip/Wip';
+import ComponentePadre from '../src/Components/ComponentePadre';
+
 
 
 function App() {
@@ -96,7 +98,7 @@ function App() {
         categoria: { "idCategoria": 3 },
         imagenes:"../public/images/set_esencia.png"
     }
-  ]); // Array de objetos con datos iniciales
+  ]); 
 
     console.log(listaProductos);
 
@@ -154,7 +156,7 @@ function App() {
         piezas: 28,
         calificacion:4.8 
     }
-  ]); // Array de objetos con datos iniciales
+  ]); 
 
 
     return (
@@ -170,6 +172,9 @@ function App() {
                     <Route path="/detail/:id" element={<Detail />} />
                     <Route path="/wip" element={<Wip />} />
                 </Routes>
+                <div>
+                    <ComponentePadre />
+                </div>
                 <Footer />
             </div>
         </>
