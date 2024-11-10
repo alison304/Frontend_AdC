@@ -11,9 +11,9 @@ import AgregarProducto from './pages/AgregarProducto';
 import RegisterForm from './components/RegisterForm/RegisterForm';
 import ListaProductos from './pages/ListaProductos';
 import Wip from './components/Wip/Wip';
-
-
 function App() {
+    console.log('RENDERIZANDO APP')
+
 
     const [listaProductos, setListaProductos] = useState([
         {
@@ -198,25 +198,8 @@ function App() {
         }
     ]); // Array de objetos con datos iniciales
 
-    console.log(listaProductos);
+    console.log('lista productos app',listaProductos);
 
-    const [listaCategorias, setlistaCategorias] = useState([
-        {
-            id: 1,
-            nombre: "Vajilla",
-            imagen: "../public/images/vajilla.jpg"
-        },
-        {
-            id: 2,
-            nombre: "Cubiertos",
-            imagen: "../public/images/cubierto.jpg"
-        },
-        {
-            id: 3,
-            nombre: "Cristaleria",
-            imagen: "../public/images/cristaleria.jpg"
-        }
-    ]); // Array de objetos con datos iniciales
 
     const [listaRecomendaciones, setlistaRecomendaciones] = useState([
         {
@@ -268,11 +251,11 @@ function App() {
             <div>
                 <Navbar />
                 <Routes>
-                    <Route path='/' element={<Home listaProductos={listaProductos} listaCategorias={listaCategorias} listaRecomendaciones={listaRecomendaciones} />} />
+                    <Route path='/' element={<Home listaRecomendaciones={listaRecomendaciones} />} />
                     <Route path='*' element={<h2>Error 404</h2>} />
-                    <Route path='/admin' element={<Administrador listaProductos={listaProductos} />} />
-                    <Route path='/admin/agregarProducto' element={<AgregarProducto listaProductos={listaProductos} setListaProductos={setListaProductos} />} />
-                    <Route path="/listaProductos/:id" element={<ListaProductos listaProductos={listaProductos} />} />
+                    <Route path='/admin' element={<Administrador/>} />
+                    <Route path='/admin/agregarProducto' element={<AgregarProducto listaProductos={listaProductos} />} />
+                    <Route path="/listaProductos/:id" element={<ListaProductos/>} />
                     <Route path="/detail/:id" element={<Detail />} />
                     <Route path="/gallery/:id" element={<Gallery />} />
                     <Route path='/register' element={<RegisterForm/>}/>

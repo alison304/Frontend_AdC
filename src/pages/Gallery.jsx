@@ -18,15 +18,15 @@ const Gallery = ({ }) => {
       <a onClick={volverHome} className={StylesGallery.tituloVolver}>Volver</a>
       {isMobile ?
         ( <div className={StylesGallery.contenedorMobile}>
-          <img src={producto.imagenes} />
-          <img src={producto.imagenes} />
-          <img src={producto.imagenes} />
-          <img src={producto.imagenes} />
-          <img src={producto.imagenes} />
+          <img src={producto.imagenes[0].url} />
+          <img src={producto.imagenes[1].url} />
+          <img src={producto.imagenes[2].url} />
+          <img src={producto.imagenes[0].url} />
+          <img src={producto.imagenes[1].url} />
         </div>) : (
           <div>
             <div className={StylesGallery.contenedor}>
-              <img src={producto.imagenes} />
+              <img src={producto.imagenes[0].url} />
               <div className={StylesGallery.columna}>
                 <img src={producto.imagenes} />
                 <img src={producto.imagenes} />
