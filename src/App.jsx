@@ -8,6 +8,7 @@ import Detail from './pages/Detail';
 import Gallery from './pages/Gallery';
 import { useState } from "react";
 import AgregarProducto from './pages/AgregarProducto';
+import RegisterForm from './components/RegisterForm/RegisterForm';
 import ListaProductos from './pages/ListaProductos';
 import Wip from './components/Wip/Wip';
 
@@ -274,6 +275,7 @@ function App() {
                     <Route path="/listaProductos/:id" element={<ListaProductos listaProductos={listaProductos} />} />
                     <Route path="/detail/:id" element={<Detail />} />
                     <Route path="/gallery/:id" element={<Gallery />} />
+                    <Route path='/register' element={<RegisterForm/>}/>
                     <Route path="/wip" element={<Wip />} />
                 </Routes>
                 <Footer />
