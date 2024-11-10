@@ -4,12 +4,18 @@ import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { RiArrowGoBackFill } from "react-icons/ri";
 import { Button } from '@mui/material';
+import {useProductosStates} from "../utils/Context"
 
-function ListaProductos({ listaProductos }) {
 
+function ListaProductos() {
+    console.log('RENDERIZANDO LISTA DE PRODUCTOS')
+    const {state} = useProductosStates();
+    const listaProductos =state.lista;  
+    console.log('listaProductos',listaProductos)
+  
     const params = useParams();
     //filtramos los que sean de esa categoria
-    const productosFiltrados = listaProductos.filter(producto => producto.categoria.idCategoria == params.id);
+    const productosFiltrados = listaProductos.filter(producto => producto.categoria.id== params.id);
     // Copia del array original
     let datosProductos = [...productosFiltrados];
     let productosAleatorias = [];

@@ -43,7 +43,7 @@ const Detail = () => {
             }}
               state={{ producto }}>
               <div className={StylesDetail.divImg}>
-                <img src={location.state.producto.imagenes} className={StylesDetail.imgPequeñaOpacity} />
+                <img src={location.state.producto.imagenes[0].url} className={StylesDetail.imgPequeñaOpacity} />
                 {
                   isMobile ? (<p className={StylesDetail.textImg}>Ver Más</p>) : (<p className={StylesDetail.textImg}>Ver todas las fotos</p>)
                 }
@@ -68,7 +68,7 @@ const Detail = () => {
 
             (<div className={StylesDetail.contenedorDetalle}>
               <h3 className={StylesDetail.nombre}>{location.state.producto.nombre}</h3>
-              <h3 className={StylesDetail.precio}>S/.{location.state.producto.precioAlquiler}</h3>
+              <h3 className={StylesDetail.precio}>S/.{location.state.producto.precio_alquiler}</h3>
               <h3 className={StylesDetail.disponible}>Disponible: {location.state.producto.disponibilidad}</h3>
               <h3 className={StylesDetail.disponible}>Cantidad</h3>
               <div className={StylesDetail.contenedorAñadir}>
