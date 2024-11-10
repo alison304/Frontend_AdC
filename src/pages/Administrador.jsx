@@ -1,11 +1,16 @@
 import { useState } from "react";
 import StylesAdmin from '../styles/Administrador.module.css';
 import { useNavigate } from 'react-router-dom';
+import {useProductosStates} from "../utils/Context"
 
-function Administrador({ listaProductos }) {
+function Administrador() {
+    console.log('RENDERIZANDO ADMIN')
+    const {state} = useProductosStates();
+    const listaProductos =state.lista;  
+    console.log(listaProductos)
+
     const navigate = useNavigate();
     const [mostrarLista, setMostrarLista] = useState(false);
-    const [productos, setProductos] = useState(listaProductos);
 
     const listarProducto = () => {
         console.log('si');
@@ -21,8 +26,8 @@ function Administrador({ listaProductos }) {
     };
 
     const eliminarProducto = (id) => {
-        const nuevosProductos = productos.filter(producto => producto.id !== id);
-        setProductos(nuevosProductos);
+        console.log('eliminar')
+        
     };
 
     return (
@@ -44,7 +49,7 @@ function Administrador({ listaProductos }) {
                         </tr>
                     </thead>
                     <tbody>
-                        {productos.map((producto) => (
+                        {listaProductos.map((producto) => (
                             <tr key={producto.id}>
                                 <td>{producto.id}</td>
                                 <td>{producto.nombre}</td>
