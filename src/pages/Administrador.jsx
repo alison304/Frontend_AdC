@@ -1,12 +1,13 @@
 import { useState } from "react";
 import StylesAdmin from '../styles/Administrador.module.css';
 import { useNavigate } from 'react-router-dom';
-import {useProductosStates} from "../utils/Context"
+import { useProductosStates } from "../utils/Context";
+import Swal from 'sweetalert2';
 
 function Administrador() {
     console.log('RENDERIZANDO ADMIN')
-    const {state} = useProductosStates();
-    const listaProductos =state.lista;  
+    const { state } = useProductosStates();
+    const listaProductos = state.lista;
     console.log(listaProductos)
 
     const navigate = useNavigate();
@@ -26,8 +27,18 @@ function Administrador() {
     };
 
     const eliminarProducto = (id) => {
-        console.log('eliminar')
-        
+        Swal.fire({
+            title: "Aura de Cristal",
+            text: "Deseas eliminar este producto?",
+            icon: "question",
+            showCancelButton: true,
+            confirmButtonText: "Eliminar",
+            cancelButtonText: "Cancelar"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                console.log('eliminar');
+            }
+        });
     };
 
     return (
