@@ -33,9 +33,7 @@ function Administrador() {
             icon: "question",
             showCancelButton: true,
             confirmButtonText: "Eliminar",
-            cancelButtonText: "Cancelar",
-            confirmButtonColor: '#000',
-            cancelButtonColor: '#8D3434CC'
+            cancelButtonText: "Cancelar"
         }).then((result) => {
             if (result.isConfirmed) {
                 console.log('eliminar');
