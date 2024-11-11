@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { createUser, getOneUser, updateUser } from "../../services/user.service";
+import { getOneUser } from "../../services/user.service";
 import { useParams, useNavigate } from "react-router-dom";
 import { Box, Paper, Button } from '@mui/material';
 import { Formik, Form, Field } from 'formik';
@@ -76,11 +76,11 @@ const RegisterComponent = () => {
                 {({ values, errors, touched, setFieldValue }) => (
                     <Form>
                         <Box className='registro'>
-                            <img className='img-reg' src="/public/images/Logo.png" alt="logo" width="200" height="100" onClick={() => navigate("/")} />
+                            {/* <img className='img-reg' src="/public/images/Logo.png" alt="logo" onClick={() => navigate("/")} /> */}
                             {id ? (
                                 <h3>Actualizar {user.name}</h3>
                             ) : (
-                                <h3>Crear cuenta 📋</h3>
+                                <h3 className="title-form">Crear cuenta 📋</h3>
                             )}
                             <br />
                             <p>Vamos a preparar todo para comenzar a configurar su perfil.</p>
@@ -141,7 +141,7 @@ const RegisterComponent = () => {
                                 <Button variant="contained" sx={{ backgroundColor: '#9575cd', display: 'inline', fontSize: 14 }} className='btn-c' type="submit">Actualizar</Button>
 
                             ) : (
-                                <Button variant="outlined" sx={{ borderColor: '#E3DACC', backgroundColor: '#E3DACC', color: '#645b4d', display: 'inline', fontSize: 14 }} className='btn-c' type="submit">Registrarse</Button>
+                                <Button variant="outlined" sx={{ borderColor: '#645b4d', backgroundColor: '#E3DACC', color: '#645b4d', display: 'inline', fontSize: 14 }} className='btn-c' type="submit">Registrarse</Button>
                             )}
                             &nbsp;&nbsp;&nbsp;&nbsp;
                             {id ? (
