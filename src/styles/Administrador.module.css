@@ -1,216 +1,269 @@
 @import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap');
 
-.titulo{
+/* Estilos generales */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+/* Estilos para el modal */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.6); /* Fondo semitransparente */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Encima de todos los elementos */
+}
+
+/* Estilo del modal en sí */
+.modal {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    max-width: 400px;
+    width: 90%; /* Para pantallas pequeñas */
+    z-index: 1010;
+}
+
+.modal p {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: space-around;
+}
+
+.cancel-button, .delete-button {
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    text-decoration: none; /* Elimina el subrayado */
+}
+
+.cancel-button {
+    background-color: #ccc;
+    color: black;
+}
+
+.delete-button {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.cancel-button:hover, .delete-button:hover {
+    opacity: 0.9;
+}
+
+
+/* Estilos específicos */
+.titulo {
     font-family: 'Kaushan Script', cursive;
     font-size: 45px;
     font-weight: 400;
     line-height: 69.65px;
-    text-align: center;    
-    color:rgba(142, 107, 50, 0.4);
+    text-align: center;
+    color: rgba(142, 107, 50, 0.4);
 }
 
-.botonesPrincipales{
+.botonesPrincipales {
     width: 300px;
     height: 63px;
     border-radius: 20px;
     border: 1px black solid;
-    background-color:#DBBD6B66; 
-    font-family: 'Inter', sans-serif; /* Cambia 'p' a cualquier otro selector según lo necesites */
+    background-color: #DBBD6B66;
     font-size: 16px;
     font-style: italic;
     font-weight: 600;
-    line-height: 19.36px;
     text-align: center;
 }
 
-.botones{
-
+.botones {
     display: flex;
     width: 80%;
-    justify-content: space-between; 
+    justify-content: space-between;
 }
 
-.seccionPrincipal{
+.seccionPrincipal {
     display: flex;
     flex-direction: column;
     height: 490px;
     align-items: center;
     justify-content: center;
-    gap:150px;
+    gap: 150px;
 }
 
-.tituloVolver{
-    font-family: 'Inter', sans-serif; /* Cambia 'p' a cualquier otro selector según lo necesites */
+.tituloVolver {
     font-size: 20px;
     font-weight: 400;
     line-height: 24.2px;
     text-align: center;
-    color:#565656;
-    text-decoration: underline; /* Subrayar todos los enlaces */
+    color: #565656;
+    text-decoration: underline;
     width: 100%;
     display: flex;
     padding-left: 15%;
-   
 }
 
-.divTituloAgregar{
+.divTituloAgregar {
     width: 864px;
     height: 80px;
     border-radius: 30px;
-    opacity: 0px;
     background-color: white;
     display: flex;
     flex-direction: column;
-
 }
 
-.tituloAgregar{
-    font-family: 'Inter', sans-serif;
+.tituloAgregar {
     font-size: 20px;
     font-weight: 700;
     line-height: 29.05px;
     text-align: center;
     display: flex;
-    justify-content: center;     /* Centra horizontalmente */
+    justify-content: center;
     align-items: center;
     padding-top: 2%;
 }
 
-.registrarProducto{
+.registrarProducto {
     display: flex;
     padding: 40px 0px;
-    flex-direction: column;   
+    flex-direction: column;
     align-items: center;
     justify-content: space-between;
     gap: 14px;
 }
 
-.inputsFormulario{
-    padding: 5px 30px; /* 10px arriba y abajo, 20px a los lados */
-    background-color: transparent; /* Sin color de fondo */
-    outline: none; 
+.inputsFormulario {
+    padding: 5px 30px;
+    background-color: transparent;
+    outline: none;
 }
 
-.botoneRegistrar{
+.botoneRegistrar {
     width: 200px;
     height: 43px;
     border-radius: 20px;
     border: 1px black solid;
-    background-color:#DBBD6B66; 
-    font-family: 'Inter', sans-serif; /* Cambia 'p' a cualquier otro selector según lo necesites */
+    background-color: #DBBD6B66;
     font-size: 16px;
     font-style: italic;
     font-weight: 600;
-    line-height: 19.36px;
     text-align: center;
 }
 
-.mensajeMovil{
-    display: none; /* Mensaje de móvil oculto */
+.mensajeMovil,
+.botonMovil,
+.fraseMovil,
+.frase2Movil {
+    display: none;
 }
 
-.botonMovil{
-    display: none; /* Mensaje de móvil oculto */
-}
-
-.fraseMovil{
-    display: none; /* Mensaje de móvil oculto */
-}
-
-.frase2Movil{
-    display: none; /* Mensaje de móvil oculto */
-}
-
-.botonesEliminar, .botonesEditar{
+.botonesEliminar,
+.botonesEditar {
     background-color: #000000;
     color: white;
     padding: .5rem 1rem;
     margin-left: 2rem;
     border-radius: .3rem;
-    font-family: Inter;
     font-size: 16px;
     font-weight: 700;
-    line-height: 19.36px;
     text-align: center;
     margin: 10px;
 }
 
-.botonesEliminar{
+.botonesEliminar {
     background-color: #8D3434CC;
 }
 
 table {
     width: 70%;
     border-collapse: collapse;
-    margin: 0 auto; /* Centra la tabla horizontalmente */    
+    margin: 0 auto;
 }
 
-th, td {
+th,
+td {
     border: 1px solid #ccc;
     padding: 10px;
     text-align: center;
 }
 
-.mensajeForm{
-    font-family: 'Inter', sans-serif; /* Cambia 'p' a cualquier otro selector según lo necesites */
+.mensajeForm {
     font-size: 22px;
     font-style: italic;
     font-weight: 600;
-    line-height: 19.36px;
     text-align: center;
 }
 
-
-
-/* Cuando la pantalla es de 900px o menos */
-@media (max-width: 600px) and (max-width: 1024px) {
-    .seccionPrincipal, .registrarProducto{
-        display: none; /* Oculta el mensaje de escritorio */
+/* Media Queries */
+@media (max-width: 1200px) {
+    .titulo {
+        font-size: 35px;
     }
+    .divTituloAgregar {
+        width: 700px;
+    }
+}
 
-    .mensajeMovil{
-        display: block; /* Muestra el mensaje de móvil */
+@media (max-width: 900px) {
+    .seccionPrincipal {
+        display: none;
+    }
+    .mensajeMovil {
+        display: block;
         height: 429px;
         background-color: #FFFFFF;
         display: flex;
         flex-direction: column;
         justify-content: center;
-        align-content: space-between;
-        width: 70%;
-        margin:40% auto;
+        align-items: center;
+        gap: 10px;
     }
-
-    .fraseMovil, .frase2Movil{
-        display: block; /* Muestra el mensaje de móvil */
-        font-family: 'Inter', sans-serif; /* Cambia 'p' a cualquier otro selector según lo necesites */
-        font-size: 30px;
-        font-style: italic;
-        font-weight: 600;
-        text-align: center;
-        line-height: 1.5; /* Espaciado entre líneas */
-        background-color: #FFFFFF;
-    }
-
-    .fraseMovil{
-        height: 280px;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-around;
-    }
-
-    .botonMovil{
+    .botonMovil,
+    .fraseMovil,
+    .frase2Movil {
         display: block;
-        width: 200px;
-        height: 63px;
-        border-radius: 20px;
-        border: 1px black solid;
-        background-color:#565656; 
-        font-family: 'Inter', sans-serif; /* Cambia 'p' a cualquier otro selector según lo necesites */
-        font-size: 16px;
-        font-style: italic;
-        font-weight: 600;
-        line-height: 19.36px;
         text-align: center;
-        margin: auto;
+        font-size: 18px;
+        color: #565656;
+    }
+    .botonesPrincipales,
+    .botoneRegistrar {
+        width: 200px;
+        height: 50px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 600px) {
+    .titulo {
+        font-size: 28px;
+    }
+    .divTituloAgregar {
+        width: 90%;
+        padding: 10px;
+    }
+    .botonesPrincipales,
+    .botoneRegistrar {
+        width: 150px;
+        height: 45px;
+        font-size: 12px;
+    }
+    .mensajeMovil {
+        padding: 20px;
+        height: auto;
     }
 }
