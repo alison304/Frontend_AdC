@@ -223,9 +223,8 @@ td {
         flex-direction: column;
         justify-content: center;
         align-content: space-between;
-        width: 40%;
-        margin:13% auto;
-
+        width: 70%;
+        margin:40% auto;
     }
 
     .fraseMovil, .frase2Movil{
