@@ -8,7 +8,7 @@ export const FooterContainer = styled.footer`
     width: 100%;
     padding: 0px -1px;
     margin: 0px;
-    @media (min-width: 600px) {
+    @media (min-width: 600px) and (max-width: 1024px) {
     font-size: 12px;
     }
 `;

@@ -7,12 +7,9 @@ const SearchBar = () => {
     return (
         <>
             <div className='search-bar'>
-                <input
-                    type="text"
-                    placeholder="Que estás buscando?"
-                />
+                <input type="text" placeholder="Que estás buscando?" className="search-input" />
                 <Link to="/wip">
-                    <IoSearch size={22} style={{ paddingLeft: "2%" }} />
+                    <button className="search-button"><IoSearch size={23} style={{ paddingLeft: "4%" }} /></button>
                 </Link>
             </div>
         </>

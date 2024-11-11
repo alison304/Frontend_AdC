@@ -1,22 +1,22 @@
 import React from 'react';
-import {FooterContainer, FooterLinksContainer, FooterWrap, FooterLogoItems, FooterLinksWrapper, FooterLinkItems} from './FooterElem';
+import { FooterContainer, FooterLinksContainer, FooterWrap, FooterLogoItems, FooterLinksWrapper, FooterLinkItems } from './FooterElem';
 import { Typography } from '@mui/material';
 import { FaFacebook } from "react-icons/fa";
 import { RiInstagramFill } from "react-icons/ri";
 import { FaSquareWhatsapp } from "react-icons/fa6";
 import { FaSquareXTwitter } from "react-icons/fa6";
 import { Link } from 'react-router-dom';
-import logo from '../../../public/images/Logo.png'
+import logo from '../../../public/images/Logo.png';
 import './Footer.css';
 
 const Footer = () => {
   return (
     <React.Fragment>
       <div className='container'>
-        <FooterContainer className='foot'>
+        <FooterContainer>
           <FooterLogoItems>
             <Link to="/">
-              <img src={logo} width={70} height={70} alt="Logo-icon" />
+              <img src={logo} width={90} height={80} alt="Logo-icon" />
             </Link>
           </FooterLogoItems>
           <FooterWrap>
@@ -50,8 +50,8 @@ const Footer = () => {
                 </FooterLinkItems>
               </FooterLinksWrapper>
             </FooterLinksContainer>
-            <Typography sx={{ fontSize: "0.9rem", paddingLeft: "1%", color: 'white', paddingBottom: '1%',paddingTop: '1%' }}>
-              © 2024 Aurora de Cristal. Todos los derechos reservados. 
+            <Typography sx={{ fontSize: "0.9rem", paddingLeft: "1%", color: 'white', paddingBottom: '1%', paddingTop: '1%' }}>
+              © 2024 Aurora de Cristal. Todos los derechos reservados.
             </Typography>
           </FooterWrap>
         </FooterContainer>
