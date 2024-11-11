@@ -5,16 +5,21 @@ import { useProductosStates } from "../utils/Context";
 import Swal from 'sweetalert2';
 
 function Administrador() {
-    console.log('RENDERIZANDO ADMIN')
-    const { state } = useProductosStates();
-    const listaProductos = state.lista;
-    console.log(listaProductos)
+    console.log('RENDERIZANDO ADMIN');
+    
+    // Obtener el estado y el dispatch desde el contexto
+    const { state, dispatch } = useProductosStates();
+    const listaProductos = state.lista || [];
+    const categorias = state.categorias || [];  // Default vacío para evitar error si no está definido
+    
+    console.log("Lista de productos:", listaProductos);
+    console.log("Lista de categorías:", categorias);
 
     const navigate = useNavigate();
     const [mostrarLista, setMostrarLista] = useState(false);
 
     const listarProducto = () => {
-        console.log('si');
+        console.log('Mostrando lista de productos');
         setMostrarLista(true);
     };
 
@@ -36,9 +41,19 @@ function Administrador() {
             cancelButtonText: "Cancelar"
         }).then((result) => {
             if (result.isConfirmed) {
-                console.log('eliminar');
+                console.log(`Producto con ID ${id} eliminado`);
+                // Aquí iría la lógica para eliminar el producto
             }
         });
+    };
+
+    const asignarCategoria = (productoId, categoriaId) => {
+        console.log(`Asignando categoría ${categoriaId} a producto ${productoId}`);
+        dispatch({
+            type: "ASIGNAR_CATEGORIA",
+            payload: { id: productoId, categoriaId }
+        });
+        Swal.fire("Éxito", "La categoría ha sido asignada al producto", "success");
     };
 
     return (
@@ -50,12 +65,14 @@ function Administrador() {
                     <button onClick={agregarProducto} className={StylesAdmin.botonesPrincipales}>AGREGAR PRODUCTO</button>
                 </div>
             </section>
+
             {mostrarLista && (
                 <table>
                     <thead>
                         <tr>
                             <th>ID</th>
                             <th>NOMBRE</th>
+                            <th>CATEGORÍA</th>
                             <th>ACCIONES</th>
                         </tr>
                     </thead>
@@ -64,6 +81,20 @@ function Administrador() {
                             <tr key={producto.id}>
                                 <td>{producto.id}</td>
                                 <td>{producto.nombre}</td>
+                                <td>
+                                    <select
+                                        value={producto.categoriaId || ""}
+                                        onChange={(e) => asignarCategoria(producto.id, e.target.value)}
+                                        className={StylesAdmin.selectorCategoria}
+                                    >
+                                        <option value="">Seleccione una categoría</option>
+                                        {categorias.map((categoria) => (
+                                            <option key={categoria.id} value={categoria.id}>
+                                                {categoria.nombre}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </td>
                                 <td>
                                     <div className="cambios-estados">
                                         <button className={StylesAdmin.botonesEditar}>Editar</button>
@@ -78,7 +109,7 @@ function Administrador() {
 
             <div className={StylesAdmin.mensajeMovil}>
                 <div className={StylesAdmin.fraseMovil}>
-                    <span className={StylesAdmin.frase2Movil}>Atención</span>No es posible entrar al Panel de Administración desde este dispositivo.
+                    <span className={StylesAdmin.frase2Movil}>Atención</span> No es posible entrar al Panel de Administración desde este dispositivo.
                 </div>
                 <button onClick={botonMovil} className={StylesAdmin.botonMovil}>Volver a inicio</button>
             </div>
