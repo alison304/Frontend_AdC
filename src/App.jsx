@@ -1,19 +1,21 @@
-import './Styles/App.css'
+import './App.css'
 import { Route, Routes } from "react-router-dom";
-import Navbar from "./Components/Navbar/Navbar";
-import Footer from "./Components/Footer/Footer";
-import Home from "./Routes/Home";
-import Administrador from "./Routes/Administrador"
-import Detail from './Routes/Detail';
+import Navbar from "./components/Navbar/Navbar";
+import Footer from "./components/Footer/Footer";
+import Home from "./pages/Home";
+import Administrador from "./pages/Administrador"
+import Detail from './pages/Detail';
+import Gallery from './pages/Gallery';
 import { useState } from "react";
-import AgregarProducto from './Routes/AgregarProducto';
-import ListaProductos from './Routes/ListaProductos';
-import Wip from './Components/Wip/Wip';
+import AgregarProducto from './pages/AgregarProducto';
+import RegisterForm from './components/RegisterForm/RegisterForm';
+import ListaProductos from './pages/ListaProductos';
+import Wip from './components/Wip/Wip';
 import ComponentePadre from '../src/Components/ComponentePadre';
 
-
-
 function App() {
+    console.log('RENDERIZANDO APP')
+
 
   const [listaProductos, setListaProductos] = useState([
     {
@@ -98,25 +100,27 @@ function App() {
         categoria: { "idCategoria": 3 },
         imagenes:"../public/images/set_esencia.png"
     }
-  ]); 
+  ]); // Array de objetos con datos iniciales
 
     console.log(listaProductos);
 
-  const [listaCategorias] = useState([
-    {
-        id:1,
-        nombre: "Vajilla",
-        imagen:"../public/images/vajilla.jpg"
-    },
-    {   id:2,
-        nombre: "Cubiertos",
-        imagen:"../public/images/cubierto.jpg"
-    },
-    {   id:3,
-        nombre: "Cristaleria",
-        imagen:"../public/images/cristaleria.jpg"
-    }
-  ]); // Array de objetos con datos iniciales
+    const [listaCategorias, setlistaCategorias] = useState([
+        {
+            id: 1,
+            nombre: "Vajilla",
+            imagen: "../public/images/vajilla.jpg"
+        },
+        {
+            id: 2,
+            nombre: "Cubiertos",
+            imagen: "../public/images/cubierto.jpg"
+        },
+        {
+            id: 3,
+            nombre: "Cristaleria",
+            imagen: "../public/images/cristaleria.jpg"
+        }
+    ]); // Array de objetos con datos iniciales
 
   const [listaRecomendaciones] = useState([
     {
@@ -164,12 +168,14 @@ function App() {
             <div>
                 <Navbar />
                 <Routes>
-                    <Route path='/' element={<Home listaCategorias={listaCategorias} listaRecomendaciones={listaRecomendaciones} />} />
+                    <Route path='/' element={<Home listaRecomendaciones={listaRecomendaciones} />} />
                     <Route path='*' element={<h2>Error 404</h2>} />
-                    <Route path='/admin' element={<Administrador listaProductos={listaProductos} />} />
-                    <Route path='/admin/agregarProducto' element={<AgregarProducto listaProductos={listaProductos} setListaProductos={setListaProductos} />} />
-                    <Route path="/listaProductos/:id" element={<ListaProductos listaProductos={listaProductos} />} />
+                    <Route path='/admin' element={<Administrador/>} />
+                    <Route path='/admin/agregarProducto' element={<AgregarProducto listaProductos={listaProductos} />} />
+                    <Route path="/listaProductos/:id" element={<ListaProductos/>} />
                     <Route path="/detail/:id" element={<Detail />} />
+                    <Route path="/gallery/:id" element={<Gallery />} />
+                    <Route path='/register' element={<RegisterForm/>}/>
                     <Route path="/wip" element={<Wip />} />
                 </Routes>
                 <div>

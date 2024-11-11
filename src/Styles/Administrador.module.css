@@ -208,19 +208,12 @@ td {
     text-align: center;
 }
 
-/* Media Queries */
-@media (max-width: 1200px) {
-    .titulo {
-        font-size: 35px;
-    }
-    .divTituloAgregar {
-        width: 700px;
-    }
-}
 
-@media (max-width: 900px) {
-    .seccionPrincipal {
-        display: none;
+
+/* Cuando la pantalla es de 900px o menos */
+@media (max-width: 600px) and (max-width: 1024px) {
+    .seccionPrincipal, .registrarProducto{
+        display: none; /* Oculta el mensaje de escritorio */
     }
     .mensajeMovil {
         display: block;
@@ -229,13 +222,18 @@ td {
         display: flex;
         flex-direction: column;
         justify-content: center;
-        align-items: center;
-        gap: 10px;
+        align-content: space-between;
+        width: 40%;
+        margin:13% auto;
+
     }
-    .botonMovil,
-    .fraseMovil,
-    .frase2Movil {
-        display: block;
+
+    .fraseMovil, .frase2Movil{
+        display: block; /* Muestra el mensaje de móvil */
+        font-family: 'Inter', sans-serif; /* Cambia 'p' a cualquier otro selector según lo necesites */
+        font-size: 30px;
+        font-style: italic;
+        font-weight: 600;
         text-align: center;
         font-size: 18px;
         color: #565656;

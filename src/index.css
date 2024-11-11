@@ -22,7 +22,7 @@ a:link {
 
 :root {
   font-family: Inter, Avenir, Helvetica;
-  background-color: hsl(0, 0%, 100%);
+  /* background-color: hsl(0, 0%, 100%); */
 }
 
 nav{
@@ -35,7 +35,7 @@ nav{
   position: fixed;
   width: 100vw;
   top: 0;
-  z-index: 9999;
+  /* z-index: 9999; */
 }
 
 /* .dropdown {
