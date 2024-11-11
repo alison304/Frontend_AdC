@@ -1,96 +1,74 @@
-import StylesListaProductos from '../styles/ListaProductos.module.css'
-import CardProductos from '../components/CardProductos'
+import React, { useEffect, useState } from 'react';
+import axiosInstance from '../utils/axios'; // Importamos la configuración de axios
+import StylesListaProductos from '../styles/ListaProductos.module.css';
+import CardProductos from '../components/CardProductos';
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { RiArrowGoBackFill } from "react-icons/ri";
 import { Button } from '@mui/material';
-import {useProductosStates} from "../utils/Context"
-
 
 function ListaProductos() {
-    console.log('RENDERIZANDO LISTA DE PRODUCTOS')
-    const {state} = useProductosStates();
-    const listaProductos =state.lista;  
-    console.log('listaProductos',listaProductos)
-  
-    const params = useParams();
-    //filtramos los que sean de esa categoria
-    const productosFiltrados = listaProductos.filter(producto => producto.categoria.id== params.id);
-    // Copia del array original
-    let datosProductos = [...productosFiltrados];
-    let productosAleatorias = [];
+  const [productos, setProductos] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const params = useParams();
+  const navigate = useNavigate();
 
-    function mostrarElementoAleatorioSinRepetir(datosRestantes) {
-        if (datosRestantes.length === 0) {
-            console.log("Ya se mostraron todos los elementos.");
-            return;
-        }
-        // Elegir un índice aleatorio
-        const indiceAleatorio = Math.floor(Math.random() * datosRestantes.length);
+  // Obtener productos desde el backend usando Axios
+  useEffect(() => {
+    axiosInstance.get('/productos')  // Llamada a la API que configuraste en axios.js
+      .then((response) => {
+        setProductos(response.data); // Guardamos los productos recibidos
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Hubo un error al obtener los productos", error);
+        setLoading(false);
+      });
+  }, []);
 
-        // Obtener y eliminar el elemento aleatorio
-        const elementoAleatorio = datosRestantes.splice(indiceAleatorio, 1)[0];
-        return elementoAleatorio;
-    }
+  // Filtrar productos según la categoría
+  const productosFiltrados = productos.filter(producto => producto.categoria === params.categoria);
 
-    for (let i = 0; i < productosFiltrados.length; i++) {
-        let producto = mostrarElementoAleatorioSinRepetir(datosProductos);
-        productosAleatorias.push(producto);
-    }
+  const onBack = () => {
+    navigate(-1);
+  };
 
-
-    const obtenerTituloCategoria = () => {
-        let titulo = 'Vajillas';
-        if (params.id == 2) {
-            titulo = 'Cubiertos';
-        }
-        else if (params.id == 3) {
-            titulo = 'Cristaleria';
-        }
-        return titulo;
-    }
-
-    const titulo = obtenerTituloCategoria();
-
-    const navigate = useNavigate();
-
-    const onBack = () => {
-        navigate(-1)
-    }
-
-    return (
-        <>
-            <div style={{
-                padding: '2.3rem',
-            }}>
-            </div>
-            <Button style={{
-                backgroundColor: '#d1b362',
-                float: 'right',
-                border: 'none',
-                color: 'white',
-                padding: '5px 15px',
-                fontSize: '16px',
-                cursor: 'pointer',
-                borderRadius: '5px',
-                transition: 'background-color 0.3s',
-                marginRight: '25px',
-            }}
-                onMouseEnter={(e) => (e.target.style.backgroundColor = '#f2ca4e')}
-                onMouseLeave={(e) => (e.target.style.backgroundColor = '#d1b362')}
-                className='back' onClick={onBack}><RiArrowGoBackFill />
-                Volver
-            </Button>
-            <section className={StylesListaProductos.productos}>
-                <h3 className={StylesListaProductos.titulo}>{titulo}</h3>
-                <div className={StylesListaProductos.cardGrid}>
-                    {productosAleatorias.map((producto) => (
-                        <CardProductos key={producto.id} producto={producto} />
-                    ))}
-                </div>
-            </section>
-        </>
-    )
+  return (
+    <div style={{ padding: '2.3rem' }}>
+      <Button
+        style={{
+          backgroundColor: '#d1b362',
+          float: 'right',
+          border: 'none',
+          color: 'white',
+          padding: '5px 15px',
+          fontSize: '16px',
+          cursor: 'pointer',
+          borderRadius: '5px',
+          transition: 'background-color 0.3s',
+          marginRight: '25px',
+        }}
+        onMouseEnter={(e) => (e.target.style.backgroundColor = '#f2ca4e')}
+        onMouseLeave={(e) => (e.target.style.backgroundColor = '#d1b362')}
+        className='back' onClick={onBack}><RiArrowGoBackFill />
+        Volver
+      </Button>
+      <section className={StylesListaProductos.productos}>
+        <h3 className={StylesListaProductos.titulo}>
+          {params.categoria === 'vajillas' ? 'Vajillas' : params.categoria === 'cubiertos' ? 'Cubiertos' : 'Cristalería'}
+        </h3>
+        <div className={StylesListaProductos.cardGrid}>
+          {loading ? (
+            <p>Cargando productos...</p>
+          ) : (
+            productosFiltrados.map((producto) => (
+              <CardProductos key={producto.id} producto={producto} />
+            ))
+          )}
+        </div>
+      </section>
+    </div>
+  );
 }
 
-export default ListaProductos
+export default ListaProductos;
