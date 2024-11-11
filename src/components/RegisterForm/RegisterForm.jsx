@@ -46,19 +46,19 @@ const RegisterComponent = () => {
 
     const userSchema = Yup.object().shape({
         name: Yup.string()
-            .min(3, 'Too Short!')
-            .max(20, 'Too Long!')
-            .required('Required name'),
+            .min(3, 'Hey, es muy corto el nombre!')
+            .max(20, 'Hey, es muy largo el nombre!')
+            .required('Se requiere agregar un nombre'),
         lastName: Yup.string()
-            .min(3, 'Too Short!')
-            .max(20, 'Too Long!')
-            .required("Required lastname"),
+            .min(3, 'Hey, es muy corto el apellido!')
+            .max(20, 'Hey, es muy largo el apellido!')
+            .required("Se requiere agregar un apellido"),
         email: Yup.string()
-            .email('Not a proper email')
-            .required("Required email"),
+            .matches(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,}$/i, "Formato de correo electrónico no válido")
+            .required("Se requiere un email"),
         password: Yup.string()
-            .min(6, 'Too Short!Password should be of minimum 6 characters length')
-            .required("Password is required"),
+            .min(6, '¡Demasiado corto! La contraseña debe tener una longitud mínima de 6 caracteres.')
+            .required("La contraseña es incorrecta"),
     });
 
     const sendNewUser = async (user) => {
@@ -80,10 +80,11 @@ const RegisterComponent = () => {
                             {id ? (
                                 <h3>Actualizar {user.name}</h3>
                             ) : (
-                                <h3>Registrar</h3>
+                                <h3>Crear cuenta 📋</h3>
                             )}
                             <br />
-                            <p>📋Vamos a preparar todo para comenzar a configurar su perfil.</p>
+                            <p>Vamos a preparar todo para comenzar a configurar su perfil.</p>
+                            <br />
                             <div className='row'>
                                 <div className='column'>
                                     <h3>Datos de registro de usuario</h3>
@@ -140,14 +141,14 @@ const RegisterComponent = () => {
                                 <Button variant="contained" sx={{ backgroundColor: '#9575cd', display: 'inline', fontSize: 14 }} className='btn-c' type="submit">Actualizar</Button>
 
                             ) : (
-                                <Button variant="contained" sx={{ backgroundColor: '#9575cd', display: 'inline', fontSize: 14 }} className='btn-c' type="submit">Registrarse</Button>
+                                <Button variant="outlined" sx={{ borderColor: '#E3DACC', backgroundColor: '#E3DACC', color: '#645b4d', display: 'inline', fontSize: 14 }} className='btn-c' type="submit">Registrarse</Button>
                             )}
                             &nbsp;&nbsp;&nbsp;&nbsp;
                             {id ? (
-                                <Button variant="contained" sx={{ backgroundColor: '#9575cd', display: 'inline', fontSize: 14 }} className='btn-c' onClick={() => navigate("/user/list")}>Cancelar</Button>
+                                <Button variant="contained" sx={{ backgroundColor: '#a45c5c', display: 'inline', fontSize: 14 }} className='btn-c' onClick={() => navigate("/user/list")}>Cancelar</Button>
 
                             ) : (
-                                <Button variant="contained" sx={{ backgroundColor: '#9575cd', display: 'inline', fontSize: 14 }} className='btn-c' onClick={() => navigate("/")}>Cancelar</Button>
+                                <Button variant="contained" sx={{ backgroundColor: '#a45c5c', display: 'inline', fontSize: 14 }} className='btn-c' onClick={() => navigate("/")}>Cancelar</Button>
                             )}
                         </Box>
                     </Form>
