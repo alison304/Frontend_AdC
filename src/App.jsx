@@ -170,9 +170,6 @@ function App() {
                     <Route path="/detail/:id" element={<Detail />} />
                     <Route path="/wip" element={<Wip />} />
                 </Routes>
-                <div>
-                    <ComponentePadre />
-                </div>
                 <Footer />
             </div>
         </>
