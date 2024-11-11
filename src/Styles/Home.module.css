@@ -70,7 +70,7 @@
     text-align: center;
 }
 /* Cuando la pantalla es de 900px o menos */
-@media (max-width: 900px) {
+@media (max-width: 600px) and (max-width: 1024px)  {
     .piezas, .calificacion{
         font-size: 14px;       
     }

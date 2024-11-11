@@ -1,10 +1,11 @@
-import './Styles/App.css'
+import './App.css'
 import { Route, Routes } from "react-router-dom";
-import Navbar from "./Components/Navbar/Navbar";
-import Footer from "./Components/Footer/Footer";
-import Home from "./Routes/Home";
-import Administrador from "./Routes/Administrador"
-import Detail from './Routes/Detail';
+import Navbar from "./components/Navbar/Navbar";
+import Footer from "./components/Footer/Footer";
+import Home from "./pages/Home";
+import Administrador from "./pages/Administrador"
+import Detail from './pages/Detail';
+import Gallery from './pages/Gallery';
 import { useState } from "react";
 import AgregarProducto from './Routes/AgregarProducto';
 import ListaProductos from './Routes/ListaProductos';
@@ -14,6 +15,8 @@ import ComponentePadre from '../src/Components/ComponentePadre';
 
 
 function App() {
+    console.log('RENDERIZANDO APP')
+
 
   const [listaProductos, setListaProductos] = useState([
     {
@@ -164,12 +167,14 @@ function App() {
             <div>
                 <Navbar />
                 <Routes>
-                    <Route path='/' element={<Home listaCategorias={listaCategorias} listaRecomendaciones={listaRecomendaciones} />} />
+                    <Route path='/' element={<Home listaRecomendaciones={listaRecomendaciones} />} />
                     <Route path='*' element={<h2>Error 404</h2>} />
-                    <Route path='/admin' element={<Administrador listaProductos={listaProductos} />} />
-                    <Route path='/admin/agregarProducto' element={<AgregarProducto listaProductos={listaProductos} setListaProductos={setListaProductos} />} />
-                    <Route path="/listaProductos/:id" element={<ListaProductos listaProductos={listaProductos} />} />
+                    <Route path='/admin' element={<Administrador/>} />
+                    <Route path='/admin/agregarProducto' element={<AgregarProducto listaProductos={listaProductos} />} />
+                    <Route path="/listaProductos/:id" element={<ListaProductos/>} />
                     <Route path="/detail/:id" element={<Detail />} />
+                    <Route path="/gallery/:id" element={<Gallery />} />
+                    <Route path='/register' element={<RegisterForm/>}/>
                     <Route path="/wip" element={<Wip />} />
                 </Routes>
                 <div>
