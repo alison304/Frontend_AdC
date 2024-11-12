@@ -4,7 +4,7 @@ import './Wip.css';
 const Wip = () => {
   return (
     <div className='manten'>
-      <img src={mantenimiento}  alt="mantenimiento" />
+      <img className="mantenimiento-img" src={mantenimiento}  alt="mantenimiento" />
     </div>
   )
 }
