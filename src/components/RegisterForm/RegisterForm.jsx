@@ -49,6 +49,10 @@ const RegisterComponent = () => {
             .required("Se requiere un email"),
         password: Yup.string()
             .min(6, '¡Demasiado corto! La contraseña debe tener una longitud mínima de 6 caracteres.')
+            .max(10, 'La contraseña no debe exceder los 10 caracteres')
+            .matches(/(?=.*[!@#$%^&*()_\-+=<>?{}[\]~])/, 'La contraseña debe incluir al menos un carácter especial')
+            .matches(/(?=.*[a-z])(?=.*[A-Z])/, 'La contraseña debe incluir al menos una letra mayúscula y una minúscula')
+            .matches(/(?=.*[0-9])/, 'La contraseña debe contener al menos un número')
             .required("La contraseña es incorrecta"),
     });
 
@@ -67,22 +71,20 @@ const RegisterComponent = () => {
                 {({ values, errors, touched, setFieldValue }) => (
                     <Form>
                         <div className='registro'>
-                            {/* <img className='img-reg' src="/public/images/Logo.png" alt="logo" onClick={() => navigate("/")} /> */}
                             {id ? (
                                 <h3>Actualizar {user.name}</h3>
                             ) : (
                                 <h3 className="title-form">Crear cuenta 📋</h3>
                             )}
                             <br />
-                            <p>Vamos a preparar todo para comenzar a configurar su perfil.</p>
+                            <p className="text-2">Vamos a comenzar a configurar su perfil.</p>
                             <br />
                             <div className='row'>
                                 <div className='column'>
-                                    <h3>Datos de registro de usuario</h3>
+                                    <h3 className="text">Datos de registro de usuario</h3>
                                     <br />
                                     <div>
-                                        <label>Nombre</label>
-                                        <Field name="name" placeholder="Nombre" />
+                                        <Field name="name" placeholder="Nombre" className="holder-style" />
                                         {errors.name && touched.name ? (
                                             <div>{errors.name}</div>
                                         ) : null}
@@ -92,8 +94,7 @@ const RegisterComponent = () => {
                                     </div>
                                     <br />
                                     <div>
-                                        <label>Apellidos</label>
-                                        <Field name="lastName" />
+                                        <Field name="lastName" placeholder="Apellido" className="holder-style" />
                                         {errors.lastName && touched.lastName ? (
                                             <div>{errors.lastName}</div>
                                         ) : null}
@@ -103,8 +104,7 @@ const RegisterComponent = () => {
                                     </div>
                                     <br />
                                     <div>
-                                        <label>Email</label>
-                                        <Field name="email" />
+                                        <Field name="email" placeholder="Email" className="holder-style" />
                                         {errors.email && touched.email ? (
                                             <div>{errors.email}</div>
                                         ) : null}
@@ -114,8 +114,7 @@ const RegisterComponent = () => {
                                     </div>
                                     <br />
                                     <div>
-                                        <label>Contraseña</label>
-                                        <Field type="password" name="password" />
+                                        <Field type="password" name="password" placeholder="Contraseña" className="holder-style" />
                                         {errors.password && touched.password ? (
                                             <div>{errors.password}</div>
                                         ) : null}
