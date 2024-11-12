@@ -102,6 +102,7 @@ function App() {
 
     console.log(listaProductos);
 
+<<<<<<< HEAD
   const [listaCategorias] = useState([
     {
         id:1,
@@ -159,12 +160,18 @@ function App() {
   ]); 
 
 
+=======
+>>>>>>> 169bf7d035fc29331935d2ad15370fba492faeab
     return (
         <>
             <div>
                 <Navbar />
                 <Routes>
+<<<<<<< HEAD
                     <Route path='/' element={<Home listaCategorias={listaCategorias} listaRecomendaciones={listaRecomendaciones} />} />
+=======
+                    <Route path='/' element={<Home/>} />
+>>>>>>> 169bf7d035fc29331935d2ad15370fba492faeab
                     <Route path='*' element={<h2>Error 404</h2>} />
                     <Route path='/admin' element={<Administrador/>} />
                     <Route path='/admin/agregarProducto' element={<AgregarProducto listaProductos={listaProductos} />} />
