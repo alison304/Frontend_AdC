@@ -151,8 +151,3 @@ const RegisterComponent = () => {
 }
 
 export default RegisterComponent;
-
-    )
-}
-
-export default RegisterComponent;
