@@ -100,7 +100,7 @@ const MyDrawer = () => {
               </ListItemButton>
             </List>
           </Collapse>
-          <Link style={{ color: 'inherit' }} to="/wip">
+          <Link onClick={() => setOpenDrawer(false)} style={{ color: 'inherit' }} to="/wip">
             <ListItem disablePadding>
               <WorkspacePremiumIcon />
               <ListItemButton
@@ -109,7 +109,7 @@ const MyDrawer = () => {
               </ListItemButton>
             </ListItem>
           </Link>
-          <Link style={{ color: 'inherit' }} to="/wip">
+          <Link onClick={() => setOpenDrawer(false)} style={{ color: 'inherit' }} to="/wip">
             <ListItem disablePadding>
               <PhoneIcon />
               <ListItemButton>
@@ -118,7 +118,7 @@ const MyDrawer = () => {
             </ListItem>
           </Link>
           <Divider />
-          <Link style={{ color: 'inherit' }} to="/wip">
+          <Link onClick={() => setOpenDrawer(false)} style={{ color: 'inherit' }} to="/wip">
             <ListItem disablePadding>
               <ShoppingCartIcon />
               <ListItemButton
@@ -128,7 +128,7 @@ const MyDrawer = () => {
             </ListItem>
           </Link>
           <Divider />
-          <Link style={{ color: 'inherit' }} to="/wip">
+          <Link onClick={() => setOpenDrawer(false)} style={{ color: 'inherit' }} to="/wip">
             <ListItem disablePadding>
               <MailIcon />
               <ListItemButton>
@@ -136,7 +136,7 @@ const MyDrawer = () => {
               </ListItemButton>
             </ListItem>
           </Link>
-          <Link style={{ color: 'inherit' }} to="/register">
+          <Link onClick={() => setOpenDrawer(false)} style={{ color: 'inherit' }} to="/register">
             <ListItem disablePadding>
               <PersonIcon />
               <ListItemButton>
