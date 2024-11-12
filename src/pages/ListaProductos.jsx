@@ -15,9 +15,9 @@ function ListaProductos() {
 
   // Obtener productos desde el backend usando Axios
   useEffect(() => {
-    axiosInstance.get('/productos')  // Llamada a la API que configuraste en axios.js
+    axiosInstance.get('/productos')  
       .then((response) => {
-        setProductos(response.data); // Guardamos los productos recibidos
+        setProductos(response.data); 
         setLoading(false);
       })
       .catch((error) => {
