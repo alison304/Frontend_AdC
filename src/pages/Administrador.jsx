@@ -42,7 +42,6 @@ function Administrador() {
         }).then((result) => {
             if (result.isConfirmed) {
                 console.log(`Producto con ID ${id} eliminado`);
-                // Aquí iría la lógica para eliminar el producto
             }
         });
     };
