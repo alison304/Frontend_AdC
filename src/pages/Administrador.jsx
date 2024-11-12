@@ -5,15 +5,11 @@ import { useProductosStates } from "../utils/Context";
 import Swal from 'sweetalert2';
 
 function Administrador() {
-    console.log('RENDERIZANDO ADMIN');
     
-    // Obtener el estado y el dispatch desde el contexto
     const { state, dispatch } = useProductosStates();
     const listaProductos = state.lista || [];
-    const categorias = state.categorias || [];  // Default vacío para evitar error si no está definido
-    
-    console.log("Lista de productos:", listaProductos);
-    console.log("Lista de categorías:", categorias);
+    const categorias = state.categorias || [];  
+    const AdministrarCategorias = state.administrarCategorias || [];
 
     const navigate = useNavigate();
     const [mostrarLista, setMostrarLista] = useState(false);
@@ -27,6 +23,10 @@ function Administrador() {
         navigate('/admin/agregarProducto');
     };
 
+    const administrarCaracteristicas = () => {
+        navigate('/admin/administrarCaracteristicas');
+    };
+
     const botonMovil = () => {
         navigate('/');
     };
@@ -34,7 +34,7 @@ function Administrador() {
     const eliminarProducto = (id) => {
         Swal.fire({
             title: "Aura de Cristal",
-            text: "Deseas eliminar este producto?",
+            text: "¿Deseas eliminar este producto?",
             icon: "question",
             showCancelButton: true,
             confirmButtonText: "Eliminar",
@@ -62,6 +62,7 @@ function Administrador() {
                 <div className={StylesAdmin.botones}>
                     <button onClick={listarProducto} className={StylesAdmin.botonesPrincipales}>LISTAR PRODUCTOS</button>
                     <button onClick={agregarProducto} className={StylesAdmin.botonesPrincipales}>AGREGAR PRODUCTO</button>
+                    <button onClick={administrarCaracteristicas} className={StylesAdmin.botonesPrincipales}>ADMINISTRAR CARACTERÍSTICAS</button>
                 </div>
             </section>
 
