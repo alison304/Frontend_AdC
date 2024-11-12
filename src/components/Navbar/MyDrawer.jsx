@@ -136,7 +136,7 @@ const MyDrawer = () => {
               </ListItemButton>
             </ListItem>
           </Link>
-          <Link style={{ color: 'inherit' }} to="/wip">
+          <Link style={{ color: 'inherit' }} to="/register">
             <ListItem disablePadding>
               <PersonIcon />
               <ListItemButton>

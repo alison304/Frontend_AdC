@@ -175,7 +175,7 @@ const Navbar = () => {
                       <Link style={{ color: 'inherit' }} to="/wip">
                         <MenuItem onClick={handleCloseUser}>Iniciar Sesión</MenuItem>
                       </Link>
-                      <Link style={{ color: 'inherit' }} to="/wip">
+                      <Link style={{ color: 'inherit' }} to="/register">
                         <MenuItem onClick={handleCloseUser}>Regístrate</MenuItem>
                       </Link>
                     </Menu>
