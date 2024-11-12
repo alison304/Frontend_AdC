@@ -200,58 +200,12 @@ function App() {
 
     console.log('lista productos app',listaProductos);
 
-
-    const [listaRecomendaciones, setlistaRecomendaciones] = useState([
-        {
-            id: 1,
-            nombre: "Vajilla Elegancia Sublime",
-            imagen: "../public/images/vajilla_elegante.jpg",
-            piezas: 24,
-            calificacion: 4.7
-        },
-        {
-            id: 2,
-            nombre: "Vajilla Lujo Refinado",
-            imagen: "../public/images/vajilla_lujo.jpg",
-            piezas: 28,
-            calificacion: 4.8
-        },
-        {
-            id: 3,
-            nombre: "Vajilla Gracia Sutil",
-            imagen: "../public/images/vajilla_gracia.png",
-            piezas: 20,
-            calificacion: 4.6
-        },
-        {
-            id: 4,
-            nombre: "Vajilla Esplendor Imperial",
-            imagen: "../public/images/vajilla_esplendor.png",
-            piezas: 16,
-            calificacion: 4.5
-        },
-        {
-            id: 5,
-            nombre: "Vajilla Serenidad Noble",
-            imagen: "../public/images/vajilla_serenidad.jpg",
-            piezas: 25,
-            calificacion: 4.7
-        },
-        {
-            id: 6,
-            nombre: "Vajilla Belleza Ancestral",
-            imagen: "../public/images/vajilla_belleza.jpg",
-            piezas: 28,
-            calificacion: 4.8
-        }
-    ]); // Array de objetos con datos iniciales
-
     return (
         <>
             <div>
                 <Navbar />
                 <Routes>
-                    <Route path='/' element={<Home listaRecomendaciones={listaRecomendaciones} />} />
+                    <Route path='/' element={<Home/>} />
                     <Route path='*' element={<h2>Error 404</h2>} />
                     <Route path='/admin' element={<Administrador/>} />
                     <Route path='/admin/agregarProducto' element={<AgregarProducto listaProductos={listaProductos} />} />
