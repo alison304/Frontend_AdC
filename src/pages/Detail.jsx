@@ -31,12 +31,12 @@ const Detail = () => {
           isMobile ? (<h3 className={StylesDetail.nombre}>{location.state.producto.nombre}</h3>) : (<></>)
         }
         <div className={StylesDetail.contenedorImg}>
-          <img src={location.state.producto.imagenes} className={StylesDetail.imgGrande} />
+          <img src={location.state.producto.imagenes[0].url} className={StylesDetail.imgGrande} />
 
           <div className={StylesDetail.contenedorImgPequeñas}>
-            <img src={location.state.producto.imagenes} className={StylesDetail.imgPequeña} />
-            <img src={location.state.producto.imagenes} className={StylesDetail.imgPequeña} />
-            <img src={location.state.producto.imagenes} className={StylesDetail.imgPequeña} />
+            <img src={location.state.producto.imagenes[0].url} className={StylesDetail.imgPequeña} />
+            <img src={location.state.producto.imagenes[1].url} className={StylesDetail.imgPequeña} />
+            <img src={location.state.producto.imagenes[2].url} className={StylesDetail.imgPequeña} />
 
             <Link to={{
               pathname: '/gallery/' + location.state.producto.id
