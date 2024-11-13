@@ -10,7 +10,7 @@ function AgregarProducto({ listaProductos, setListaProductos, categorias }) {
     disponibilidad: 0,
     inventario: 0,
     fechaRegistro: "2024-10-25",
-    categoriaId: "", // Inicializa con un valor vacío
+    categoriaId: "", 
     imagenes: null
   });
 
