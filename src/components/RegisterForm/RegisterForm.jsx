@@ -45,15 +45,16 @@ const RegisterComponent = () => {
             .max(20, 'Hey, es muy largo el apellido!')
             .required("Se requiere agregar un apellido"),
         email: Yup.string()
-            .matches(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,}$/i, "Formato de correo electrónico no válido")
+            .matches(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, "Formato de correo electrónico no válido")
             .required("Se requiere un email"),
         password: Yup.string()
             .min(6, '¡Demasiado corto! La contraseña debe tener una longitud mínima de 6 caracteres.')
-            .max(10, 'La contraseña no debe exceder los 10 caracteres')
-            .matches(/(?=.*[!@#$%^&*()_\-+=<>?{}[\]~])/, 'La contraseña debe incluir al menos un carácter especial')
-            .matches(/(?=.*[a-z])(?=.*[A-Z])/, 'La contraseña debe incluir al menos una letra mayúscula y una minúscula')
-            .matches(/(?=.*[0-9])/, 'La contraseña debe contener al menos un número')
-            .required("La contraseña es incorrecta"),
+            .max(20, 'La contraseña no debe exceder los 20 caracteres')
+            .matches(/[@$!%*?&]/, 'La contraseña debe tener al menos un carácter especial (@, $, !, %, *, ?, &)')
+            .matches(/[A-Z]/, 'La contraseña debe tener al menos una letra mayúscula')
+            .matches(/[a-z]/, 'La contraseña debe tener al menos una letra minúscula')
+            .matches(/[0-9]/, 'La contraseña debe tener al menos un número')
+            .required("Se requiere de una contraseña"),
     });
 
     const sendNewUser = async (user) => {
