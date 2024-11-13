@@ -10,6 +10,7 @@ import { useState } from "react";
 import AgregarProducto from './pages/AgregarProducto';
 import RegisterForm from './components/RegisterForm/RegisterForm';
 import ListaProductos from './pages/ListaProductos';
+import Login from './components/LoginForm/login';
 import Wip from './components/Wip/Wip';
 function App() {
     console.log('RENDERIZANDO APP')
@@ -113,6 +114,7 @@ function App() {
                     <Route path='/admin/agregarProducto' element={<AgregarProducto listaProductos={listaProductos} />} />
                     <Route path="/listaProductos/:id" element={<ListaProductos/>} />
                     <Route path="/detail/:id" element={<Detail />} />
+                    <Route path="/login" element={<Login />} />
                     <Route path="/wip" element={<Wip />} />
                 </Routes>
                 <Footer />

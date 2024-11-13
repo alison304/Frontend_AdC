@@ -172,7 +172,7 @@ const Navbar = () => {
                         horizontal: 'left',
                       }}
                     >
-                      <Link style={{ color: 'inherit' }} to="/wip">
+                      <Link style={{ color: 'inherit' }} to="/login">
                         <MenuItem onClick={handleCloseUser}>Iniciar Sesión</MenuItem>
                       </Link>
                       <Link style={{ color: 'inherit' }} to="/wip">
