@@ -50,7 +50,7 @@ const Navbar = () => {
               <img src={logo} width={90} height={80} alt="Logo-icon" />
             </Link>
             <Typography sx={{ fontSize: "0.9rem", fontWeight: '250', fontStyle: 'italic', color: '#623d2b', fontFamily: 'Kaushan Script' }}>
-              Tus recuerdos <br/> en porcelana
+              Tus recuerdos <br /> en porcelana
             </Typography>
             {
               isMatch ? (
@@ -172,7 +172,7 @@ const Navbar = () => {
                         horizontal: 'left',
                       }}
                     >
-                      <Link style={{ color: 'inherit' }} to="/wip">
+                      <Link style={{ color: 'inherit' }} to="/login">
                         <MenuItem onClick={handleCloseUser}>Iniciar Sesión</MenuItem>
                       </Link>
                       <Link style={{ color: 'inherit' }} to="/wip">

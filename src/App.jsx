@@ -10,7 +10,9 @@ import { useState } from "react";
 import AgregarProducto from './pages/AgregarProducto';
 import RegisterForm from './components/RegisterForm/RegisterForm';
 import ListaProductos from './pages/ListaProductos';
+import Login from './components/LoginForm/login';
 import Wip from './components/Wip/Wip';
+
 function App() {
     console.log('RENDERIZANDO APP')
 
@@ -198,21 +200,22 @@ function App() {
         }
     ]); // Array de objetos con datos iniciales
 
-    console.log('lista productos app',listaProductos);
+    console.log('lista productos app', listaProductos);
 
     return (
         <>
             <div>
                 <Navbar />
                 <Routes>
-                    <Route path='/' element={<Home/>} />
+                    <Route path='/' element={<Home />} />
                     <Route path='*' element={<h2>Error 404</h2>} />
-                    <Route path='/admin' element={<Administrador/>} />
+                    <Route path='/admin' element={<Administrador />} />
                     <Route path='/admin/agregarProducto' element={<AgregarProducto listaProductos={listaProductos} />} />
-                    <Route path="/listaProductos/:id" element={<ListaProductos/>} />
+                    <Route path="/listaProductos/:id" element={<ListaProductos />} />
                     <Route path="/detail/:id" element={<Detail />} />
                     <Route path="/gallery/:id" element={<Gallery />} />
-                    <Route path='/register' element={<RegisterForm/>}/>
+                    <Route path='/register' element={<RegisterForm />} />
+                    <Route path="/login" element={<Login />} />
                     <Route path="/wip" element={<Wip />} />
                 </Routes>
                 <Footer />
