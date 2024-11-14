@@ -128,7 +128,7 @@ const MyDrawer = () => {
             </ListItem>
           </Link>
           <Divider />
-          <Link style={{ color: 'inherit' }} to="/wip">
+          <Link onClick={() => setOpenDrawer(false)} style={{ color: 'inherit' }} to="/login">
             <ListItem disablePadding>
               <MailIcon />
               <ListItemButton>
@@ -136,7 +136,7 @@ const MyDrawer = () => {
               </ListItemButton>
             </ListItem>
           </Link>
-          <Link style={{ color: 'inherit' }} to="/wip">
+          <Link onClick={() => setOpenDrawer(false)} style={{ color: 'inherit' }} to="/register">
             <ListItem disablePadding>
               <PersonIcon />
               <ListItemButton>
