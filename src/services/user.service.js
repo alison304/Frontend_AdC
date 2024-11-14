@@ -1,4 +1,5 @@
 import axios from "axios";
+axios.defaults.headers.common['Content-Type'] = 'application/json';
 
 const BASE_URL = "https://auradecristalapi-development.up.railway.app";
 
@@ -11,7 +12,7 @@ export const getOneUser = (id) => {
 }
 
 export const createUser = (user) => {
-    return axios.post(`${BASE_URL}/api/user/`, user);
+    return axios.post(`${BASE_URL}/api/auth/register`, user);
 }
 
 export const updateUser = (id, user) => {
@@ -23,6 +24,11 @@ export const removeUser = (id) => {
 }
 
 export const login = (email, password) => {
-    return axios.post(`${BASE_URL}/api/user/login/`, {email, password})
+    return axios.post(`${BASE_URL}/api/auth/login`, 
+        {
+            "email": email, 
+            "password": password
+        }
+    )
 }
 
