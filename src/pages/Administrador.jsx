@@ -22,6 +22,10 @@ function Administrador() {
         navigate('/admin/agregarProducto');
     };
 
+    const administrarCategorias = () => {
+        navigate('/admin/administrar-categorias');
+    };
+
     const botonMovil = () => {
         navigate('/');
     };
@@ -50,6 +54,7 @@ function Administrador() {
                 <div className={StylesAdmin.botones}>
                     <button onClick={listarProducto} className={StylesAdmin.botonesPrincipales}>LISTAR PRODUCTOS</button>
                     <button onClick={agregarProducto} className={StylesAdmin.botonesPrincipales}>AGREGAR PRODUCTO</button>
+                    <button onClick={administrarCategorias} className={StylesAdmin.botonesPrincipales}>ADMINISTRAR CATEGORÍAS</button>
                 </div>
             </section>
             {mostrarLista && (
@@ -58,6 +63,7 @@ function Administrador() {
                         <tr>
                             <th>ID</th>
                             <th>NOMBRE</th>
+                            <th>CATEGORÍA</th>
                             <th>ACCIONES</th>
                         </tr>
                     </thead>
