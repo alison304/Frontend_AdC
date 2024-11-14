@@ -42,7 +42,7 @@ body {
     font-weight: 400;
     text-align: center;
     color: rgba(142, 107, 50, 0.6);
-    margin-bottom: 20px;
+    margin-bottom: 30px; /* Espaciado adicional */
 }
 
 /* Estilo de cada sección de entrada */
@@ -50,16 +50,16 @@ body {
     width: 100%;
     background-color: white;
     border-radius: 8px;
-    padding: 15px;
-    margin-bottom: 10px;
+    padding: 20px; /* Ajuste en el padding */
+    margin-bottom: 15px;
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 10px;
 }
 
 .inputsFormulario {
     width: 100%;
-    padding: 10px;
+    padding: 12px; /* Espaciado mejorado */
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 16px;
@@ -68,7 +68,7 @@ body {
 
 .radioContainer {
     display: flex;
-    flex-wrap: wrap; /* Permite que los elementos pasen a una nueva línea si es necesario */
+    flex-wrap: wrap;
     gap: 10px;
     margin-top: 8px;
     justify-content: flex-start;
@@ -89,6 +89,7 @@ body {
     margin-right: 5px;
 }
 
+/* Modal */
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -118,7 +119,7 @@ body {
 
 /* Botones principales */
 .botonesPrincipales, .botoneRegistrar {
-    padding: 10px 20px;
+    padding: 12px 20px; /* Espaciado mejorado */
     border-radius: 20px;
     border: 1px solid black;
     background-color: #DBBD6B66;
@@ -128,28 +129,20 @@ body {
     text-align: center;
     cursor: pointer;
     width: 200px;
+    transition: background-color 0.3s ease;
+}
+
+.botonesPrincipales:hover, .botoneRegistrar:hover {
+    background-color: #c6a963;
+    color: white;
 }
 
 .botoneRegistrar {
     width: 220px;
     height: 45px;
     margin-top: 20px;
-    border-radius: 20px;
-    border: 1px solid black;
-    background-color: #DBBD6B66;
-    font-size: 16px;
-    font-style: italic;
-    font-weight: 600;
     color: #333;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
 }
-
-.botoneRegistrar:hover {
-    background-color: #c6a963;
-    color: white;
-}
-
 
 .tituloVolver {
     font-size: 20px;
@@ -158,6 +151,7 @@ body {
     color: #565656;
     text-decoration: underline;
     width: 100%;
+    margin-top: 20px; /* Espaciado adicional */
 }
 
 /* Tablas */
@@ -179,6 +173,7 @@ th, td {
     font-style: italic;
     font-weight: 600;
     text-align: center;
+    margin-top: 20px; /* Espaciado adicional */
 }
 
 /* Media Queries */
@@ -210,7 +205,7 @@ th, td {
     }
     .divTituloAgregar {
         width: 100%;
-        padding: 10px;
+        padding: 15px; /* Ajuste en padding */
     }
     .botonesPrincipales, .botoneRegistrar {
         width: 150px;

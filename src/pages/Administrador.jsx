@@ -5,10 +5,11 @@ import { useProductosStates } from "../utils/Context";
 import Swal from 'sweetalert2';
 
 function Administrador() {
+    
     const { state, dispatch } = useProductosStates();
     const listaProductos = state.lista || [];
-    const categorias = state.categorias || [];
-    const tematicas = state.tematicas || []; // Asume que tienes un estado para temáticas
+    const categorias = state.categorias || [];  
+    const AdministrarCategorias = state.administrarCategorias || [];
 
     const navigate = useNavigate();
     const [mostrarLista, setMostrarLista] = useState(false);
@@ -22,8 +23,8 @@ function Administrador() {
         navigate('/admin/agregarProducto');
     };
 
-    const administrarCaracteristicas = () => {
-        navigate('/admin/administrarCaracteristicas');
+    const administrarCategorias = () => {
+        navigate('/admin/administrarCategorias');
     };
 
     const botonMovil = () => {
@@ -41,7 +42,6 @@ function Administrador() {
         }).then((result) => {
             if (result.isConfirmed) {
                 console.log(`Producto con ID ${id} eliminado`);
-                // Aquí puedes agregar la lógica para eliminar el producto del estado
             }
         });
     };
@@ -55,15 +55,6 @@ function Administrador() {
         Swal.fire("Éxito", "La categoría ha sido asignada al producto", "success");
     };
 
-    const asignarTematica = (productoId, tematicaId) => {
-        console.log(`Asignando temática ${tematicaId} a producto ${productoId}`);
-        dispatch({
-            type: "ASIGNAR_TEMATICA",
-            payload: { id: productoId, tematicaId }
-        });
-        Swal.fire("Éxito", "La temática ha sido asignada al producto", "success");
-    };
-
     return (
         <>
             <section className={StylesAdmin.seccionPrincipal}>
@@ -71,7 +62,7 @@ function Administrador() {
                 <div className={StylesAdmin.botones}>
                     <button onClick={listarProducto} className={StylesAdmin.botonesPrincipales}>LISTAR PRODUCTOS</button>
                     <button onClick={agregarProducto} className={StylesAdmin.botonesPrincipales}>AGREGAR PRODUCTO</button>
-                    <button onClick={administrarCaracteristicas} className={StylesAdmin.botonesPrincipales}>ADMINISTRAR CARACTERÍSTICAS</button>
+                    <button onClick={administrarCategorias} className={StylesAdmin.botonesPrincipales}>ADMINISTRAR CATEGORÍAS</button>
                 </div>
             </section>
 
@@ -82,7 +73,6 @@ function Administrador() {
                             <th>ID</th>
                             <th>NOMBRE</th>
                             <th>CATEGORÍA</th>
-                            <th>TEMÁTICA</th>
                             <th>ACCIONES</th>
                         </tr>
                     </thead>
@@ -101,20 +91,6 @@ function Administrador() {
                                         {categorias.map((categoria) => (
                                             <option key={categoria.id} value={categoria.id}>
                                                 {categoria.nombre}
-                                            </option>
-                                        ))}
-                                    </select>
-                                </td>
-                                <td>
-                                    <select
-                                        value={producto.tematicaId || ""}
-                                        onChange={(e) => asignarTematica(producto.id, e.target.value)}
-                                        className={StylesAdmin.selectorTematica}
-                                    >
-                                        <option value="">Seleccione una temática</option>
-                                        {tematicas.map((tematica) => (
-                                            <option key={tematica.id} value={tematica.id}>
-                                                {tematica.nombre}
                                             </option>
                                         ))}
                                     </select>
@@ -141,4 +117,4 @@ function Administrador() {
     );
 }
 
-export default Administrador;   
+export default Administrador;
