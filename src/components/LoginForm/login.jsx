@@ -12,11 +12,11 @@ const userSchema = Yup.object().shape({
         .matches(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{1,}$/i, "Email incorrecto")
         .required("Se requiere un email"),
     password: Yup.string()
-        .min(6, 'La contraseña debe tener al menos 6 caracteres')
+        .min(5, 'La contraseña debe tener al menos 6 caracteres')
         .max(10, 'La contraseña no debe exceder los 10 caracteres')
-        .matches(/(?=.*[!@#$%^&*()_\-+=<>?{}[\]~])/, 'Debe incluir al menos un carácter especial')
-        .matches(/(?=.*[a-z])(?=.*[A-Z])/, 'Debe incluir una mayúscula y una minúscula')
-        .matches(/(?=.*[0-9])/, 'Debe contener al menos un número')
+        //.matches(/(?=.*[!@#$%^&*()_\-+=<>?{}[\]~])/, 'Debe incluir al menos un carácter especial')
+        //.matches(/(?=.*[a-z])(?=.*[A-Z])/, 'Debe incluir una mayúscula y una minúscula')
+        //.matches(/(?=.*[0-9])/, 'Debe contener al menos un número')
         .required("Contraseña incorrecta"),
 });
 

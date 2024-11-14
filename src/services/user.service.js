@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "http://localhost:8080";
+const BASE_URL = "https://auradecristalapi-development.up.railway.app";
 
 export const getUserList = () => {
     return axios.get(`${BASE_URL}/api/user/`);
