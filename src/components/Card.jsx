@@ -24,7 +24,7 @@ const Card = ({ dato, esCategoria, productos }) => {
 
   return (
     <div className={StylesHome.card}>
-      {esCategoria && dato ? (
+      {esCategoria ? (
         <>
           <Link to={'/listaProductos/' + dato.id} className={StylesHome.link}>
             <h3 className={StylesHome.nombreCategorias} >{dato.descripcion}</h3>
