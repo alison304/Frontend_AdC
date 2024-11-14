@@ -5,18 +5,16 @@ import { useProductosStates } from "../utils/Context";
 import Swal from 'sweetalert2';
 
 function Administrador() {
-    
-    const { state, dispatch } = useProductosStates();
-    const listaProductos = state.lista || [];
-    const categorias = state.categorias || [];  
-    const AdministrarCategorias = state.administrarCategorias || [];
+    console.log('RENDERIZANDO ADMIN')
+    const { state } = useProductosStates();
+    const listaProductos = state.lista;
+    console.log(listaProductos)
 
     const navigate = useNavigate();
     const [mostrarLista, setMostrarLista] = useState(false);
 
     const listarProducto = () => {
-        console.log('Mostrando lista de productos');
-        setMostrarLista(true);
+        navigate('/admin/listaProductos');
     };
 
     const agregarProducto = () => {
@@ -34,14 +32,16 @@ function Administrador() {
     const eliminarProducto = (id) => {
         Swal.fire({
             title: "Aura de Cristal",
-            text: "¿Deseas eliminar este producto?",
+            text: "Deseas eliminar este producto?",
             icon: "question",
             showCancelButton: true,
             confirmButtonText: "Eliminar",
-            cancelButtonText: "Cancelar"
+            cancelButtonText: "Cancelar",
+            confirmButtonColor: '#000',
+            cancelButtonColor: '#8D3434CC'
         }).then((result) => {
             if (result.isConfirmed) {
-                console.log(`Producto con ID ${id} eliminado`);
+                console.log('eliminar');
             }
         });
     };
@@ -65,7 +65,6 @@ function Administrador() {
                     <button onClick={administrarCategorias} className={StylesAdmin.botonesPrincipales}>ADMINISTRAR CATEGORÍAS</button>
                 </div>
             </section>
-
             {mostrarLista && (
                 <table>
                     <thead>
@@ -108,9 +107,6 @@ function Administrador() {
             )}
 
             <div className={StylesAdmin.mensajeMovil}>
-                <div className={StylesAdmin.fraseMovil}>
-                    <span className={StylesAdmin.frase2Movil}>Atención</span> No es posible entrar al Panel de Administración desde este dispositivo.
-                </div>
                 <button onClick={botonMovil} className={StylesAdmin.botonMovil}>Volver a inicio</button>
             </div>
         </>

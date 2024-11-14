@@ -9,7 +9,7 @@ import Gallery from './pages/Gallery';
 import { useState } from "react";
 import AgregarProducto from './pages/AgregarProducto';
 import RegisterForm from './components/RegisterForm/RegisterForm';
-import ListaProductos from './pages/ListaProductos';
+import ListaProductos from './pages/ListaProductos'; 
 import AdministrarCaracteristicas from './pages/AdministrarCaracteristicas';
 import Wip from './components/Wip/Wip';
 function App() {

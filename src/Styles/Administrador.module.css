@@ -1,164 +1,148 @@
 @import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap');
 
-/* Estilos generales */
-* {
-    box-sizing: border-box;
-}
-
-body {
-    font-family: 'Inter', sans-serif;
-}
-
-/* Estilos de flexibilidad para las filas */
-.divRow {
-    display: flex;
-    justify-content: space-between;
-    gap: 15px;
-    margin-bottom: 15px;
-}
-
-.halfWidth {
-    width: 48%;
-}
-
-/* Contenedor principal */
-.registrarProducto {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 40px 20px;
-    gap: 20px;
-    max-width: 800px;
-    margin: 0 auto;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-/* Titulo principal */
-.titulo {
+.titulo{
     font-family: 'Kaushan Script', cursive;
     font-size: 45px;
     font-weight: 400;
-    text-align: center;
-    color: rgba(142, 107, 50, 0.6);
-    margin-bottom: 30px; /* Espaciado adicional */
+    line-height: 69.65px;
+    text-align: center;    
+    color:rgba(142, 107, 50, 0.4);
 }
 
-/* Estilo de cada sección de entrada */
-.divTituloAgregar {
-    width: 100%;
-    background-color: white;
-    border-radius: 8px;
-    padding: 20px; /* Ajuste en el padding */
-    margin-bottom: 15px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.inputsFormulario {
-    width: 100%;
-    padding: 12px; /* Espaciado mejorado */
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
-    margin-top: 5px;
-}
-
-.radioContainer {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 8px;
-    justify-content: flex-start;
-}
-
-.radioLabel {
-    display: flex;
-    align-items: center;
-    font-weight: normal;
-    padding: 5px 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    cursor: pointer;
-    background-color: #f9f9f9;
-}
-
-.radioLabel input {
-    margin-right: 5px;
-}
-
-/* Modal */
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.6);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-}
-
-.modal {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    max-width: 400px;
-    width: 90%;
-}
-
-.modal-buttons {
-    display: flex;
-    justify-content: space-around;
-}
-
-/* Botones principales */
-.botonesPrincipales, .botoneRegistrar {
-    padding: 12px 20px; /* Espaciado mejorado */
+.botonesPrincipales{
+    width: 300px;
+    height: 63px;
     border-radius: 20px;
-    border: 1px solid black;
-    background-color: #DBBD6B66;
+    border: 1px black solid;
+    background-color:#DBBD6B66; 
+    font-family: 'Inter', sans-serif; /* Cambia 'p' a cualquier otro selector según lo necesites */
     font-size: 16px;
     font-style: italic;
     font-weight: 600;
+    line-height: 19.36px;
     text-align: center;
-    cursor: pointer;
-    width: 200px;
-    transition: background-color 0.3s ease;
 }
 
-.botonesPrincipales:hover, .botoneRegistrar:hover {
-    background-color: #c6a963;
-    color: white;
+.botones{
+
+    display: flex;
+    width: 80%;
+    justify-content: space-between; 
 }
 
-.botoneRegistrar {
-    width: 220px;
-    height: 45px;
-    margin-top: 20px;
-    color: #333;
+.seccionPrincipal{
+    display: flex;
+    flex-direction: column;
+    height: 490px;
+    align-items: center;
+    justify-content: center;
+    gap:150px;
 }
 
-.tituloVolver {
+.tituloVolver{
+    font-family: 'Inter', sans-serif; /* Cambia 'p' a cualquier otro selector según lo necesites */
     font-size: 20px;
     font-weight: 400;
+    line-height: 24.2px;
     text-align: center;
-    color: #565656;
-    text-decoration: underline;
+    color:#565656;
+    text-decoration: underline; /* Subrayar todos los enlaces */
     width: 100%;
-    margin-top: 20px; /* Espaciado adicional */
+    display: flex;
+    padding-left: 15%;
+   
 }
 
-/* Tablas */
+.divTituloAgregar{
+    width: 864px;
+    height: 80px;
+    border-radius: 30px;
+    opacity: 0px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.tituloAgregar{
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 29.05px;
+    text-align: center;
+    display: flex;
+    justify-content: center;     /* Centra horizontalmente */
+    align-items: center;
+    padding-top: 2%;
+}
+
+.registrarProducto{
+    display: flex;
+    padding: 40px 0px;
+    flex-direction: column;   
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+}
+
+.inputsFormulario{
+    padding: 5px 30px; /* 10px arriba y abajo, 20px a los lados */
+    background-color: transparent; /* Sin color de fondo */
+    outline: none; 
+}
+
+.botoneRegistrar{
+    width: 200px;
+    height: 43px;
+    border-radius: 20px;
+    border: 1px black solid;
+    background-color:#DBBD6B66; 
+    font-family: 'Inter', sans-serif; /* Cambia 'p' a cualquier otro selector según lo necesites */
+    font-size: 16px;
+    font-style: italic;
+    font-weight: 600;
+    line-height: 19.36px;
+    text-align: center;
+}
+
+.mensajeMovil{
+    display: none; /* Mensaje de móvil oculto */
+}
+
+.botonMovil{
+    display: none; /* Mensaje de móvil oculto */
+}
+
+.fraseMovil{
+    display: none; /* Mensaje de móvil oculto */
+}
+
+.frase2Movil{
+    display: none; /* Mensaje de móvil oculto */
+}
+
+.botonesEliminar, .botonesEditar{
+    background-color: #000000;
+    color: white;
+    padding: .5rem 1rem;
+    margin-left: 2rem;
+    border-radius: .3rem;
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 19.36px;
+    text-align: center;
+    margin: 10px;
+}
+
+.botonesEliminar{
+    background-color: #8D3434CC;
+}
+
 table {
     width: 70%;
     border-collapse: collapse;
-    margin: 20px auto;
+    margin: 0 auto; /* Centra la tabla horizontalmente */    
 }
 
 th, td {
@@ -167,48 +151,64 @@ th, td {
     text-align: center;
 }
 
-/* Mensaje de formulario */
-.mensajeForm {
+.mensajeForm{
+    font-family: 'Inter', sans-serif; /* Cambia 'p' a cualquier otro selector según lo necesites */
     font-size: 22px;
     font-style: italic;
     font-weight: 600;
+    line-height: 19.36px;
     text-align: center;
-    margin-top: 20px; /* Espaciado adicional */
 }
 
-/* Media Queries */
-@media (max-width: 1200px) {
-    .titulo {
-        font-size: 35px;
+/* Cuando la pantalla es de 900px o menos */
+@media (max-width: 600px) and (max-width: 1024px) {
+    .seccionPrincipal, .registrarProducto{
+        display: none; /* Oculta el mensaje de escritorio */
     }
-    .divTituloAgregar {
-        width: 80%;
-    }
-}
 
-@media (max-width: 900px) {
-    .titulo {
-        font-size: 28px;
+    .mensajeMovil{
+        display: block; /* Muestra el mensaje de móvil */
+        height: 429px;
+        background-color: #FFFFFF;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-content: space-between;
+        width: 70%;
+        margin:40% auto;
     }
-    .botonesPrincipales, .botoneRegistrar {
-        width: 180px;
-        font-size: 14px;
-    }
-}
 
-@media (max-width: 600px) {
-    .registrarProducto {
-        padding: 20px 10px;
+    .fraseMovil, .frase2Movil{
+        display: block; /* Muestra el mensaje de móvil */
+        font-family: 'Inter', sans-serif; /* Cambia 'p' a cualquier otro selector según lo necesites */
+        font-size: 30px;
+        font-style: italic;
+        font-weight: 600;
+        text-align: center;
+        line-height: 1.5; /* Espaciado entre líneas */
+        background-color: #FFFFFF;
     }
-    .titulo {
-        font-size: 24px;
+
+    .fraseMovil{
+        height: 280px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
     }
-    .divTituloAgregar {
-        width: 100%;
-        padding: 15px; /* Ajuste en padding */
-    }
-    .botonesPrincipales, .botoneRegistrar {
-        width: 150px;
-        font-size: 12px;
+
+    .botonMovil{
+        display: block;
+        width: 200px;
+        height: 63px;
+        border-radius: 20px;
+        border: 1px black solid;
+        background-color:#565656; 
+        font-family: 'Inter', sans-serif; /* Cambia 'p' a cualquier otro selector según lo necesites */
+        font-size: 16px;
+        font-style: italic;
+        font-weight: 600;
+        line-height: 19.36px;
+        text-align: center;
+        margin: auto;
     }
 }

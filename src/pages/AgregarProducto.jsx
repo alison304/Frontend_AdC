@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import StylesAdmin from '../Styles/Administrador.module.css';
+import StylesAdmin from '../Styles/AgregarProducto.module.css';
 
 function AgregarProducto({ listaProductos, setListaProductos, categorias }) {
   const [producto, setProducto] = useState({
