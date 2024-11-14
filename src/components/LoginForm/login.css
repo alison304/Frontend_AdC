@@ -51,8 +51,8 @@ body {
 
 
 .login-button:hover {
-  background-color: #968149;
-  color: white;
+  background-color: #524c4c;
+  color: #d8c7a0;
   border-color: #d8c7a0;
   outline-color: #d8c7a0;
 }
