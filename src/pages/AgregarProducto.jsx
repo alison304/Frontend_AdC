@@ -1,16 +1,7 @@
-import React from "react";
-import { useState } from "react";
-import StylesAdmin from '../styles/Administrador.module.css'
-import { useNavigate } from 'react-router-dom'
+import React, { useState } from "react";
+import StylesAdmin from '../Styles/AgregarProducto.module.css';
 
-function AgregarProducto({ listaProductos, setListaProductos }) {
-  const navigate = useNavigate();
-  console.log(listaProductos);
-
-  const volverAdministrador = () => {
-    navigate('/admin');
-  }
-
+function AgregarProducto({ listaProductos, setListaProductos, categorias }) {
   const [producto, setProducto] = useState({
     id: 0,
     nombre: "",
@@ -19,132 +10,139 @@ function AgregarProducto({ listaProductos, setListaProductos }) {
     disponibilidad: 0,
     inventario: 0,
     fechaRegistro: "2024-10-25",
-    categoria: { "idCategoria": 2 },
-    imagenes: ""
+    categoriaId: "",
+    tematica: "",
+    caracteristicas: "",
+    imagenes: null
   });
 
-  const [mensajeForm, setMensajeForm] = useState("")
+  const [mensajeForm, setMensajeForm] = useState("");
 
-  const handleChangenombre = (event) => {
-    setProducto({ ...producto, nombre: event.target.value })
-  }
+  const handleChange = (field, value) => {
+    setProducto({ ...producto, [field]: value });
+  };
 
-  const handleChangedescripcion = (event) => {
-    setProducto({ ...producto, descripcion: event.target.value })
-  }
-
-  /* const handleChangeprecioAlquiler= (event)=>{
-     setProducto({...producto, precioAlquiler: event.target.value})
-   } 
- 
-   const handleChangeDisponibilidad= (event)=>{
-     setProducto({...producto, disponibilidad: event.target.value})
-   }
- 
-   const handleChangeInventario= (event)=>{
-     setProducto({...producto, inventario: event.target.value})
-   }*/
-  const handleChangeImagenes = (event) => {
-    // Maneja el cambio en el campo de imagen
-    setProducto((prevData) => ({
-      ...prevData,
-      imagenes: event.target.value // Guarda el archivo de imagen en el estado
-    }));
-
-    //setProducto({...producto, imagenes: event.target.value})
-  }
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log(event);
-    console.log(producto);
-    console.log(listaProductos);
-
-    if (producto.nombre.trim().length > 0) {
-
-      const existe = listaProductos.some((item) => item.nombre === producto.nombre);
-      console.log(existe)
-      if (existe) {
-        setMensajeForm(`ERROR: El nombre  ${producto.nombre} ya esta en uso`)
-      } else {
-
-        if (producto.nombre.trim().length > 0 && producto.descripcion.trim().length > 0 && producto.imagenes !== null) {
-          // Agrega el nuevo objeto al array existente
-          setListaProductos((prevItems) => [...prevItems, producto]);
-
-          // Limpia el formulario
-          setProducto({
-            nombre: "",
-            descripcion: "",
-            precioAlquiler: 0.0,
-            disponibilidad: 0,
-            inventario: 0,
-            imagenes: ""
-          });
-          setMensajeForm(`El producto se ha guardado correctamente`)
-
-        } else {
-          setMensajeForm("Por favor verifique su información nuevamente. Debe ingresar todos los datos")
-        }
-      }
-    }
-  }
-
-  const botonMovil = () => {
-    navigate('/');
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Aquí puedes añadir la lógica para agregar el producto
+    console.log("Producto agregado:", producto);
+    setMensajeForm("Producto agregado con éxito!");
   };
 
   return (
-    <>
-      <div className={StylesAdmin.registrarProducto}>
-        <div className={StylesAdmin.titulo}>Panel de Administración</div>
-        <a onClick={volverAdministrador} className={StylesAdmin.tituloVolver}>Volver</a>
-        <div className={StylesAdmin.divTituloAgregar}>
-          <span className={StylesAdmin.tituloAgregar}>AGREGAR PRODUCTO NUEVO</span>
-        </div>
-        <form onSubmit={handleSubmit} className={StylesAdmin.registrarProducto}>
-          <div className={StylesAdmin.divTituloAgregar}>
-            <label className={StylesAdmin.inputsFormulario}>Nombre *</label>
-            <input className={StylesAdmin.inputsFormulario}
-              type="text"
-              value={producto.nombre}
-              onChange={handleChangenombre}
-              placeholder="Nombre del objeto"
-            />
-          </div>
-          <div className={StylesAdmin.divTituloAgregar}>
-            <label className={StylesAdmin.inputsFormulario}>Descripcion *</label>
-            <input className={StylesAdmin.inputsFormulario}
-              type="text"
-              value={producto.descripcion}
-              placeholder="Describe el producto del producto"
-              onChange={handleChangedescripcion}
-            />
-          </div>
-          <div className={StylesAdmin.divTituloAgregar}>
-            <label className={StylesAdmin.inputsFormulario}>Sube la imagen *</label>
-            <input className={StylesAdmin.inputsFormulario}
-              type="text"
-              value={producto.imagenes}
-              placeholder="Sube la url de las imágenes"
-              onChange={handleChangeImagenes}
-            />
-          </div>
-          <button className={StylesAdmin.botoneRegistrar}>AGREGAR PRODUCTO</button>
-        </form>
-
-        {<p className={StylesAdmin.mensajeForm}>{mensajeForm}</p>}
-
+    <div className={StylesAdmin.registrarProducto}>
+      <div className={StylesAdmin.titulo}>Panel de Administración</div>
+      
+      {/* Nombre */}
+      <div className={StylesAdmin.divTituloAgregar}>
+        <label className={StylesAdmin.inputsFormulario}>Nombre *</label>
+        <input
+          className={StylesAdmin.inputsFormulario}
+          type="text"
+          value={producto.nombre}
+          onChange={(e) => handleChange("nombre", e.target.value)}
+          placeholder="Nombre del objeto"
+        />
       </div>
-      <div className={StylesAdmin.mensajeMovil}>
-        <div className={StylesAdmin.fraseMovil}>
-          <span className={StylesAdmin.frase2Movil}>Atención</span>No es posible entrar al Panel de Administración desde este dispositivo.
-        </div>
-        <button onClick={botonMovil} className={StylesAdmin.botonMovil}>Volver a inicio</button>
+
+      {/* Descripción */}
+      <div className={StylesAdmin.divTituloAgregar}>
+        <label className={StylesAdmin.inputsFormulario}>Descripcion *</label>
+        <input
+          className={StylesAdmin.inputsFormulario}
+          type="text"
+          value={producto.descripcion}
+          onChange={(e) => handleChange("descripcion", e.target.value)}
+          placeholder="Describe el producto"
+        />
       </div>
-    </>
+
+      {/* Categoría */}
+      <div className={StylesAdmin.divTituloAgregar}>
+        <label className={StylesAdmin.inputsFormulario}>Categoría *</label>
+        <select
+          className={StylesAdmin.inputsFormulario} 
+          value={producto.categoriaId}
+          onChange={(e) => handleChange("categoriaId", parseInt(e.target.value))}
+        >
+          <option value="" disabled>Selecciona una categoría</option>
+          {categorias && categorias.map((cat) => (
+            <option key={cat.idCategoria} value={cat.idCategoria}>
+              {cat.nombreCategoria}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      {/* Temática con Radio Buttons */}
+      <div className={StylesAdmin.divTituloAgregar}>
+        <label className={StylesAdmin.inputsFormulario}>Temática *</label>
+        <div className={StylesAdmin.radioContainer}>
+          {["Plata", "Oro", "Mármol", "Cerámica", "Añadir otro"].map((tematica) => (
+            <label key={tematica} className={StylesAdmin.radioLabel}>
+              <input
+                type="radio"
+                name="tematica"
+                value={tematica}
+                checked={producto.tematica === tematica}
+                onChange={() => handleChange("tematica", tematica)}
+              />
+              {tematica}
+            </label>
+          ))}
+        </div>
+      </div>
+
+      {/* Características */}
+      <div className={StylesAdmin.divTituloAgregar}>
+        <label className={StylesAdmin.inputsFormulario}>Características *</label>
+        <select
+          className={StylesAdmin.inputsFormulario}
+          value={producto.caracteristicas}
+          onChange={(e) => handleChange("caracteristicas", e.target.value)}
+        >
+          <option value="" disabled>Selecciona una característica</option>
+          <option value="plata">Plata</option>
+          <option value="oro">Oro</option>
+          <option value="marmol">Mármol</option>
+          <option value="ceramica">Cerámica</option>
+          <option value="otro">Añadir otro</option>
+        </select>
+      </div>
+
+      {/* Precio e Imagen en la misma línea */}
+      <div className={StylesAdmin.divRow}>
+        <div className={StylesAdmin.halfWidth}>
+          <label className={StylesAdmin.inputsFormulario}>Precio *</label>
+          <input
+            className={StylesAdmin.inputsFormulario}
+            type="number"
+            value={producto.precioAlquiler}
+            onChange={(e) => handleChange("precioAlquiler", parseFloat(e.target.value))}
+            placeholder="Precio de alquiler"
+          />
+        </div>
+        <div className={StylesAdmin.halfWidth}>
+          <label className={StylesAdmin.inputsFormulario}>Sube imágenes *</label>
+          <input
+            className={StylesAdmin.inputsFormulario}
+            type="file"
+            name="image"
+            accept="image/*"
+            onChange={(e) => handleChange("imagenes", e.target.files[0])}
+          />
+        </div>
+      </div>
+
+      {/* Mensaje de confirmación */}
+      {mensajeForm && <p className={StylesAdmin.mensajeForm}>{mensajeForm}</p>}
+
+      {/* Botón de Agregar Producto */}
+      <button className={StylesAdmin.botoneRegistrar} onClick={handleSubmit}>
+        Agregar Producto
+      </button>
+    </div>
   );
 }
 
-
-export default AgregarProducto
+export default AgregarProducto;
