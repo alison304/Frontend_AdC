@@ -1,10 +1,10 @@
-import './App.css'
-import { Route, Routes } from "react-router-dom";
+import './App.css';
+import { Route, Routes, Navigate } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
 import Navbar_logueado from "./components/Navbar/Navbar_logueado";
 import Footer from "./components/Footer/Footer";
 import Home from "./pages/Home";
-import Administrador from "./pages/Administrador"
+import Administrador from "./pages/Administrador";
 import Detail from './pages/Detail';
 import Gallery from './pages/Gallery';
 import { useState, useEffect } from "react";
@@ -13,13 +13,11 @@ import RegisterForm from './components/RegisterForm/RegisterForm';
 import ListaProductos from './pages/ListaProductos';
 import Login from './components/LoginForm/login';
 import Wip from './components/Wip/Wip';
-import AdministrarCategorias from './pages/AdministrarCategorias';
 import { isAuthenticated } from './services/user.service';
 
 function App() {
+    console.log('RENDERIZANDO APP');
     const [isLoggedIn, setIsLoggedIn] = useState(isAuthenticated()); // Logueado o no
-    console.log('RENDERIZANDO APP')
-
 
     const [listaProductos, setListaProductos] = useState([
         {
@@ -206,58 +204,66 @@ function App() {
 
 
 
-console.log('lista productos app', listaProductos);
 
-// Esto para que solo se ingrese a ciertas partes logueado
-const ProtectedRoute = ({ children }) => {
-    return isLoggedIn ? children : <Navigate to="/login" />;
-};
+    console.log('lista productos app', listaProductos);
 
-// Detectar cambios en autenticación, en teoria funciona
-useEffect(() => {
-    setIsLoggedIn(isAuthenticated());
-}, []);
+    // Esto para que solo se ingrese a ciertas partes logueado
+    const ProtectedRoute = ({ children }) => {
+        return isLoggedIn ? children : <Navigate to="/login" />;
+    };
 
-return (
-    <>
-        <div>
-            {isLoggedIn ? <Navbar_logueado /> : <Navbar />} {/* Mostrar uno u otro */}
-            <Routes>
-                <Route path='/' element={<Home />} />
-                <Route path='*' element={<h2>Error 404</h2>} />
+    // Detectar cambios en autenticación, en teoria funciona
+    useEffect(() => {
+        setIsLoggedIn(isAuthenticated());
+    }, []);
 
-                {/* Rutas públicas */}
-                <Route path='/register' element={<RegisterForm />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/wip" element={<Wip />} />
-                <Route path="/listaProductos/:id" element={<ListaProductos />} />
-                <Route path="/detail/:id" element={<Detail />} />
-                <Route path="/gallery/:id" element={<Gallery />} />
+    return (
+        <>
+            <div>
+                {isLoggedIn ? <Navbar_logueado /> : <Navbar />} {/* Mostrar uno u otro */}
+                <Routes>
+                    <Route path='/' element={<Home />} />
+                    <Route path='*' element={<h2>Error 404</h2>} />
 
-                {/* Rutas protegidas */}
-                <Route path='/admin' element={
-                    <ProtectedRoute>
-                        <Administrador />
-                    </ProtectedRoute>
-                } />
-                <Route path='/admin/agregarProducto' element={
-                    <ProtectedRoute>
-                        <AgregarProducto listaProductos={listaProductos} />
-                    </ProtectedRoute>
-                } />
-                <Route path="/admin/administrar-categorias" element={
-                    <ProtectedRoute>
-                        <AdministrarCategorias />
-                    </ProtectedRoute>
-                } />
-            </Routes>
+                    {/* Rutas públicas */}
+                    <Route path='/register' element={<RegisterForm />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/wip" element={<Wip />} />
+                    <Route path="/listaProductos/:id" element={<ListaProductos />} />
+                    <Route path="/detail/:id" element={<Detail />} />
+                    <Route path="/gallery/:id" element={<Gallery />} />
+
+                    {/* Rutas protegidas */}
+                    <Route path='/admin' element={
+                        <ProtectedRoute>
+                            <Administrador />
+                        </ProtectedRoute>
+                    } />
+                    <Route path='/admin/agregarProducto' element={
+                        <ProtectedRoute>
+                            <AgregarProducto listaProductos={listaProductos} />
+                        </ProtectedRoute>
+                    } />
+                </Routes>
                 <Footer />
             </div>
         </>
     );
 }
 
+export default App;
 
 
 
-export default App
+
+
+
+
+
+
+
+
+
+
+
+

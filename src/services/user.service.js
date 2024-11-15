@@ -39,3 +39,17 @@ export const login = (email, password) => {
     )
 }
 
+
+
+
+
+
+
+/* Mantener sesion abierta y cerrar sesion */
+export const isAuthenticated = () => {
+    return !!localStorage.getItem('authToken');
+};
+
+export const logout = () => {
+    localStorage.removeItem('authToken');
+};
