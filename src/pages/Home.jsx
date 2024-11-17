@@ -7,7 +7,7 @@ import {useProductosStates} from "../utils/Context"
 const Home = () => {
     console.log('RENDERIZANDO HOME')
     const {state} = useProductosStates();
-    const listaProductos =state.lista;  
+    const listaProductos =state.listaProductosAleatorios;  
     const listaCategorias =state.listaCategorias;  
     const listaRecomendaciones = listaProductos.slice(0, 3);
 
