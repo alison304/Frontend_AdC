@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const Card = ({ dato, esCategoria, productos }) => {
 
   console.log('RENDERIZANDO CARD')
-  const calificaciones = [4.8, 4.5, 4.2];
+ 
   const producto = dato;
 
   let productoCategoria = {};
@@ -15,6 +15,8 @@ const Card = ({ dato, esCategoria, productos }) => {
       if (producto.categoria.id == dato.id) {
         productoCategoria = producto;
         break; // Detenemos el recorrido 
+      }else{
+        productoCategoria = null;
       }
     }
 
@@ -24,7 +26,7 @@ const Card = ({ dato, esCategoria, productos }) => {
 
   return (
     <div className={StylesHome.card}>
-      {esCategoria ? (
+      {esCategoria && productoCategoria ? (
         <>
           <Link to={'/listaProductos/' + dato.id} className={StylesHome.link}>
             <h3 className={StylesHome.nombreCategorias} >{dato.descripcion}</h3>
@@ -42,7 +44,7 @@ const Card = ({ dato, esCategoria, productos }) => {
           </Link>
           <div className={StylesHome.recomendacionesPiezas}>
             <span className={StylesHome.piezas}>S/.{dato.precio_alquiler}</span>
-            <span className={StylesHome.calificacion}>{calificaciones[dato.id - 1]}⭐</span>
+            <span className={StylesHome.calificacion}>4.8⭐</span>
           </div>
         </>
       )}
