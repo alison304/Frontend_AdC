@@ -1,13 +1,12 @@
 import './App.css'
 import { Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
-import Navbar_logueado from "./components/Navbar/Navbar_logueado";
 import Footer from "./components/Footer/Footer";
 import Home from "./pages/Home";
 import Administrador from "./pages/Administrador"
 import Detail from './pages/Detail';
 import Gallery from './pages/Gallery';
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import AgregarProducto from './pages/AgregarProducto';
 import RegisterForm from './components/RegisterForm/RegisterForm';
 import ListaProductos from './pages/ListaProductos';
@@ -16,7 +15,6 @@ import Wip from './components/Wip/Wip';
 import AdministrarCategorias from './pages/AdministrarCategorias'
 
 function App() {
-    const [isLoggedIn, setIsLoggedIn] = useState(isAuthenticated()); // Logueado o no
     console.log('RENDERIZANDO APP')
 
 
@@ -203,19 +201,7 @@ function App() {
         }
     ]); // Array de objetos con datos iniciales
 
-
-
-console.log('lista productos app', listaProductos);
-
-// Esto para que solo se ingrese a ciertas partes logueado
-const ProtectedRoute = ({ children }) => {
-    return isLoggedIn ? children : <Navigate to="/login" />;
-};
-
-// Detectar cambios en autenticación, en teoria funciona
-useEffect(() => {
-    setIsLoggedIn(isAuthenticated());
-}, []);
+    console.log('lista productos app', listaProductos);
 
     return (
         <>
@@ -237,10 +223,7 @@ useEffect(() => {
                 <Footer />
             </div>
         </>
-    );
+    )
 }
-
-
-
 
 export default App
