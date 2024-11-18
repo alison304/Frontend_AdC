@@ -14,23 +14,22 @@ const categorias = [
 const AdministrarCategorias = () => {
     return (
         <div className={styles['panel-administracion']}>
-            <h1>Panel de Administración</h1>
-            <h2>Listar Características</h2>
+            <h1>LISTAR CARACTERISTICAS</h1>
+            <button className={styles['agregar-boton']}>AGREGAR CARACTERISTICA</button>
             <div className={styles['caracteristicas-lista']}>
-                {categorias.map((caracteristica) => (
-                    <div key={caracteristica.id} className={styles['caracteristica-item']}>
-                        <span className={styles.icono}>{caracteristica.icono}</span>
-                        <span className={styles.nombre}>{caracteristica.nombre}</span>
+                {categorias.map((categoria) => (
+                    <div key={categoria.id} className={styles['caracteristica-item']}>
+                        <span className={styles.icono}>{categoria.icono}</span>
+                        <span className={styles.nombre}>{categoria.nombre}</span>
                         <button className={styles['editar-boton']}>
-                            <FaEdit /> Editar
+                            <FaEdit /> EDITAR
                         </button>
                         <button className={styles['eliminar-boton']}>
-                            <FaTrash /> Eliminar
+                            <FaTrash /> ELIMINAR
                         </button>
                     </div>
                 ))}
             </div>
-            <button className={styles['agregar-boton']}>Agregar Característica</button>
         </div>
     );
 };

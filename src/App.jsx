@@ -12,7 +12,7 @@ import RegisterForm from './components/RegisterForm/RegisterForm';
 import ListaProductos from './pages/ListaProductos';
 import Login from './components/LoginForm/login';
 import Wip from './components/Wip/Wip';
-import AdministrarCategorias from './pages/AdministrarCategorias';
+import AdministrarCategorias from './pages/AdministrarCategorias'
 
 function App() {
     console.log('RENDERIZANDO APP')
@@ -218,7 +218,7 @@ function App() {
                     <Route path='/register' element={<RegisterForm />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/wip" element={<Wip />} />
-                    <Route path="/admin/administrarCategorias" element={<AdministrarCategorias />} />
+                    <Route path="/admin/administrar-categorias" element={<AdministrarCategorias listaProductos={listaProductos} />} />
                 </Routes>
                 <Footer />
             </div>
