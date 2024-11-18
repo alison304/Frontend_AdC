@@ -11,8 +11,15 @@ export const getOneUser = (id) => {
     return axios.get(`${BASE_URL}/api/user/${id}`);
 }
 
-export const createUser = (user) => {
-    return axios.post(`${BASE_URL}/api/auth/register`, user);
+export const createUser = (name,lastName,email,password) => {
+    return axios.post(`${BASE_URL}/api/auth/register`, 
+        {
+            "name": name,             
+            "lastName": lastName,             
+            "email": email, 
+            "password": password
+        }
+    );
 }
 
 export const updateUser = (id, user) => {
@@ -32,3 +39,17 @@ export const login = (email, password) => {
     )
 }
 
+
+
+
+
+
+
+/* Mantener sesion abierta y cerrar sesion */
+export const isAuthenticated = () => {
+    return !!localStorage.getItem('authToken');
+};
+
+export const logout = () => {
+    localStorage.removeItem('authToken');
+};

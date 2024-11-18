@@ -26,12 +26,18 @@ function Login() {
     const handleLogin = async (values) => {
         try {
             const response = await login(values.email, values.password);
-            console.log('Login exitoso:', response.data);
+            const token = response.data.token;
+
+            // Mantiene sesion abierta
+            localStorage.setItem('authToken', token);
+
             Swal.fire({
                 icon: 'success',
                 title: '¡Login exitoso!',
                 text: 'Bienvenido de nuevo',
             });
+
+            // Redireccion a pagina principal
             navigate('/');
         } catch (error) {
             Swal.fire({

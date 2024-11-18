@@ -6,6 +6,7 @@ import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import Swal from "sweetalert2";
 import "./register.css";
+import { createUser } from '../../services/user.service';
 
 const RegisterComponent = () => {
     const { id } = useParams();
@@ -17,23 +18,6 @@ const RegisterComponent = () => {
         password: '',
     });
     const [errorsResponse, setErrorsResponse] = useState();
-
-    const getOneUserFromService = async () => {
-        try {
-            const data = await getOneUser(id);
-            setUser(data.data.user);
-        } catch (error) {
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: error.response.data.error,
-            });
-        }
-    };
-
-    useEffect(() => {
-        id && getOneUserFromService();
-    }, [id]);
 
     const userSchema = Yup.object().shape({
         name: Yup.string()
@@ -51,13 +35,27 @@ const RegisterComponent = () => {
             .min(6, '¡Demasiado corto! La contraseña debe tener una longitud mínima de 6 caracteres.')
             .max(10, 'La contraseña no debe exceder los 10 caracteres')
             .matches(/(?=.*[!@#$%^&*()_\-+=<>?{}[\]~])/, 'La contraseña debe incluir al menos un carácter especial')
-            .matches(/(?=.*[a-z])(?=.*[A-Z])/, 'La contraseña debe incluir al menos una letra mayúscula y una minúscula')
+            .matches(/(?=.*[a-z])(?=.*[A-Z])/, 'La contraseña debe incluir al menos una letra mayúscula')
             .matches(/(?=.*[0-9])/, 'La contraseña debe contener al menos un número')
             .required("La contraseña es incorrecta"),
     });
 
     const sendNewUser = async (user) => {
-        console.log("test");
+        try {
+            const response = await createUser(user.name, user.lastName, user.email, user.password);
+            Swal.fire({
+                icon: 'success',
+                title: 'Aura de Cristal',
+                text: 'Usuario creado',
+            });
+            navigate('/');
+        } catch (error) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Aura de Cristal',
+                text: 'Usuario no creado',
+            });
+        }
     };
 
     return (
