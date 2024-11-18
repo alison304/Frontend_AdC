@@ -1,7 +1,8 @@
 import React from 'react';
 import { FaEdit, FaTrash } from 'react-icons/fa';
+import styles from '../Styles/AdministrarCategorias.module.css';
 
-const caracteristicas = [
+const categorias = [
     { id: 1, nombre: 'Material', icono: '📦' },
     { id: 2, nombre: 'Lavavajillas', icono: '🚿' },
     { id: 3, nombre: 'Dimensiones', icono: '📏' },
@@ -12,24 +13,24 @@ const caracteristicas = [
 
 const AdministrarCategorias = () => {
     return (
-        <div className="panel-administracion">
+        <div className={styles['panel-administracion']}>
             <h1>Panel de Administración</h1>
             <h2>Listar Características</h2>
-            <div className="caracteristicas-lista">
-                {caracteristicas.map((caracteristica) => (
-                    <div key={caracteristica.id} className="caracteristica-item">
-                        <span className="icono">{caracteristica.icono}</span>
-                        <span className="nombre">{caracteristica.nombre}</span>
-                        <button className="editar-boton">
+            <div className={styles['caracteristicas-lista']}>
+                {categorias.map((caracteristica) => (
+                    <div key={caracteristica.id} className={styles['caracteristica-item']}>
+                        <span className={styles.icono}>{caracteristica.icono}</span>
+                        <span className={styles.nombre}>{caracteristica.nombre}</span>
+                        <button className={styles['editar-boton']}>
                             <FaEdit /> Editar
                         </button>
-                        <button className="eliminar-boton">
+                        <button className={styles['eliminar-boton']}>
                             <FaTrash /> Eliminar
                         </button>
                     </div>
                 ))}
             </div>
-            <button className="agregar-boton">Agregar Característica</button>
+            <button className={styles['agregar-boton']}>Agregar Característica</button>
         </div>
     );
 };

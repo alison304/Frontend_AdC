@@ -218,7 +218,7 @@ function App() {
                     <Route path='/register' element={<RegisterForm />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/wip" element={<Wip />} />
-                    <Route path="/admin/administrar-categorias" element={<AdministrarCategorias />} />
+                    <Route path="/admin/administrarCategorias" element={<AdministrarCategorias />} />
                 </Routes>
                 <Footer />
             </div>
