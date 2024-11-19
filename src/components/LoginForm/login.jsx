@@ -5,7 +5,7 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import Swal from 'sweetalert2';
 import { login } from '../../services/user.service';
-import './Login.css';
+import './login.css';
 
 const userSchema = Yup.object().shape({
     email: Yup.string()
