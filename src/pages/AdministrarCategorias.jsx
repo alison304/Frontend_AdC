@@ -1,6 +1,6 @@
 import React from 'react';
 import { FaEdit, FaTrash } from 'react-icons/fa';
-import styles from '../Styles/AdministrarCategorias.module.css';
+import styles from '../styles/AdministrarCategorias.module.css';
 
 const categorias = [
     { id: 1, nombre: 'Material', icono: '📦' },
