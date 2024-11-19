@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import StylesAdmin from '../Styles/AgregarProducto.module.css';
+import StylesAdmin from '../styles/AgregarProducto.module.css';
 
 function AgregarProducto({ listaProductos, setListaProductos, categorias }) {
   const [producto, setProducto] = useState({
@@ -32,7 +32,7 @@ function AgregarProducto({ listaProductos, setListaProductos, categorias }) {
   return (
     <div className={StylesAdmin.registrarProducto}>
       <div className={StylesAdmin.titulo}>Panel de Administración</div>
-      
+
       {/* Nombre */}
       <div className={StylesAdmin.divTituloAgregar}>
         <label className={StylesAdmin.inputsFormulario}>Nombre *</label>
@@ -61,7 +61,7 @@ function AgregarProducto({ listaProductos, setListaProductos, categorias }) {
       <div className={StylesAdmin.divTituloAgregar}>
         <label className={StylesAdmin.inputsFormulario}>Categoría *</label>
         <select
-          className={StylesAdmin.inputsFormulario} 
+          className={StylesAdmin.inputsFormulario}
           value={producto.categoriaId}
           onChange={(e) => handleChange("categoriaId", parseInt(e.target.value))}
         >
