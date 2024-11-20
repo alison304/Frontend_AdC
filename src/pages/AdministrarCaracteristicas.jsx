@@ -1,6 +1,6 @@
 import React from "react";
 import { FaEdit, FaTrash } from 'react-icons/fa';
-import styles from '../Styles/AdministrarCaracteristicas.module.css';
+import styles from '../styles/AdministrarCaracteristicas.module.css';
 import { useNavigate } from 'react-router-dom';
 
 const caracteristica = [
