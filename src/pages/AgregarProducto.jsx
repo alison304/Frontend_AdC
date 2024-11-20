@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
-import StylesAdmin from '../Styles/AgregarProducto.module.css';
+import StylesAdmin from '../styles/AgregarProducto.module.css';
 
 function AgregarProducto({ listaProductos, setListaProductos, categorias }) {
   const [producto, setProducto] = useState({
