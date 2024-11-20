@@ -1,18 +1,16 @@
 import React from 'react';
 import { AppBar, Toolbar, Typography, useMediaQuery, useTheme, Button, Menu, MenuItem } from '@mui/material';
 import MyDrawer from './MyDrawer';
-import logo from '../../../public/images/Logo.png'
+import logo from '../../../public/images/Logo.png';
 import { FaUser } from "react-icons/fa";
 import { FiShoppingCart } from "react-icons/fi";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './Navbar.css';
 
-const Navbar = () => {
-  //const [value, setValue] = useState();
+const Navbar = ({ isAuthenticated, onLogout }) => {
   const theme = useTheme();
-  console.log(theme);
   const isMatch = useMediaQuery(theme.breakpoints.down('md'));
-  console.log(isMatch);
+  const navigate = useNavigate();
 
   const [anchorElCatalogo, setAnchorElCatalogo] = React.useState(null);
   const openCatalogo = Boolean(anchorElCatalogo);
@@ -41,6 +39,12 @@ const Navbar = () => {
     setAnchorElUser(null);
   };
 
+  const handleLogoutAndRedirect = () => {
+    handleCloseUser();
+    onLogout();
+    navigate('/'); // Ahora deberia cerrar sesion y volver a inicio
+  };
+
   return (
     <React.Fragment>
       <AppBar position='fixed'>
@@ -54,16 +58,13 @@ const Navbar = () => {
             </Typography>
             {
               isMatch ? (
-                <>
-                  <MyDrawer />
-                </>
+                <MyDrawer />
               ) : (
                 <>
                   <Button
-                    id="demo-positioned-button"
-                    aria-controls={open ? 'demo-positioned-menu' : undefined}
+                    aria-controls={openCatalogo ? 'demo-positioned-menu' : undefined}
                     aria-haspopup="true"
-                    aria-expanded={open ? 'true' : undefined}
+                    aria-expanded={openCatalogo ? 'true' : undefined}
                     onClick={handleClickCatalogo}
                     style={{ color: "#623d2b", paddingLeft: "5%" }}
                   >
@@ -71,18 +72,11 @@ const Navbar = () => {
                   </Button>
                   <Menu
                     id="demo-positioned-menu"
-                    aria-labelledby="demo-positioned-button"
                     anchorEl={anchorElCatalogo}
                     open={openCatalogo}
                     onClose={handleCloseCatalogo}
-                    anchorOrigin={{
-                      vertical: 'top',
-                      horizontal: 'left',
-                    }}
-                    transformOrigin={{
-                      vertical: 'top',
-                      horizontal: 'left',
-                    }}
+                    anchorOrigin={{ vertical: 'top', horizontal: 'left' }}
+                    transformOrigin={{ vertical: 'top', horizontal: 'left' }}
                   >
                     <Link style={{ color: 'inherit' }} to="/listaProductos/1">
                       <MenuItem onClick={handleCloseCatalogo}>Vajilla</MenuItem>
@@ -95,10 +89,9 @@ const Navbar = () => {
                     </Link>
                   </Menu>
                   <Button
-                    id="demo-positioned-button"
-                    aria-controls={open ? 'demo-positioned-menu' : undefined}
+                    aria-controls={openTematicas ? 'demo-positioned-menu' : undefined}
                     aria-haspopup="true"
-                    aria-expanded={open ? 'true' : undefined}
+                    aria-expanded={openTematicas ? 'true' : undefined}
                     onClick={handleClickTematicas}
                     style={{ color: "#623d2b" }}
                   >
@@ -106,18 +99,11 @@ const Navbar = () => {
                   </Button>
                   <Menu
                     id="demo-positioned-menu"
-                    aria-labelledby="demo-positioned-button"
                     anchorEl={anchorElTematicas}
                     open={openTematicas}
                     onClose={handleCloseTematicas}
-                    anchorOrigin={{
-                      vertical: 'top',
-                      horizontal: 'left',
-                    }}
-                    transformOrigin={{
-                      vertical: 'top',
-                      horizontal: 'left',
-                    }}
+                    anchorOrigin={{ vertical: 'top', horizontal: 'left' }}
+                    transformOrigin={{ vertical: 'top', horizontal: 'left' }}
                   >
                     <Link style={{ color: 'inherit' }} to="/wip">
                       <MenuItem onClick={handleCloseTematicas}>Halloween</MenuItem>
@@ -130,55 +116,68 @@ const Navbar = () => {
                     </Link>
                   </Menu>
                   <Link to="/wip">
-                    <Button
-                      id="demo-positioned-button"
-                      style={{ color: "#623d2b" }}
-                    >
-                      Premium set
-                    </Button>
+                    <Button style={{ color: "#623d2b" }}>Premium set</Button>
                   </Link>
                   <Link to="/wip">
-                    <Button
-                      id="demo-positioned-button"
-                      style={{ color: "#623d2b" }}
-                    >
-                      Contáctanos
-                    </Button>
+                    <Button style={{ color: "#623d2b" }}>Contáctanos</Button>
                   </Link>
                   <div className='right-side'>
-                    <FiShoppingCart size={35} color="#655e5e" style={{ paddingLeft: "0%" }} />
-                    <Button
-                      id="demo-positioned-button"
-                      aria-controls={open ? 'demo-positioned-menu' : undefined}
-                      aria-haspopup="true"
-                      aria-expanded={open ? 'true' : undefined}
-                      onClick={handleClickUser}
-                      style={{ color: "#623d2b", paddingLeft: "1%" }}
-                    >
-                      <FaUser size={30} color="#655e5e" style={{ paddingLeft: "20%" }} />
-                    </Button>
-                    <Menu
-                      id="demo-positioned-menu"
-                      aria-labelledby="demo-positioned-button"
-                      anchorEl={anchorElUser}
-                      open={openUser}
-                      onClose={handleCloseUser}
-                      anchorOrigin={{
-                        vertical: 'top',
-                        horizontal: 'left',
-                      }}
-                      transformOrigin={{
-                        vertical: 'top',
-                        horizontal: 'left',
-                      }}
-                    >
-                      <Link style={{ color: 'inherit' }} to="/login">
-                        <MenuItem onClick={handleCloseUser}>Iniciar Sesión</MenuItem>
-                      </Link>
-                      <Link style={{ color: 'inherit' }} to="/register">
-                        <MenuItem onClick={handleCloseUser}>Regístrate</MenuItem>
-                      </Link>
-                    </Menu>
+                    <FiShoppingCart size={35} color="#655e5e" />
+                    {isAuthenticated ? (
+                      <>
+                        <Button
+                          aria-controls={openUser ? 'demo-positioned-menu' : undefined}
+                          aria-haspopup="true"
+                          aria-expanded={openUser ? 'true' : undefined}
+                          onClick={handleClickUser}
+                          style={{ color: "#623d2b", paddingLeft: "1%" }}
+                        >
+                          <FaUser size={30} color="#655e5e" />
+                        </Button>
+                        <Menu
+                          id="demo-positioned-menu"
+                          anchorEl={anchorElUser}
+                          open={openUser}
+                          onClose={handleCloseUser}
+                          anchorOrigin={{ vertical: 'top', horizontal: 'left' }}
+                          transformOrigin={{ vertical: 'top', horizontal: 'left' }}
+                        >
+                          <Link style={{ color: 'inherit' }} to="/profile">
+                            <MenuItem onClick={handleCloseUser}>Perfil</MenuItem>
+                          </Link>
+                          <MenuItem onClick={handleLogoutAndRedirect}>
+                            Cerrar Sesión
+                          </MenuItem>
+                        </Menu>
+                      </>
+                    ) : (
+                      <>
+                        <Button
+                          aria-controls={openUser ? 'demo-positioned-menu' : undefined}
+                          aria-haspopup="true"
+                          aria-expanded={openUser ? 'true' : undefined}
+                          onClick={handleClickUser}
+                          style={{ color: "#623d2b", paddingLeft: "1%" }}
+                        >
+                          <FaUser size={30} color="#655e5e" />
+                        </Button>
+                        <Menu
+                          id="demo-positioned-menu"
+                          anchorEl={anchorElUser}
+                          open={openUser}
+                          onClose={handleCloseUser}
+                          anchorOrigin={{ vertical: 'top', horizontal: 'left' }}
+                          transformOrigin={{ vertical: 'top', horizontal: 'left' }}
+                        >
+                          <Link style={{ color: 'inherit' }} to="/login">
+                            <MenuItem onClick={handleCloseUser}>Iniciar Sesión</MenuItem>
+                          </Link>
+                          <Link style={{ color: 'inherit' }} to="/register">
+                            <MenuItem onClick={handleCloseUser}>Regístrate</MenuItem>
+                          </Link>
+                        </Menu>
+                      </>
+                    )}
                   </div>
                 </>
               )
@@ -190,4 +189,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar
+export default Navbar;

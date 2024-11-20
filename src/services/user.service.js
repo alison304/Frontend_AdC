@@ -14,8 +14,8 @@ export const getOneUser = (id) => {
 export const createUser = (name,lastName,email,password) => {
     return axios.post(`${BASE_URL}/api/auth/register`, 
         {
-            "name": name,             
-            "lastName": lastName,             
+            "nombre": name,             
+            "apellido": lastName,             
             "email": email, 
             "password": password
         }

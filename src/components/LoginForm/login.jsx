@@ -5,22 +5,18 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import Swal from 'sweetalert2';
 import { login } from '../../services/user.service';
-import './Login.css';
+import './login.css';
 
 const userSchema = Yup.object().shape({
     email: Yup.string()
         .matches(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{1,}$/i, "Email incorrecto")
         .required("Se requiere un email"),
     password: Yup.string()
-        //.min(6, 'La contraseña debe tener al menos 6 caracteres')
         .max(10, 'La contraseña no debe exceder los 10 caracteres')
-        //.matches(/(?=.*[!@#$%^&*()_\-+=<>?{}[\]~])/, 'Debe incluir al menos un carácter especial')
-        //.matches(/(?=.*[a-z])(?=.*[A-Z])/, 'Debe incluir una mayúscula y una minúscula')
-        //.matches(/(?=.*[0-9])/, 'Debe contener al menos un número')
         .required("Contraseña incorrecta"),
 });
 
-function Login() {
+function Login({ onLoginSuccess }) {
     const navigate = useNavigate();
 
     const handleLogin = async (values) => {
@@ -37,7 +33,10 @@ function Login() {
                 text: 'Bienvenido de nuevo',
             });
 
-            // Redireccion a pagina principal
+            // Notifica el éxito del login
+            onLoginSuccess();
+
+            // Redirecciona a la página principal
             navigate('/');
         } catch (error) {
             Swal.fire({
