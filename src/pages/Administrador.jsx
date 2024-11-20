@@ -22,8 +22,8 @@ function Administrador() {
         navigate('/admin/agregarProducto');
     };
 
-    const administrarCategorias = () => {
-        navigate('/admin/administrar-categorias');
+    const administrarCaracteristicas = () => {
+        navigate('/admin/administrar-caracteristicas');
     };
 
     const botonMovil = () => {
@@ -54,7 +54,7 @@ function Administrador() {
                 <div className={StylesAdmin.botones}>
                     <button onClick={listarProducto} className={StylesAdmin.botonesPrincipales}>LISTAR PRODUCTOS</button>
                     <button onClick={agregarProducto} className={StylesAdmin.botonesPrincipales}>AGREGAR PRODUCTO</button>
-                    <button onClick={administrarCategorias} className={StylesAdmin.botonesPrincipales}>ADMINISTRAR CATEGORÍAS</button>
+                    <button onClick={administrarCaracteristicas} className={StylesAdmin.botonesPrincipales}>ADMINISTRAR CARACTERISTICAS</button>
                 </div>
             </section>
             {mostrarLista && (

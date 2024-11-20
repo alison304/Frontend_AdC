@@ -12,7 +12,7 @@ import RegisterForm from './components/RegisterForm/RegisterForm';
 import ListaProductos from './pages/ListaProductos';
 import Login from './components/LoginForm/login';
 import Wip from './components/Wip/Wip';
-import AdministrarCategorias from './pages/AdministrarCategorias'
+import AdministrarCaracteristicas from './pages/AdministrarCaracteristicas'
 
 function App() {
     console.log('RENDERIZANDO APP')
@@ -212,13 +212,13 @@ function App() {
                     <Route path='*' element={<h2>Error 404</h2>} />
                     <Route path='/admin' element={<Administrador />} />
                     <Route path='/admin/agregarProducto' element={<AgregarProducto listaProductos={listaProductos} />} />
-                    <Route path="/listaProductos/:id" element={<ListaProductos />} />
-                    <Route path="/detail/:id" element={<Detail />} />
-                    <Route path="/gallery/:id" element={<Gallery />} />
+                    <Route path='/listaProductos/:id' element={<ListaProductos />} />
+                    <Route path='/detail/:id' element={<Detail />} />
+                    <Route path='/gallery/:id' element={<Gallery />} />
                     <Route path='/register' element={<RegisterForm />} />
-                    <Route path="/login" element={<Login />} />
-                    <Route path="/wip" element={<Wip />} />
-                    <Route path="/admin/administrar-categorias" element={<AdministrarCategorias listaProductos={listaProductos} />} />
+                    <Route path='/login' element={<Login />} />
+                    <Route path='/wip' element={<Wip />} />
+                    <Route path='/admin/administrar-caracteristicas' element={<AdministrarCaracteristicas listaProductos={listaProductos} />} />
                 </Routes>
                 <Footer />
             </div>

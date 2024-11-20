@@ -1,9 +1,9 @@
-import React from 'react';
+import React from "react";
 import { FaEdit, FaTrash } from 'react-icons/fa';
-import styles from '../Styles/AdministrarCategorias.module.css';
+import styles from '../Styles/AdministrarCaracteristicas.module.css';
 import { useNavigate } from 'react-router-dom';
 
-const categorias = [
+const caracteristica = [
     { id: 1, nombre: 'Material', icono: '📦' },
     { id: 2, nombre: 'Lavavajillas', icono: '🚿' },
     { id: 3, nombre: 'Dimensiones', icono: '📏' },
@@ -12,7 +12,7 @@ const categorias = [
     { id: 6, nombre: 'Peso', icono: '⚖️' },
 ];
 
-const AdministrarCategorias = () => {
+const AdministrarCaracteristicas = () => {
     const navigate = useNavigate();
 
     const handleVolver = () => {
@@ -31,10 +31,10 @@ const AdministrarCategorias = () => {
                 <h1>LISTAR CARACTERISTICAS</h1>
                 <button className={styles['agregar-boton']}>AGREGAR CARACTERISTICA</button>
                 <div className={styles['caracteristicas-lista']}>
-                    {categorias.map((categoria) => (
-                        <div key={categoria.id} className={styles['caracteristica-item']}>
-                            <span className={styles.icono}>{categoria.icono}</span>
-                            <span className={styles.nombre}>{categoria.nombre}</span>
+                    {caracteristica.map((caracteristica) => (
+                        <div key={caracteristica.id} className={styles['caracteristica-item']}>
+                            <span className={styles.icono}>{caracteristica.icono}</span>
+                            <span className={styles.nombre}>{caracteristica.nombre}</span>
                             <button className={styles['editar-boton']}>
                                 <FaEdit /> EDITAR
                             </button>
@@ -49,4 +49,4 @@ const AdministrarCategorias = () => {
     );
 };
 
-export default AdministrarCategorias;
+export default AdministrarCaracteristicas;
