@@ -40,7 +40,6 @@ const Navbar = ({ isAuthenticated, onLogout }) => {
   };
 
   const handleLogoutAndRedirect = () => {
-    handleCloseUser();
     onLogout();
     navigate('/'); // Ahora deberia cerrar sesion y volver a inicio
   };

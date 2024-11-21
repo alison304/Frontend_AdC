@@ -1,23 +1,40 @@
+
+
+
 import './App.css'
 import { Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
 import Home from "./pages/Home";
-import Administrador from "./pages/Administrador"
+import Administrador from "./pages/Administrador";
 import Detail from './pages/Detail';
 import Gallery from './pages/Gallery';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import AgregarProducto from './pages/AgregarProducto';
 import RegisterForm from './components/RegisterForm/RegisterForm';
 import ListaProductos from './pages/ListaProductos';
 import Login from './components/LoginForm/login';
 import Wip from './components/Wip/Wip';
+import AdministrarCategorias from './pages/AdministrarCategorias';
+import UserProfile from './components/UserProfile/UserProfile';
+import ProtectedRoute from './components/LoginForm/ProtectedRoute';
 import AdministrarCaracteristicas from './pages/AdministrarCaracteristicas'
 
+
 function App() {
-    console.log('RENDERIZANDO APP')
+    console.log('RENDERIZANDO APP');
 
+    const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem('authToken'));
 
+    const handleLoginSuccess = () => {
+        setIsAuthenticated(true);
+    };
+
+    const handleLogout = () => {
+        localStorage.removeItem('authToken');
+        setIsAuthenticated(false);
+    };
+    
     const [listaProductos, setListaProductos] = useState([
         {
             id: 1,
@@ -206,24 +223,75 @@ function App() {
     return (
         <>
             <div>
-                <Navbar />
+                <Navbar isAuthenticated={isAuthenticated} onLogout={handleLogout} />
                 <Routes>
                     <Route path='/' element={<Home />} />
                     <Route path='*' element={<h2>Error 404</h2>} />
-                    <Route path='/admin' element={<Administrador />} />
-                    <Route path='/admin/agregarProducto' element={<AgregarProducto listaProductos={listaProductos} />} />
-                    <Route path='/listaProductos/:id' element={<ListaProductos />} />
-                    <Route path='/detail/:id' element={<Detail />} />
-                    <Route path='/gallery/:id' element={<Gallery />} />
+                    
+                    <Route path="/listaProductos/:id" element={<ListaProductos />} />
+                    <Route path="/detail/:id" element={<Detail />} />
+                    <Route path="/gallery/:id" element={<Gallery />} />
                     <Route path='/register' element={<RegisterForm />} />
-                    <Route path='/login' element={<Login />} />
-                    <Route path='/wip' element={<Wip />} />
-                    <Route path='/admin/administrar-caracteristicas' element={<AdministrarCaracteristicas listaProductos={listaProductos} />} />
+                    <Route path="/login" element={<Login onLoginSuccess={handleLoginSuccess} />} />
+                    <Route path="/wip" element={<Wip />} />
+                    
+                    {/*Cosas admin */}
+                    
+                    <Route
+                        path='/admin'
+                        element={
+                            <ProtectedRoute isAuthenticated={isAuthenticated}>
+                                <Administrador />
+                            </ProtectedRoute>
+                        }
+                    />
+                    <Route
+                        path='/admin/agregarProducto'
+                        element={
+                            <ProtectedRoute isAuthenticated={isAuthenticated}>
+                                <AgregarProducto listaProductos={listaProductos} />
+                            </ProtectedRoute>
+                        }
+                    />
+                    <Route
+                        path="/admin/administrar-categorias"
+                        element={
+                            <ProtectedRoute isAuthenticated={isAuthenticated}>
+                                <AdministrarCategorias listaProductos={listaProductos} />
+                            </ProtectedRoute>
+                        }
+                    />
+                    <Route
+                        path="/admin/administrar-caracteristicas"
+                        element={
+                            <ProtectedRoute isAuthenticated={isAuthenticated}>
+                                <AdministrarCaracteristicas listaProductos={listaProductos}  />
+                            </ProtectedRoute>
+                        }
+                    />
+
+
+
+
+
+                    {/*Cosas usuario comun logueado */}
+                    <Route
+                        path="/profile"
+                        element={
+                            <ProtectedRoute isAuthenticated={isAuthenticated}>
+                                <UserProfile />
+                            </ProtectedRoute>
+                        }
+                    />
                 </Routes>
+
+
+
+
                 <Footer />
             </div>
         </>
-    )
+    );
 }
 
-export default App
+export default App;

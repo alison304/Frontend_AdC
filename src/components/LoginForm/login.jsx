@@ -26,6 +26,7 @@ function Login({ onLoginSuccess }) {
 
             // Mantiene sesion abierta
             localStorage.setItem('authToken', token);
+            localStorage.setItem('userEmail', values.email); // Guarda mail, intento n3
 
             Swal.fire({
                 icon: 'success',

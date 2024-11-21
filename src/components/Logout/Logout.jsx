@@ -1,16 +1,16 @@
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { logout } from '../../services/user.service'; // Ajusta la ruta según sea necesario
+// Logout.js
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-const Logout = () => {
-    const navigate = useNavigate();
+const Logout = ({ onLogout }) => {
+  const navigate = useNavigate();
 
-    useEffect(() => {
-        logout(); // Llama a la función para cerrar sesión
-        navigate('/'); // Redirige al usuario a la página de inicio
-    }, [navigate]);
+  useEffect(() => {
+    onLogout(); // Lógica de cierre de sesión
+    navigate('/'); // Redirigir a la página de inicio después de cerrar sesión
+  }, [onLogout, navigate]);
 
-    return null; // No se muestra nada
+  return null; // No renderiza nada en la pantalla
 };
 
 export default Logout;
