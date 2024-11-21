@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getUserByEmail } from '../../services/user.service';
+import { getUserByEmail1 } from '../../services/user.service';
 import { useNavigate } from 'react-router-dom';
 import './UserProfile.css';
 
@@ -19,7 +19,7 @@ const UserProfile = ({ onLogout }) => {
             try {
 
 
-                    const data = await getUserByEmail();
+                    const data = await getUserByEmail1();
                     // Asigna los valores recibidos al estado
                     setUserData({
                         name: data.name || '', // Usando valores recibidos o cadenas vacías

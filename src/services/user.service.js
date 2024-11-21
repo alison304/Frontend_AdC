@@ -92,21 +92,21 @@ export const getUserBy1Email = () => {
 
 
 
-export const getUserByEmail = () => {
-    const authToken = localStorage.getItem('authToken');
-    
-    fetch(`${BASE_URL}/api/usuario/buscar/prueba7@p.co`, {
-      method: 'GET',
-      headers: {
-        'Authorization': `Bearer ${authToken}`,
-        'Accept': '*/*',
-        'Content-Type': 'application/json'
-      },
-      mode: 'cors'
-    })
-    .then(response => response.json())
-    .then(data => console.log('Response data:', data))
-    .catch(error => console.error('Error during request:', error));
+export const getUserByEmail1 = () => {
+    fetch('https://auradecristalapi-development.up.railway.app/api/usuario/buscar/prueba7@p.co', {
+        method: 'OPTIONS',
+        headers: {
+          'Access-Control-Request-Method': 'GET',
+          'Access-Control-Request-Headers': 'Authorization',
+          'Origin': window.location.origin,
+        }
+      })
+      .then(response => console.log('OPTIONS response:', response))
+      .catch(error => console.error('Error during OPTIONS request:', error));
+      h(error => console.error('Error during request:', error));
     
   };
+  
+
+
   
