@@ -1,10 +1,19 @@
 import React, { useState } from 'react';
-import { Drawer, List, ListItemText, ListItemButton, ListItem, IconButton, Collapse, ListItemIcon } from '@mui/material';
+import {
+  Drawer,
+  List,
+  ListItemText,
+  ListItemButton,
+  ListItem,
+  IconButton,
+  Collapse,
+  ListItemIcon,
+  Divider,
+} from '@mui/material';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import StarBorder from '@mui/icons-material/StarBorder';
 import MenuIcon from '@mui/icons-material/Menu';
-import Divider from '@mui/material/Divider';
 import MailIcon from '@mui/icons-material/Mail';
 import ImportContactsIcon from '@mui/icons-material/ImportContacts';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
@@ -12,12 +21,20 @@ import PersonIcon from '@mui/icons-material/Person';
 import WorkspacePremiumIcon from '@mui/icons-material/WorkspacePremium';
 import PhoneIcon from '@mui/icons-material/Phone';
 import CelebrationIcon from '@mui/icons-material/Celebration';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from 'react-router-dom';
 
-const MyDrawer = () => {
+const MyDrawer = ({ isAuthenticated, onLogout }) => {
   const [openDrawer, setOpenDrawer] = useState(false);
-  const [openCatalogo, setOpenCatalogo] = React.useState(false);
-  const [openTematica, setOpenTematica] = React.useState(false);
+  const [openCatalogo, setOpenCatalogo] = useState(false);
+  const [openTematica, setOpenTematica] = useState(false);
+
+  const navigate = useNavigate();
+
+  const handleLogoutAndClose = () => {
+    onLogout();
+    setOpenDrawer(false);
+    navigate('/');
+  };
 
   const handleClickCatalogo = () => {
     setOpenCatalogo(!openCatalogo);
@@ -28,21 +45,24 @@ const MyDrawer = () => {
   };
 
   return (
-    <React.Fragment>
+    <>
       <Drawer open={openDrawer} onClose={() => setOpenDrawer(false)}>
         <List>
+          {/* Catálogo */}
           <ListItem disablePadding>
             <ImportContactsIcon />
-            <ListItemButton
-              onClick={handleClickCatalogo}
-            >
-              <ListItemText>Catalogo</ListItemText>
+            <ListItemButton onClick={handleClickCatalogo}>
+              <ListItemText>Catálogo</ListItemText>
               {openCatalogo ? <ExpandLess /> : <ExpandMore />}
             </ListItemButton>
           </ListItem>
           <Collapse in={openCatalogo} timeout="auto" unmountOnExit>
             <List component="div" disablePadding>
-              <Link onClick={() => setOpenDrawer(false)} style={{ color: 'inherit' }} to="/listaProductos/1">
+              <Link
+                onClick={() => setOpenDrawer(false)}
+                style={{ color: 'inherit', textDecoration: 'none' }}
+                to="/listaProductos/1"
+              >
                 <ListItemButton sx={{ pl: 6 }}>
                   <ListItemIcon>
                     <StarBorder />
@@ -50,31 +70,38 @@ const MyDrawer = () => {
                   <ListItemText primary="Vajilla" />
                 </ListItemButton>
               </Link>
-              <Link onClick={() => setOpenDrawer(false)} style={{ color: 'inherit' }} to="/listaProductos/2">
+              <Link
+                onClick={() => setOpenDrawer(false)}
+                style={{ color: 'inherit', textDecoration: 'none' }}
+                to="/listaProductos/2"
+              >
                 <ListItemButton sx={{ pl: 6 }}>
                   <ListItemIcon>
                     <StarBorder />
                   </ListItemIcon>
-
                   <ListItemText primary="Cubiertos" />
                 </ListItemButton>
               </Link>
-              <Link onClick={() => setOpenDrawer(false)} style={{ color: 'inherit' }} to="/listaProductos/3">
+              <Link
+                onClick={() => setOpenDrawer(false)}
+                style={{ color: 'inherit', textDecoration: 'none' }}
+                to="/listaProductos/3"
+              >
                 <ListItemButton sx={{ pl: 6 }}>
                   <ListItemIcon>
                     <StarBorder />
                   </ListItemIcon>
-                  <ListItemText primary="Cristaleria" />
+                  <ListItemText primary="Cristalería" />
                 </ListItemButton>
               </Link>
             </List>
           </Collapse>
+
+          {/* Temáticas */}
           <ListItem disablePadding>
             <CelebrationIcon />
-            <ListItemButton
-              onClick={handleClickTematica}
-            >
-              <ListItemText>Tematicas</ListItemText>
+            <ListItemButton onClick={handleClickTematica}>
+              <ListItemText>Temáticas</ListItemText>
               {openTematica ? <ExpandLess /> : <ExpandMore />}
             </ListItemButton>
           </ListItem>
@@ -96,20 +123,29 @@ const MyDrawer = () => {
                 <ListItemIcon>
                   <StarBorder />
                 </ListItemIcon>
-                <ListItemText primary="Accion de gracias" />
+                <ListItemText primary="Acción de Gracias" />
               </ListItemButton>
             </List>
           </Collapse>
-          <Link style={{ color: 'inherit' }} to="/wip">
+
+          {/* Otros enlaces */}
+          <Link
+            style={{ color: 'inherit', textDecoration: 'none' }}
+            to="/wip"
+            onClick={() => setOpenDrawer(false)}
+          >
             <ListItem disablePadding>
               <WorkspacePremiumIcon />
-              <ListItemButton
-              >
+              <ListItemButton>
                 <ListItemText>Premium set</ListItemText>
               </ListItemButton>
             </ListItem>
           </Link>
-          <Link style={{ color: 'inherit' }} to="/wip">
+          <Link
+            style={{ color: 'inherit', textDecoration: 'none' }}
+            to="/wip"
+            onClick={() => setOpenDrawer(false)}
+          >
             <ListItem disablePadding>
               <PhoneIcon />
               <ListItemButton>
@@ -118,39 +154,88 @@ const MyDrawer = () => {
             </ListItem>
           </Link>
           <Divider />
-          <Link style={{ color: 'inherit' }} to="/wip">
+          <Link
+            style={{ color: 'inherit', textDecoration: 'none' }}
+            to="/wip"
+            onClick={() => setOpenDrawer(false)}
+          >
             <ListItem disablePadding>
               <ShoppingCartIcon />
-              <ListItemButton
-              >
+              <ListItemButton>
                 <ListItemText>Comprar</ListItemText>
               </ListItemButton>
             </ListItem>
           </Link>
           <Divider />
-          <Link onClick={() => setOpenDrawer(false)} style={{ color: 'inherit' }} to="/login">
-            <ListItem disablePadding>
-              <MailIcon />
-              <ListItemButton>
-                <ListItemText>Iniciar Sesión</ListItemText>
-              </ListItemButton>
-            </ListItem>
-          </Link>
-          <Link onClick={() => setOpenDrawer(false)} style={{ color: 'inherit' }} to="/register">
-            <ListItem disablePadding>
-              <PersonIcon />
-              <ListItemButton>
-                <ListItemText>Regístrate</ListItemText>
-              </ListItemButton>
-            </ListItem>
-          </Link>
+
+          {/* Opciones de sesión */}
+          {isAuthenticated ? (
+            <>
+              {/* Perfil */}
+              <Link
+                style={{ color: 'inherit', textDecoration: 'none' }}
+                to="/profile"
+                onClick={() => setOpenDrawer(false)}
+              >
+                <ListItem disablePadding>
+                  <PersonIcon />
+                  <ListItemButton>
+                    <ListItemText>Perfil</ListItemText>
+                  </ListItemButton>
+                </ListItem>
+              </Link>
+
+              {/* Cerrar sesión */}
+              <ListItem disablePadding>
+                <MailIcon />
+                <ListItemButton onClick={handleLogoutAndClose}>
+                  <ListItemText>Cerrar Sesión</ListItemText>
+                </ListItemButton>
+              </ListItem>
+            </>
+          ) : (
+            <>
+              {/* Iniciar sesión */}
+              <Link
+                style={{ color: 'inherit', textDecoration: 'none' }}
+                to="/login"
+                onClick={() => setOpenDrawer(false)}
+              >
+                <ListItem disablePadding>
+                  <MailIcon />
+                  <ListItemButton>
+                    <ListItemText>Iniciar Sesión</ListItemText>
+                  </ListItemButton>
+                </ListItem>
+              </Link>
+
+              {/* Registrarse */}
+              <Link
+                style={{ color: 'inherit', textDecoration: 'none' }}
+                to="/register"
+                onClick={() => setOpenDrawer(false)}
+              >
+                <ListItem disablePadding>
+                  <PersonIcon />
+                  <ListItemButton>
+                    <ListItemText>Regístrate</ListItemText>
+                  </ListItemButton>
+                </ListItem>
+              </Link>
+            </>
+          )}
         </List>
-      </Drawer >
-      <IconButton sx={{ color: '#623d2b', marginLeft: 'auto' }} onClick={() => setOpenDrawer(!openDrawer)}>
+      </Drawer>
+
+      {/* Botón para abrir Drawer */}
+      <IconButton
+        sx={{ color: '#623d2b', marginLeft: 'auto' }}
+        onClick={() => setOpenDrawer(!openDrawer)}
+      >
         <MenuIcon />
       </IconButton>
-    </React.Fragment >
+    </>
   );
 };
 
-export default MyDrawer
+export default MyDrawer;
