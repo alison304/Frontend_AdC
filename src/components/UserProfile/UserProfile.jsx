@@ -7,8 +7,8 @@ const UserProfile = ({ onLogout }) => {
     const navigate = useNavigate();
     const [activeTab, setActiveTab] = useState('personal-data');
     const [userData, setUserData] = useState({
-        name: '',
-        surname: '',
+        nombre: '',
+        apellido: '',
         email: '',
         password: ''
     });
@@ -17,17 +17,15 @@ const UserProfile = ({ onLogout }) => {
         // Llama a getUserByEmail cuando el componente se monta
         const fetchUserData = async () => {
             try {
-
-
-                    const data = await getUserByEmail1();
-                    // Asigna los valores recibidos al estado
-                    setUserData({
-                        name: data.name || '', // Usando valores recibidos o cadenas vacías
-                        surname: data.surname || '',
-                        email: data.email || '',
-                        password: '' // No debes mostrar la contraseña real
-                    });
-                    console.log(data.name)
+                const data = await getUserByEmail1();
+                // Asigna los valores recibidos al estado
+                setUserData({
+                    nombre: data.nombre || '',
+                    apellido: data.apellido || '',
+                    email: data.email || '',
+                    password: '' // No debes mostrar la contraseña real
+                });
+                console.log(data.nombre);
             } catch (error) {
                 console.error('Error fetching user data:', error);
                 // Manejo adicional del error, como redirección o mostrar mensaje
@@ -37,7 +35,6 @@ const UserProfile = ({ onLogout }) => {
         fetchUserData();
     }, []);
 
-    // Resto del código...
     const handleTabChange = (tab) => {
         setActiveTab(tab);
     };
@@ -74,12 +71,12 @@ const UserProfile = ({ onLogout }) => {
                         <div id="personal-data" className="user-profile-tab-content active">
                             <h2>Datos Personales</h2>
                             <div className="user-profile-form-group">
-                                <label htmlFor="name">Nombre</label>
-                                <input type="text" id="name" value={userData.name} onChange={handleInputChange} placeholder="Ingresa tu nombre" />
+                                <label htmlFor="nombre">Nombre</label>
+                                <input type="text" id="nombre" value={userData.nombre} onChange={handleInputChange} placeholder="Ingresa tu nombre" />
                             </div>
                             <div className="user-profile-form-group">
-                                <label htmlFor="surname">Apellido</label>
-                                <input type="text" id="surname" value={userData.surname} onChange={handleInputChange} placeholder="Ingresa tu apellido" />
+                                <label htmlFor="apellido">Apellido</label>
+                                <input type="text" id="apellido" value={userData.apellido} onChange={handleInputChange} placeholder="Ingresa tu apellido" />
                             </div>
                             <div className="user-profile-form-group">
                                 <label htmlFor="email">Correo Electrónico</label>
