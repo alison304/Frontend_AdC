@@ -37,124 +37,124 @@ function AgregarProducto({ listaProductos, setListaProductos, categorias }) {
     setMensajeForm("Producto agregado con éxito!");
   };
 
-  const handleVolver = () => {
-    navigate(-1);
-  };
-
   return (
-    <div>
+    <div className={styles.container}>
       {/* Botón Volver */}
-      <button className={styles["volver-boton"]} onClick={handleVolver}>
-        ← Volver
+      <button className={styles.volver} onClick={() => navigate(-1)}>
+        Volver
       </button>
 
-      <div className={styles["panel-administracion"]}>
-        {/* Encabezado principal */}
-        <h1>Panel de Control</h1>
-        <h2>Agregar Producto Nuevo</h2>
+      {/* Título Principal */}
+      <h1 className={styles.titulo}>Panel de Administración</h1>
 
-        {/* Formulario de Agregar Producto */}
-        <form onSubmit={handleSubmit}>
-          {/* Nombre */}
-          <div className={styles["form-group"]}>
-            <label>Nombre *</label>
-            <input
-              type="text"
-              value={producto.nombre}
-              onChange={(e) => handleChange("nombre", e.target.value)}
-              placeholder="Nombre del producto"
-            />
-          </div>
+      {/* Subtítulo */}
+      <h2 className={styles.subtitulo}>AGREGAR PRODUCTO NUEVO</h2>
 
-          {/* Descripción */}
-          <div className={styles["form-group"]}>
-            <label>Descripción *</label>
-            <input
-              type="text"
-              value={producto.descripcion}
-              onChange={(e) => handleChange("descripcion", e.target.value)}
-              placeholder="Describe el producto"
-            />
-          </div>
+      {/* Formulario */}
+      <form className={styles.formulario} onSubmit={handleSubmit}>
+        <div className={styles["form-group"]}>
+          <label>Nombre *</label>
+          <input
+            type="text"
+            value={producto.nombre}
+            onChange={(e) => handleChange("nombre", e.target.value)}
+            placeholder="Escribe el nombre del producto"
+          />
+        </div>
 
-          {/* Categoría */}
-          <div className={styles["form-group"]}>
-            <label>Categoría *</label>
-            <select
-              value={producto.categoriaId}
-              onChange={(e) => handleChange("categoriaId", parseInt(e.target.value))}
-            >
-              <option value="" disabled>
-                Selecciona una categoría
-              </option>
-              {categorias &&
-                categorias.map((cat) => (
-                  <option key={cat.idCategoria} value={cat.idCategoria}>
-                    {cat.nombreCategoria}
-                  </option>
-                ))}
-            </select>
-          </div>
+        <div className={styles["form-group"]}>
+          <label>Inventario *</label>
+          <input
+            type="number"
+            value={producto.inventario}
+            onChange={(e) => handleChange("inventario", e.target.value)}
+            placeholder="0"
+          />
+        </div>
 
-          {/* Temática */}
-          <div className={styles["form-group"]}>
-            <label>Temática *</label>
-            <div className={styles["radio-container"]}>
-              {["Plata", "Oro", "Mármol", "Cerámica", "Añadir otro"].map((tematica) => (
-                <label key={tematica} className={styles["radio-label"]}>
-                  <input
-                    type="radio"
-                    name="tematica"
-                    value={tematica}
-                    checked={producto.tematica === tematica}
-                    onChange={() => handleChange("tematica", tematica)}
-                  />
-                  {tematica}
-                </label>
+        <div className={styles["form-group"]}>
+          <label>Descripción *</label>
+          <textarea
+            value={producto.descripcion}
+            onChange={(e) => handleChange("descripcion", e.target.value)}
+            placeholder="Describe el producto"
+          />
+        </div>
+
+        <div className={styles["form-group"]}>
+          <label>Categoría *</label>
+          <select
+            value={producto.categoriaId}
+            onChange={(e) => handleChange("categoriaId", e.target.value)}
+          >
+            <option value="" disabled>
+              Selecciona una categoría
+            </option>
+            {categorias &&
+              categorias.map((cat) => (
+                <option key={cat.idCategoria} value={cat.idCategoria}>
+                  {cat.nombreCategoria}
+                </option>
               ))}
-            </div>
-          </div>
+          </select>
+        </div>
 
-          {/* Características */}
-          <div className={styles["form-group"]}>
-            <label>Características *</label>
-            <select
-              value={producto.caracteristicas}
-              onChange={(e) => handleChange("caracteristicas", e.target.value)}
-            >
-              <option value="" disabled>
-                Selecciona una característica
-              </option>
-              <option value="Material">Material</option>
-              <option value="Garantía">Garantía</option>
-              <option value="Peso">Peso</option>
-            </select>
-          </div>
+        <div className={styles["form-group"]}>
+          <label>Temática *</label>
+          <select
+            value={producto.tematica}
+            onChange={(e) => handleChange("tematica", e.target.value)}
+          >
+            <option value="" disabled>
+              Sin Temática
+            </option>
+            <option value="Navidad">Navidad</option>
+            <option value="Cumpleaños">Cumpleaños</option>
+          </select>
+        </div>
 
-          {/* Subir Imágenes */}
-          <div className={styles["form-group"]}>
-            <label>Subir Imágenes *</label>
-            <input
-              type="file"
-              accept="image/*"
-              multiple
-              onChange={handleFileChange}
-            />
-            {imagenes.length > 0 && (
-              <div className={styles["preview-container"]}>
-                {imagenes.map((img, index) => (
-                  <p key={index}>{img.name}</p>
-                ))}
-              </div>
-            )}
+        <div className={styles["form-group"]}>
+          <label>Características</label>
+          <div className={styles.caracteristicas}>
+            {["Plata", "Garantía", "Lavavajilla", "Cerámica"].map((item) => (
+              <label key={item}>
+                <input
+                  type="checkbox"
+                  value={item}
+                  onChange={(e) =>
+                    handleChange(
+                      "caracteristicas",
+                      producto.caracteristicas.includes(item)
+                        ? producto.caracteristicas.filter((i) => i !== item)
+                        : [...producto.caracteristicas, item]
+                    )
+                  }
+                />
+                {item}
+              </label>
+            ))}
           </div>
+        </div>
 
-          {/* Botón Agregar */}
-          <button type="submit" className={styles["agregar-boton"]}>
-            Agregar Producto
-          </button>
-        </form>
-      </div>
+        <div className={styles["form-group"]}>
+          <label>Subir Imágenes *</label>
+          <input type="file" accept="image/*" onChange={handleFileChange} />
+        </div>
+
+        <div className={styles["form-group"]}>
+          <label>Precio *</label>
+          <input
+            type="number"
+            value={producto.precioAlquiler}
+            onChange={(e) => handleChange("precioAlquiler", e.target.value)}
+            placeholder="Colocar el precio"
+          />
+        </div>
+
+        <button type="submit" className={styles["agregar-boton"]}>
+          AGREGAR PRODUCTO
+        </button>
+      </form>
     </div>
   );
 }
