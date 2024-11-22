@@ -40,7 +40,7 @@ const UserList = () => {
             omit: true
         },        
         {
-            name: 'Is Admin',
+            name: 'Es Admin?',
             selector: row => row.isAdmin,
             cell: row => (
                 <input
@@ -52,7 +52,7 @@ const UserList = () => {
             sortable: true,
         },
         {
-            name: 'Action',
+            name: 'Acciones',
             cell: (row) => (
                 <div className="cambios-estados">
                     <button onClick={() => cambiarRole(row.id,row.rol)} className={StylesAdmin.botonesEditar}>Cambiar Role</button>
