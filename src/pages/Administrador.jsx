@@ -26,6 +26,10 @@ function Administrador() {
         navigate('/admin/administrar-caracteristicas');
     };
 
+    const administrarUsuarios = () => {
+        navigate('/user-list');
+    };
+
     const botonMovil = () => {
         navigate('/');
     };
@@ -55,6 +59,7 @@ function Administrador() {
                     <button onClick={listarProducto} className={StylesAdmin.botonesPrincipales}>LISTAR PRODUCTOS</button>
                     <button onClick={agregarProducto} className={StylesAdmin.botonesPrincipales}>AGREGAR PRODUCTO</button>
                     <button onClick={administrarCaracteristicas} className={StylesAdmin.botonesPrincipales}>ADMINISTRAR CARACTERISTICAS</button>
+                    <button onClick={administrarUsuarios} className={StylesAdmin.botonesPrincipales}>ADMINISTRAR USUARIOS</button>
                 </div>
             </section>
             {mostrarLista && (

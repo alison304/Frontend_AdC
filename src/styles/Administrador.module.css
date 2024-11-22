@@ -21,13 +21,15 @@
     font-weight: 600;
     line-height: 19.36px;
     text-align: center;
+    margin-bottom: 2%;
 }
 
 .botones{
-
     display: flex;
     width: 80%;
-    justify-content: space-between; 
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
 }
 
 .seccionPrincipal{
@@ -36,7 +38,7 @@
     height: 490px;
     align-items: center;
     justify-content: center;
-    gap:150px;
+    gap:40px;
 }
 
 .tituloVolver{
