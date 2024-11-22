@@ -1,162 +1,194 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import styles from "../Styles/AgregarProducto.module.css";
 
-function AgregarProducto({ listaProductos, setListaProductos, categorias }) {
-  const [producto, setProducto] = useState({
-    id: 0,
-    nombre: "",
-    descripcion: "",
-    precioAlquiler: 0.0,
-    disponibilidad: 0,
-    inventario: 0,
-    fechaRegistro: "2024-10-25",
-    categoriaId: "",
-    tematica: "",
-    caracteristicas: "",
-    imagenes: null,
-  });
-
-  const [mensajeForm, setMensajeForm] = useState("");
+const AgregarProducto = () => {
+  const [categorias, setCategorias] = useState([]);
+  const [tematicas, setTematicas] = useState([]);
+  const [nombre, setNombre] = useState("");
+  const [descripcion, setDescripcion] = useState("");
+  const [precio, setPrecio] = useState(0);
+  const [inventario, setInventario] = useState(0);
+  const [categoriaId, setCategoriaId] = useState(0);
+  const [tematicaId, setTematicaId] = useState(0);
   const [imagenes, setImagenes] = useState([]);
-  const navigate = useNavigate();
+  const [caracteristicas, setCaracteristicas] = useState([]);
+  const [mensaje, setMensaje] = useState("");
 
-  const handleChange = (field, value) => {
-    setProducto({ ...producto, [field]: value });
-  };
+  useEffect(() => {
+    // Cargar categorías
+    axios
+      .get("https://auradecristalapi-development.up.railway.app/categorias/listar")
+      .then((response) => {
+        setCategorias(response.data);
+      })
+      .catch(() => {
+        console.error("Error al cargar categorías.");
+      });
 
-  const handleFileChange = (e) => {
-    const files = Array.from(e.target.files);
-    setImagenes(files);
-  };
+    // Cargar temáticas
+    axios
+      .get("https://auradecristalapi-development.up.railway.app/tematicas/listar")
+      .then((response) => {
+        setTematicas(response.data);
+      })
+      .catch(() => {
+        console.error("Error al cargar temáticas.");
+      });
+  }, []);
 
-  const handleSubmit = (e) => {
+  const handleAgregarProducto = async (e) => {
     e.preventDefault();
-    console.log("Producto agregado:", producto);
-    console.log("Imágenes subidas:", imagenes);
-    setMensajeForm("Producto agregado con éxito!");
+
+    const nuevoProducto = {
+      nombre: nombre,
+      descripcion: descripcion,
+      precio_alquiler: precio,
+      disponibilidad: 1,  // Asumimos que siempre estará disponible
+      inventario: inventario,
+      categoria_id: categoriaId,
+      tematica_id: tematicaId,
+      imagenes: imagenes, // Aquí suponemos que ya son URLs de imágenes
+      caracteristicaIds: caracteristicas.map((caracteristica) => parseInt(caracteristica)), // Asegúrate de que las características sean números si la API lo espera
+    };
+
+    try {
+      const response = await axios.post(
+        "https://auradecristalapi-development.up.railway.app/productos/registrar",
+        nuevoProducto,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      if (response.status === 200 || response.status === 201) {
+        setMensaje("Producto registrado con éxito.");
+        limpiarFormulario();
+      } else {
+        setMensaje("Hubo un error al registrar el producto.");
+      }
+    } catch (error) {
+      console.error("Error al registrar producto:", error);
+      setMensaje("Error al registrar el producto.");
+    }
+  };
+
+  const limpiarFormulario = () => {
+    setNombre("");
+    setDescripcion("");
+    setPrecio(0);
+    setInventario(0);
+    setCategoriaId(0);
+    setTematicaId(0);
+    setImagenes([]);
+    setCaracteristicas([]);
   };
 
   return (
     <div className={styles.container}>
-      {/* Botón Volver */}
-      <button className={styles.volver} onClick={() => navigate(-1)}>
+      <button className={styles.volver} onClick={() => window.history.back()}>
         Volver
       </button>
-
-      {/* Título Principal */}
-      <h1 className={styles.titulo}>Panel de Administración</h1>
-
-      {/* Subtítulo */}
-      <h2 className={styles.subtitulo}>AGREGAR PRODUCTO NUEVO</h2>
-
-      {/* Formulario */}
-      <form className={styles.formulario} onSubmit={handleSubmit}>
-        <div className={styles["form-group"]}>
+      <h2 className={styles.titulo}>Agregar Producto</h2>
+      <form className={styles.formulario} onSubmit={handleAgregarProducto}>
+        <div className={styles.formGroup}>
           <label>Nombre *</label>
           <input
             type="text"
-            value={producto.nombre}
-            onChange={(e) => handleChange("nombre", e.target.value)}
-            placeholder="Escribe el nombre del producto"
+            value={nombre}
+            onChange={(e) => setNombre(e.target.value)}
+            required
           />
         </div>
-
-        <div className={styles["form-group"]}>
-          <label>Inventario *</label>
-          <input
-            type="number"
-            value={producto.inventario}
-            onChange={(e) => handleChange("inventario", e.target.value)}
-            placeholder="0"
-          />
-        </div>
-
-        <div className={styles["form-group"]}>
+        <div className={styles.formGroup}>
           <label>Descripción *</label>
           <textarea
-            value={producto.descripcion}
-            onChange={(e) => handleChange("descripcion", e.target.value)}
-            placeholder="Describe el producto"
-          />
+            value={descripcion}
+            onChange={(e) => setDescripcion(e.target.value)}
+            required
+          ></textarea>
         </div>
-
-        <div className={styles["form-group"]}>
-          <label>Categoría *</label>
-          <select
-            value={producto.categoriaId}
-            onChange={(e) => handleChange("categoriaId", e.target.value)}
-          >
-            <option value="" disabled>
-              Selecciona una categoría
-            </option>
-            {categorias &&
-              categorias.map((cat) => (
-                <option key={cat.idCategoria} value={cat.idCategoria}>
-                  {cat.nombreCategoria}
-                </option>
-              ))}
-          </select>
-        </div>
-
-        <div className={styles["form-group"]}>
-          <label>Temática *</label>
-          <select
-            value={producto.tematica}
-            onChange={(e) => handleChange("tematica", e.target.value)}
-          >
-            <option value="" disabled>
-              Sin Temática
-            </option>
-            <option value="Navidad">Navidad</option>
-            <option value="Cumpleaños">Cumpleaños</option>
-          </select>
-        </div>
-
-        <div className={styles["form-group"]}>
-          <label>Características</label>
-          <div className={styles.caracteristicas}>
-            {["Plata", "Garantía", "Lavavajilla", "Cerámica"].map((item) => (
-              <label key={item}>
-                <input
-                  type="checkbox"
-                  value={item}
-                  onChange={(e) =>
-                    handleChange(
-                      "caracteristicas",
-                      producto.caracteristicas.includes(item)
-                        ? producto.caracteristicas.filter((i) => i !== item)
-                        : [...producto.caracteristicas, item]
-                    )
-                  }
-                />
-                {item}
-              </label>
-            ))}
-          </div>
-        </div>
-
-        <div className={styles["form-group"]}>
-          <label>Subir Imágenes *</label>
-          <input type="file" accept="image/*" onChange={handleFileChange} />
-        </div>
-
-        <div className={styles["form-group"]}>
+        <div className={styles.formGroup}>
           <label>Precio *</label>
           <input
             type="number"
-            value={producto.precioAlquiler}
-            onChange={(e) => handleChange("precioAlquiler", e.target.value)}
-            placeholder="Colocar el precio"
+            value={precio}
+            onChange={(e) => setPrecio(e.target.value)}
+            required
           />
         </div>
-
-        <button type="submit" className={styles["agregar-boton"]}>
-          AGREGAR PRODUCTO
+        <div className={styles.formGroup}>
+          <label>Inventario *</label>
+          <input
+            type="number"
+            value={inventario}
+            onChange={(e) => setInventario(e.target.value)}
+            required
+          />
+        </div>
+        <div className={styles.formGroup}>
+          <label>Categoría *</label>
+          <select
+            value={categoriaId}
+            onChange={(e) => setCategoriaId(e.target.value)}
+            required
+          >
+            <option value={0}>Seleccionar</option>
+            {categorias.map((cat) => (
+              <option key={cat.id} value={cat.id}>
+                {cat.descripcion}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className={styles.formGroup}>
+          <label>Temática *</label>
+          <select
+            value={tematicaId}
+            onChange={(e) => setTematicaId(e.target.value)}
+            required
+          >
+            <option value={0}>Seleccionar</option>
+            {tematicas.map((tem) => (
+              <option key={tem.id} value={tem.id}>
+                {tem.descripcion}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className={styles.formGroup}>
+          <label>Imágenes *</label>
+          <input
+            type="file"
+            multiple
+            onChange={(e) => {
+              const files = Array.from(e.target.files).map((file) =>
+                URL.createObjectURL(file)
+              );
+              setImagenes(files);
+            }}
+          />
+        </div>
+        <div className={styles.formGroup}>
+          <label>Características</label>
+          <input
+            type="text"
+            value={caracteristicas}
+            onChange={(e) =>
+              setCaracteristicas(e.target.value.split(",").map((c) => c.trim()))
+            }
+            placeholder="Separar con comas (ej: 1, 2, 3)"
+          />
+        </div>
+        {mensaje && <p className={mensaje.includes("éxito") ? styles.success : styles.error}>{mensaje}</p>}
+        <button type="submit" className={styles.btnSubmit}>
+          Registrar Producto
         </button>
       </form>
     </div>
   );
-}
+};
 
 export default AgregarProducto;
