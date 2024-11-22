@@ -235,7 +235,7 @@ function App() {
                     <Route path='/register' element={<RegisterForm />} />
                     <Route path="/login" element={<Login onLoginSuccess={handleLoginSuccess} />} />
                     <Route path="/wip" element={<Wip />} />
-                    <Route path="user/user-list" element={<UserList />} />
+                    <Route path="/user/user-list" element={<UserList />} />
 
                     {/*Cosas admin */}
 
