@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import styles from "../Styles/AgregarProducto.module.css";
 
+const BASE_URL = "https://auradecristalapi-development.up.railway.app";
 const AgregarProducto = () => {
   const [categorias, setCategorias] = useState([]);
   const [tematicas, setTematicas] = useState([]);
@@ -15,8 +16,8 @@ const AgregarProducto = () => {
   const [caracteristicas, setCaracteristicas] = useState([]);
   const [mensaje, setMensaje] = useState("");
 
+  // Obtener categorías y temáticas
   useEffect(() => {
-    // Cargar categorías
     axios
       .get("https://auradecristalapi-development.up.railway.app/categorias/listar")
       .then((response) => {
@@ -26,7 +27,6 @@ const AgregarProducto = () => {
         console.error("Error al cargar categorías.");
       });
 
-    // Cargar temáticas
     axios
       .get("https://auradecristalapi-development.up.railway.app/tematicas/listar")
       .then((response) => {
@@ -37,19 +37,26 @@ const AgregarProducto = () => {
       });
   }, []);
 
+  // Función para registrar un producto
   const handleAgregarProducto = async (e) => {
     e.preventDefault();
 
+    // Validar que se ha ingresado toda la información
+    if (!nombre || !descripcion || !precio || !inventario || !categoriaId || !tematicaId || imagenes.length === 0) {
+      setMensaje("Por favor complete todos los campos antes de registrar el producto.");
+      return;
+    }
+
     const nuevoProducto = {
-      nombre: nombre,
-      descripcion: descripcion,
+      nombre,
+      descripcion,
       precio_alquiler: precio,
-      disponibilidad: 1,  // Asumimos que siempre estará disponible
-      inventario: inventario,
+      disponibilidad: inventario, // Cambiar según el campo correspondiente en la API
+      inventario,
       categoria_id: categoriaId,
       tematica_id: tematicaId,
-      imagenes: imagenes, // Aquí suponemos que ya son URLs de imágenes
-      caracteristicaIds: caracteristicas.map((caracteristica) => parseInt(caracteristica)), // Asegúrate de que las características sean números si la API lo espera
+      imagenes,
+      caracteristicaIds: caracteristicas.map((car) => parseInt(car)),
     };
 
     try {
@@ -75,6 +82,7 @@ const AgregarProducto = () => {
     }
   };
 
+  // Limpiar formulario después de registrar el producto
   const limpiarFormulario = () => {
     setNombre("");
     setDescripcion("");
