@@ -64,9 +64,9 @@ const UserList = () => {
     const data = [
         {
             id: 1,
-            nombre: 'Familia',
-            apellido: 'Cardenas Paico',
-            email: 'familiacardenaspaico@gmail.com',
+            nombre: 'Miguel',
+            apellido: 'Park',
+            email: 'miguelcp@gmail.com',
             rol: 'USER',
             isAdmin: false
         },
@@ -116,6 +116,9 @@ const UserList = () => {
 
     return (
         <React.Fragment>
+            <br/>
+            <h3 className="title-form">Usuarios registrados 📋</h3>
+            <br/><br/>
             <DataTable
                 columns={columns}
                 data={data}
