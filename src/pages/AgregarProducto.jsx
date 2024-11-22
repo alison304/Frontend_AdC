@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import styles from "../Styles/AgregarProducto.module.css";
 
 const BASE_URL = "https://auradecristalapi-development.up.railway.app";
