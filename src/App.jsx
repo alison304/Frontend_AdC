@@ -18,7 +18,8 @@ import Wip from './components/Wip/Wip';
 import AdministrarCategorias from './pages/AdministrarCategorias';
 import UserProfile from './components/UserProfile/UserProfile';
 import ProtectedRoute from './components/LoginForm/ProtectedRoute';
-import AdministrarCaracteristicas from './pages/AdministrarCaracteristicas'
+import AdministrarCaracteristicas from './pages/AdministrarCaracteristicas';
+import UserList from './components/User/UserList';
 
 
 function App() {
@@ -34,7 +35,7 @@ function App() {
         localStorage.removeItem('authToken');
         setIsAuthenticated(false);
     };
-    
+
     const [listaProductos, setListaProductos] = useState([
         {
             id: 1,
@@ -227,16 +228,17 @@ function App() {
                 <Routes>
                     <Route path='/' element={<Home />} />
                     <Route path='*' element={<h2>Error 404</h2>} />
-                    
+
                     <Route path="/listaProductos/:id" element={<ListaProductos />} />
                     <Route path="/detail/:id" element={<Detail />} />
                     <Route path="/gallery/:id" element={<Gallery />} />
                     <Route path='/register' element={<RegisterForm />} />
                     <Route path="/login" element={<Login onLoginSuccess={handleLoginSuccess} />} />
                     <Route path="/wip" element={<Wip />} />
-                    
+                    <Route path='/user-list' element={<UserList />} />
+
                     {/*Cosas admin */}
-                    
+
                     <Route
                         path='/admin'
                         element={
@@ -265,7 +267,7 @@ function App() {
                         path="/admin/administrar-caracteristicas"
                         element={
                             <ProtectedRoute isAuthenticated={isAuthenticated}>
-                                <AdministrarCaracteristicas listaProductos={listaProductos}  />
+                                <AdministrarCaracteristicas listaProductos={listaProductos} />
                             </ProtectedRoute>
                         }
                     />

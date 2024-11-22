@@ -3,7 +3,7 @@ axios.defaults.headers.common['Content-Type'] = 'application/json';
 
 const BASE_URL = "https://auradecristalapi-development.up.railway.app";
 
-export const getUserList = () => {
+export const getListUser = () => {
     return axios.get(`${BASE_URL}/api/user/`);
 }
 
