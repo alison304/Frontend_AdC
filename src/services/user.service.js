@@ -103,7 +103,7 @@ export const getUserByEmail1 = () => {
       })
       .then(response => console.log('OPTIONS response:', response))
       .catch(error => console.error('Error during OPTIONS request:', error));
-      h(error => console.error('Error during request:', error));
+      (error => console.error('Error during request:', error));
     
   };
   

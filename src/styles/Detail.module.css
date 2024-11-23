@@ -203,6 +203,14 @@
 
 }
 
+h4 {
+    font-family: 'Kaushan Script', cursive;
+    font-size: 32px;
+    font-weight: 400;
+    line-height: 38px;
+    color: #000000;
+}
+
 /* Cuando la pantalla es de 900px o menos */
 @media (max-width: 900px) {
 

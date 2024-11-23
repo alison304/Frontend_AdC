@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
-import styles from "../Styles/AgregarProducto.module.css";
+import styles from "../styles/AgregarProducto.module.css";
 
 const BASE_URL = "https://auradecristalapi-development.up.railway.app";
+
 const AgregarProducto = () => {
   const [categorias, setCategorias] = useState([]);
   const [tematicas, setTematicas] = useState([]);
@@ -19,7 +20,7 @@ const AgregarProducto = () => {
   // Obtener categorías y temáticas
   useEffect(() => {
     axios
-      .get("https://auradecristalapi-development.up.railway.app/categorias/listar")
+      .get(BASE_URL+"/categorias/listar")
       .then((response) => {
         setCategorias(response.data);
       })
@@ -28,7 +29,7 @@ const AgregarProducto = () => {
       });
 
     axios
-      .get("https://auradecristalapi-development.up.railway.app/tematicas/listar")
+      .get(BASE_URL+"/tematicas/listar")
       .then((response) => {
         setTematicas(response.data);
       })
@@ -61,7 +62,7 @@ const AgregarProducto = () => {
 
     try {
       const response = await axios.post(
-        "https://auradecristalapi-development.up.railway.app/productos/registrar",
+        BASE_URL+"/productos/registrar",
         nuevoProducto,
         {
           headers: {
