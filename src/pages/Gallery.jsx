@@ -21,8 +21,8 @@ const Gallery = ({ }) => {
           <img src={producto.imagenes[0].url} />
           <img src={producto.imagenes[1].url} />
           <img src={producto.imagenes[2].url} />
-          <img src={producto.imagenes[0].url} />
-          <img src={producto.imagenes[1].url} />
+          <img src={producto.imagenes[3].url} />
+          <img src={producto.imagenes[4].url} />
         </div>) : (
           <div>
             <div className={StylesGallery.contenedor}>
@@ -33,9 +33,9 @@ const Gallery = ({ }) => {
               </div>
             </div>
             <div className={StylesGallery.contenedor}>
-              <img src={producto.imagenes[0].url} />
+              <img src={producto.imagenes[3].url} />
               <div className={StylesGallery.columna}>
-                <img src={producto.imagenes[1].url} />
+                <img src={producto.imagenes[4].url} />
               </div>
             </div>
           </div>

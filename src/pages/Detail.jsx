@@ -33,9 +33,9 @@ const Detail = () => {
           <img src={location.state.producto.imagenes[0].url} className={StylesDetail.imgGrande} />
 
           <div className={StylesDetail.contenedorImgPequeñas}>
-            <img src={location.state.producto.imagenes[0].url} className={StylesDetail.imgPequeña} />
             <img src={location.state.producto.imagenes[1].url} className={StylesDetail.imgPequeña} />
             <img src={location.state.producto.imagenes[2].url} className={StylesDetail.imgPequeña} />
+            <img src={location.state.producto.imagenes[3].url} className={StylesDetail.imgPequeña} />
 
             <Link to={{
               pathname: '/gallery/' + location.state.producto.id
