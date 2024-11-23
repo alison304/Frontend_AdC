@@ -12,7 +12,7 @@ export const getOneUser = (id) => {
 }
 
 export const createUser = (name,lastName,email,password) => {
-    return axios.post(`${BASE_URL}/api/auth/register`, 
+    return axios.post(`${BASE_URL}/auth/register`, 
         {
             "nombre": name,             
             "apellido": lastName,             
@@ -31,7 +31,7 @@ export const removeUser = (id) => {
 }
 
 export const login = (email, password) => {
-    return axios.post(`${BASE_URL}/api/auth/login`, 
+    return axios.post(`${BASE_URL}/auth/login`, 
         {
             "email": email, 
             "password": password

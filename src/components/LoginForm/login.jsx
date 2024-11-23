@@ -28,9 +28,9 @@ function Login({ onLoginSuccess }) {
             const response = await login(values.email, values.password);
             const token = response.data.token;
 
-            // Mantiene sesion abierta
+            // Mantiene sesión abierta
             localStorage.setItem('authToken', token);
-            localStorage.setItem('userEmail', values.email); // Guarda mail, intento n3
+            localStorage.setItem('userEmail', values.email); // Guarda email
 
             Swal.fire({
                 icon: 'success',
@@ -62,7 +62,17 @@ function Login({ onLoginSuccess }) {
 
     return (
         <Box className="login-container">
-            <Typography className="login-text-login" sx={{ fontSize: "48px", fontWeight: '250', fontStyle: 'italic', color: '#8E6B3266', fontFamily: 'Kaushan Script', marginBottom: '5rem' }}>
+            <Typography
+                className="login-text-login"
+                sx={{
+                    fontSize: "48px",
+                    fontWeight: '250',
+                    fontStyle: 'italic',
+                    color: '#8E6B3266',
+                    fontFamily: 'Kaushan Script',
+                    marginBottom: '5rem',
+                }}
+            >
                 Iniciar Sesión
             </Typography>
             <Formik
@@ -76,10 +86,21 @@ function Login({ onLoginSuccess }) {
                             as={TextField}
                             label="Email"
                             name="email"
+                            type="email" // Agregado para evitar conflicto de estilos
                             variant="outlined"
                             fullWidth
                             required
-                            helperText={<ErrorMessage name="email" component="div" style={{ color: '#a15750', fontSize: '0.9rem', marginTop: '0.25rem' }} />}
+                            helperText={
+                                <ErrorMessage
+                                    name="email"
+                                    component="div"
+                                    style={{
+                                        color: '#a15750',
+                                        fontSize: '0.9rem',
+                                        marginTop: '0.25rem',
+                                    }}
+                                />
+                            }
                         />
                         <Field
                             as={TextField}
@@ -89,9 +110,23 @@ function Login({ onLoginSuccess }) {
                             variant="outlined"
                             fullWidth
                             required
-                            helperText={<ErrorMessage name="password" component="div" style={{ color: '#a15750', fontSize: '0.9rem', marginTop: '0.25rem' }} />}
+                            helperText={
+                                <ErrorMessage
+                                    name="password"
+                                    component="div"
+                                    style={{
+                                        color: '#a15750',
+                                        fontSize: '0.9rem',
+                                        marginTop: '0.25rem',
+                                    }}
+                                />
+                            }
                         />
-                        <Button className="olvidoPass-button" sx={{ color: '#635b4d', textDecoration: 'underline' }} onClick={handleOlvidoPassRedirect}>
+                        <Button
+                            className="olvidoPass-button"
+                            sx={{ color: '#635b4d', textDecoration: 'underline' }}
+                            onClick={handleOlvidoPassRedirect}
+                        >
                             ¿Olvidaste tu contraseña?
                         </Button>
                         <Button
@@ -99,7 +134,13 @@ function Login({ onLoginSuccess }) {
                             variant="outlined"
                             className="login-button"
                             fullWidth
-                            sx={{ backgroundColor: '#d8c7a0', color: 'white', outlineColor: '#635b4d', borderColor: '#635b4d', fontWeight: 'bold' }}
+                            sx={{
+                                backgroundColor: '#d8c7a0',
+                                color: 'white',
+                                outlineColor: '#635b4d',
+                                borderColor: '#635b4d',
+                                fontWeight: 'bold',
+                            }}
                             disabled={isSubmitting}
                         >
                             Ingresar
@@ -108,7 +149,18 @@ function Login({ onLoginSuccess }) {
                 )}
             </Formik>
             <Box className="login-links">
-                <Button className="register-button" variant="outlined" sx={{ backgroundColor: '#a15750', color: 'white', outlineColor: '#635b4d', borderColor: '#635b4d', fontWeight: 'bold' }} onClick={handleRegisterRedirect}>
+                <Button
+                    className="register-button"
+                    variant="outlined"
+                    sx={{
+                        backgroundColor: '#a15750',
+                        color: 'white',
+                        outlineColor: '#635b4d',
+                        borderColor: '#635b4d',
+                        fontWeight: 'bold',
+                    }}
+                    onClick={handleRegisterRedirect}
+                >
                     Registrarse
                 </Button>
             </Box>
