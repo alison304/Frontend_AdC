@@ -1,10 +1,9 @@
 import { useNavigate, useLocation } from "react-router-dom";
-import React from 'react'
 import StylesDetail from '../styles/Detail.module.css'
 import { useMediaQuery, useTheme } from '@mui/material';
 import { useState } from "react";
 import { Link } from "react-router-dom";
-
+import Caracteristicas from "../components/Caracteristicas/Caractiristicas";
 const Detail = () => {
 
   const location = useLocation();
@@ -49,7 +48,10 @@ const Detail = () => {
                 }
               </div>
             </Link>
-
+          </div>
+          <div>
+                <h4>Características:</h4>
+                <Caracteristicas idProducto={producto.id}></Caracteristicas>
           </div>
         </div>
         {
