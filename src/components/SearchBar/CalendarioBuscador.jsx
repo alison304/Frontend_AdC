@@ -9,6 +9,7 @@ import {useProductosStates} from "../../utils/Context"
 function CalendarioBuscador({ onClose }) {
   const [fecha, setFecha] = useState(new Date ());
   const [mostrarError, setmostrarError] = useState(false);
+  const [mostrarExito, setmostrarExito] = useState(false);
   const {state,dispatch} = useProductosStates();
 
   const formatoFecha = (fecha) => {
@@ -27,6 +28,7 @@ function CalendarioBuscador({ onClose }) {
     
     if(new Date(fecha[0]).toDateString()  !== "Invalid Date"){
       setmostrarError(false);
+      setmostrarExito(true);
       const diaInicio=formatoFecha(new Date(fecha[0]));
       const diaFin = formatoFecha(new Date(fecha[1]));
       console.log("inicial",diaInicio);
@@ -35,7 +37,7 @@ function CalendarioBuscador({ onClose }) {
       dispatch({type:"ADD_FECHA_FINAL", payload:diaFin});
     }else{
       setmostrarError(true);
-      
+      setmostrarExito(false);
     }
 
   }
@@ -50,6 +52,7 @@ function CalendarioBuscador({ onClose }) {
         <button className={StylesCalendario.botonGuardarFecha}  onClick={guardarFechas}>Confirmar</button>
       </div>
       {mostrarError && (<p className={StylesCalendario.mensajeError}>Debe Seleccionar una fecha inicial y una fecha final</p>)}
+      {mostrarExito && (<p className={StylesCalendario.mensajeExito}>Se ha guardado la fecha seleccionada</p>)}
       {new Date(fecha[0]).toDateString() !== "Invalid Date" ? (
         <div className={StylesCalendario.titulo}>
           <p className={StylesCalendario.fechasSeleccionada}>

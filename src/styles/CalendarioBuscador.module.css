@@ -46,16 +46,27 @@
 
 .botonIconoCerrar{
     background-color: transparent;
+    cursor: pointer;
 }
 
 .botonGuardarFecha{
     background-color: #DBA643CC;
     color: white;
     padding: 0.7rem;
+    cursor: pointer;
     border-radius: 4px;
 }
 
 .mensajeError{
     color: red;
     font-size: 1rem;
+}
+
+.mensajeExito{
+    color: green;
+    font-size: 1rem;
+}
+
+.botonGuardarFecha:hover {
+    background-color: rgba(217, 183, 91, 0.7);
 }
