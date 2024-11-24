@@ -1,10 +1,14 @@
 import axios from "axios";
-axios.defaults.headers.common['Content-Type'] = 'application/json';
-
 const BASE_URL = "https://auradecristalapi-development.up.railway.app";
+const token = localStorage.getItem('authToken');
 
 export const getListUser = () => {
-    return axios.get(`${BASE_URL}/api/user/`);
+  return axios.get(`${BASE_URL}/usuarios/listar`, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      }
+    });
 }
 
 export const getOneUser = (id) => {

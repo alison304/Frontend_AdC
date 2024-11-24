@@ -27,7 +27,7 @@ function Administrador() {
     };
 
     const administrarUsuarios = () => {
-        navigate('/user-list');
+        navigate('/admin/user-list');
     };
 
     const botonMovil = () => {

@@ -232,7 +232,6 @@ function App() {
                     <Route path='/register' element={<RegisterForm />} />
                     <Route path="/login" element={<Login onLoginSuccess={handleLoginSuccess} />} />
                     <Route path="/wip" element={<Wip />} />
-                    <Route path="/user-list" element={<UserList />} />
 
                     {/*Cosas admin */}
 
@@ -282,6 +281,17 @@ function App() {
                             </ProtectedRoute>
                         }
                     />
+
+                    {/*Cosas usuario comun logueado */}
+                    <Route
+                        path="/admin/user-list"
+                        element={
+                            <ProtectedRoute isAuthenticated={isAuthenticated}>
+                                <UserList />
+                            </ProtectedRoute>
+                        }
+                    />                    
+
                 </Routes>
 
 
