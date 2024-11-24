@@ -3,11 +3,17 @@ import { createContext, useContext, useEffect, useReducer } from "react";
 import { reducer } from "../reducer/reducer";
 
 const productosStates= createContext();
+const fechaInicial = JSON.parse(localStorage.getItem("fechaInicial")) || null;
+const fechaFinal = JSON.parse(localStorage.getItem("fechaFinal")) || null;
+
 const initialState = {
   lista:[],
   listaCategorias:[],
-  listaProductosAleatorios:[]
+  listaProductosAleatorios:[],
+  fechaInicial:fechaInicial,
+  fechaFinal:fechaFinal
 }
+
 
 const Context = ({ children }) => {
   const [state,dispatch] = useReducer(reducer,initialState)
@@ -41,6 +47,12 @@ const Context = ({ children }) => {
   
     obtenerProductos();
   }, [dispatch]);
+
+  //fechas
+  useEffect(() => {
+    localStorage.setItem("fechaInicial", JSON.stringify(state.fechaInicial));
+    localStorage.setItem("fechaFinal", JSON.stringify(state.fechaFinal));
+  }, [state.fechaInicial, state.fechaFinal]);
 
 
   return (
