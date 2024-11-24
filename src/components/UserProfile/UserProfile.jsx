@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getUserByEmail1 } from '../../services/user.service';
+import { getUserByEmail } from '../../services/user.service';
 import { useNavigate } from 'react-router-dom';
 import './UserProfile.css';
 
@@ -10,25 +10,32 @@ const UserProfile = ({ onLogout }) => {
         nombre: '',
         apellido: '',
         email: '',
-        password: ''
+        password: '',
     });
 
     useEffect(() => {
-        // Llama a getUserByEmail cuando el componente se monta
         const fetchUserData = async () => {
             try {
-                const data = await getUserByEmail1();
-                // Asigna los valores recibidos al estado
-                setUserData({
-                    nombre: data.nombre || '',
-                    apellido: data.apellido || '',
-                    email: data.email || '',
-                    password: '' // No debes mostrar la contraseña real
-                });
-                console.log(data.nombre);
+                const authToken = localStorage.getItem('authToken'); // Obtiene el token del localStorage
+                const userEmail = localStorage.getItem('userEmail'); // Obtiene el email del localStorage o un valor predeterminado
+                const BASE_URL = 'https://auradecristalapi-development.up.railway.app';
+
+                if (!authToken || !userEmail) {
+                    console.error('Falta el token de autenticación o el correo electrónico.');
+                    return;
+                }
+
+                const user = await getUserByEmail(userEmail, authToken, BASE_URL);
+
+                // Actualiza el estado con los datos obtenidos
+                setUserData((prevState) => ({
+                    ...prevState,
+                    nombre: user.nombre,
+                    apellido: user.apellido,
+                    email: user.email,
+                }));
             } catch (error) {
-                console.error('Error fetching user data:', error);
-                // Manejo adicional del error, como redirección o mostrar mensaje
+                console.error('Error al obtener los datos del usuario:', error);
             }
         };
 
@@ -51,7 +58,7 @@ const UserProfile = ({ onLogout }) => {
     };
 
     const handleSaveChanges = () => {
-        // Lógica para guardar cambios, aquí puedes agregar tu lógica de actualización
+        // Lógica para guardar cambios
         console.log('Datos guardados:', userData);
     };
 
@@ -59,11 +66,36 @@ const UserProfile = ({ onLogout }) => {
         <div className="user-profile-container">
             <div className="user-profile-layout">
                 <div className="user-profile-tabs user-profile-tabs-vertical">
-                    <button className={`tab-link ${activeTab === 'personal-data' ? 'active' : ''}`} onClick={() => handleTabChange('personal-data')}>Datos Personales</button>
-                    <button className={`tab-link ${activeTab === 'orders' ? 'active' : ''}`} onClick={() => handleTabChange('orders')}>Pedidos</button>
-                    <button className={`tab-link ${activeTab === 'favorites' ? 'active' : ''}`} onClick={() => handleTabChange('favorites')}>Mis Favoritos</button>
-                    <button className={`tab-link ${activeTab === 'addresses' ? 'active' : ''}`} onClick={() => handleTabChange('addresses')}>Direcciones</button>
-                    <button className={`tab-link ${activeTab === 'logout' ? 'active' : ''}`} onClick={handleLogoutAndRedirect}>Cerrar Sesión</button>
+                    <button
+                        className={`tab-link ${activeTab === 'personal-data' ? 'active' : ''}`}
+                        onClick={() => handleTabChange('personal-data')}
+                    >
+                        Datos Personales
+                    </button>
+                    <button
+                        className={`tab-link ${activeTab === 'orders' ? 'active' : ''}`}
+                        onClick={() => handleTabChange('orders')}
+                    >
+                        Pedidos
+                    </button>
+                    <button
+                        className={`tab-link ${activeTab === 'favorites' ? 'active' : ''}`}
+                        onClick={() => handleTabChange('favorites')}
+                    >
+                        Mis Favoritos
+                    </button>
+                    <button
+                        className={`tab-link ${activeTab === 'addresses' ? 'active' : ''}`}
+                        onClick={() => handleTabChange('addresses')}
+                    >
+                        Direcciones
+                    </button>
+                    <button
+                        className={`tab-link ${activeTab === 'logout' ? 'active' : ''}`}
+                        onClick={handleLogoutAndRedirect}
+                    >
+                        Cerrar Sesión
+                    </button>
                 </div>
 
                 <div className="user-profile-content">
@@ -72,21 +104,48 @@ const UserProfile = ({ onLogout }) => {
                             <h2>Datos Personales</h2>
                             <div className="user-profile-form-group">
                                 <label htmlFor="nombre">Nombre</label>
-                                <input type="text" id="nombre" value={userData.nombre} onChange={handleInputChange} placeholder="Ingresa tu nombre" />
+                                <input
+                                    type="text"
+                                    id="nombre"
+                                    value={userData.nombre}
+                                    onChange={handleInputChange}
+                                    placeholder="Ingresa tu nombre"
+                                />
                             </div>
                             <div className="user-profile-form-group">
                                 <label htmlFor="apellido">Apellido</label>
-                                <input type="text" id="apellido" value={userData.apellido} onChange={handleInputChange} placeholder="Ingresa tu apellido" />
+                                <input
+                                    type="text"
+                                    id="apellido"
+                                    value={userData.apellido}
+                                    onChange={handleInputChange}
+                                    placeholder="Ingresa tu apellido"
+                                />
                             </div>
                             <div className="user-profile-form-group">
                                 <label htmlFor="email">Correo Electrónico</label>
-                                <input type="email" id="email" value={userData.email} onChange={handleInputChange} placeholder="Ingresa tu correo electrónico" disabled />
+                                <input
+                                    type="email"
+                                    id="email"
+                                    value={userData.email}
+                                    onChange={handleInputChange}
+                                    placeholder="Ingresa tu correo electrónico"
+                                    disabled
+                                />
                             </div>
                             <div className="user-profile-form-group">
                                 <label htmlFor="password">Contraseña</label>
-                                <input type="password" id="password" value={userData.password} onChange={handleInputChange} placeholder="Ingresa tu contraseña" />
+                                <input
+                                    type="password"
+                                    id="password"
+                                    value={userData.password}
+                                    onChange={handleInputChange}
+                                    placeholder="Ingresa tu contraseña"
+                                />
                             </div>
-                            <button className="user-profile-button" onClick={handleSaveChanges}>Guardar Cambios</button>
+                            <button className="user-profile-button" onClick={handleSaveChanges}>
+                                Guardar Cambios
+                            </button>
                         </div>
                     )}
                 </div>
