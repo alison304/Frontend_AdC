@@ -9,10 +9,8 @@
 
 .search-input {
     flex: 1;
-    border-radius: 30px 0px 0px 30px;
-  
+    border-radius: 30px 0px 0px 30px;  
     font-size: 18px;
-  
     height: 40px;
     margin: 30px 0;
     text-align: center;
@@ -54,18 +52,16 @@
 /* Estilo del contenido del modal */
 .modal-content {
     background: white;
-    padding: 20px;
+    padding: 10px 20px 10px 20px;
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    max-width: 500px;
-    width: 90%;
     max-height: 500px;
     text-align: center;
     z-index: 1010; /* Asegura que esté sobre el overlay */
-    border: 2px solid blue;
+    border: 2px solid mediumspringgreen;
     display: flex;
     flex-direction: column;
-    align-items: center;
+
 }
 
 /* Botón de cerrar */
