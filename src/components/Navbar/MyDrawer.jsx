@@ -185,6 +185,20 @@ const MyDrawer = ({ isAuthenticated, onLogout }) => {
                 </ListItem>
               </Link>
 
+              {/* Panel Admin */}
+              <Link
+                style={{ color: 'inherit', textDecoration: 'none' }}
+                to="/admin"
+                onClick={() => setOpenDrawer(false)}
+              >
+                <ListItem disablePadding>
+                  <PersonIcon />
+                  <ListItemButton>
+                    <ListItemText>Panel Admin</ListItemText>
+                  </ListItemButton>
+                </ListItem>
+              </Link>
+
               {/* Cerrar sesión */}
               <ListItem disablePadding>
                 <MailIcon />

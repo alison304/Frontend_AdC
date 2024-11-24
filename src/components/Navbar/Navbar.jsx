@@ -189,6 +189,9 @@ const Navbar = ({ isAuthenticated, onLogout }) => {
                         <Link style={{ color: 'inherit' }} to="/profile">
                           <MenuItem onClick={handleCloseUser}>Perfil</MenuItem>
                         </Link>
+                        <Link style={{ color: 'inherit' }} to="/admin">
+                          <MenuItem onClick={handleCloseUser}>Panel Admin</MenuItem>
+                        </Link>
                         <MenuItem onClick={handleLogoutAndRedirect}>
                           Cerrar Sesión
                         </MenuItem>
