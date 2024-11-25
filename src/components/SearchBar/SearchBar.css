@@ -1,4 +1,4 @@
-.search-bar {
+.form {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -14,17 +14,6 @@
     text-align: center;
     background-color: transparent;
     width: 30px;
-}
-
-.search-button {
-    margin: 18px 0;
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-}
-
-.search-button:hover {
-    background-color: rgba(219, 189, 107, 0.4);
 }
 
 /* Estilo del fondo superpuesto */
@@ -76,7 +65,7 @@
     background-color: rgba(217, 183, 91, 0.7);
 }
 
-.form{
+.search-bar{
     width: 50%;
     display: flex;
     justify-content: center;
@@ -94,7 +83,7 @@
 
 .buscadorParte2{
     display: flex;
-    width: 50%;
+    width: 60%;
     justify-content: space-around;
 }
 
@@ -104,27 +93,23 @@
 
 
 @media (max-width: 600px) and (max-width: 1024px) {
-    .search-bar {
+    .form {
         width: 80%;
         padding-top: 20%;
     }
 
-    .search-bar input {
+    .form input {
         max-width: 60%;
         height: 25px;
         font-size: 16px;
         border-radius: 30px 0px 0px 30px;
     }
 
-    .search-bar button {
+    .form button {
         border-radius: 30px 30px;
         max-width: 100%;
         font-size: 13px;
         border-radius: 0px 40px 40px 0px;
         padding: 10px 20px;
-    }
-
-    .search-button:hover {
-        background-color: #b48b29;
     }
 }
