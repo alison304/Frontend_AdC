@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import {useProductosStates} from "../../utils/Context"
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 const SearchBar = () => {
-    const {state} = useProductosStates();
+    const {state,dispatch} = useProductosStates();
     const [mostrarCalendario, setmostrarCalendario] = useState(false);
     const [busqueda, setbusqueda] = useState("");
 
@@ -12,14 +12,23 @@ const SearchBar = () => {
         setmostrarCalendario(!mostrarCalendario)
     };
 
+    const noTieneNumeros =(texto) => {
+        return !/\d/.test(texto); // Devuelve true si NO tiene números
+      }
+      
+
     const handleChangeBuscador= (event)=>{
-        setbusqueda(event.target.value);
+        setbusqueda(event.target.value);       
       } 
     
 
     const buscar =(event) =>{
         event.preventDefault();
         console.log(busqueda);
+        if(noTieneNumeros(busqueda)){
+            console.log('hola');
+            dispatch({type:"MOSTRAR_BUSQUEDA", payload:true});
+        }
     }
 
     return (

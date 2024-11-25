@@ -11,7 +11,8 @@ const initialState = {
   listaCategorias:[],
   listaProductosAleatorios:[],
   fechaInicial:fechaInicial,
-  fechaFinal:fechaFinal
+  fechaFinal:fechaFinal,
+  mostrarBusqueda:false
 }
 
 
