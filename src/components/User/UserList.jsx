@@ -85,7 +85,7 @@ const UserList = () => {
             cell: (row, index) => (
               editableRow === index ? (
                 <FormControl>
-                    <InputLabel id={`status-select-label-${row.id}`}>Status</InputLabel>
+                    <InputLabel id={`status-select-label-${row.id}`}></InputLabel>
                     <Select
                         labelId={`status-select-label-${row.id}`}
                         value={row.rol}
@@ -112,7 +112,7 @@ const UserList = () => {
             cell: (row, index) => (
               editableRow === index ? (
                 <FormControl>
-                    <button onClick={handleSaveClick} className={StylesAdmin.botonesEditar}>Save</button>
+                    <button onClick={handleSaveClick} className={StylesAdmin.botonesEditar}>Guardar</button>
                     <button onClick={() => handleDeleteClick(row.id)} className={StylesAdmin.botonesEliminar}>Eliminar</button>                    
                 </FormControl>
               ) : (
