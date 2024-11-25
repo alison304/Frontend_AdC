@@ -31,10 +31,10 @@ function Login({ onLoginSuccess }) {
 
             // Guardar el token y otros datos en localStorage
             localStorage.setItem('authToken', token);
-            localStorage.setItem('userEmail', user.email);
-            localStorage.setItem('nombre', user.nombre);
-            localStorage.setItem('apellido', user.apellido);
-            localStorage.setItem('rol', user.rol);
+            //localStorage.setItem('userEmail', user.email);
+            //localStorage.setItem('nombre', user.nombre);
+            //localStorage.setItem('apellido', user.apellido);
+            //localStorage.setItem('rol', user.rol);
 
             Swal.fire({
                 icon: 'success',
@@ -48,7 +48,8 @@ function Login({ onLoginSuccess }) {
             }
 
             // Redirecciona a la página principal o dashboard
-            navigate('/dashboard'); // Asegúrate de tener una ruta '/dashboard' configurada
+            //navigate('/dashboard'); // Asegúrate de tener una ruta '/dashboard' configurada
+            navigate('/'); // Asegúrate de tener una ruta '/dashboard' configurada            
         } catch (error) {
             console.error('Error en el inicio de sesión:', error);
             Swal.fire({

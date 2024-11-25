@@ -1,5 +1,4 @@
 import './SearchBar.css';
-import SearchIcon from '@mui/icons-material/Search';
 import CalendarioBuscador from './CalendarioBuscador'
 import React, { useState } from "react";
 import {useProductosStates} from "../../utils/Context"
@@ -7,18 +6,31 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 const SearchBar = () => {
     const {state} = useProductosStates();
     const [mostrarCalendario, setmostrarCalendario] = useState(false);
+    const [busqueda, setbusqueda] = useState("");
 
     const handleCalendario = () => {
         setmostrarCalendario(!mostrarCalendario)
     };
 
+    const handleChangeBuscador= (event)=>{
+        setbusqueda(event.target.value);
+      } 
+    
+
+    const buscar =(event) =>{
+        event.preventDefault();
+        console.log(busqueda);
+    }
+
     return (
         <>
-            <div className='search-bar'>
-                <form className ='form'>
-                    <input type="text" style={{fontSize: '1rem', width :'50%',border:'none', borderRadius: '0px'}} placeholder="Que estás buscando?" className="search-input" />
-                    <button className="search-button"><SearchIcon style={{  color: '#A3A3A1',fontSize: '1.3rem' }} /></button>
-                </form>
+            <form className='form' onSubmit={buscar}>
+                <div className ='search-bar'>
+                    <input 
+                    type="text" style={{fontSize: '1rem', width :'80%',border:'none', borderRadius: '0px'}} 
+                    placeholder="Que estás buscando?" className="search-input" 
+                    value={busqueda} onChange={handleChangeBuscador}/>
+                </div>
                 <div className="buscadorParte2" >
                     
                     <button onClick={handleCalendario} className="open-modal-button">
@@ -32,7 +44,7 @@ const SearchBar = () => {
                         </div>
                         <KeyboardArrowDownIcon/>
                     </button>
-                    <button className="botonBuscador" >Buscar</button>
+                    <button className="botonBuscador">Buscar</button>
                     {mostrarCalendario && (
                         <div className="modal-overlay">
                             <div className="modal-content">  
@@ -41,7 +53,7 @@ const SearchBar = () => {
                         </div>
                     )}
                 </div>
-            </div>                    
+            </form>                    
             
         </>
     )
