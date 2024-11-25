@@ -1,65 +1,72 @@
-.registro {
+.container-adm {
   flex-direction: column;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+  justify-content: flex-start;
+  height: 80vh;
+}
+
+/* .back {
+  display: inline-block;
+  width: auto !important;
+  max-width: 200px;
+  margin: 0 auto; 
+} */
+
+.btn-edit {
+  background-color: #f2ca4f;
+  color: white;
+  margin-bottom: 8%;
+  margin-top: 8%;
+}
+
+.btn-elim {
+  background-color: #cf2a28;
+  color: white;
+  margin-bottom: 8%;
+}
+
+.btn-edit, .btn-elim {
+  padding: 8px 15px;
+  font-size: 14px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  text-align: center;
 }
 
 .title-form {
   font-family: Kaushan Script;
   font-size: 40px;
   color: #655e5e;
-  padding-bottom: 1%;
+  padding-bottom: 5%;
+  text-align: center;
 }
 
-.text {
-  padding-bottom: 2%;
+.table-ad {
+  margin: 3% 3%;
 }
 
-.btn-c {
-  width: 150px;
-  height: 39px;
+.btn-volv {
+  padding-top: 2%;
+  padding-left: 2%;
 }
 
-label {
-  font-weight: bold;
-  padding-right: 50px;
-}
 
-.img-reg {
-  width: 100px;
-  height: 80px;
-}
-
-.holder-style {
-  width: 500px;
-  height: 30px;
-  border: 1px solid #080808;
-  padding: 10px;
-  border-radius: 2px;
-}
-
-.text-2 {
-  padding-bottom: 2%;
-}
+/* panel admin no debe estar disponible en movil
 
 @media (min-width: 300px) and (max-width: 1024px) {
-  .register {
-    width: 100vh;
-    height: 100vh;
+
+  .btn-volv {
+    padding-top: 20%;
   }
 
-  .text {
-    padding-bottom: 4%;
+  .container-adm {
+    min-width: 50vh;
+    max-height: 100vh;
+    margin-bottom: 20%;
   }
 
   .title-form {
-    margin-top: 23%;
+    font-size: 33px;
   }
-
-  .holder-style {
-    width: 230px;
-    height: 20px;
-  }
-}
+} */
