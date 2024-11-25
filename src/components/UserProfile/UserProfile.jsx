@@ -7,29 +7,13 @@ const UserProfile = ({ onLogout }) => {
     const navigate = useNavigate();
     const [activeTab, setActiveTab] = useState('personal-data');
     const [userData, setUserData] = useState({
-        nombre: '',
-        apellido: '',
-        email: '',
-        password: '',
+        nombre: localStorage.getItem('userNombre'),
+        apellido: localStorage.getItem('userApellido'),
+        email: localStorage.getItem('userEmail'),
+        password: '***',
     });
 
-    useEffect(() => {
-        const fetchUserData = async () => {
-            try {
-                const authToken = localStorage.getItem('authToken'); // Obtiene el token del localStorage
-                const userEmail = localStorage.getItem('userEmail'); // Obtiene el email del localStorage o un valor predeterminado
-                const userName = localStorage.getItem('userName');
-                const userLastName = localStorage.getItem('userLastName');
-                const userRol = localStorage.getItem('userRol');
 
-                
-            } catch (error) {
-                console.error('Error al obtener los datos del usuario:', error);
-            }
-        };
-
-        fetchUserData();
-    }, []);
 
     const handleTabChange = (tab) => {
         setActiveTab(tab);
