@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import Swal from 'sweetalert2';
-import { login } from '../../services/user.service';
+import { login, getUserByEmail } from '../../services/user.service';
 import './login.css';
 
 const userSchema = Yup.object().shape({
@@ -27,11 +27,19 @@ function Login({ onLoginSuccess }) {
     const handleLogin = async (values, { setSubmitting }) => {
         try {
             const response = await login(values.email, values.password);
-            const { token, user } = response.data; // Asegúrate de que la respuesta contenga 'token' y 'user'
+            const { token } = response.data;
+            localStorage.setItem('authToken', token);
+            localStorage.setItem('userEmail', values.email);
+            await getUserByEmail(values.email); // Asegúrate de que la respuesta contenga 'token' y 'user'
 
             // Guardar el token y otros datos en localStorage
-            localStorage.setItem('authToken', token);
-            //localStorage.setItem('userEmail', user.email);
+            
+            console.log(localStorage.getItem('userEmail'))
+            console.log(localStorage.getItem('userEmail'))
+            console.log(localStorage.getItem('userEmail'))
+            console.log(localStorage.getItem('userEmail'))
+            console.log(localStorage.getItem('userEmail'))
+            console.log(localStorage.getItem('userEmail'))
             //localStorage.setItem('nombre', user.nombre);
             //localStorage.setItem('apellido', user.apellido);
             //localStorage.setItem('rol', user.rol);
@@ -47,9 +55,7 @@ function Login({ onLoginSuccess }) {
                 onLoginSuccess();
             }
 
-            // Redirecciona a la página principal o dashboard
-            //navigate('/dashboard'); // Asegúrate de tener una ruta '/dashboard' configurada
-            navigate('/'); // Asegúrate de tener una ruta '/dashboard' configurada            
+            navigate('/');   
         } catch (error) {
             console.error('Error en el inicio de sesión:', error);
             Swal.fire({

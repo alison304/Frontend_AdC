@@ -7,40 +7,13 @@ const UserProfile = ({ onLogout }) => {
     const navigate = useNavigate();
     const [activeTab, setActiveTab] = useState('personal-data');
     const [userData, setUserData] = useState({
-        nombre: '',
-        apellido: '',
-        email: '',
-        password: '',
+        nombre: localStorage.getItem('userNombre'),
+        apellido: localStorage.getItem('userApellido'),
+        email: localStorage.getItem('userEmail'),
+        password: '***',
     });
 
-    useEffect(() => {
-        const fetchUserData = async () => {
-            try {
-                const authToken = localStorage.getItem('authToken'); // Obtiene el token del localStorage
-                const userEmail = localStorage.getItem('userEmail'); // Obtiene el email del localStorage o un valor predeterminado
-                const BASE_URL = 'https://auradecristalapi-development.up.railway.app';
 
-                if (!authToken || !userEmail) {
-                    console.error('Falta el token de autenticación o el correo electrónico.');
-                    return;
-                }
-
-                const user = await getUserByEmail(userEmail, authToken, BASE_URL);
-
-                // Actualiza el estado con los datos obtenidos
-                setUserData((prevState) => ({
-                    ...prevState,
-                    nombre: user.nombre,
-                    apellido: user.apellido,
-                    email: user.email,
-                }));
-            } catch (error) {
-                console.error('Error al obtener los datos del usuario:', error);
-            }
-        };
-
-        fetchUserData();
-    }, []);
 
     const handleTabChange = (tab) => {
         setActiveTab(tab);

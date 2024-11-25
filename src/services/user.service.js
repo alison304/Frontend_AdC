@@ -2,7 +2,8 @@
 import axios from 'axios';
 
 // URL base de tu API
-const BASE_URL = 'https://auradecristalapi-development.up.railway.app';
+ export const BASE_URL = 'https://auradecristalapi-development.up.railway.app';
+ //export const BASE_URL = 'http://localhost:8080'
 
 // Crear una instancia de Axios
 const api = axios.create({
@@ -54,8 +55,15 @@ export const removeUser = (id) => {
 };
 
 export const login = (email, password) => {
-  return api.post('/auth/login', { email, password });
-};
+  return axios.post(`${BASE_URL}/auth/login`, 
+      {
+          "email": email, 
+          "password": password
+      }
+  )
+}
+
+
 
 /* Mantener sesión abierta y cerrar sesión */
 export const isAuthenticated = () => {
@@ -72,18 +80,23 @@ export const logout = () => {
 
 /* Obtener usuario por email */
 export const getUserByEmail = async (userEmail) => {
+  const options = {
+    method: 'GET',
+    url: `${BASE_URL}/usuarios/buscar`,
+    params: {email: userEmail},
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('authToken')}`,
+    }
+  };
+
   try {
-    const response = await api.get('/usuarios/buscar', {
-      params: { email: userEmail },
-    });
-    const data = response.data;
-    // Guardar información en localStorage
-    localStorage.setItem('nombre', data.nombre);
-    localStorage.setItem('apellido', data.apellido);
-    localStorage.setItem('rol', data.rol);
-    return data;
+    const { data } = await axios.request(options);
+    localStorage.setItem('userNombre', data.nombre)
+    localStorage.setItem('userApellido', data.apellido)
+    localStorage.setItem('userRol', data.rol)
+
   } catch (error) {
-    console.error('Error fetching user by email:', error);
-    throw error;
+    console.error(error);
   }
-};
+}
+
