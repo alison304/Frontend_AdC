@@ -28,10 +28,25 @@ api.interceptors.request.use(
 );
 
 // Funciones de la API
+export const getListUser = async () => {
+  const options = {
+    method: 'GET',
+    url: `${BASE_URL}/usuarios/listar`,
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('authToken')}`,
+    }
+  };
 
-export const getListUser = () => {
-  return api.get('/usuarios/listar');
-};
+  try {
+    const { data } = await axios.request(options);
+    localStorage.setItem('userLista', data)
+
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+
 
 export const getOneUser = (id) => {
   return api.get(`/api/user/${id}`);
