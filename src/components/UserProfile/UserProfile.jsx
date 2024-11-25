@@ -18,22 +18,11 @@ const UserProfile = ({ onLogout }) => {
             try {
                 const authToken = localStorage.getItem('authToken'); // Obtiene el token del localStorage
                 const userEmail = localStorage.getItem('userEmail'); // Obtiene el email del localStorage o un valor predeterminado
-                const BASE_URL = 'https://auradecristalapi-development.up.railway.app';
+                const userName = localStorage.getItem('userName');
+                const userLastName = localStorage.getItem('userLastName');
+                const userRol = localStorage.getItem('userRol');
 
-                if (!authToken || !userEmail) {
-                    console.error('Falta el token de autenticación o el correo electrónico.');
-                    return;
-                }
-
-                const user = await getUserByEmail(userEmail, authToken, BASE_URL);
-
-                // Actualiza el estado con los datos obtenidos
-                setUserData((prevState) => ({
-                    ...prevState,
-                    nombre: user.nombre,
-                    apellido: user.apellido,
-                    email: user.email,
-                }));
+                
             } catch (error) {
                 console.error('Error al obtener los datos del usuario:', error);
             }

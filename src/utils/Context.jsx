@@ -1,6 +1,7 @@
 import axios from "axios";
 import { createContext, useContext, useEffect, useReducer } from "react";
 import { reducer } from "../reducer/reducer";
+import {BASE_URL} from '../services/user.service'
 
 const productosStates= createContext();
 const fechaInicial = JSON.parse(localStorage.getItem("fechaInicial")) || null;
@@ -17,9 +18,9 @@ const initialState = {
 
 const Context = ({ children }) => {
   const [state,dispatch] = useReducer(reducer,initialState)
-  const urlListarProductos="https://auradecristalapi-development.up.railway.app/productos/listar";
-  const urlListarProductosAleatorios="https://auradecristalapi-development.up.railway.app/productos/aleatorios";
-  const urlListarCategorias="https://auradecristalapi-development.up.railway.app/categorias/listar";
+  const urlListarProductos=`${BASE_URL}/productos/listar`;
+  const urlListarProductosAleatorios=`${BASE_URL}/productos/aleatorios`;
+  const urlListarCategorias=`${BASE_URL}/categorias/listar`;
 
   //listar productos
   useEffect(() => {
