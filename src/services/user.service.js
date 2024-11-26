@@ -90,6 +90,7 @@ export const getUserByEmail = async (userEmail) => {
 
   try {
     const { data } = await axios.request(options);
+    localStorage.setItem('userId', data.id)
     localStorage.setItem('userNombre', data.nombre)
     localStorage.setItem('userApellido', data.apellido)
     localStorage.setItem('userRol', data.rol)
