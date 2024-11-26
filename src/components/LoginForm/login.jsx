@@ -32,18 +32,6 @@ function Login({ onLoginSuccess }) {
             localStorage.setItem('userEmail', values.email);
             await getUserByEmail(values.email); // Asegúrate de que la respuesta contenga 'token' y 'user'
 
-            // Guardar el token y otros datos en localStorage
-            
-            console.log(localStorage.getItem('userEmail'))
-            console.log(localStorage.getItem('userEmail'))
-            console.log(localStorage.getItem('userEmail'))
-            console.log(localStorage.getItem('userEmail'))
-            console.log(localStorage.getItem('userEmail'))
-            console.log(localStorage.getItem('userEmail'))
-            //localStorage.setItem('nombre', user.nombre);
-            //localStorage.setItem('apellido', user.apellido);
-            //localStorage.setItem('rol', user.rol);
-
             Swal.fire({
                 icon: 'success',
                 title: '¡Login exitoso!',

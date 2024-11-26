@@ -13,7 +13,7 @@ const api = axios.create({
   },
 });
 
-// Interceptor para adjuntar el token en cada solicitud
+// Interceptor para adjuntar el token en cada solicitud NO USAR NO USAR NO USAR NO USAR, mayormente no funcional.
 api.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem('authToken');
