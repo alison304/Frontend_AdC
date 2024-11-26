@@ -24,8 +24,8 @@ const SearchBar = () => {
 
     const buscar =(event) =>{
         event.preventDefault();
-        console.log(busqueda);
-        if(noTieneNumeros(busqueda)){
+        console.log('busqueda',busqueda);
+        if(noTieneNumeros(busqueda) && busqueda!==""){
             console.log('hola');
             dispatch({type:"MOSTRAR_BUSQUEDA", payload:true});
         }
