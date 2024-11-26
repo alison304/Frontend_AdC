@@ -12,5 +12,9 @@ export const reducer = (state,action) =>{
             return {...state, fechaFinal: action.payload};
         case "MOSTRAR_BUSQUEDA":
             return {...state, mostrarBusqueda: action.payload};
+        case "REMOVE_FECHA_INICIAL":
+            return {...state, fechaInicial: action.payload};
+        case "REMOVE_FECHA_FINAL":
+            return {...state, fechaFinal: action.payload};
         }       
 }
