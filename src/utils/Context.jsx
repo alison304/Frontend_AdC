@@ -4,8 +4,8 @@ import { reducer } from "../reducer/reducer";
 import {BASE_URL} from '../services/user.service'
 
 const productosStates= createContext();
-const fechaInicial = JSON.parse(localStorage.getItem("fechaInicial")) || null;
-const fechaFinal = JSON.parse(localStorage.getItem("fechaFinal")) || null;
+const fechaInicial = JSON.parse(sessionStorage.getItem("fechaInicial")) || null;
+const fechaFinal = JSON.parse(sessionStorage.getItem("fechaFinal")) || null;
 
 const initialState = {
   lista:[],
@@ -52,8 +52,8 @@ const Context = ({ children }) => {
 
   //fechas
   useEffect(() => {
-    localStorage.setItem("fechaInicial", JSON.stringify(state.fechaInicial));
-    localStorage.setItem("fechaFinal", JSON.stringify(state.fechaFinal));
+    sessionStorage.setItem("fechaInicial", JSON.stringify(state.fechaInicial));
+    sessionStorage.setItem("fechaFinal", JSON.stringify(state.fechaFinal));
   }, [state.fechaInicial, state.fechaFinal]);
 
 
