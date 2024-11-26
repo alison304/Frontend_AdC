@@ -8,28 +8,9 @@ import "./UserList.css";
 import { getListUser, updateUser } from '../../services/user.service';
 import { Select, MenuItem, FormControl, InputLabel } from '@mui/material';
 
-const data = [
-    {
-        id: 1,
-        nombre: 'Miguel',
-        apellido: 'Park',
-        email: 'miguelcp@gmail.com',
-        rol: 'USER',
-        isAdmin: false
-    },
-    {
-        id: 2,
-        nombre: 'admin',
-        apellido: 'admin',
-        email: 'admin@admin.com',
-        rol: 'ADMIN',
-        isAdmin: true
-    },
-]
-
 const UserList = () => {
 
-    const [userList, setUserList] = useState(data);
+    const [userList, setUserList] = useState(null);
     const [editableRow, setEditableRow] = useState(null);
 
     const handleEditClick = (rowIndex) => {
@@ -119,40 +100,25 @@ const UserList = () => {
                 editableRow === index ? (
                     <FormControl>
                         <button onClick={handleSaveClick} className="btn-edit">Guardar</button>
-                        <button onClick={() => handleDeleteClick(row.id)} className="btn-elim">Eliminar</button>
                     </FormControl>
                 ) : (
                     <FormControl>
                         <button onClick={() => handleEditClick(index)} className="btn-edit">Editar</button>
-                        <button onClick={() => handleDeleteClick(row.id)} className="btn-elim">Eliminar</button>
                     </FormControl>
                 )
             ),
-        },
+        }
     ];
-    /*
-        <React.Fragment>
-        <button onClick={handleSaveClick} className={StylesAdmin.botonesEditar}>Save</button>
-        <button onClick={() => eliminarProducto(producto.id)} className={StylesAdmin.botonesEliminar}>Eliminar</button>                
-    </React.Fragment>
-    ) : (
-    <React.Fragment>                    
-        <button onClick={() => handleEditClick(index)} className={StylesAdmin.botonesEditar}>Edit</button>
-        <button onClick={() => eliminarProducto(producto.id)} className={StylesAdmin.botonesEliminar}>Eliminar</button>
-    </React.Fragment>                    
-    */
 
     useEffect(() => {
         // declare the async data fetching function
         const fetchData = async () => {
             // get the data from the api
-            const data = await getListUser();
-            // convert the data to json
-            const list = await response.data;
+            const list = await getListUser();
             // set state with the result
-            setUserList(list);
+            console.log(list.data);
+            setUserList(list.data);
         }
-
         // call the function
         fetchData()
             // make sure to catch any error
@@ -180,13 +146,27 @@ const UserList = () => {
                     </Button>
                 </div>
                 <h3 className="title-form">Usuarios registrados 📋</h3>
-                <div className="table-ad">
-                    <DataTable
-                        columns={columns}
-                        data={userList}
-                    />
                 </div>
-            </div>
+                {
+                    userList != null ? 
+                        <React.Fragment>
+                            <div style={{ height: '650px', overflowX: 'hidden', overflowY: 'auto'}}>
+                                <DataTable
+                                    columns={columns}
+                                    data={userList}
+                                    pagination          // Enable pagination
+                                    paginationPerPage={5} // Show 5 rows per page
+                                    paginationRowsPerPageOptions={[5, 10, 15]} // Options for number of rows per page
+                                    highlightOnHover     // Optional: Highlight rows on hover
+                                    striped              // Optional: Striped rows for better readability
+                                />
+                            </div> 
+                        </React.Fragment>
+                        :
+                        <React.Fragment></React.Fragment>                 
+                }
+
+
         </React.Fragment >
 
     )
