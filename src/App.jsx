@@ -16,6 +16,7 @@ import AdministrarCategorias from './pages/AdministrarCategorias';
 import UserProfile from './components/UserProfile/UserProfile';
 import ProtectedRoute from './components/LoginForm/ProtectedRoute';
 import AdministrarCaracteristicas from './pages/AdministrarCaracteristicas';
+import Logout from './components/Logout/Logout';
 import UserList from './components/User/UserList';
 
 
@@ -232,6 +233,19 @@ function App() {
                     <Route path='/register' element={<RegisterForm />} />
                     <Route path="/login" element={<Login onLoginSuccess={handleLoginSuccess} />} />
                     <Route path="/wip" element={<Wip />} />
+
+
+
+
+
+                    <Route
+                    path="/logout"
+                    element={
+                    <ProtectedRoute isAuthenticated={isAuthenticated}>
+                    <Logout onLogout={handleLogout} />
+                    </ProtectedRoute>
+                    }
+                    />
 
                     {/*Cosas admin */}
 
