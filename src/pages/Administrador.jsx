@@ -8,14 +8,12 @@ function Administrador() {
     console.log('RENDERIZANDO ADMIN')
     const { state } = useProductosStates();
     const listaProductos = state.lista;
-    console.log(listaProductos)
 
     const navigate = useNavigate();
     const [mostrarLista, setMostrarLista] = useState(false);
 
-    const listarProducto = () => {
-        console.log('si');
-        setMostrarLista(true);
+    const listaProducto = () => {
+        navigate('/admin/listaProducto');
     };
 
     const agregarProducto = () => {
@@ -56,7 +54,7 @@ function Administrador() {
             <section className={StylesAdmin.seccionPrincipal}>
                 <div className={StylesAdmin.titulo}>Panel de Administración</div>
                 <div className={StylesAdmin.botones}>
-                    <button onClick={listarProducto} className={StylesAdmin.botonesPrincipales}>LISTAR PRODUCTOS</button>
+                    <button onClick={listaProducto} className={StylesAdmin.botonesPrincipales}>LISTAR PRODUCTOS</button>
                     <button onClick={agregarProducto} className={StylesAdmin.botonesPrincipales}>AGREGAR PRODUCTO</button>
                     <button onClick={administrarCaracteristicas} className={StylesAdmin.botonesPrincipales}>ADMINISTRAR CARACTERISTICAS</button>
                     <button onClick={administrarUsuarios} className={StylesAdmin.botonesPrincipales}>ADMINISTRAR USUARIOS</button>
@@ -68,8 +66,8 @@ function Administrador() {
                         <tr>
                             <th>ID</th>
                             <th>NOMBRE</th>
-                            <th>CATEGORÍA</th>
                             <th>ACCIONES</th>
+                            <th>CATEGORIA</th>
                         </tr>
                     </thead>
                     <tbody>

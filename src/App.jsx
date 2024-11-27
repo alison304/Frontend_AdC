@@ -231,6 +231,7 @@ function App() {
                     <Route path='/' element={<Home />} />
                     <Route path='*' element={<h2>Error 404</h2>} />
 
+                    <Route path="/admin/listarProducto" element={<ListaProductos />} />
                     <Route path="/listaProductos/:id" element={<ListaProductos />} />
                     <Route path="/detail/:id" element={<Detail />} />
                     <Route path="/gallery/:id" element={<Gallery />} />
@@ -258,6 +259,14 @@ function App() {
                         element={
                             <ProtectedRoute isAuthenticated={isAuthenticated}>
                                 <Administrador />
+                            </ProtectedRoute>
+                        }
+                    />
+                    <Route
+                        path='/admin/listaProducto'
+                        element={
+                            <ProtectedRoute isAuthenticated={isAuthenticated}>
+                                <ListaProductos listaProductos={listaProductos} />
                             </ProtectedRoute>
                         }
                     />
