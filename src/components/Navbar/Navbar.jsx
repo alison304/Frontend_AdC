@@ -17,7 +17,7 @@ import { FiShoppingCart } from 'react-icons/fi';
 import { Link, useNavigate } from 'react-router-dom';
 import './Navbar.css';
 
-const Navbar = ({ isAuthenticated, onLogout }) => {
+const Navbar = ({ isAuthenticated, isAdmin, onLogout }) => {
   const theme = useTheme();
   const isMatch = useMediaQuery(theme.breakpoints.down('md'));
   const navigate = useNavigate();
@@ -90,7 +90,7 @@ const Navbar = ({ isAuthenticated, onLogout }) => {
 
             {isMatch ? (
               // Drawer para dispositivos móviles
-              <MyDrawer isAuthenticated={isAuthenticated} onLogout={onLogout} />
+              <MyDrawer isAuthenticated={isAuthenticated} isAdmin={isAdmin} onLogout={onLogout} />
             ) : (
               // Menú completo para pantallas grandes
               <>
@@ -203,9 +203,14 @@ const Navbar = ({ isAuthenticated, onLogout }) => {
                         <Link style={{ color: 'inherit', textDecoration: 'none' }} to="/profile">
                           <MenuItem onClick={handleCloseUser}>Perfil</MenuItem>
                         </Link>
-                        <Link style={{ color: 'inherit', textDecoration: 'none' }} to="/admin">
-                          <MenuItem onClick={handleCloseUser}>Panel Admin</MenuItem>
-                        </Link>
+                        {
+                          isAdmin ? 
+                            <Link style={{ color: 'inherit', textDecoration: 'none' }} to="/admin">
+                              <MenuItem onClick={handleCloseUser}>Panel Admin</MenuItem>
+                            </Link>
+                          :
+                          <React.Fragment></React.Fragment>
+                        }                        
                         <MenuItem onClick={handleLogoutAndRedirect}>Cerrar Sesión</MenuItem>
                       </Menu>
                     </>

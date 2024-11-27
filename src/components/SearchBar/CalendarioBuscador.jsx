@@ -24,7 +24,8 @@ function CalendarioBuscador({ onClose }) {
   };
 
 
-  const guardarFechas = () => {
+  const guardarFechas = (event) => {
+    event.preventDefault();
     
     if(new Date(fecha[0]).toDateString()  !== "Invalid Date"){
       setmostrarError(false);

@@ -8,7 +8,8 @@ const SearchBar = () => {
     const [mostrarCalendario, setmostrarCalendario] = useState(false);
     const [busqueda, setbusqueda] = useState("");
 
-    const handleCalendario = () => {
+    const handleCalendario = (event) => {
+        event.preventDefault();
         setmostrarCalendario(!mostrarCalendario)
     };
 
@@ -25,15 +26,35 @@ const SearchBar = () => {
     const buscar =(event) =>{
         event.preventDefault();
         console.log('busqueda',busqueda);
-        if(noTieneNumeros(busqueda) && busqueda!==""){
-            console.log('hola');
+        console.log('holaaaaaaaaaaaaa')
+        if(noTieneNumeros(busqueda) && busqueda!=="" && state.fechaInicial ===null && state.fechaFinal ===null ){
+            console.log('SOLO DESCRIPCION');
             dispatch({type:"MOSTRAR_BUSQUEDA", payload:true});
+            console.log('antes',state.palabraDescripcion);
+            dispatch({type:"VALOR_INPUT", payload:busqueda});
+            console.log('despues',state.palabraDescripcion);
+            dispatch({type:"TIPO_BUSQUEDA", payload:1});
+        }else if(noTieneNumeros(busqueda) && busqueda==="" && state.fechaInicial !==null && state.fechaFinal !==null ){
+            console.log('SOLO FECHAS');
+            dispatch({type:"MOSTRAR_BUSQUEDA", payload:true});
+            console.log('antes',state.palabraDescripcion);
+            dispatch({type:"VALOR_INPUT", payload:busqueda});
+            console.log('despues',state.palabraDescripcion);
+            dispatch({type:"TIPO_BUSQUEDA", payload:2});
+        }else if(noTieneNumeros(busqueda) && busqueda!=="" && state.fechaInicial !==null && state.fechaFinal !==null ){
+            console.log('DESCRIPCION Y FECHAS');
+            dispatch({type:"MOSTRAR_BUSQUEDA", payload:true});
+            console.log('antes',state.palabraDescripcion);
+            dispatch({type:"VALOR_INPUT", payload:busqueda});
+            console.log('despues',state.palabraDescripcion);
+            dispatch({type:"TIPO_BUSQUEDA", payload:3});
         }
+
     }
 
     return (
         <>
-            <form className='form' onSubmit={buscar}>
+            <form className='form'>
                 <div className ='search-bar'>
                     <input 
                     type="text" style={{fontSize: '1rem', width :'80%',border:'none', borderRadius: '0px'}} 
@@ -53,7 +74,7 @@ const SearchBar = () => {
                         </div>
                         <KeyboardArrowDownIcon/>
                     </button>
-                    <button className="botonBuscador">Buscar</button>
+                    <button className="botonBuscador" onClick={buscar}>Buscar</button>
                     {mostrarCalendario && (
                         <div className="modal-overlay">
                             <div className="modal-content">  
