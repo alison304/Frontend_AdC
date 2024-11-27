@@ -70,3 +70,24 @@
 .botonGuardarFecha:hover {
     background-color: rgba(217, 183, 91, 0.7);
 }
+
+@media (max-width: 600px) and (max-width: 1024px) {
+
+    .titulo{
+        flex-direction: column;
+    }
+
+    .fechasSeleccionada{ 
+        font-size: 0.8rem;
+        display: flex; /* Asegura que podamos alinear contenido fácilmente */
+        justify-content: center; /* Centra horizontalmente */
+        align-items: center; /* Centra verticalmente */
+        text-align: center; /* Asegura que el texto esté centrado en su línea */
+        width: 50%;
+    }
+
+    .divIconoCerrar{
+        justify-content: space-between;
+    }
+
+}

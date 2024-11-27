@@ -13,20 +13,6 @@ const api = axios.create({
   },
 });
 
-// Interceptor para adjuntar el token en cada solicitud
-api.interceptors.request.use(
-  (config) => {
-    const token = localStorage.getItem('authToken');
-    if (token) {
-      config.headers['Authorization'] = `Bearer ${token}`;
-    }
-    return config;
-  },
-  (error) => {
-    return Promise.reject(error);
-  }
-);
-
 // Funciones de la API
 export const getListUser = async () => {
   const options = {
@@ -38,9 +24,7 @@ export const getListUser = async () => {
   };
 
   try {
-    const { data } = await axios.request(options);
-    localStorage.setItem('userLista', data)
-
+    return await axios.request(options);
   } catch (error) {
     console.error(error);
   }
@@ -106,6 +90,7 @@ export const getUserByEmail = async (userEmail) => {
 
   try {
     const { data } = await axios.request(options);
+    localStorage.setItem('userId', data.id)
     localStorage.setItem('userNombre', data.nombre)
     localStorage.setItem('userApellido', data.apellido)
     localStorage.setItem('userRol', data.rol)

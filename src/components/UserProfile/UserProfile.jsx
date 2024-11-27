@@ -63,12 +63,7 @@ const UserProfile = ({ onLogout }) => {
                     >
                         Direcciones
                     </button>
-                    <button
-                        className={`tab-link ${activeTab === 'logout' ? 'active' : ''}`}
-                        onClick={handleLogoutAndRedirect}
-                    >
-                        Cerrar Sesión
-                    </button>
+
                 </div>
 
                 <div className="user-profile-content">
@@ -126,5 +121,13 @@ const UserProfile = ({ onLogout }) => {
         </div>
     );
 };
+/*
+                    <button
+                        className={`tab-link ${activeTab === 'logout' ? 'active' : ''}`}
+                        onClick={handleLogoutAndRedirect}
+                    >
+                        Cerrar Sesión
+                    </button>
 
+*/ 
 export default UserProfile;

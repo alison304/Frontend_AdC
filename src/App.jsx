@@ -16,21 +16,26 @@ import AdministrarCategorias from './pages/AdministrarCategorias';
 import UserProfile from './components/UserProfile/UserProfile';
 import ProtectedRoute from './components/LoginForm/ProtectedRoute';
 import AdministrarCaracteristicas from './pages/AdministrarCaracteristicas';
+import Logout from './components/Logout/Logout';
 import UserList from './components/User/UserList';
-
+import {useProductosStates} from "./utils/Context"
 
 function App() {
     console.log('RENDERIZANDO APP');
-
+    const {dispatch} = useProductosStates();
     const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem('authToken'));
 
     const handleLoginSuccess = () => {
         setIsAuthenticated(true);
+        dispatch({type:"REMOVE_FECHA_INICIAL", payload:null});
+        dispatch({type:"REMOVE_FECHA_FINAL", payload:null});
     };
 
     const handleLogout = () => {
         localStorage.removeItem('authToken');
         setIsAuthenticated(false);
+        dispatch({type:"REMOVE_FECHA_INICIAL", payload:null});
+        dispatch({type:"REMOVE_FECHA_FINAL", payload:null});
     };
 
     const [listaProductos, setListaProductos] = useState([
@@ -232,6 +237,19 @@ function App() {
                     <Route path='/register' element={<RegisterForm />} />
                     <Route path="/login" element={<Login onLoginSuccess={handleLoginSuccess} />} />
                     <Route path="/wip" element={<Wip />} />
+
+
+
+
+
+                    <Route
+                    path="/logout"
+                    element={
+                    <ProtectedRoute isAuthenticated={isAuthenticated}>
+                    <Logout onLogout={handleLogout} />
+                    </ProtectedRoute>
+                    }
+                    />
 
                     {/*Cosas admin */}
 
