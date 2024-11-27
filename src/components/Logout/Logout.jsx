@@ -7,7 +7,7 @@ const Logout = ({ onLogout }) => {
 
   useEffect(() => {
     onLogout(); // Lógica de cierre de sesión
-    navigate('/'); // Redirigir a la página de inicio después de cerrar sesión
+    navigate('/login'); // Redirigir a la página de inicio de sesión después de cerrar sesión
   }, [onLogout, navigate]);
 
   return null; // No renderiza nada en la pantalla

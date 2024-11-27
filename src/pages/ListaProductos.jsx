@@ -45,7 +45,7 @@ function ListaProductos() {
             titulo = 'Cubiertos';
         }
         else if (params.id == 3) {
-            titulo = 'Cristaleria';
+            titulo = 'Cristalería';
         }
         return titulo;
     }

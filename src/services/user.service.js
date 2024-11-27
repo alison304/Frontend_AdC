@@ -1,116 +1,102 @@
-import axios from "axios";
-const BASE_URL = "https://auradecristalapi-development.up.railway.app";
-const token = localStorage.getItem('authToken');
+// src/services/user.service.js
+import axios from 'axios';
 
-export const getListUser = () => {
-  return axios.get(`${BASE_URL}/usuarios/listar`, {
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`,
-      }
-    });
+// URL base de tu API
+ export const BASE_URL = 'https://auradecristalapi-development.up.railway.app';
+ //export const BASE_URL = 'http://localhost:8080'
+
+// Crear una instancia de Axios
+const api = axios.create({
+  baseURL: BASE_URL,
+  headers: {
+    'Content-Type': 'application/json',
+  },
+});
+
+// Funciones de la API
+export const getListUser = async () => {
+  const options = {
+    method: 'GET',
+    url: `${BASE_URL}/usuarios/listar`,
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('authToken')}`,
+    }
+  };
+
+  try {
+    return await axios.request(options);
+  } catch (error) {
+    console.error(error);
+  }
 }
+
+
 
 export const getOneUser = (id) => {
-    return axios.get(`${BASE_URL}/api/user/${id}`);
-}
+  return api.get(`/api/user/${id}`);
+};
 
-export const createUser = (name,lastName,email,password) => {
-    return axios.post(`${BASE_URL}/auth/register`, 
-        {
-            "nombre": name,             
-            "apellido": lastName,             
-            "email": email, 
-            "password": password
-        }
-    );
-}
+export const createUser = (name, lastName, email, password) => {
+  return api.post('/auth/register', {
+    nombre: name,
+    apellido: lastName,
+    email: email,
+    password: password,
+  });
+};
 
 export const updateUser = (id, user) => {
-    return axios.put(`${BASE_URL}/api/user/${id}`, user);
-}
+  return api.put(`/api/user/${id}`, user);
+};
 
 export const removeUser = (id) => {
-    return axios.delete(`${BASE_URL}/api/user/${id}`);
-}
+  return api.delete(`/api/user/${id}`);
+};
 
 export const login = (email, password) => {
-    return axios.post(`${BASE_URL}/auth/login`, 
-        {
-            "email": email, 
-            "password": password
-        }
-    )
+  return axios.post(`${BASE_URL}/auth/login`, 
+      {
+          "email": email, 
+          "password": password
+      }
+  )
 }
 
 
 
-
-
-
-
-/* Mantener sesion abierta y cerrar sesion */
+/* Mantener sesión abierta y cerrar sesión */
 export const isAuthenticated = () => {
-    return !!localStorage.getItem('authToken');
+  return !!localStorage.getItem('authToken');
 };
 
 export const logout = () => {
-    localStorage.removeItem('authToken');
+  localStorage.removeItem('authToken');
+  localStorage.removeItem('userEmail');
+  localStorage.removeItem('nombre');
+  localStorage.removeItem('apellido');
+  localStorage.removeItem('rol');
 };
 
-const userEmail = localStorage.getItem('userEmail');
-const authToken = localStorage.getItem('authToken');
-
-console.log('Retrieved userEmail:', userEmail); // Verificar si se recuperó el userEmail
-console.log('Retrieved authToken:', authToken); // Verificar si se recuperó el authToken
-
-
-
-
-
-
-
-export const getUserBy1Email = () => {
-    let data = '';
-    
-    let config = {
-      method: 'GET',
-      maxBodyLength: Infinity,
-      url: 'http://auradecristalapi-development.up.railway.app/api/usuario/buscar/prueba7@p.co',
-      headers: { 
-        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJub21icmUiOiJPc2NhciIsImVtYWlsIjoicHJ1ZWJhN0BwLmNvIiwiYXBlbGxpZG8iOiJhbmRyZXMiLCJyb2wiOlt7ImF1dGhvcml0eSI6IlVTRVIifV0sInN1YiI6InBydWViYTdAcC5jbyIsImlhdCI6MTczMjA2ODEyMywiZXhwIjoxNzMyMTU0NTIzfQ.xKrk2Cdiek2CTrt61CrOnmABR2ntUf8uy0VQRXAl2vU'
-      },
-      data : data
-    };
-    
-    axios.request(config)
-    .then((response) => {
-      console.log(JSON.stringify(response.data));
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-    
-};
-
-
-
-
-export const getUserByEmail1 = () => {
-    fetch('https://auradecristalapi-development.up.railway.app/api/usuario/buscar/prueba7@p.co', {
-        method: 'OPTIONS',
-        headers: {
-          'Access-Control-Request-Method': 'GET',
-          'Access-Control-Request-Headers': 'Authorization',
-          'Origin': window.location.origin,
-        }
-      })
-      .then(response => console.log('OPTIONS response:', response))
-      .catch(error => console.error('Error during OPTIONS request:', error));
-      (error => console.error('Error during request:', error));
-    
+/* Obtener usuario por email */
+export const getUserByEmail = async (userEmail) => {
+  const options = {
+    method: 'GET',
+    url: `${BASE_URL}/usuarios/buscar`,
+    params: {email: userEmail},
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('authToken')}`,
+    }
   };
-  
 
+  try {
+    const { data } = await axios.request(options);
+    localStorage.setItem('userId', data.id)
+    localStorage.setItem('userNombre', data.nombre)
+    localStorage.setItem('userApellido', data.apellido)
+    localStorage.setItem('userRol', data.rol)
 
-  
+  } catch (error) {
+    console.error(error);
+  }
+}
+

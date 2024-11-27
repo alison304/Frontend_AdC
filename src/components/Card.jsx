@@ -2,7 +2,7 @@ import React from "react";
 import StylesHome from '../styles/Home.module.css'
 import { Link } from "react-router-dom";
 
-const Card = ({ dato, esCategoria, productos }) => {
+const Card = ({ dato, esCategoria, productos, esBusqueda }) => {
 
   console.log('RENDERIZANDO CARD')
  
@@ -34,7 +34,25 @@ const Card = ({ dato, esCategoria, productos }) => {
           </Link>
         </>
       ) : (
-        <>
+
+        esBusqueda ? 
+        (
+          <>
+          <Link to={{
+            pathname: '/detail/' + dato.id
+          }}
+            state={{ producto }} className={StylesHome.link}>
+            <h3 className={StylesHome.nombreCategorias} >{dato.nombre}</h3>
+            <img src={dato.imagenes[0].url} className={StylesHome.cardImg} />
+          </Link>
+          <div className={StylesHome.recomendacionesPiezas}>
+            <span className={StylesHome.piezas}>S/.{dato.precio_alquiler}</span>
+            <span className={StylesHome.calificacion}>Disponible: {dato.disponibilidad}</span>
+          </div>
+        </>
+        ):
+        (
+          <>
           <Link to={{
             pathname: '/detail/' + dato.id
           }}
@@ -47,6 +65,8 @@ const Card = ({ dato, esCategoria, productos }) => {
             <span className={StylesHome.calificacion}>4.8⭐</span>
           </div>
         </>
+        )
+        
       )}
 
     </div>

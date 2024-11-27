@@ -1,9 +1,19 @@
+// Navbar.js
 import React from 'react';
-import { AppBar, Toolbar, Typography, useMediaQuery, useTheme, Button, Menu, MenuItem } from '@mui/material';
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  useMediaQuery,
+  useTheme,
+  Button,
+  Menu,
+  MenuItem,
+} from '@mui/material';
 import MyDrawer from './MyDrawer';
 import logo from '../../../public/images/Logo.png';
-import { FaUser } from "react-icons/fa";
-import { FiShoppingCart } from "react-icons/fi";
+import { FaUser } from 'react-icons/fa';
+import { FiShoppingCart } from 'react-icons/fi';
 import { Link, useNavigate } from 'react-router-dom';
 import './Navbar.css';
 
@@ -12,6 +22,7 @@ const Navbar = ({ isAuthenticated, onLogout }) => {
   const isMatch = useMediaQuery(theme.breakpoints.down('md'));
   const navigate = useNavigate();
 
+  // Estado y manejadores para el menú de Catálogo
   const [anchorElCatalogo, setAnchorElCatalogo] = React.useState(null);
   const openCatalogo = Boolean(anchorElCatalogo);
   const handleClickCatalogo = (event) => {
@@ -21,6 +32,7 @@ const Navbar = ({ isAuthenticated, onLogout }) => {
     setAnchorElCatalogo(null);
   };
 
+  // Estado y manejadores para el menú de Temáticas
   const [anchorElTematicas, setAnchorElTematicas] = React.useState(null);
   const openTematicas = Boolean(anchorElTematicas);
   const handleClickTematicas = (event) => {
@@ -30,6 +42,7 @@ const Navbar = ({ isAuthenticated, onLogout }) => {
     setAnchorElTematicas(null);
   };
 
+  // Estado y manejadores para el menú de Usuario
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const openUser = Boolean(anchorElUser);
   const handleClickUser = (event) => {
@@ -39,9 +52,10 @@ const Navbar = ({ isAuthenticated, onLogout }) => {
     setAnchorElUser(null);
   };
 
+  // Función actualizada para cerrar sesión y redirigir al inicio de sesión
   const handleLogoutAndRedirect = () => {
     onLogout();
-    navigate('/'); // Cerrar sesión y redirigir a la página de inicio
+    navigate('/login'); // Redirige a la página de inicio de sesión después de cerrar sesión
   };
 
   return (
@@ -51,9 +65,9 @@ const Navbar = ({ isAuthenticated, onLogout }) => {
           <Toolbar
             sx={{
               height: '90px',
-              backgroundColor: "#ebe9e9",
-              display: "flex",
-              justifyContent: "space-evenly",
+              backgroundColor: '#ebe9e9',
+              display: 'flex',
+              justifyContent: 'space-evenly',
             }}
           >
             {/* Logo */}
@@ -64,7 +78,7 @@ const Navbar = ({ isAuthenticated, onLogout }) => {
             {/* Slogan */}
             <Typography
               sx={{
-                fontSize: "0.9rem",
+                fontSize: '0.9rem',
                 fontWeight: '250',
                 fontStyle: 'italic',
                 color: '#623d2b',
@@ -82,16 +96,16 @@ const Navbar = ({ isAuthenticated, onLogout }) => {
               <>
                 {/* Catálogo */}
                 <Button
-                  aria-controls={openCatalogo ? 'demo-positioned-menu' : undefined}
+                  aria-controls={openCatalogo ? 'menu-catalogo' : undefined}
                   aria-haspopup="true"
                   aria-expanded={openCatalogo ? 'true' : undefined}
                   onClick={handleClickCatalogo}
-                  style={{ color: "#623d2b", paddingLeft: "5%" }}
+                  style={{ color: '#623d2b', paddingLeft: '5%' }}
                 >
                   Catálogo
                 </Button>
                 <Menu
-                  id="demo-positioned-menu"
+                  id="menu-catalogo"
                   anchorEl={anchorElCatalogo}
                   open={openCatalogo}
                   onClose={handleCloseCatalogo}
@@ -104,29 +118,29 @@ const Navbar = ({ isAuthenticated, onLogout }) => {
                     horizontal: 'left',
                   }}
                 >
-                  <Link style={{ color: 'inherit' }} to="/listaProductos/1">
+                  <Link style={{ color: 'inherit', textDecoration: 'none' }} to="/listaProductos/1">
                     <MenuItem onClick={handleCloseCatalogo}>Vajilla</MenuItem>
                   </Link>
-                  <Link style={{ color: 'inherit' }} to="/listaProductos/2">
+                  <Link style={{ color: 'inherit', textDecoration: 'none' }} to="/listaProductos/2">
                     <MenuItem onClick={handleCloseCatalogo}>Cubiertos</MenuItem>
                   </Link>
-                  <Link style={{ color: 'inherit' }} to="/listaProductos/3">
+                  <Link style={{ color: 'inherit', textDecoration: 'none' }} to="/listaProductos/3">
                     <MenuItem onClick={handleCloseCatalogo}>Cristalería</MenuItem>
                   </Link>
                 </Menu>
 
                 {/* Temáticas */}
                 <Button
-                  aria-controls={openTematicas ? 'demo-positioned-menu' : undefined}
+                  aria-controls={openTematicas ? 'menu-tematicas' : undefined}
                   aria-haspopup="true"
                   aria-expanded={openTematicas ? 'true' : undefined}
                   onClick={handleClickTematicas}
-                  style={{ color: "#623d2b" }}
+                  style={{ color: '#623d2b' }}
                 >
                   Temáticas
                 </Button>
                 <Menu
-                  id="demo-positioned-menu"
+                  id="menu-tematicas"
                   anchorEl={anchorElTematicas}
                   open={openTematicas}
                   onClose={handleCloseTematicas}
@@ -139,23 +153,23 @@ const Navbar = ({ isAuthenticated, onLogout }) => {
                     horizontal: 'left',
                   }}
                 >
-                  <Link style={{ color: 'inherit' }} to="/wip">
+                  <Link style={{ color: 'inherit', textDecoration: 'none' }} to="/wip">
                     <MenuItem onClick={handleCloseTematicas}>Halloween</MenuItem>
                   </Link>
-                  <Link style={{ color: 'inherit' }} to="/wip">
+                  <Link style={{ color: 'inherit', textDecoration: 'none' }} to="/wip">
                     <MenuItem onClick={handleCloseTematicas}>Navidad</MenuItem>
                   </Link>
-                  <Link style={{ color: 'inherit' }} to="/wip">
+                  <Link style={{ color: 'inherit', textDecoration: 'none' }} to="/wip">
                     <MenuItem onClick={handleCloseTematicas}>Acción de Gracias</MenuItem>
                   </Link>
                 </Menu>
 
                 {/* Otros enlaces */}
                 <Link to="/wip">
-                  <Button style={{ color: "#623d2b" }}>Premium set</Button>
+                  <Button style={{ color: '#623d2b' }}>Premium set</Button>
                 </Link>
                 <Link to="/wip">
-                  <Button style={{ color: "#623d2b" }}>Contáctanos</Button>
+                  <Button style={{ color: '#623d2b' }}>Contáctanos</Button>
                 </Link>
 
                 {/* Carrito y opciones de usuario */}
@@ -164,16 +178,16 @@ const Navbar = ({ isAuthenticated, onLogout }) => {
                   {isAuthenticated ? (
                     <>
                       <Button
-                        aria-controls={openUser ? 'demo-positioned-menu' : undefined}
+                        aria-controls={openUser ? 'menu-user' : undefined}
                         aria-haspopup="true"
                         aria-expanded={openUser ? 'true' : undefined}
                         onClick={handleClickUser}
-                        style={{ color: "#623d2b", paddingLeft: "1%" }}
+                        style={{ color: '#623d2b', paddingLeft: '1%' }}
                       >
                         <FaUser size={30} color="#655e5e" />
                       </Button>
                       <Menu
-                        id="demo-positioned-menu"
+                        id="menu-user"
                         anchorEl={anchorElUser}
                         open={openUser}
                         onClose={handleCloseUser}
@@ -186,30 +200,28 @@ const Navbar = ({ isAuthenticated, onLogout }) => {
                           horizontal: 'left',
                         }}
                       >
-                        <Link style={{ color: 'inherit' }} to="/profile">
+                        <Link style={{ color: 'inherit', textDecoration: 'none' }} to="/profile">
                           <MenuItem onClick={handleCloseUser}>Perfil</MenuItem>
                         </Link>
-                        <Link style={{ color: 'inherit' }} to="/admin">
+                        <Link style={{ color: 'inherit', textDecoration: 'none' }} to="/admin">
                           <MenuItem onClick={handleCloseUser}>Panel Admin</MenuItem>
                         </Link>
-                        <MenuItem onClick={handleLogoutAndRedirect}>
-                          Cerrar Sesión
-                        </MenuItem>
+                        <MenuItem onClick={handleLogoutAndRedirect}>Cerrar Sesión</MenuItem>
                       </Menu>
                     </>
                   ) : (
                     <>
                       <Button
-                        aria-controls={openUser ? 'demo-positioned-menu' : undefined}
+                        aria-controls={openUser ? 'menu-user' : undefined}
                         aria-haspopup="true"
                         aria-expanded={openUser ? 'true' : undefined}
                         onClick={handleClickUser}
-                        style={{ color: "#623d2b", paddingLeft: "1%" }}
+                        style={{ color: '#623d2b', paddingLeft: '1%' }}
                       >
                         <FaUser size={30} color="#655e5e" />
                       </Button>
                       <Menu
-                        id="demo-positioned-menu"
+                        id="menu-user"
                         anchorEl={anchorElUser}
                         open={openUser}
                         onClose={handleCloseUser}
@@ -222,10 +234,10 @@ const Navbar = ({ isAuthenticated, onLogout }) => {
                           horizontal: 'left',
                         }}
                       >
-                        <Link style={{ color: 'inherit' }} to="/login">
+                        <Link style={{ color: 'inherit', textDecoration: 'none' }} to="/login">
                           <MenuItem onClick={handleCloseUser}>Iniciar Sesión</MenuItem>
                         </Link>
-                        <Link style={{ color: 'inherit' }} to="/register">
+                        <Link style={{ color: 'inherit', textDecoration: 'none' }} to="/register">
                           <MenuItem onClick={handleCloseUser}>Regístrate</MenuItem>
                         </Link>
                       </Menu>

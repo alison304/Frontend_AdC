@@ -1,4 +1,4 @@
-import {React, useState} from 'react'
+import {React, useState,useEffect} from 'react'
 import StylesCalendario from '../../styles/CalendarioBuscador.module.css'
 import Calendar from 'react-calendar';
 import "react-calendar/dist/Calendar.css";
@@ -43,6 +43,18 @@ function CalendarioBuscador({ onClose }) {
   }
 
   console.log(fecha)
+
+  //calendario movil
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 600); // Estado para detectar si es móvil
+
+  // Actualizar el estado en caso de cambio de tamaño de ventana
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 600);
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
     <div className={StylesCalendario.divPrincipal}>
       <div className={StylesCalendario.divIconoCerrar}>
@@ -83,9 +95,9 @@ function CalendarioBuscador({ onClose }) {
 			)
       }
       <Calendar
-        showDoubleView={true}
-        returnValue='range'
-        selectRange
+        showDoubleView={!isMobile} // Mostrar dos meses solo si no es móvil}
+        returnValue={fecha}
+        selectRange={true}
         onChange={cambiarFecha}
         locale = 'es-ES'
       />
