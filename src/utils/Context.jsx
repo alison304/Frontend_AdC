@@ -79,7 +79,6 @@ console.log('fecDes',urlBuscarProductosDescripcionFechas);
 
   //buscador
   if(state.tipo_Busqueda === 1){
-    console.log('bus',state.tipo_Busqueda)
     //buscar solo descripcion
     useEffect(() => {
       const obtenerProductosDescripcion = async () => {
@@ -110,10 +109,12 @@ console.log('fecDes',urlBuscarProductosDescripcionFechas);
       }
     }
     obtenerProductosFechas();
-    }, [state.fechaInicial, state.fechaFinal, state.tipo_Busqueda]);
-  }else{
+    }, [state.fechaFinal, state.tipo_Busqueda]);
+  }else if (state.tipo_Busqueda === 3){
+   
     //buscar ambos
     useEffect(() => {
+      
       const obtenerProductosDescripcionFechas = async () => {
   
       try {
@@ -126,9 +127,10 @@ console.log('fecDes',urlBuscarProductosDescripcionFechas);
       }
     }
     obtenerProductosDescripcionFechas();
-    }, [state.palabraDescripcion,state.fechaInicial, state.fechaFinal, state.tipo_Busqueda]); 
+    }, [state.fechaInicial, state.fechaFinal]); 
+   
   }
- 
+  console.log('bus',state.tipo_Busqueda);
 
 
   return (
