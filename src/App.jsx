@@ -24,9 +24,11 @@ function App() {
     console.log('RENDERIZANDO APP');
     const {dispatch} = useProductosStates();
     const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem('authToken'));
+    const [isAdmin, setIsAdmin] = useState(localStorage.getItem('userRol') == "ADMIN" ? true: false);
 
     const handleLoginSuccess = () => {
         setIsAuthenticated(true);
+        setIsAdmin(localStorage.getItem('userRol') == "ADMIN" ? true: false);
         dispatch({type:"REMOVE_FECHA_INICIAL", payload:null});
         dispatch({type:"REMOVE_FECHA_FINAL", payload:null});
     };
@@ -226,7 +228,7 @@ function App() {
     return (
         <>
             <div>
-                <Navbar isAuthenticated={isAuthenticated} onLogout={handleLogout} />
+                <Navbar isAuthenticated={isAuthenticated} isAdmin={isAdmin} onLogout={handleLogout} />
                 <Routes>
                     <Route path='/' element={<Home />} />
                     <Route path='*' element={<h2>Error 404</h2>} />
@@ -245,7 +247,7 @@ function App() {
                     <Route
                     path="/logout"
                     element={
-                    <ProtectedRoute isAuthenticated={isAuthenticated}>
+                    <ProtectedRoute isAuthenticated={isAuthenticated} isAdmin={isAdmin}>
                     <Logout onLogout={handleLogout} />
                     </ProtectedRoute>
                     }
@@ -256,7 +258,7 @@ function App() {
                     <Route
                         path='/admin'
                         element={
-                            <ProtectedRoute isAuthenticated={isAuthenticated}>
+                            <ProtectedRoute isAuthenticated={isAuthenticated} isAdmin={isAdmin}>
                                 <Administrador />
                             </ProtectedRoute>
                         }
@@ -264,7 +266,7 @@ function App() {
                     <Route
                         path='/admin/agregarProducto'
                         element={
-                            <ProtectedRoute isAuthenticated={isAuthenticated}>
+                            <ProtectedRoute isAuthenticated={isAuthenticated} isAdmin={isAdmin}>
                                 <AgregarProducto listaProductos={listaProductos} />
                             </ProtectedRoute>
                         }
@@ -272,7 +274,7 @@ function App() {
                     <Route
                         path="/admin/administrar-categorias"
                         element={
-                            <ProtectedRoute isAuthenticated={isAuthenticated}>
+                            <ProtectedRoute isAuthenticated={isAuthenticated} isAdmin={isAdmin}>
                                 <AdministrarCategorias listaProductos={listaProductos} />
                             </ProtectedRoute>
                         }
@@ -280,7 +282,7 @@ function App() {
                     <Route
                         path="/admin/administrar-caracteristicas"
                         element={
-                            <ProtectedRoute isAuthenticated={isAuthenticated}>
+                            <ProtectedRoute isAuthenticated={isAuthenticated} isAdmin={isAdmin}>
                                 <AdministrarCaracteristicas listaProductos={listaProductos} />
                             </ProtectedRoute>
                         }
@@ -294,7 +296,7 @@ function App() {
                     <Route
                         path="/profile"
                         element={
-                            <ProtectedRoute isAuthenticated={isAuthenticated}>
+                            <ProtectedRoute isAuthenticated={isAuthenticated} isAdmin={isAdmin}>
                                 <UserProfile />
                             </ProtectedRoute>
                         }
@@ -304,7 +306,7 @@ function App() {
                     <Route
                         path="/admin/user-list"
                         element={
-                            <ProtectedRoute isAuthenticated={isAuthenticated}>
+                            <ProtectedRoute isAuthenticated={isAuthenticated} isAdmin={isAdmin}>
                                 <UserList />
                             </ProtectedRoute>
                         }

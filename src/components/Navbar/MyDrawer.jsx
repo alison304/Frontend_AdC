@@ -23,7 +23,7 @@ import PhoneIcon from '@mui/icons-material/Phone';
 import CelebrationIcon from '@mui/icons-material/Celebration';
 import { Link, useNavigate } from 'react-router-dom';
 
-const MyDrawer = ({ isAuthenticated, onLogout }) => {
+const MyDrawer = ({ isAuthenticated, isAdmin, onLogout }) => {
   const [openDrawer, setOpenDrawer] = useState(false);
   const [openCatalogo, setOpenCatalogo] = useState(false);
   const [openTematica, setOpenTematica] = useState(false);
@@ -185,19 +185,26 @@ const MyDrawer = ({ isAuthenticated, onLogout }) => {
                 </ListItem>
               </Link>
 
-              {/* Panel Admin */}
-              <Link
-                style={{ color: 'inherit', textDecoration: 'none' }}
-                to="/admin"
-                onClick={() => setOpenDrawer(false)}
-              >
-                <ListItem disablePadding>
-                  <PersonIcon />
-                  <ListItemButton>
-                    <ListItemText>Panel Admin</ListItemText>
-                  </ListItemButton>
-                </ListItem>
-              </Link>
+              {
+                isAdmin ? 
+                  <React.Fragment>
+                    {/* Panel Admin */}
+                    <Link
+                      style={{ color: 'inherit', textDecoration: 'none' }}
+                      to="/admin"
+                      onClick={() => setOpenDrawer(false)}
+                    >
+                      <ListItem disablePadding>
+                        <PersonIcon />
+                        <ListItemButton>
+                          <ListItemText>Panel Admin</ListItemText>
+                        </ListItemButton>
+                      </ListItem>
+                    </Link>
+                  </React.Fragment>                          
+                          :
+                  <React.Fragment></React.Fragment>
+              }                                      
 
               {/* Cerrar sesión */}
               <ListItem disablePadding>
