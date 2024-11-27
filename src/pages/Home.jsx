@@ -10,16 +10,30 @@ const Home = () => {
     const listaProductos =state.listaProductosAleatorios;  
     const listaCategorias =state.listaCategorias;  
     const listaRecomendaciones = listaProductos.slice(0, 3);
+    let listaProductosBusqueda =[];
+
+    const validarBusqueda =  () => {
+        if(state.tipo_Busqueda === 1){
+            listaProductosBusqueda = state.listaProductosSoloDescripcion;
+        }else if(state.tipo_Busqueda === 2){
+            listaProductosBusqueda = state.listaProductosSoloFechas;
+        }else{
+            listaProductosBusqueda = state.listaProductosDescripcionFechas;
+        }
+        return listaProductosBusqueda;
+    }
+    
+    listaProductosBusqueda = validarBusqueda();
 
     return (
         <React.Fragment>
             <SearchBar />
             {
                 state.mostrarBusqueda  && 
-                (<section className={StylesHome.categorias}>
-                    <h3 className={StylesHome.titulo}>Resultados de la busqueda</h3>
+                (<section className={StylesHome.busqueda}>
+                    <h3 className={StylesHome.tituloBusqueda}>Resultados de la busqueda</h3>
                     <div className={StylesHome.cardGrid}>
-                        {listaRecomendaciones.map((producto) => (
+                        {listaProductosBusqueda.map((producto) => (
                             <Card key={producto.id} dato={producto} esCategoria={false} productos={listaProductos}  esBusqueda={true}/>
                         ))}
                     </div>
