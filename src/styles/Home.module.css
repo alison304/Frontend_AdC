@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap');
 
-.titulo{
+.titulo, .tituloBusqueda{
     font-family: 'Kaushan Script', cursive;
     font-size: 30px;
     font-weight: 400;
@@ -8,9 +8,14 @@
     color:rgba(142, 107, 50, 0.4);
 }
 
-.categorias{
+.categorias, .busqueda{
     width: 90vw;
     margin: 0 auto;
+}
+
+.busqueda{
+    margin-top: 20px;
+    background-color: #EBE9E980;
 }
 
 .cardGrid{
