@@ -4,6 +4,7 @@ import { useMediaQuery, useTheme } from '@mui/material';
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import Caracteristicas from "../components/Caracteristicas/Caractiristicas";
+import CalendarioDetail from "../components/CalendarioDetail";
 const Detail = () => {
 
   const location = useLocation();
@@ -63,6 +64,8 @@ const Detail = () => {
                 <div className={StylesDetail.cantidad}>{contador}</div>
                 <button className={StylesDetail.botonMas} onClick={() => { actualizarContador(1) }} >+</button>
               </div>
+              <CalendarioDetail/>
+
               <h3 className={StylesDetail.precio}>S/.{location.state.producto.precioAlquiler}</h3>
 
               <button className={StylesDetail.boton}>Añadir al Carrito</button>
@@ -78,6 +81,7 @@ const Detail = () => {
                 <div className={StylesDetail.cantidad}>{contador}</div>
                 <button className={StylesDetail.botonMas} onClick={() => { actualizarContador(1) }} >+</button>
               </div>
+              <CalendarioDetail/>
               <button className={StylesDetail.boton}>AÑADIR AL CARRO</button>
               <h3 className={StylesDetail.tituloDescripcion}>Descripción:</h3>
               <p className={StylesDetail.descripcion}> {location.state.producto.descripcion}</p>
