@@ -26,11 +26,13 @@ const Navbar = ({ isAuthenticated, isAdmin, onLogout }) => {
   const [userInitials, setUserInitials] = useState('');
 
   useEffect(() => {
-    const initials = localStorage.getItem('userInitials');
-    if (initials) {
-      setUserInitials(initials);
-    }
-  }, []);
+      if (isAuthenticated) {
+          const initials = localStorage.getItem('userInitials');
+          setUserInitials(initials || '');
+      } else {
+          setUserInitials('');
+      }
+  }, [isAuthenticated]);
 
   // Estado y manejadores para el menú de Catálogo
   const [anchorElCatalogo, setAnchorElCatalogo] = React.useState(null);

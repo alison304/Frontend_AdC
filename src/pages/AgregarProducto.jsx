@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import styles from "../styles/AgregarProducto.module.css";
+import { createProduct, updateProduct } from '../services/producto.service';
+
 
 const BASE_URL = "https://auradecristalapi-development.up.railway.app";
 

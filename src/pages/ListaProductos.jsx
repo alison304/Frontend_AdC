@@ -1,96 +1,91 @@
-import StylesListaProductos from '../styles/ListaProductos.module.css'
-import CardProductos from '../components/CardProductos'
-import { useParams } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
-import { RiArrowGoBackFill } from "react-icons/ri";
-import { Button } from '@mui/material';
-import {useProductosStates} from "../utils/Context"
+import { useEffect, useState } from "react";
+import axios from "axios";
+import StylesAdmin from '../styles/ListaProductos.module.css';
+import { useNavigate } from 'react-router-dom';
+import { useProductosStates } from "../utils/Context";
+import Swal from 'sweetalert2';
 
+const BASE_URL = "https://auradecristalapi-development.up.railway.app";
 
-function ListaProductos() {
-    console.log('RENDERIZANDO LISTA DE PRODUCTOS')
-    const {state} = useProductosStates();
-    const listaProductos =state.lista;  
-    console.log('listaProductos',listaProductos)
-  
-    const params = useParams();
-    //filtramos los que sean de esa categoria
-    const productosFiltrados = listaProductos.filter(producto => producto.categoria.id== params.id);
-    // Copia del array original
-    let datosProductos = [...productosFiltrados];
-    let productosAleatorias = [];
-
-    function mostrarElementoAleatorioSinRepetir(datosRestantes) {
-        if (datosRestantes.length === 0) {
-            console.log("Ya se mostraron todos los elementos.");
-            return;
-        }
-        // Elegir un índice aleatorio
-        const indiceAleatorio = Math.floor(Math.random() * datosRestantes.length);
-
-        // Obtener y eliminar el elemento aleatorio
-        const elementoAleatorio = datosRestantes.splice(indiceAleatorio, 1)[0];
-        return elementoAleatorio;
-    }
-
-    for (let i = 0; i < productosFiltrados.length; i++) {
-        let producto = mostrarElementoAleatorioSinRepetir(datosProductos);
-        productosAleatorias.push(producto);
-    }
-
-
-    const obtenerTituloCategoria = () => {
-        let titulo = 'Vajillas';
-        if (params.id == 2) {
-            titulo = 'Cubiertos';
-        }
-        else if (params.id == 3) {
-            titulo = 'Cristalería';
-        }
-        return titulo;
-    }
-
-    const titulo = obtenerTituloCategoria();
-
+const ListaProductos = () => {
+    const [id, setId] = useState('')
+    const [nombre, setNombre] = useState("");
+    const [acciones, setAcciones] = useState("");
+    const [categorias, setCategorias] = useState([]);
+    const { state } = useProductosStates();
+    const listaProductos = state.lista;
     const navigate = useNavigate();
+    const [mostrarLista, setMostrarLista] = useState(true);
 
-    const onBack = () => {
-        navigate(-1)
-    }
+    useEffect(() => {
+
+    })
+
+    const botonMovil = () => {
+        navigate('/');
+    };
+
+    const eliminarProducto = (id) => {
+        Swal.fire({
+            title: "Aura de Cristal",
+            text: "Deseas eliminar este producto?",
+            icon: "question",
+            showCancelButton: true,
+            confirmButtonText: "Eliminar",
+            cancelButtonText: "Cancelar",
+            confirmButtonColor: '#000',
+            cancelButtonColor: '#8D3434CC'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                console.log('eliminar');
+            }
+        });
+    };
+
+    
 
     return (
         <>
-            <div style={{
-                padding: '2.3rem',
-            }}>
-            </div>
-            <Button style={{
-                backgroundColor: '#d1b362',
-                float: 'right',
-                border: 'none',
-                color: 'white',
-                padding: '5px 15px',
-                fontSize: '16px',
-                cursor: 'pointer',
-                borderRadius: '5px',
-                transition: 'background-color 0.3s',
-                marginRight: '25px',
-            }}
-                onMouseEnter={(e) => (e.target.style.backgroundColor = '#f2ca4e')}
-                onMouseLeave={(e) => (e.target.style.backgroundColor = '#d1b362')}
-                className='back' onClick={onBack}><RiArrowGoBackFill />
-                Volver
-            </Button>
-            <section className={StylesListaProductos.productos}>
-                <h3 className={StylesListaProductos.titulo}>{titulo}</h3>
-                <div className={StylesListaProductos.cardGrid}>
-                    {productosAleatorias.map((producto) => (
-                        <CardProductos key={producto.id} producto={producto} />
-                    ))}
+            <section className={StylesAdmin.seccionPrincipal}>
+                <div className={StylesAdmin.titulo}>Listar Productos</div>
+                <div className={StylesAdmin.botones}>
                 </div>
             </section>
+            {mostrarLista && (
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>NOMBRE</th>
+                            <th>ACCIONES</th>
+                            <th>CATEGORIA</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {listaProductos.map((producto) => (
+                            <tr key={producto.id}>
+                                <td>{producto.id}</td>
+                                <td>{producto.nombre}</td>
+                                <td>
+                                    <div className="cambios-estados">
+                                        <button className={StylesAdmin.botonesEditar}>Editar</button>
+                                        <button onClick={() => eliminarProducto(producto.id)} className={StylesAdmin.botonesEliminar}>Eliminar</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            )}
+
+            <div className={StylesAdmin.mensajeMovil}>
+                <div className={StylesAdmin.fraseMovil}>
+                    <span className={StylesAdmin.frase2Movil}>Atención</span>No es posible entrar al Panel de Administración desde este dispositivo.
+                </div>
+                <button onClick={botonMovil} className={StylesAdmin.botonMovil}>Volver a inicio</button>
+            </div>
         </>
-    )
+    );
 }
 
-export default ListaProductos
+export default ListaProductos;
