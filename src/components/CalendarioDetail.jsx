@@ -16,10 +16,14 @@ function CalendarioDetail({ noDisponibles }) {
   console.log("desde calendario", noDisponibles)
   let blackoutDates = []
 
-  const listaReservas = [{"fechaInicio":"2024-11-22","fechaFin":"2024-11-24"},
-    {"fechaInicio":"2024-12-12","fechaFin":"2024-12-18"}]
+  // const listaReservas = [{"fechaInicio":"2024-11-22","fechaFin":"2024-11-24"},
+  //   {"fechaInicio":"2024-12-12","fechaFin":"2024-12-18"}]
 
+   const listaReservas = noDisponibles
   const obtenerDias = (fechaInicio, fechaFin) => {
+    fechaInicio.setDate(fechaInicio.getDate() + 1);
+    fechaFin.setDate(fechaFin.getDate() + 1);
+
     const date = new Date(fechaInicio.getTime());
     while (date <= fechaFin) {
       if(!blackoutDates.includes(date.toDateString())){
