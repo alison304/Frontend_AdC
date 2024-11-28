@@ -22,6 +22,8 @@ const Detail = () => {
     }
   }
   const producto = location.state.producto;
+  console.log("desde detail", location.state.producto.reservas)
+  
   return (
     <>
       <a onClick={volverHome} className={StylesDetail.tituloVolver}>Volver</a>
@@ -64,7 +66,7 @@ const Detail = () => {
                 <div className={StylesDetail.cantidad}>{contador}</div>
                 <button className={StylesDetail.botonMas} onClick={() => { actualizarContador(1) }} >+</button>
               </div>
-              <CalendarioDetail/>
+              <CalendarioDetail noDisponibles={location.state.producto.reservas}/>
 
               <h3 className={StylesDetail.precio}>S/.{location.state.producto.precioAlquiler}</h3>
 
@@ -81,7 +83,7 @@ const Detail = () => {
                 <div className={StylesDetail.cantidad}>{contador}</div>
                 <button className={StylesDetail.botonMas} onClick={() => { actualizarContador(1) }} >+</button>
               </div>
-              <CalendarioDetail/>
+              <CalendarioDetail noDisponibles={location.state.producto.reservas}/>
               <button className={StylesDetail.boton}>AÑADIR AL CARRO</button>
               <h3 className={StylesDetail.tituloDescripcion}>Descripción:</h3>
               <p className={StylesDetail.descripcion}> {location.state.producto.descripcion}</p>
