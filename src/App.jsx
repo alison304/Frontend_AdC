@@ -10,6 +10,7 @@ import { useState, useEffect } from "react";
 import AgregarProducto from './pages/AgregarProducto';
 import RegisterForm from './components/RegisterForm/RegisterForm';
 import ListaProductos from './pages/ListaProductos';
+import ListaCategorias from './pages/ListaCategorias';
 import Login from './components/LoginForm/login';
 import Wip from './components/Wip/Wip';
 import AdministrarCategorias from './pages/AdministrarCategorias';
@@ -18,32 +19,32 @@ import ProtectedRoute from './components/LoginForm/ProtectedRoute';
 import AdministrarCaracteristicas from './pages/AdministrarCaracteristicas';
 import Logout from './components/Logout/Logout';
 import UserList from './components/User/UserList';
-import {useProductosStates} from "./utils/Context"
+import { useProductosStates } from "./utils/Context"
 import { logout } from './services/user.service';
 
 function App() {
     console.log('RENDERIZANDO APP');
-    const {dispatch} = useProductosStates();
+    const { dispatch } = useProductosStates();
     const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem('authToken'));
-    const [isAdmin, setIsAdmin] = useState(localStorage.getItem('userRol') == "ADMIN" ? true: false);
+    const [isAdmin, setIsAdmin] = useState(localStorage.getItem('userRol') == "ADMIN" ? true : false);
 
     const handleLoginSuccess = () => {
         setIsAuthenticated(true);
-        setIsAdmin(localStorage.getItem('userRol') == "ADMIN" ? true: false);
-        dispatch({type:"REMOVE_FECHA_INICIAL", payload:null});
-        dispatch({type:"REMOVE_FECHA_FINAL", payload:null});
-        dispatch({type:"MOSTRAR_BUSQUEDA", payload:false});     
-        dispatch({type:"INPUT_BUSQUEDA", payload:""});  
+        setIsAdmin(localStorage.getItem('userRol') == "ADMIN" ? true : false);
+        dispatch({ type: "REMOVE_FECHA_INICIAL", payload: null });
+        dispatch({ type: "REMOVE_FECHA_FINAL", payload: null });
+        dispatch({ type: "MOSTRAR_BUSQUEDA", payload: false });
+        dispatch({ type: "INPUT_BUSQUEDA", payload: "" });
     };
 
     const handleLogout = () => {
         localStorage.removeItem('authToken');
         logout();
         setIsAuthenticated(false);
-        dispatch({type:"REMOVE_FECHA_INICIAL", payload:null});
-        dispatch({type:"REMOVE_FECHA_FINAL", payload:null});
-        dispatch({type:"MOSTRAR_BUSQUEDA", payload:false});
-        dispatch({type:"INPUT_BUSQUEDA", payload:""});
+        dispatch({ type: "REMOVE_FECHA_INICIAL", payload: null });
+        dispatch({ type: "REMOVE_FECHA_FINAL", payload: null });
+        dispatch({ type: "MOSTRAR_BUSQUEDA", payload: false });
+        dispatch({ type: "INPUT_BUSQUEDA", payload: "" });
     };
 
     const [listaProductos, setListaProductos] = useState([
@@ -238,7 +239,7 @@ function App() {
                 <Routes>
                     <Route path='/' element={<Home />} />
                     <Route path='*' element={<h2>Error 404</h2>} />
-
+                    <Route path="/listaCategorias/:id" element={<ListaCategorias />} />
                     <Route path="/listaProductos/:id" element={<ListaProductos />} />
                     <Route path="/detail/:id" element={<Detail />} />
                     <Route path="/gallery/:id" element={<Gallery />} />
@@ -251,12 +252,12 @@ function App() {
 
 
                     <Route
-                    path="/logout"
-                    element={
-                    <ProtectedRoute isAuthenticated={isAuthenticated} isAdmin={isAdmin}>
-                    <Logout onLogout={handleLogout} />
-                    </ProtectedRoute>
-                    }
+                        path="/logout"
+                        element={
+                            <ProtectedRoute isAuthenticated={isAuthenticated} isAdmin={isAdmin}>
+                                <Logout onLogout={handleLogout} />
+                            </ProtectedRoute>
+                        }
                     />
 
                     {/*Cosas admin */}
@@ -316,7 +317,7 @@ function App() {
                                 <UserList />
                             </ProtectedRoute>
                         }
-                    />                    
+                    />
 
                 </Routes>
 
