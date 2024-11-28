@@ -14,12 +14,10 @@ const initialState = {
   fechaInicial:fechaInicial,
   fechaFinal:fechaFinal,
   mostrarBusqueda:false,
-  listaProductosSoloDescripcion:[],
-  listaProductosSoloFechas:[],
-  listaProductosDescripcionFechas:[],
   palabraDescripcion:"",
-  tipo_Busqueda:1, 
-  busqueda:""
+  tipo_Busqueda:3, 
+  busqueda:"",
+  productosBusqueda:[]
 }
 
 function convertirFecha(fecha) {
@@ -88,7 +86,7 @@ console.log('fecDes',urlBuscarProductosDescripcionFechas);
         //se obtiene los productos cuando solo se ingresa la descripcion
         const resProductosDescripcion = await axios(urlBuscarProductosDescripcion);
         console.log('pro_des',resProductosDescripcion.data);
-        dispatch({ type: "GET_PRODUCTOS_SOLO_DESCRIPCION", payload: resProductosDescripcion.data });
+        dispatch({ type: "PRODUCTOS_BUSQUEDA", payload: resProductosDescripcion.data });
       } catch (error) {
         console.error("Error al obtener los datos de la busqueda solo descripcion:", error);
       }
@@ -104,7 +102,7 @@ console.log('fecDes',urlBuscarProductosDescripcionFechas);
         //se obtiene los productos cuando solo se ingresan las fechas
         const resProductosFechas = await axios(urlBuscarProductosFechas);
         console.log('pro_fec',resProductosFechas.data);
-        dispatch({ type: "GET_PRODUCTOS_SOLO_FECHAS", payload: resProductosFechas.data });
+        dispatch({ type: "PRODUCTOS_BUSQUEDA", payload: resProductosFechas.data });
       } catch (error) {
         console.error("Error al obtener los datos de la busqueda solo fechas:", error);
       }
@@ -122,7 +120,7 @@ console.log('fecDes',urlBuscarProductosDescripcionFechas);
         //se obtiene los productos cuando ingresa amos
         const resProductosDescripcionFecha = await axios(urlBuscarProductosDescripcionFechas);
         console.log('pro_desfec',resProductosDescripcionFecha.data);
-        dispatch({ type: "GET_PRODUCTOS_DESCRIPCION_FECHAS", payload: resProductosDescripcionFecha.data });
+        dispatch({ type: "PRODUCTOS_BUSQUEDA", payload: resProductosDescripcionFecha.data });
       } catch (error) {
         console.error("Error al obtener los datos de la busqueda de descripcion y fecha:", error);
       }

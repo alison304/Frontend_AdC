@@ -15,18 +15,14 @@ export const reducer = (state,action) =>{
         case "REMOVE_FECHA_INICIAL":
             return {...state, fechaInicial: action.payload};
         case "REMOVE_FECHA_FINAL":
-            return {...state, fechaFinal: action.payload};
-        case "GET_PRODUCTOS_SOLO_DESCRIPCION":
-            return {...state, listaProductosSoloDescripcion:action.payload};
+            return {...state, fechaFinal: action.payload};      
         case "VALOR_INPUT":
             return{...state, palabraDescripcion:action.payload}
-        case "GET_PRODUCTOS_SOLO_FECHAS":
-            return {...state, listaProductosSoloFechas:action.payload}// Sobrescribe los valores con los datos del payload
-        case "GET_PRODUCTOS_DESCRIPCION_FECHAS":
-            return {...state, listaProductosDescripcionFechas:action.payload};
         case "TIPO_BUSQUEDA":
             return {...state, tipo_Busqueda:action.payload};
         case "INPUT_BUSQUEDA":
             return {...state, busqueda:action.payload};
+        case "PRODUCTOS_BUSQUEDA":
+            return {...state, productosBusqueda:action.payload};
         }       
 }
