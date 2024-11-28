@@ -18,7 +18,6 @@ export const reducer = (state,action) =>{
             return {...state, fechaFinal: action.payload};      
         case "VALOR_INPUT":
             return{...state, palabraDescripcion:action.payload}
-            return {...state, listaProductosDescripcionFechas:action.payload};
         case "TIPO_BUSQUEDA":
             return {...state, tipo_Busqueda:action.payload};
         case "INPUT_BUSQUEDA":
