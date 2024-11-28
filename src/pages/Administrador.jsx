@@ -13,7 +13,7 @@ function Administrador() {
     const [mostrarLista, setMostrarLista] = useState(false);
 
     const listaProducto = () => {
-        navigate('/admin/listaProducto');
+        navigate('/admin/listaProductos');
     };
 
     const agregarProducto = () => {

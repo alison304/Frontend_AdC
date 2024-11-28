@@ -240,16 +240,11 @@ function App() {
                     <Route path='/' element={<Home />} />
                     <Route path='*' element={<h2>Error 404</h2>} />
                     <Route path="/listaCategorias/:id" element={<ListaCategorias />} />
-                    <Route path="/listaProductos/:id" element={<ListaProductos />} />
                     <Route path="/detail/:id" element={<Detail />} />
                     <Route path="/gallery/:id" element={<Gallery />} />
                     <Route path='/register' element={<RegisterForm />} />
                     <Route path="/login" element={<Login onLoginSuccess={handleLoginSuccess} />} />
                     <Route path="/wip" element={<Wip />} />
-
-
-
-
 
                     <Route
                         path="/logout"
@@ -260,13 +255,21 @@ function App() {
                         }
                     />
 
-                    {/*Cosas admin */}
+                    {/*ADMIN - INICIO*/}
 
                     <Route
                         path='/admin'
                         element={
                             <ProtectedRoute isAuthenticated={isAuthenticated} isAdmin={isAdmin}>
                                 <Administrador />
+                            </ProtectedRoute>
+                        }
+                    />
+                    <Route
+                        path='/admin/listaProductos'
+                        element={
+                            <ProtectedRoute isAuthenticated={isAuthenticated} isAdmin={isAdmin}>
+                                <ListaProductos />
                             </ProtectedRoute>
                         }
                     />
@@ -279,14 +282,6 @@ function App() {
                         }
                     />
                     <Route
-                        path="/admin/administrar-categorias"
-                        element={
-                            <ProtectedRoute isAuthenticated={isAuthenticated} isAdmin={isAdmin}>
-                                <AdministrarCategorias listaProductos={listaProductos} />
-                            </ProtectedRoute>
-                        }
-                    />
-                    <Route
                         path="/admin/administrar-caracteristicas"
                         element={
                             <ProtectedRoute isAuthenticated={isAuthenticated} isAdmin={isAdmin}>
@@ -294,10 +289,15 @@ function App() {
                             </ProtectedRoute>
                         }
                     />
-
-
-
-
+                    <Route
+                        path="/admin/user-list"
+                        element={
+                            <ProtectedRoute isAuthenticated={isAuthenticated} isAdmin={isAdmin}>
+                                <UserList />
+                            </ProtectedRoute>
+                        }
+                    />
+                    {/*ADMIN - FIN*/}
 
                     {/*Cosas usuario comun logueado */}
                     <Route
@@ -305,16 +305,6 @@ function App() {
                         element={
                             <ProtectedRoute isAuthenticated={isAuthenticated} isAdmin={isAdmin}>
                                 <UserProfile />
-                            </ProtectedRoute>
-                        }
-                    />
-
-                    {/*Cosas usuario comun logueado */}
-                    <Route
-                        path="/admin/user-list"
-                        element={
-                            <ProtectedRoute isAuthenticated={isAuthenticated} isAdmin={isAdmin}>
-                                <UserList />
                             </ProtectedRoute>
                         }
                     />
