@@ -27,10 +27,15 @@ function Login({ onLoginSuccess }) {
     const handleLogin = async (values, { setSubmitting }) => {
         try {
             const response = await login(values.email, values.password);
-            const { token } = response.data;
+            const { token , id, nombre , apellido, email, rol } = response.data;
             localStorage.setItem('authToken', token);
-            localStorage.setItem('userEmail', values.email);
-            await getUserByEmail(values.email); // Asegúrate de que la respuesta contenga 'token' y 'user'
+            localStorage.setItem('userId', id)            
+            localStorage.setItem('userNombre', nombre);
+            localStorage.setItem('userApellido', apellido);
+            localStorage.setItem('userEmail', email);
+            localStorage.setItem('userRol', rol) 
+            const initials = nombre.charAt(0) + apellido.charAt(0);
+            localStorage.setItem('userInitials', initials)        
 
             Swal.fire({
                 icon: 'success',
@@ -63,7 +68,6 @@ function Login({ onLoginSuccess }) {
     const handleOlvidoPassRedirect = () => {
         navigate('/wip'); // 'wip' podría ser una página de "trabajo en progreso"
     };
-
     return (
         <Box className="login-container">
             <Typography

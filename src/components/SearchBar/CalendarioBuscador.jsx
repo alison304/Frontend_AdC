@@ -24,7 +24,8 @@ function CalendarioBuscador({ onClose }) {
   };
 
 
-  const guardarFechas = () => {
+  const guardarFechas = (event) => {
+    event.preventDefault();
     
     if(new Date(fecha[0]).toDateString()  !== "Invalid Date"){
       setmostrarError(false);
@@ -42,6 +43,11 @@ function CalendarioBuscador({ onClose }) {
 
   }
 
+  const reestablecer = (event) =>{
+    event.preventDefault();
+    dispatch({type:"REMOVE_FECHA_INICIAL", payload:null});
+    dispatch({type:"REMOVE_FECHA_FINAL", payload:null});
+  }
   console.log(fecha)
 
   //calendario movil
@@ -61,6 +67,7 @@ function CalendarioBuscador({ onClose }) {
         <button onClick={onClose} className={StylesCalendario.botonIconoCerrar}>
           <CloseIcon className={StylesCalendario.iconoCerrar} />
         </button>
+        <button onClick={reestablecer} className={StylesCalendario.botonRestablecer}>Restablecer</button>
         <button className={StylesCalendario.botonGuardarFecha}  onClick={guardarFechas}>Confirmar</button>
       </div>
       {mostrarError && (<p className={StylesCalendario.mensajeError}>Debe Seleccionar una fecha inicial y una fecha final</p>)}

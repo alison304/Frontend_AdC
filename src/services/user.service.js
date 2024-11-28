@@ -45,8 +45,21 @@ export const createUser = (name, lastName, email, password) => {
   });
 };
 
-export const updateUser = (id, user) => {
-  return api.put(`/api/user/${id}`, user);
+export const updateUser = async (id, user) => {
+  const options = {
+    method: 'PUT',
+    url: `${BASE_URL}/usuarios/${id}`,
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('authToken')}`,
+    },
+    data: user,
+  };
+
+  try {
+    return await axios.request(options);
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 export const removeUser = (id) => {
@@ -70,12 +83,15 @@ export const isAuthenticated = () => {
 };
 
 export const logout = () => {
-  localStorage.removeItem('authToken');
   localStorage.removeItem('userEmail');
-  localStorage.removeItem('nombre');
-  localStorage.removeItem('apellido');
-  localStorage.removeItem('rol');
+  localStorage.removeItem('userNombre');
+  localStorage.removeItem('userApellido');
+  localStorage.removeItem('userRol');
+  localStorage.removeItem('userId');
+  localStorage.removeItem('userInitials');
 };
+
+
 
 /* Obtener usuario por email */
 export const getUserByEmail = async (userEmail) => {
@@ -90,11 +106,6 @@ export const getUserByEmail = async (userEmail) => {
 
   try {
     const { data } = await axios.request(options);
-    localStorage.setItem('userId', data.id)
-    localStorage.setItem('userNombre', data.nombre)
-    localStorage.setItem('userApellido', data.apellido)
-    localStorage.setItem('userRol', data.rol)
-
   } catch (error) {
     console.error(error);
   }

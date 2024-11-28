@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const Card = ({ dato, esCategoria, productos, esBusqueda }) => {
 
   console.log('RENDERIZANDO CARD')
- 
+
   const producto = dato;
 
   let productoCategoria = {};
@@ -15,7 +15,7 @@ const Card = ({ dato, esCategoria, productos, esBusqueda }) => {
       if (producto.categoria.id == dato.id) {
         productoCategoria = producto;
         break; // Detenemos el recorrido 
-      }else{
+      } else {
         productoCategoria = null;
       }
     }
@@ -28,45 +28,45 @@ const Card = ({ dato, esCategoria, productos, esBusqueda }) => {
     <div className={StylesHome.card}>
       {esCategoria && productoCategoria ? (
         <>
-          <Link to={'/listaProductos/' + dato.id} className={StylesHome.link}>
+          <Link to={'/listaCategorias/' + dato.id} className={StylesHome.link}>
             <h3 className={StylesHome.nombreCategorias} >{dato.descripcion}</h3>
             <img src={productoCategoria.imagenes[0].url} className={StylesHome.cardImg} />
           </Link>
         </>
       ) : (
 
-        esBusqueda ? 
-        (
-          <>
-          <Link to={{
-            pathname: '/detail/' + dato.id
-          }}
-            state={{ producto }} className={StylesHome.link}>
-            <h3 className={StylesHome.nombreCategorias} >{dato.nombre}</h3>
-            <img src={dato.imagenes[0].url} className={StylesHome.cardImg} />
-          </Link>
-          <div className={StylesHome.recomendacionesPiezas}>
-            <span className={StylesHome.piezas}>S/.{dato.precio_alquiler}</span>
-            <span className={StylesHome.calificacion}>Disponible: {dato.disponibilidad}</span>
-          </div>
-        </>
-        ):
-        (
-          <>
-          <Link to={{
-            pathname: '/detail/' + dato.id
-          }}
-            state={{ producto }} className={StylesHome.link}>
-            <h3 className={StylesHome.nombreCategorias} >{dato.nombre}</h3>
-            <img src={dato.imagenes[0].url} className={StylesHome.cardImg} />
-          </Link>
-          <div className={StylesHome.recomendacionesPiezas}>
-            <span className={StylesHome.piezas}>S/.{dato.precio_alquiler}</span>
-            <span className={StylesHome.calificacion}>4.8⭐</span>
-          </div>
-        </>
-        )
-        
+        esBusqueda ?
+          (
+            <>
+              <Link to={{
+                pathname: '/detail/' + dato.id
+              }}
+                state={{ producto }} className={StylesHome.link}>
+                <h3 className={StylesHome.nombreCategorias} >{dato.nombre}</h3>
+                <img src={dato.imagenes[0].url} className={StylesHome.cardImg} />
+              </Link>
+              <div className={StylesHome.recomendacionesPiezas}>
+                <span className={StylesHome.piezas}>S/.{dato.precio_alquiler}</span>
+                <span className={StylesHome.calificacion}>Disponible: {dato.disponibilidad}</span>
+              </div>
+            </>
+          ) :
+          (
+            <>
+              <Link to={{
+                pathname: '/detail/' + dato.id
+              }}
+                state={{ producto }} className={StylesHome.link}>
+                <h3 className={StylesHome.nombreCategorias} >{dato.nombre}</h3>
+                <img src={dato.imagenes[0].url} className={StylesHome.cardImg} />
+              </Link>
+              <div className={StylesHome.recomendacionesPiezas}>
+                <span className={StylesHome.piezas}>S/.{dato.precio_alquiler}</span>
+                <span className={StylesHome.calificacion}>4.8⭐</span>
+              </div>
+            </>
+          )
+
       )}
 
     </div>

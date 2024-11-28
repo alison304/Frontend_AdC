@@ -1,5 +1,5 @@
-// Navbar.js
-import React from 'react';
+// Navbar.jsx
+import React, { useState, useEffect } from 'react';
 import {
   AppBar,
   Toolbar,
@@ -17,10 +17,22 @@ import { FiShoppingCart } from 'react-icons/fi';
 import { Link, useNavigate } from 'react-router-dom';
 import './Navbar.css';
 
-const Navbar = ({ isAuthenticated, onLogout }) => {
+const Navbar = ({ isAuthenticated, isAdmin, onLogout }) => {
   const theme = useTheme();
   const isMatch = useMediaQuery(theme.breakpoints.down('md'));
   const navigate = useNavigate();
+
+  // Estado para las iniciales del usuario
+  const [userInitials, setUserInitials] = useState('');
+
+  useEffect(() => {
+      if (isAuthenticated) {
+          const initials = localStorage.getItem('userInitials');
+          setUserInitials(initials || '');
+      } else {
+          setUserInitials('');
+      }
+  }, [isAuthenticated]);
 
   // Estado y manejadores para el menú de Catálogo
   const [anchorElCatalogo, setAnchorElCatalogo] = React.useState(null);
@@ -52,9 +64,10 @@ const Navbar = ({ isAuthenticated, onLogout }) => {
     setAnchorElUser(null);
   };
 
-  // Función actualizada para cerrar sesión y redirigir al inicio de sesión
+  // Función para cerrar sesión y redirigir al inicio de sesión
   const handleLogoutAndRedirect = () => {
     onLogout();
+    logout();
     navigate('/login'); // Redirige a la página de inicio de sesión después de cerrar sesión
   };
 
@@ -90,7 +103,7 @@ const Navbar = ({ isAuthenticated, onLogout }) => {
 
             {isMatch ? (
               // Drawer para dispositivos móviles
-              <MyDrawer isAuthenticated={isAuthenticated} onLogout={onLogout} />
+              <MyDrawer isAuthenticated={isAuthenticated} isAdmin={isAdmin} onLogout={onLogout} />
             ) : (
               // Menú completo para pantallas grandes
               <>
@@ -184,7 +197,11 @@ const Navbar = ({ isAuthenticated, onLogout }) => {
                         onClick={handleClickUser}
                         style={{ color: '#623d2b', paddingLeft: '1%' }}
                       >
-                        <FaUser size={30} color="#655e5e" />
+                        {userInitials ? (
+                          <div className="user-initials">{userInitials}</div>
+                        ) : (
+                          <FaUser size={30} color="#655e5e" />
+                        )}
                       </Button>
                       <Menu
                         id="menu-user"
@@ -203,9 +220,11 @@ const Navbar = ({ isAuthenticated, onLogout }) => {
                         <Link style={{ color: 'inherit', textDecoration: 'none' }} to="/profile">
                           <MenuItem onClick={handleCloseUser}>Perfil</MenuItem>
                         </Link>
-                        <Link style={{ color: 'inherit', textDecoration: 'none' }} to="/admin">
-                          <MenuItem onClick={handleCloseUser}>Panel Admin</MenuItem>
-                        </Link>
+                        {isAdmin ? (
+                          <Link style={{ color: 'inherit', textDecoration: 'none' }} to="/admin">
+                            <MenuItem onClick={handleCloseUser}>Panel Admin</MenuItem>
+                          </Link>
+                        ) : null}
                         <MenuItem onClick={handleLogoutAndRedirect}>Cerrar Sesión</MenuItem>
                       </Menu>
                     </>

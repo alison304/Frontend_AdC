@@ -6,9 +6,10 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 const SearchBar = () => {
     const {state,dispatch} = useProductosStates();
     const [mostrarCalendario, setmostrarCalendario] = useState(false);
-    const [busqueda, setbusqueda] = useState("");
+    //const [busqueda, setbusqueda] = useState("");
 
-    const handleCalendario = () => {
+    const handleCalendario = (event) => {
+        event.preventDefault();
         setmostrarCalendario(!mostrarCalendario)
     };
 
@@ -18,27 +19,48 @@ const SearchBar = () => {
       
 
     const handleChangeBuscador= (event)=>{
-        setbusqueda(event.target.value);       
+        //setbusqueda(event.target.value);       
+        dispatch({type:"INPUT_BUSQUEDA", payload:event.target.value});
       } 
     
 
     const buscar =(event) =>{
         event.preventDefault();
-        console.log('busqueda',busqueda);
-        if(noTieneNumeros(busqueda) && busqueda!==""){
-            console.log('hola');
+        console.log('busqueda',state.busqueda);
+        if(noTieneNumeros(state.busqueda) && state.busqueda!=="" && state.fechaInicial ===null && state.fechaFinal ===null ){
+            console.log('SOLO DESCRIPCION');
             dispatch({type:"MOSTRAR_BUSQUEDA", payload:true});
+            console.log('antes',state.palabraDescripcion);
+            dispatch({type:"VALOR_INPUT", payload:state.busqueda});
+            console.log('despues',state.palabraDescripcion);
+            dispatch({type:"TIPO_BUSQUEDA", payload:1});
+        }else if(noTieneNumeros(state.busqueda) && state.busqueda==="" && state.fechaInicial !==null && state.fechaFinal !==null ){
+            console.log('SOLO FECHAS');
+            dispatch({type:"MOSTRAR_BUSQUEDA", payload:true});
+            console.log('antes',state.palabraDescripcion);
+            dispatch({type:"VALOR_INPUT", payload:state.busqueda});
+            console.log('despues',state.palabraDescripcion);
+            dispatch({type:"TIPO_BUSQUEDA", payload:2});
+        }else if(noTieneNumeros(state.busqueda) && state.busqueda!=="" && state.fechaInicial !==null && state.fechaFinal !==null ){
+            console.log('DESCRIPCION Y FECHAS');
+            dispatch({type:"MOSTRAR_BUSQUEDA", payload:true});
+            console.log('busq',state.mostrarBusqueda)
+            console.log('antes',state.palabraDescripcion);
+            dispatch({type:"VALOR_INPUT", payload:state.busqueda});
+            console.log('despues',state.palabraDescripcion);
+            dispatch({type:"TIPO_BUSQUEDA", payload:3});
         }
+
     }
 
     return (
         <>
-            <form className='form' onSubmit={buscar}>
+            <form className='form'>
                 <div className ='search-bar'>
                     <input 
                     type="text" style={{fontSize: '1rem', width :'80%',border:'none', borderRadius: '0px'}} 
                     placeholder="Que estás buscando?" className="search-input" 
-                    value={busqueda} onChange={handleChangeBuscador}/>
+                    value={state.busqueda} onChange={handleChangeBuscador}/>
                 </div>
                 <div className="buscadorParte2" >
                     
@@ -53,7 +75,7 @@ const SearchBar = () => {
                         </div>
                         <KeyboardArrowDownIcon/>
                     </button>
-                    <button className="botonBuscador">Buscar</button>
+                    <button className="botonBuscador" onClick={buscar}>Buscar</button>
                     {mostrarCalendario && (
                         <div className="modal-overlay">
                             <div className="modal-content">  

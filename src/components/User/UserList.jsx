@@ -18,22 +18,17 @@ const UserList = () => {
     };
 
     // Save edited row and stop editing
-    const handleSaveClick = () => {
+    const handleSaveClick = async (id, user) => {
         setEditableRow(null);  // Stop editing
-    };
-
-    const handleDeleteClick = (id) => {
-        debugger;
-        // Filter out the row with the matching id
-        const tmpUserList = [...userList];
-        const updatedUserList = tmpUserList.filter(row => row.id !== id);
-        setUserList(updatedUserList); // Update state with the new data        
+        console.log(user);
+        await updateUser(id,user);
     };
 
     // Save mui select
-    const handleSelectChange = (e, field, rowIndex) => {
+    const handleSelectChange = (e, field, id) => {
         const value = e.target.value;
         const updatedUserList = [...userList];
+        let rowIndex = updatedUserList.findIndex(element => element.id === id);
         updatedUserList[rowIndex][field] = value;
         setUserList(updatedUserList);
     };
@@ -76,7 +71,7 @@ const UserList = () => {
                         <Select
                             labelId={`status-select-label-${row.id}`}
                             value={row.rol}
-                            onChange={(e) => handleSelectChange(e, 'rol', index)}
+                            onChange={(e) => handleSelectChange(e, 'rol', row.id)}
                             sx={{
                                 width: 150,       // Set width here
                                 height: 50,       // Set height here
@@ -99,7 +94,7 @@ const UserList = () => {
             cell: (row, index) => (
                 editableRow === index ? (
                     <FormControl>
-                        <button onClick={handleSaveClick} className="btn-edit">Guardar</button>
+                        <button onClick={() => handleSaveClick(row.id, row)} className="btn-edit">Guardar</button>
                     </FormControl>
                 ) : (
                     <FormControl>
