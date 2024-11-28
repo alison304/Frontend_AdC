@@ -71,6 +71,12 @@
     background-color: rgba(217, 183, 91, 0.7);
 }
 
+.botonRestablecer{
+    background-color: transparent;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
 @media (max-width: 600px) and (max-width: 1024px) {
 
     .titulo{

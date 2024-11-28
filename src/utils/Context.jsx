@@ -18,7 +18,8 @@ const initialState = {
   listaProductosSoloFechas:[],
   listaProductosDescripcionFechas:[],
   palabraDescripcion:"",
-  tipo_Busqueda:1
+  tipo_Busqueda:1, 
+  busqueda:""
 }
 
 function convertirFecha(fecha) {
@@ -82,7 +83,7 @@ console.log('fecDes',urlBuscarProductosDescripcionFechas);
     //buscar solo descripcion
     useEffect(() => {
       const obtenerProductosDescripcion = async () => {
-  
+      console.log('entro1');
       try {
         //se obtiene los productos cuando solo se ingresa la descripcion
         const resProductosDescripcion = await axios(urlBuscarProductosDescripcion);
@@ -98,7 +99,7 @@ console.log('fecDes',urlBuscarProductosDescripcionFechas);
     //buscar solo fechas
     useEffect(() => {
       const obtenerProductosFechas = async () => {
-  
+      console.log('entro2');
       try {
         //se obtiene los productos cuando solo se ingresan las fechas
         const resProductosFechas = await axios(urlBuscarProductosFechas);
@@ -116,7 +117,7 @@ console.log('fecDes',urlBuscarProductosDescripcionFechas);
     useEffect(() => {
       
       const obtenerProductosDescripcionFechas = async () => {
-  
+      console.log('entro3');
       try {
         //se obtiene los productos cuando ingresa amos
         const resProductosDescripcionFecha = await axios(urlBuscarProductosDescripcionFechas);
@@ -127,7 +128,7 @@ console.log('fecDes',urlBuscarProductosDescripcionFechas);
       }
     }
     obtenerProductosDescripcionFechas();
-    }, [state.fechaInicial, state.fechaFinal]); 
+    }, [state.palabraDescripcion, state.fechaFinal]); 
    
   }
   console.log('bus',state.tipo_Busqueda);

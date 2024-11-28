@@ -26,5 +26,7 @@ export const reducer = (state,action) =>{
             return {...state, listaProductosDescripcionFechas:action.payload};
         case "TIPO_BUSQUEDA":
             return {...state, tipo_Busqueda:action.payload};
+        case "INPUT_BUSQUEDA":
+            return {...state, busqueda:action.payload};
         }       
 }

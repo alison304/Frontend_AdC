@@ -32,6 +32,8 @@ function App() {
         setIsAdmin(localStorage.getItem('userRol') == "ADMIN" ? true: false);
         dispatch({type:"REMOVE_FECHA_INICIAL", payload:null});
         dispatch({type:"REMOVE_FECHA_FINAL", payload:null});
+        dispatch({type:"MOSTRAR_BUSQUEDA", payload:false});     
+        dispatch({type:"INPUT_BUSQUEDA", payload:""});  
     };
 
     const handleLogout = () => {
@@ -40,6 +42,8 @@ function App() {
         setIsAuthenticated(false);
         dispatch({type:"REMOVE_FECHA_INICIAL", payload:null});
         dispatch({type:"REMOVE_FECHA_FINAL", payload:null});
+        dispatch({type:"MOSTRAR_BUSQUEDA", payload:false});
+        dispatch({type:"INPUT_BUSQUEDA", payload:""});
     };
 
     const [listaProductos, setListaProductos] = useState([
