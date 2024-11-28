@@ -18,8 +18,34 @@ const ListaProductos = () => {
     const [mostrarLista, setMostrarLista] = useState(true);
 
     useEffect(() => {
+        axios
+          .get(`${BASE_URL}/categorias/listar`)
+          .then((response) => {
+            setCategorias(response.data);
+          })
+          .catch(() => {
+            console.error("Error al cargar categorías.");
+          });
+      
+          axios
+          .put(`${BASE_URL}categorias/editar/`)
+          .then((response) => {
+            setAcciones(response.data);
+          })
+          .catch(() => {
+            console.error("No se puede editar la categoría porque está siendo utilizada en otro lugar.");
+          });
 
-    })
+        axios
+          .delete(`${BASE_URL}categorias/eliminar/`)
+          .then((response) => {
+            setAcciones(response.data);
+          })
+          .catch(() => {
+            console.error("No se puede eliminar la categoría porque está siendo utilizada en otro lugar.");
+          });
+      }, []); // Asegúrate de usar un array de dependencias vacío si deseas que esto se ejecute solo una vez.
+      
 
     const botonMovil = () => {
         navigate('/');
