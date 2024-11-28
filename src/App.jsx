@@ -19,6 +19,7 @@ import AdministrarCaracteristicas from './pages/AdministrarCaracteristicas';
 import Logout from './components/Logout/Logout';
 import UserList from './components/User/UserList';
 import {useProductosStates} from "./utils/Context"
+import { logout } from './services/user.service';
 
 function App() {
     console.log('RENDERIZANDO APP');
@@ -35,6 +36,7 @@ function App() {
 
     const handleLogout = () => {
         localStorage.removeItem('authToken');
+        logout();
         setIsAuthenticated(false);
         dispatch({type:"REMOVE_FECHA_INICIAL", payload:null});
         dispatch({type:"REMOVE_FECHA_FINAL", payload:null});
@@ -233,7 +235,6 @@ function App() {
                     <Route path='/' element={<Home />} />
                     <Route path='*' element={<h2>Error 404</h2>} />
 
-                    <Route path="/admin/listarProducto" element={<ListaProductos />} />
                     <Route path="/listaProductos/:id" element={<ListaProductos />} />
                     <Route path="/detail/:id" element={<Detail />} />
                     <Route path="/gallery/:id" element={<Gallery />} />
@@ -261,14 +262,6 @@ function App() {
                         element={
                             <ProtectedRoute isAuthenticated={isAuthenticated} isAdmin={isAdmin}>
                                 <Administrador />
-                            </ProtectedRoute>
-                        }
-                    />
-                    <Route
-                        path='/admin/listaProducto'
-                        element={
-                            <ProtectedRoute isAuthenticated={isAuthenticated}>
-                                <ListaProductos listaProductos={listaProductos} />
                             </ProtectedRoute>
                         }
                     />
