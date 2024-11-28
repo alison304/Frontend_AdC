@@ -19,6 +19,7 @@ import AdministrarCaracteristicas from './pages/AdministrarCaracteristicas';
 import Logout from './components/Logout/Logout';
 import UserList from './components/User/UserList';
 import {useProductosStates} from "./utils/Context"
+import { logout } from './services/user.service';
 
 function App() {
     console.log('RENDERIZANDO APP');
@@ -35,6 +36,7 @@ function App() {
 
     const handleLogout = () => {
         localStorage.removeItem('authToken');
+        logout();
         setIsAuthenticated(false);
         dispatch({type:"REMOVE_FECHA_INICIAL", payload:null});
         dispatch({type:"REMOVE_FECHA_FINAL", payload:null});

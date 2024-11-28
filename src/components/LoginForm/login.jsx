@@ -33,7 +33,9 @@ function Login({ onLoginSuccess }) {
             localStorage.setItem('userNombre', nombre);
             localStorage.setItem('userApellido', apellido);
             localStorage.setItem('userEmail', email);
-            localStorage.setItem('userRol', rol)            
+            localStorage.setItem('userRol', rol) 
+            const initials = nombre.charAt(0) + apellido.charAt(0);
+            localStorage.setItem('userInitials', initials)        
 
             Swal.fire({
                 icon: 'success',
@@ -66,7 +68,6 @@ function Login({ onLoginSuccess }) {
     const handleOlvidoPassRedirect = () => {
         navigate('/wip'); // 'wip' podría ser una página de "trabajo en progreso"
     };
-
     return (
         <Box className="login-container">
             <Typography

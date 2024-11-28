@@ -1,5 +1,5 @@
-// Navbar.js
-import React from 'react';
+// Navbar.jsx
+import React, { useState, useEffect } from 'react';
 import {
   AppBar,
   Toolbar,
@@ -21,6 +21,16 @@ const Navbar = ({ isAuthenticated, isAdmin, onLogout }) => {
   const theme = useTheme();
   const isMatch = useMediaQuery(theme.breakpoints.down('md'));
   const navigate = useNavigate();
+
+  // Estado para las iniciales del usuario
+  const [userInitials, setUserInitials] = useState('');
+
+  useEffect(() => {
+    const initials = localStorage.getItem('userInitials');
+    if (initials) {
+      setUserInitials(initials);
+    }
+  }, []);
 
   // Estado y manejadores para el menú de Catálogo
   const [anchorElCatalogo, setAnchorElCatalogo] = React.useState(null);
@@ -52,9 +62,10 @@ const Navbar = ({ isAuthenticated, isAdmin, onLogout }) => {
     setAnchorElUser(null);
   };
 
-  // Función actualizada para cerrar sesión y redirigir al inicio de sesión
+  // Función para cerrar sesión y redirigir al inicio de sesión
   const handleLogoutAndRedirect = () => {
     onLogout();
+    logout();
     navigate('/login'); // Redirige a la página de inicio de sesión después de cerrar sesión
   };
 
@@ -184,7 +195,11 @@ const Navbar = ({ isAuthenticated, isAdmin, onLogout }) => {
                         onClick={handleClickUser}
                         style={{ color: '#623d2b', paddingLeft: '1%' }}
                       >
-                        <FaUser size={30} color="#655e5e" />
+                        {userInitials ? (
+                          <div className="user-initials">{userInitials}</div>
+                        ) : (
+                          <FaUser size={30} color="#655e5e" />
+                        )}
                       </Button>
                       <Menu
                         id="menu-user"
@@ -203,14 +218,11 @@ const Navbar = ({ isAuthenticated, isAdmin, onLogout }) => {
                         <Link style={{ color: 'inherit', textDecoration: 'none' }} to="/profile">
                           <MenuItem onClick={handleCloseUser}>Perfil</MenuItem>
                         </Link>
-                        {
-                          isAdmin ? 
-                            <Link style={{ color: 'inherit', textDecoration: 'none' }} to="/admin">
-                              <MenuItem onClick={handleCloseUser}>Panel Admin</MenuItem>
-                            </Link>
-                          :
-                          <React.Fragment></React.Fragment>
-                        }                        
+                        {isAdmin ? (
+                          <Link style={{ color: 'inherit', textDecoration: 'none' }} to="/admin">
+                            <MenuItem onClick={handleCloseUser}>Panel Admin</MenuItem>
+                          </Link>
+                        ) : null}
                         <MenuItem onClick={handleLogoutAndRedirect}>Cerrar Sesión</MenuItem>
                       </Menu>
                     </>
