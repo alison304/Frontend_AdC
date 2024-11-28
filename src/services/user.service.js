@@ -83,12 +83,15 @@ export const isAuthenticated = () => {
 };
 
 export const logout = () => {
-  localStorage.removeItem('authToken');
   localStorage.removeItem('userEmail');
-  localStorage.removeItem('nombre');
-  localStorage.removeItem('apellido');
-  localStorage.removeItem('rol');
+  localStorage.removeItem('userNombre');
+  localStorage.removeItem('userApellido');
+  localStorage.removeItem('userRol');
+  localStorage.removeItem('userId');
+  localStorage.removeItem('userInitials');
 };
+
+
 
 /* Obtener usuario por email */
 export const getUserByEmail = async (userEmail) => {
