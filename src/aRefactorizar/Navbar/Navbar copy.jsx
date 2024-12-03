@@ -142,8 +142,52 @@ const Navbar = ({ isAuthenticated, isAdmin, onLogout }) => {
                   </Link>
                 </Menu>
 
-                {/* Opciones de usuario */}
+                {/* Temáticas */}
+                <Button
+                  aria-controls={openTematicas ? 'menu-tematicas' : undefined}
+                  aria-haspopup="true"
+                  aria-expanded={openTematicas ? 'true' : undefined}
+                  onClick={handleClickTematicas}
+                  style={{ color: '#623d2b' }}
+                >
+                  Temáticas
+                </Button>
+                <Menu
+                  id="menu-tematicas"
+                  anchorEl={anchorElTematicas}
+                  open={openTematicas}
+                  onClose={handleCloseTematicas}
+                  anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'left',
+                  }}
+                  transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'left',
+                  }}
+                >
+                  <Link style={{ color: 'inherit', textDecoration: 'none' }} to="/wip">
+                    <MenuItem onClick={handleCloseTematicas}>Halloween</MenuItem>
+                  </Link>
+                  <Link style={{ color: 'inherit', textDecoration: 'none' }} to="/wip">
+                    <MenuItem onClick={handleCloseTematicas}>Navidad</MenuItem>
+                  </Link>
+                  <Link style={{ color: 'inherit', textDecoration: 'none' }} to="/wip">
+                    <MenuItem onClick={handleCloseTematicas}>Acción de Gracias</MenuItem>
+                  </Link>
+                </Menu>
+
+                {/* Otros enlaces */}
+                <Link to="/wip">
+                  <Button style={{ color: '#623d2b' }}>Premium set</Button>
+                </Link>
+                <Link to="/wip">
+                  <Button style={{ color: '#623d2b' }}>Contáctanos</Button>
+                </Link>
+
+                {/* Carrito y opciones de usuario */}
                 <div className="right-side">
+                  <FiShoppingCart size={35} color="#655e5e" />
                   {isAuthenticated ? (
                     <>
                       <Button
