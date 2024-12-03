@@ -1,0 +1,40 @@
+.articulo{
+    border: solid blue 1px;
+}
+
+.imagen {
+    width: 250px;      /* La imagen se ajusta al ancho del contenedor */
+    height: 250px;     /* La altura se ajusta para mantener la proporción */
+    object-fit: cover; /* Asegura que la imagen llene el contenedor sin deformarse */
+    border-radius: 40px; 
+    border: solid red 1px;  
+}
+
+.nombreProducto{
+    font-family: 'Kaushan Script', cursive;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 34.82px;
+    text-align: center;
+    color: black;
+}
+
+.div2{
+    border: solid green 1px;  
+}
+
+.fechas{
+    border: 1px solid #A3A3A1;
+    border-radius: 10px;
+    width: 10%;
+    padding: 1rem;
+}
+
+.rangoFechas{
+    border: solid rgb(237, 27, 205) 1px;
+    display:flex;
+}
+
+.div3{
+    border: solid rgb(197, 125, 24) 1px;  
+}

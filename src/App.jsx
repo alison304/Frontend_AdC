@@ -20,6 +20,7 @@ import Logout from './components/Logout/Logout';
 import UserList from './components/User/UserList';
 import { useProductosStates } from "./utils/Context"
 import { logout } from './services/user.service';
+import Reserva from './pages/Reserva'
 
 function App() {
     console.log('RENDERIZANDO APP');
@@ -243,7 +244,7 @@ function App() {
                     <Route path="/gallery/:id" element={<Gallery />} />
                     <Route path='/register' element={<RegisterForm />} />
                     <Route path="/login" element={<Login onLoginSuccess={handleLoginSuccess} />} />
-
+                    <Route path="/reserva" element={<Reserva />} />
                     <Route
                         path="/logout"
                         element={
