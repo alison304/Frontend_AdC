@@ -65,9 +65,6 @@ function Login({ onLoginSuccess }) {
         navigate('/register');
     };
 
-    const handleOlvidoPassRedirect = () => {
-        navigate('/wip'); // 'wip' podría ser una página de "trabajo en progreso"
-    };
     return (
         <Box className="login-container">
             <Typography
@@ -132,13 +129,6 @@ function Login({ onLoginSuccess }) {
                                 />
                             }
                         />
-                        <Button
-                            className="olvidoPass-button"
-                            sx={{ color: '#635b4d', textDecoration: 'underline', textTransform: 'none' }}
-                            onClick={handleOlvidoPassRedirect}
-                        >
-                            ¿Olvidaste tu contraseña?
-                        </Button>
                         <Button
                             type="submit"
                             variant="contained"
