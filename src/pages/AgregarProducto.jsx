@@ -4,7 +4,7 @@ import styles from "../styles/AgregarProducto.module.css";
 import { createProduct, updateProduct } from '../services/producto.service';
 
 
-const BASE_URL = "https://auradecristalapi-development.up.railway.app";
+const BASE_URL = "https://auradecristalapi-production.up.railway.app";
 
 const AgregarProducto = () => {
   const [categorias, setCategorias] = useState([]);

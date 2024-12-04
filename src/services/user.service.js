@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 // URL base de tu API
- export const BASE_URL = 'https://auradecristalapi-development.up.railway.app';
+ export const BASE_URL = 'https://auradecristalapi-production.up.railway.app';
  //export const BASE_URL = 'http://localhost:8080'
 
 // Crear una instancia de Axios

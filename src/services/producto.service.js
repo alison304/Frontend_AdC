@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL_PRODUCTO = "https://auradecristalapi-development.up.railway.app";
+const BASE_URL_PRODUCTO = "https://auradecristalapi-production.up.railway.app";
 
 // Obtener lista de productos
 export const getListProducts = () => {

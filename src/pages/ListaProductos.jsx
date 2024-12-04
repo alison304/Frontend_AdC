@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { useProductosStates } from "../utils/Context";
 import Swal from 'sweetalert2';
 
-const BASE_URL = "https://auradecristalapi-development.up.railway.app";
+const BASE_URL = "https://auradecristalapi-production.up.railway.app";
 
 const ListaProductos = () => {
     const [id, setId] = useState('')
