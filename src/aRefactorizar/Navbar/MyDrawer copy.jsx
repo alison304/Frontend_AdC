@@ -96,7 +96,76 @@ const MyDrawer = ({ isAuthenticated, isAdmin, onLogout }) => {
               </Link>
             </List>
           </Collapse>
-          
+
+          {/* Temáticas */}
+          <ListItem disablePadding>
+            <CelebrationIcon />
+            <ListItemButton onClick={handleClickTematica}>
+              <ListItemText>Temáticas</ListItemText>
+              {openTematica ? <ExpandLess /> : <ExpandMore />}
+            </ListItemButton>
+          </ListItem>
+          <Collapse in={openTematica} timeout="auto" unmountOnExit>
+            <List component="div" disablePadding>
+              <ListItemButton sx={{ pl: 6 }}>
+                <ListItemIcon>
+                  <StarBorder />
+                </ListItemIcon>
+                <ListItemText primary="Halloween" />
+              </ListItemButton>
+              <ListItemButton sx={{ pl: 6 }}>
+                <ListItemIcon>
+                  <StarBorder />
+                </ListItemIcon>
+                <ListItemText primary="Navidad" />
+              </ListItemButton>
+              <ListItemButton sx={{ pl: 6 }}>
+                <ListItemIcon>
+                  <StarBorder />
+                </ListItemIcon>
+                <ListItemText primary="Acción de Gracias" />
+              </ListItemButton>
+            </List>
+          </Collapse>
+
+          {/* Otros enlaces */}
+          <Link
+            style={{ color: 'inherit', textDecoration: 'none' }}
+            to="/wip"
+            onClick={() => setOpenDrawer(false)}
+          >
+            <ListItem disablePadding>
+              <WorkspacePremiumIcon />
+              <ListItemButton>
+                <ListItemText>Premium set</ListItemText>
+              </ListItemButton>
+            </ListItem>
+          </Link>
+          <Link
+            style={{ color: 'inherit', textDecoration: 'none' }}
+            to="/wip"
+            onClick={() => setOpenDrawer(false)}
+          >
+            <ListItem disablePadding>
+              <PhoneIcon />
+              <ListItemButton>
+                <ListItemText>Contáctanos</ListItemText>
+              </ListItemButton>
+            </ListItem>
+          </Link>
+          <Divider />
+          <Link
+            style={{ color: 'inherit', textDecoration: 'none' }}
+            to="/wip"
+            onClick={() => setOpenDrawer(false)}
+          >
+            <ListItem disablePadding>
+              <ShoppingCartIcon />
+              <ListItemButton>
+                <ListItemText>Comprar</ListItemText>
+              </ListItemButton>
+            </ListItem>
+          </Link>
           <Divider />
 
           {/* Opciones de sesión */}

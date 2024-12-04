@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import DataTable from 'react-data-table-component';
 import { Button } from '@mui/material';
-import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import { RiArrowGoBackFill } from "react-icons/ri";
 import "./UserList.css";
