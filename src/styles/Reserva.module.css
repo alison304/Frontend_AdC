@@ -1,40 +1,118 @@
 .articulo{
-    border: solid blue 1px;
+    border: 1px solid #A3A3A1;
+    border-radius: 10px;
+    width: 50%;
 }
 
 .imagen {
-    width: 250px;      /* La imagen se ajusta al ancho del contenedor */
-    height: 250px;     /* La altura se ajusta para mantener la proporción */
-    object-fit: cover; /* Asegura que la imagen llene el contenedor sin deformarse */
-    border-radius: 40px; 
+    width: 150px;      /* La imagen se ajusta al ancho del contenedor */
+    height: 150px;     /* La altura se ajusta para mantener la proporción */
+    object-fit: cover; /* Asegura que la imagen llene el contenedor sin deformarse */ 
     border: solid red 1px;  
 }
 
 .nombreProducto{
     font-family: 'Kaushan Script', cursive;
-    font-size: 24px;
+    font-size: 25px;
     font-weight: 400;
     line-height: 34.82px;
     text-align: center;
     color: black;
+    margin-bottom: 1rem;
 }
 
-.div2{
-    border: solid green 1px;  
+.descripcionProducto, .fechasSeleccionada{
+    font-size: 14px;
+    font-weight: 300;
+    font-family: 'Inter', sans-serif;
+    text-align: left;
 }
 
-.fechas{
-    border: 1px solid #A3A3A1;
-    border-radius: 10px;
-    width: 10%;
-    padding: 1rem;
+.div1_1{
+    border: solid green 1px; 
+    width: 35%; 
 }
 
-.rangoFechas{
+.div1_2{
     border: solid rgb(237, 27, 205) 1px;
-    display:flex;
+    
 }
 
 .div3{
     border: solid rgb(197, 125, 24) 1px;  
+}
+
+.div1{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-bottom: 1px solid #A3A3A1;
+    margin: 3rem 0px 5px;
+    padding-bottom: 2rem;
+    width: 100%;
+}
+
+.fechasSeleccionada{
+    font-size: 16px;
+    text-align: center;
+}
+
+.principal{
+    border: 1px solid blue;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.titulo{
+    border: solid 1px yellow;
+    background-color: transparent;
+    width: 50%;
+    text-align: left;
+    font-size: 32px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+}
+
+.informacion, .nombre, .correo{
+    text-align: left;
+    font-size: 23px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    border: solid 2px green;
+}
+
+.informacion{
+    padding-left: 1rem;
+}
+
+.nombre, .correo{
+    font-size: 18px;
+    border: solid 1px rgb(20, 31, 230);
+    width: 45%;
+}
+
+.datosUsuario{
+    font-size: 16px;
+    border: solid 1px rgb(230, 20, 157);
+    text-align: center;
+    width: 45%;
+}
+
+.div2{
+    border-bottom: 1px solid #A3A3A1;
+    margin: 3rem 0px 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+    padding-bottom: 2rem;
+    width: 100%;
+}
+
+.div2_1{
+    border: solid 2px  blueviolet;
+    display: flex;
+    justify-content: space-around;
+
 }
