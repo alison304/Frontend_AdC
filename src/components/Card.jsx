@@ -45,9 +45,8 @@ const Card = ({ dato, esCategoria, productos, esBusqueda }) => {
                 <h3 className={StylesHome.nombreCategorias} >{dato.nombre}</h3>
                 <img src={dato.imagenes[0].url} className={StylesHome.cardImg} />
               </Link>
-              <div className={StylesHome.recomendacionesPiezas}>
-                <span className={StylesHome.piezas}>S/.{dato.precio_alquiler}</span>
-                <span className={StylesHome.calificacion}>Disponible: {dato.disponibilidad}</span>
+              <div className={StylesHome.precioBusqueda}>
+                <span className={StylesHome.piezas}>Precio: S/.{dato.precio_alquiler}</span>
               </div>
             </>
           ) :

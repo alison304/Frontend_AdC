@@ -45,25 +45,6 @@ const UserProfile = ({ onLogout }) => {
                     >
                         Datos Personales
                     </button>
-                    <button
-                        className={`tab-link ${activeTab === 'orders' ? 'active' : ''}`}
-                        onClick={() => handleTabChange('orders')}
-                    >
-                        Pedidos
-                    </button>
-                    <button
-                        className={`tab-link ${activeTab === 'favorites' ? 'active' : ''}`}
-                        onClick={() => handleTabChange('favorites')}
-                    >
-                        Mis Favoritos
-                    </button>
-                    <button
-                        className={`tab-link ${activeTab === 'addresses' ? 'active' : ''}`}
-                        onClick={() => handleTabChange('addresses')}
-                    >
-                        Direcciones
-                    </button>
-
                 </div>
 
                 <div className="user-profile-content">

@@ -67,8 +67,7 @@ const Navbar = ({ isAuthenticated, isAdmin, onLogout }) => {
   // Función para cerrar sesión y redirigir al inicio de sesión
   const handleLogoutAndRedirect = () => {
     onLogout();
-    logout();
-    navigate('/login'); // Redirige a la página de inicio de sesión después de cerrar sesión
+    navigate('/'); // Redirige a la página de inicio de sesión después de cerrar sesión
   };
 
   return (

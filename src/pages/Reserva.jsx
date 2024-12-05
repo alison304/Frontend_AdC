@@ -31,11 +31,25 @@ function Reserva() {
                 </div>
             </div>
             
-            <div className={StylesReserva.div3}>
-                <p>S/ 320</p>
+            <div className={StylesReserva.div2}>
+                <p className={StylesReserva.informacion}>Información del precio</p>
+                <div className={StylesReserva.div2_1}>
+                    <p className={StylesReserva.precioDias}>S/80 X 2 días</p>    
+                    <p className={StylesReserva.datosUsuario}>S/ 160</p>
+                </div>
             </div>
-            
+
+            <div className={StylesReserva.div3}>
+                <div className={StylesReserva.div2_1}>
+                    <p className={StylesReserva.informacion2}>Total(Soles)</p>   
+                    <p className={StylesReserva.datosUsuario}>S/ 160</p>
+                </div>
+            </div>            
         </article>
+        <div className={StylesReserva.divBotones}>
+            <button className={StylesReserva.botonCancelar}>Cancelar</button>
+            <button className={StylesReserva.botonReservar}>Solicitar reserva</button>
+        </div>
     </section>
   )
 }
