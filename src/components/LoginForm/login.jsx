@@ -27,9 +27,9 @@ function Login({ onLoginSuccess }) {
     const handleLogin = async (values, { setSubmitting }) => {
         try {
             const response = await login(values.email, values.password);
-            const { token , idUsuario, nombre , apellido, email, rol } = response.data;
+            const { token , id, nombre , apellido, email, rol } = response.data;
             localStorage.setItem('authToken', token);
-            localStorage.setItem('userId', idUsuario)            
+            localStorage.setItem('userId', id)            
             localStorage.setItem('userNombre', nombre);
             localStorage.setItem('userApellido', apellido);
             localStorage.setItem('userEmail', email);
