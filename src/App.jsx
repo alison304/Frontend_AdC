@@ -21,6 +21,7 @@ import UserList from './components/User/UserList';
 import { useProductosStates } from "./utils/Context"
 import { logout } from './services/user.service';
 import Reserva from './pages/Reserva'
+import ReservaExitosa from './pages/ReservaExitosa'
 
 function App() {
     console.log('RENDERIZANDO APP');
@@ -245,6 +246,7 @@ function App() {
                     <Route path='/register' element={<RegisterForm />} />
                     <Route path="/login" element={<Login onLoginSuccess={handleLoginSuccess} />} />
                     <Route path="/reserva" element={<Reserva />} />
+                    <Route path="/reservaExitosa" element={<ReservaExitosa />} />
                     <Route
                         path="/logout"
                         element={
