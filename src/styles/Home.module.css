@@ -51,10 +51,16 @@
     color: black;
 }
 
-.recomendacionesPiezas{
+.recomendacionesPiezas, .precioBusqueda{
     width: 70%; 
     display: flex;
     justify-content: space-between;
+}
+
+.recomendacionesPiezas, .precioBusqueda{
+    width: 70%; 
+    display: flex;
+    justify-content: center;
 }
 
 .piezas, .calificacion{
