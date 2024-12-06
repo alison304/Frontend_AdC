@@ -35,7 +35,7 @@ const Home = () => {
                     <h3 className={StylesHome.tituloBusqueda}>Resultados de la busqueda</h3>
                     <div className={StylesHome.cardGrid}>
                         {state.productosBusqueda.map((producto) => (
-                            <Card key={producto.id} dato={producto} esCategoria={false} productos={listaProductos}  esBusqueda={true}/>
+                            <Card key={producto.idProducto} dato={producto} esCategoria={false} productos={listaProductos}  esBusqueda={true}/>
                         ))}
                     </div> 
                     </>)
@@ -47,7 +47,7 @@ const Home = () => {
                 <h3 className={StylesHome.titulo}>Categorías</h3>
                 <div className={StylesHome.cardGrid}>
                     {listaCategorias.map((categoria) => (
-                        <Card key={categoria.id} dato={categoria} esCategoria={true} productos={listaProductos} esBusqueda={false}/>
+                        <Card key={categoria.idCategoria} dato={categoria} esCategoria={true} productos={listaProductos} esBusqueda={false}/>
                     ))}
                 </div>
             </section>
@@ -55,7 +55,7 @@ const Home = () => {
                 <h3 className={StylesHome.titulo}>Recomendaciones</h3>
                 <div className={StylesHome.cardGrid}>
                     {listaRecomendaciones.map((recomendacion) => (
-                        <Card key={recomendacion.id} dato={recomendacion} esCategoria={false} productos={listaProductos[recomendacion.id]} esBusqueda={false}/>
+                        <Card key={recomendacion.idProducto} dato={recomendacion} esCategoria={false} productos={listaProductos[recomendacion.id]} esBusqueda={false}/>
                     ))}
                 </div>
             </section>

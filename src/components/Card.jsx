@@ -12,7 +12,7 @@ const Card = ({ dato, esCategoria, productos, esBusqueda }) => {
   if (esCategoria) {
     for (const producto of productos) {
 
-      if (producto.categoria.id == dato.id) {
+      if (producto.categoria.idCategoria == dato.idCategoria) {
         productoCategoria = producto;
         break; // Detenemos el recorrido 
       } else {
@@ -28,7 +28,7 @@ const Card = ({ dato, esCategoria, productos, esBusqueda }) => {
     <div className={StylesHome.card}>
       {esCategoria && productoCategoria ? (
         <>
-          <Link to={'/listaCategorias/' + dato.id} className={StylesHome.link}>
+          <Link to={'/listaCategorias/' + dato.idCategoria} className={StylesHome.link}>
             <h3 className={StylesHome.nombreCategorias} >{dato.descripcion}</h3>
             <img src={productoCategoria.imagenes[0].url} className={StylesHome.cardImg} />
           </Link>
@@ -39,7 +39,7 @@ const Card = ({ dato, esCategoria, productos, esBusqueda }) => {
           (
             <>
               <Link to={{
-                pathname: '/detail/' + dato.id
+                pathname: '/detail/' + dato.idProducto
               }}
                 state={{ producto }} className={StylesHome.link}>
                 <h3 className={StylesHome.nombreCategorias} >{dato.nombre}</h3>
@@ -53,7 +53,7 @@ const Card = ({ dato, esCategoria, productos, esBusqueda }) => {
           (
             <>
               <Link to={{
-                pathname: '/detail/' + dato.id
+                pathname: '/detail/' + dato.idProducto
               }}
                 state={{ producto }} className={StylesHome.link}>
                 <h3 className={StylesHome.nombreCategorias} >{dato.nombre}</h3>
