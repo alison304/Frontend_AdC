@@ -31,7 +31,7 @@ Para arrancar el proyecto en un ambiente local. realice lo siguiente:
 3- Ir a la carpeta /Frontend_AdC y en linea de comandos corre el siguiente comando: $ npm run dev
 
 ---
-### Vistas por tipo de rol del usuario🍸
+### Vistas por tipo de rol del usuario 👤
 
 Rol: Usuario
 
