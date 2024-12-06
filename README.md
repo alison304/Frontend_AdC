@@ -31,13 +31,31 @@ Para arrancar el proyecto en un ambiente local. realice lo siguiente:
 3- Ir a la carpeta /Frontend_AdC y en linea de comandos corre el siguiente comando: $ npm run dev
 
 ---
-### Vistas🍸
+### Vistas por tipo de rol del usuario🍸
 
--   *Pagina de Inicio* : Esta página inicial, se muestra la barra de busqueda, las categorias, las recomendaciones de productos. 
+Rol: Usuario
 
--   *Detalle de los productos* :Muestra el detalle del producto como descripcion y precio.
+- *Pagina de Inicio* : En esta página inicial, se muestra la barra de busqueda, las categorias, las recomendaciones de productos. 
 
--   *Vista por categoria* : Aquí se muestran todos los productos disponibles por categoria.
+- *Lista de los productos por categoria* :Muestra los productos por su tipo de categoría.
+
+- *Detalle de los productos* :Muestra el detalle del producto como su nombre, descripción, características, precio y fecha de reserva.
+
+- *Galería de imágenes* :Muestra las imágenes de los productos.
+
+- *Recomendaciones de los productos* : Aquí se muestran todos los productos disponibles y recomendados.
+
+- *Perfil de usuario* : Aquí se muestran los datos personales del usuario como nombre, apellido y email.
+
+Rol: Usuario Administrador
+
+- *Panel administrador* : Aquí se muestran las secciones a las que puede acceder un administrador, se le permite acceder a añadir o quitar permisos, crear nuevos productos, acceder al registro de usuarios registrados.
+
+- *Agregar producto* : Aquí se muestran un formulario para poder agregar y registrar un producto, sale nombre, descripción, precio, inventario, categoría, temática, imágenes y características.
+
+- *Administrar caracteristicas* : Aquí se muestran una tabla con todas las características que puede tener un producto, se permite editar y eliminar.
+
+- *Administrar usuarios* : Aquí se muestran una tabla con el registro de todos los usuarios registrados por nombre, apellido, email y rol.
 
 ---
 ### Librerías usadas 🍷
@@ -53,7 +71,10 @@ Para arrancar el proyecto en un ambiente local. realice lo siguiente:
 - Mui: Es una biblioteca de componentes React sencilla, personalizable y accesible.
 - React-Bootstrap: Permite construir páginas web responsives de una forma más rápida y sencilla.
 - Git/Github: Sistema de control de versiones utilizado para consolidar piezas de código, así como desarrollo ágil de software y puntos de recuperación del mismo.
+- Vercel: Es una plataforma unificada en la nube que permite a los desarrolladores desplegar, gestionar y escalar sus aplicaciones y sitios web.
 
 ### Despliegue
 
-El deploy del sitio fue realizado en Vercel, Para acceder , puede dar click [Aurora de Cristal | Alquiler de Vajillas](https://aura-de-cristal.vercel.app/)
+El deploy del sitio fue realizado en Vercel. 
+
+Para acceder , puede dar click aquí [Aurora de Cristal | Alquiler de Vajillas](https://aura-de-cristal.vercel.app/)
