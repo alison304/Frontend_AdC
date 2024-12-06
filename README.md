@@ -20,7 +20,7 @@
 El repositorio de articulos de alquiler de vajillas Aura de Cristal fue desarrollado: el frontend con React con Vite y el backend en Java Spring Boot para el Proyecto Integrador de Digital House.
 
 ---
-### Inicio Rapido
+### Inicio Rapido 🏃‍♀️
 
 Para arrancar el proyecto en un ambiente local. realice lo siguiente:
 
@@ -33,7 +33,7 @@ Para arrancar el proyecto en un ambiente local. realice lo siguiente:
 ---
 ### Vistas por tipo de rol del usuario 👤
 
-Rol: Usuario
+Rol: Usuario ⛁
 
 - *Pagina de Inicio* : En esta página inicial, se muestra la barra de busqueda, las categorias, las recomendaciones de productos. 
 
@@ -47,7 +47,7 @@ Rol: Usuario
 
 - *Perfil de usuario* : Aquí se muestran los datos personales del usuario como nombre, apellido y email.
 
-Rol: Usuario Administrador
+Rol: Usuario Administrador ♔
 
 - *Panel administrador* : Aquí se muestran las secciones a las que puede acceder un administrador, se le permite acceder a añadir o quitar permisos, crear nuevos productos, acceder al registro de usuarios registrados.
 
@@ -73,7 +73,7 @@ Rol: Usuario Administrador
 - Git/Github: Sistema de control de versiones utilizado para consolidar piezas de código, así como desarrollo ágil de software y puntos de recuperación del mismo.
 - Vercel: Es una plataforma unificada en la nube que permite a los desarrolladores desplegar, gestionar y escalar sus aplicaciones y sitios web.
 
-### Despliegue
+### Despliegue 🚀
 
 El deploy del sitio fue realizado en Vercel. 
 
