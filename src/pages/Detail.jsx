@@ -41,7 +41,7 @@ const Detail = () => {
             <img src={location.state.producto.imagenes[3].url} className={StylesDetail.imgPequeña} />
 
             <Link to={{
-              pathname: '/gallery/' + location.state.producto.id
+              pathname: '/gallery/' + location.state.producto.idProducto
             }}
               state={{ producto }}>
               <div className={StylesDetail.divImg}>
