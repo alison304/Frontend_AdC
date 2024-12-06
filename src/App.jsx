@@ -80,16 +80,6 @@ function App() {
             imagenes: "../public/images/vajilla_serenidad.jpg"
         },
         {
-            id: 4,
-            nombre: "Vajilla Hyra Premium",
-            descripcion: "La vajilla de gres premium Hyra ofrece una experiencia de comedor elevada. Con platos y cuencos de varios tamaños, añade versatilidad a tu mesa, destacando un esmalte brillante y detalles delicados para impresionar a tus invitados con estilo.",
-            precioAlquiler: 100,
-            disponibilidad: 1,
-            fechaRegistro: "2024-10-25",
-            categoria: { "idCategoria": 1 },
-            imagenes: "../public/images/vajilla_hyra.png"
-        },
-        {
             id: 5,
             nombre: "Vajilla Blanco Legacy",
             descripcion: "La vajilla Blanco Legacy añade elegancia instantánea a cualquier mesa. Cada pieza tiene borde dorado pintado a mano, ideal para ocasiones sociales. Su porcelana duradera la hace perfecta para el uso diario o para reuniones en casa o fuera.",
