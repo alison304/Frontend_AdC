@@ -53,3 +53,7 @@ Para arrancar el proyecto en un ambiente local. realice lo siguiente:
 - Mui: Es una biblioteca de componentes React sencilla, personalizable y accesible.
 - React-Bootstrap: Permite construir páginas web responsives de una forma más rápida y sencilla.
 - Git/Github: Sistema de control de versiones utilizado para consolidar piezas de código, así como desarrollo ágil de software y puntos de recuperación del mismo.
+
+### Despliegue
+
+El deploy del sitio fue realizado en Vercel, Para acceder , puede dar click [Aurora de Cristal | Alquiler de Vajillas](https://aura-de-cristal.vercel.app/)
