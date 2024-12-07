@@ -101,19 +101,19 @@ const validateDisabled = (date) => {
       <div className={StylesCalendario.titulo} >
         <button className={StylesCalendario.botonFechas} onClick={handleCalendario}>
           <p className={StylesCalendario.fechasSeleccionada}> Desde
-            <p className={StylesCalendario.fechas}>
+            <span className={StylesCalendario.fechas}>
             {state.fechaInicial === null ?
               ('DD/MM/YYYY') :
-              (state.fechaInicial)}</p>
+              (state.fechaInicial)}</span>
           </p>
         </button>
         <ArrowForwardIcon /> {/* Usa el ícono de flecha */}
         <button className={StylesCalendario.botonFechas} onClick={handleCalendario}>
           <p className={StylesCalendario.fechasSeleccionada}>Hasta
-            <p className={StylesCalendario.fechas}>
+            <span className={StylesCalendario.fechas}>
             {state.fechaFinal === null ?
               ('DD/MM/YYYY') :
-              (state.fechaFinal)}</p>
+              (state.fechaFinal)}</span>
           </p>
         </button>
       </div>
