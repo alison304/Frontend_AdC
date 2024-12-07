@@ -10,7 +10,6 @@ const UserProfile = ({ onLogout }) => {
         nombre: localStorage.getItem('userNombre'),
         apellido: localStorage.getItem('userApellido'),
         email: localStorage.getItem('userEmail'),
-        // password: '***',
     });
 
     const handleTabChange = (tab) => {
@@ -27,11 +26,6 @@ const UserProfile = ({ onLogout }) => {
         localStorage.removeItem('authToken');
         navigate('/'); // Redirigir a la página de inicio
     };
-
-    // const handleSaveChanges = () => {
-    //     // Lógica para guardar cambios
-    //     console.log('Datos guardados:', userData);
-    // };
 
     return (
         <div className="user-profile-container">
@@ -82,19 +76,6 @@ const UserProfile = ({ onLogout }) => {
                                     disabled
                                 />
                             </div>
-                            {/* <div className="user-profile-form-group">
-                                <label htmlFor="password">Contraseña</label>
-                                <input
-                                    type="password"
-                                    id="password"
-                                    value={userData.password}
-                                    onChange={handleInputChange}
-                                    placeholder="Ingresa tu contraseña"
-                                />
-                            </div>
-                            <button className="user-profile-button" onClick={handleSaveChanges}>
-                                Guardar Cambios
-                            </button> */}
                         </div>
                     )}
                 </div>
