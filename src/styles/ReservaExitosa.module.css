@@ -108,6 +108,15 @@
     width: 45%;
 }
 
+.datosPoliticas{
+    font-size: 16px;
+    border: solid 1px rgb(230, 20, 157);
+    text-align: left;
+    width: 100%;
+    padding-left: 1rem;
+    text-decoration: underline;
+}
+
 .div2, .div3{
     border-bottom: 1px solid #A3A3A1;
     margin: 3rem 0px 5px;
@@ -170,4 +179,39 @@
 .div1_fechas{
     border: solid 1px black;
     display: flex;
+}
+
+/* Cuando la pantalla es de 900px o menos */
+@media (max-width: 600px) and (max-width: 1024px) {
+
+.articulo{
+    width: 90%;
+}
+
+.div1_1{
+    width: 100%; 
+}
+
+.div1_imagenes{
+    display: grid;
+    grid-template-columns: 45% 45%;
+}
+
+.imagen {
+    width: 96%;      /* La imagen se ajusta al ancho del contenedor */
+    height: 96%;
+    margin-bottom: 1rem;     /* La altura se ajusta para mantener la proporción */ 
+}
+
+.div1_2_hasta{
+    padding-left: 20%;
+    border-left: 1px solid #A3A3A1;
+}
+
+.titulo{
+    margin-top: 60px;
+    width: 100%;
+}
+
+
 }

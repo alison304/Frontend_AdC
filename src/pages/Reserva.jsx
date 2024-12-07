@@ -1,10 +1,29 @@
 import React from 'react'
 import StylesReserva from '../styles/Reserva.module.css'
+import Swal from 'sweetalert2';
 
 function Reserva() {
+
+    const errorEnLaReserva = () => {
+        Swal.fire({
+            title: "Aura de Cristal",
+            text: "Hubo un problema con el método de pago",
+            icon: "question",
+            showCancelButton: true,
+            confirmButtonText: "Volver",
+            cancelButtonText: "Más info",
+            confirmButtonColor: '#000',
+            cancelButtonColor: '#8D3434CC'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                console.log('error reserva hola');
+            }
+        });
+    };
+
   return (
     <section className={StylesReserva.principal}>
-        <p className={StylesReserva.titulo}>Confirma y paga</p>
+        <p className={StylesReserva.titulo}>Confirma y reserva</p>
         <article className={StylesReserva.articulo}>
             <div className={StylesReserva.div1}>
                 <img src="https://dovet.es/wp-content/uploads/2017/01/gato-768x658.jpg"className={StylesReserva.imagen} />
