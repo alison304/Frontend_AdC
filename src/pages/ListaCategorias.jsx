@@ -85,7 +85,7 @@ function ListaCategorias() {
                 <h3 className={StylesListaProductos.titulo}>{titulo}</h3>
                 <div className={StylesListaProductos.cardGrid}>
                     {productosAleatorias.map((producto) => (
-                        <CardProductos key={producto.id} producto={producto} />
+                        <CardProductos key={producto.idProducto} producto={producto} />
                     ))}
                 </div>
             </section>
