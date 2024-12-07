@@ -9,6 +9,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
 }
 
 .titulo {
@@ -16,6 +17,7 @@
     width: 70%;
     align-items: center;
     padding-bottom: 15px;
+    justify-content: center;
 }
 
 .botonFechas {
@@ -30,7 +32,16 @@
 .fechasSeleccionada {
     border: 1px solid #A3A3A1;
     border-radius: 10px;
-    padding: 1rem;
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.fechas{
+    text-align: center;
+    margin-top: 0.5rem;
+    
 }
 
 .iconoCerrar {
@@ -61,11 +72,13 @@
 .mensajeError {
     color: red;
     font-size: 1rem;
+    padding-bottom: 1rem;
 }
 
 .mensajeExito {
     color: green;
     font-size: 1rem;
+    padding-bottom: 1rem;
 }
 
 .botonGuardarFecha:hover {
