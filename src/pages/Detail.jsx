@@ -47,19 +47,24 @@ const Detail = () => {
             </Link>
           </div>
           <div>
-                <h4>Características:</h4>
-                <Caracteristicas idProducto={producto.idProducto}></Caracteristicas>
+                {
+                  !isMobile && (
+                    <>
+                      <h4>Características:</h4>
+                      <Caracteristicas idProducto={producto.idProducto}></Caracteristicas>
+                    </>
+                  )
+                }
           </div>
         </div>
         {
           isMobile ? (
             <div className={StylesDetail.contenedorDetalle}>
+              <h3 className={StylesDetail.tituloDescripcion}>Descripción:</h3>
               <p className={StylesDetail.descripcion}> {location.state.producto.descripcion}</p>
-              <CalendarioDetail noDisponibles={location.state.producto.reservas}/>
-
               <h3 className={StylesDetail.precio}>S/.{location.state.producto.precio_alquiler}</h3>
-
-              <button className={StylesDetail.boton}>Añadir al Carrito</button>
+              <CalendarioDetail noDisponibles={location.state.producto.reservas}/>
+              <button className={StylesDetail.boton}>RESERVAR</button>
             </div>) :
 
             (<div className={StylesDetail.contenedorDetalle}>
