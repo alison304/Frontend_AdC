@@ -42,10 +42,9 @@ function ReservaExitosa() {
         </div>
         
         <div className={StylesReservaExitosa.div2}>
-            <p className={StylesReservaExitosa.informacion}>Información del precio</p>
+            <p className={StylesReservaExitosa.informacion}>Politicas del producto</p>
             <div className={StylesReservaExitosa.div2_1}>
-                <p className={StylesReservaExitosa.datosUsuario}>S/80 X 2 días</p>    
-                <p className={StylesReservaExitosa.datosUsuario}>S/ 160</p>
+                <p className={StylesReservaExitosa.datosPoliticas}>Politicas de cancelación</p>    
             </div>
         </div>
 
