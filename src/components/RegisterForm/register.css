@@ -44,10 +44,12 @@ label {
   padding-bottom: 2%;
 }
 
+/* Adaptación para dispositivos móviles y tabletas */
 @media (min-width: 300px) and (max-width: 1024px) {
   .register {
     width: 100vh;
     height: 100vh;
+    margin-bottom: auto;
   }
 
   .text {
@@ -55,11 +57,12 @@ label {
   }
 
   .title-form {
-    margin-top: 23%;
+    margin-top: 20%;
   }
 
   .holder-style {
     width: 230px;
-    height: 20px;
+    height: 30px;
   }
 }
+
