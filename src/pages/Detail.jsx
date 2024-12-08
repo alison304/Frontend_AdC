@@ -14,13 +14,7 @@ const Detail = () => {
   const volverHome = () => {
     navigate(-1);
   }
-  const [contador, setContador] = useState(1);
 
-  const actualizarContador = (valor) => {
-    if ((contador + valor) > -1) {
-      setContador(contador + valor)
-    }
-  }
   const producto = location.state.producto;
   console.log("desde detail", location.state.producto.reservas)
   
@@ -41,7 +35,7 @@ const Detail = () => {
             <img src={location.state.producto.imagenes[3].url} className={StylesDetail.imgPequeña} />
 
             <Link to={{
-              pathname: '/gallery/' + location.state.producto.id
+              pathname: '/gallery/' + location.state.producto.idProducto
             }}
               state={{ producto }}>
               <div className={StylesDetail.divImg}>
@@ -53,40 +47,35 @@ const Detail = () => {
             </Link>
           </div>
           <div>
-                <h4>Características:</h4>
-                <Caracteristicas idProducto={producto.id}></Caracteristicas>
+                {
+                  !isMobile && (
+                    <>
+                      <h4>Características:</h4>
+                      <Caracteristicas idProducto={producto.idProducto}></Caracteristicas>
+                    </>
+                  )
+                }
           </div>
         </div>
         {
           isMobile ? (
             <div className={StylesDetail.contenedorDetalle}>
+              <h3 className={StylesDetail.tituloDescripcion}>Descripción:</h3>
               <p className={StylesDetail.descripcion}> {location.state.producto.descripcion}</p>
-              <div className={StylesDetail.contenedorAñadir}>
-                <button className={StylesDetail.botonMenos} onClick={() => { actualizarContador(-1) }}>-</button>
-                <div className={StylesDetail.cantidad}>{contador}</div>
-                <button className={StylesDetail.botonMas} onClick={() => { actualizarContador(1) }} >+</button>
-              </div>
+              <h3 className={StylesDetail.precio}>S/.{location.state.producto.precio_alquiler}</h3>
               <CalendarioDetail noDisponibles={location.state.producto.reservas}/>
-
-              <h3 className={StylesDetail.precio}>S/.{location.state.producto.precioAlquiler}</h3>
-
-              <button className={StylesDetail.boton}>Añadir al Carrito</button>
+              <button className={StylesDetail.boton}>RESERVAR</button>
             </div>) :
 
             (<div className={StylesDetail.contenedorDetalle}>
               <h3 className={StylesDetail.nombre}>{location.state.producto.nombre}</h3>
               <h3 className={StylesDetail.precio}>S/.{location.state.producto.precio_alquiler}</h3>
-              <h3 className={StylesDetail.disponible}>Disponible: {location.state.producto.disponibilidad}</h3>
-              <h3 className={StylesDetail.disponible}>Cantidad</h3>
-              <div className={StylesDetail.contenedorAñadir}>
-                <button className={StylesDetail.botonMenos} onClick={() => { actualizarContador(-1) }} >-</button>
-                <div className={StylesDetail.cantidad}>{contador}</div>
-                <button className={StylesDetail.botonMas} onClick={() => { actualizarContador(1) }} >+</button>
-              </div>
-              <CalendarioDetail noDisponibles={location.state.producto.reservas}/>
-              <button className={StylesDetail.boton}>AÑADIR AL CARRO</button>
               <h3 className={StylesDetail.tituloDescripcion}>Descripción:</h3>
               <p className={StylesDetail.descripcion}> {location.state.producto.descripcion}</p>
+              <div className={StylesDetail.contenedorReserva}>
+              <CalendarioDetail noDisponibles={location.state.producto.reservas}/>
+              <button className={StylesDetail.boton}>RESERVAR</button>
+              </div>
             </div>)
         }
       </section>

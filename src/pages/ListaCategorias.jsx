@@ -15,7 +15,7 @@ function ListaCategorias() {
 
     const params = useParams();
     //filtramos los que sean de esa categoria
-    const productosFiltrados = listaProductos.filter(producto => producto.categoria.id == params.id);
+    const productosFiltrados = listaProductos.filter(producto => producto.categoria.idCategoria == params.id);
     // Copia del array original
     let datosProductos = [...productosFiltrados];
     let productosAleatorias = [];
@@ -85,7 +85,7 @@ function ListaCategorias() {
                 <h3 className={StylesListaProductos.titulo}>{titulo}</h3>
                 <div className={StylesListaProductos.cardGrid}>
                     {productosAleatorias.map((producto) => (
-                        <CardProductos key={producto.id} producto={producto} />
+                        <CardProductos key={producto.idProducto} producto={producto} />
                     ))}
                 </div>
             </section>

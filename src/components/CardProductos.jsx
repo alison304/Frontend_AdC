@@ -8,7 +8,7 @@ function CardProductos({ producto }) {
   return (
     <div className={StylesListaProductos.card}>
       <Link to={{
-        pathname: '/detail/' + producto.id
+        pathname: '/detail/' + producto.idProducto
       }}
         state={{ producto }}
         className={StylesListaProductos.link}>

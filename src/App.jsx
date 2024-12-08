@@ -231,7 +231,7 @@ function App() {
                     <Route path='/' element={<Home />} />
                     <Route path='*' element={<h2>Error 404</h2>} />
                     <Route path="/listaCategorias/:id" element={<ListaCategorias />} />
-                    <Route path="/detail/:id" element={<Detail />} />
+                    <Route path="/detail/:id" element={<Detail/>} />
                     <Route path="/gallery/:id" element={<Gallery />} />
                     <Route path='/register' element={<RegisterForm />} />
                     <Route path="/login" element={<Login onLoginSuccess={handleLoginSuccess} />} />
