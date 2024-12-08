@@ -61,7 +61,7 @@ const MyDrawer = ({ isAuthenticated, isAdmin, onLogout }) => {
               <Link
                 onClick={() => setOpenDrawer(false)}
                 style={{ color: 'inherit', textDecoration: 'none' }}
-                to="/listaProductos/1"
+                to="/listaCategorias/1"
               >
                 <ListItemButton sx={{ pl: 6 }}>
                   <ListItemIcon>
@@ -73,7 +73,7 @@ const MyDrawer = ({ isAuthenticated, isAdmin, onLogout }) => {
               <Link
                 onClick={() => setOpenDrawer(false)}
                 style={{ color: 'inherit', textDecoration: 'none' }}
-                to="/listaProductos/2"
+                to="/listaCategorias/2"
               >
                 <ListItemButton sx={{ pl: 6 }}>
                   <ListItemIcon>
@@ -85,7 +85,7 @@ const MyDrawer = ({ isAuthenticated, isAdmin, onLogout }) => {
               <Link
                 onClick={() => setOpenDrawer(false)}
                 style={{ color: 'inherit', textDecoration: 'none' }}
-                to="/listaProductos/3"
+                to="/listaCategorias/3"
               >
                 <ListItemButton sx={{ pl: 6 }}>
                   <ListItemIcon>

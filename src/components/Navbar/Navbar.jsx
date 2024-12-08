@@ -130,13 +130,13 @@ const Navbar = ({ isAuthenticated, isAdmin, onLogout }) => {
                     horizontal: 'left',
                   }}
                 >
-                  <Link style={{ color: 'inherit', textDecoration: 'none' }} to="/listaProductos/1">
+                  <Link style={{ color: 'inherit', textDecoration: 'none' }} to="/listaCategorias/1">
                     <MenuItem onClick={handleCloseCatalogo}>Vajilla</MenuItem>
                   </Link>
-                  <Link style={{ color: 'inherit', textDecoration: 'none' }} to="/listaProductos/2">
+                  <Link style={{ color: 'inherit', textDecoration: 'none' }} to="/listaCategorias/2">
                     <MenuItem onClick={handleCloseCatalogo}>Cubiertos</MenuItem>
                   </Link>
-                  <Link style={{ color: 'inherit', textDecoration: 'none' }} to="/listaProductos/3">
+                  <Link style={{ color: 'inherit', textDecoration: 'none' }} to="/listaCategorias/3">
                     <MenuItem onClick={handleCloseCatalogo}>Cristalería</MenuItem>
                   </Link>
                 </Menu>
