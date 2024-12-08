@@ -27,7 +27,7 @@ const UserList = () => {
     const handleSelectChange = (e, field, id) => {
         const value = e.target.value;
         const updatedUserList = [...userList];
-        let rowIndex = updatedUserList.findIndex(element => element.id === id);
+        let rowIndex = updatedUserList.findIndex(element => element.idUsuario === id);
         updatedUserList[rowIndex][field] = value;
         setUserList(updatedUserList);
     };
@@ -41,7 +41,7 @@ const UserList = () => {
     const columns = [
         {
             name: 'id',
-            selector: row => row.id,
+            selector: row => row.idUsuario,
             sortable: true,
             omit: true
         },
@@ -66,11 +66,11 @@ const UserList = () => {
             cell: (row, index) => (
                 editableRow === index ? (
                     <FormControl>
-                        <InputLabel id={`status-select-label-${row.id}`}></InputLabel>
+                        <InputLabel id={`status-select-label-${row.idUsuario}`}></InputLabel>
                         <Select
-                            labelId={`status-select-label-${row.id}`}
+                            labelId={`status-select-label-${row.idUsuario}`}
                             value={row.rol}
-                            onChange={(e) => handleSelectChange(e, 'rol', row.id)}
+                            onChange={(e) => handleSelectChange(e, 'rol', row.idUsuario)}
                             sx={{
                                 width: 150,       // Set width here
                                 height: 50,       // Set height here
@@ -93,7 +93,7 @@ const UserList = () => {
             cell: (row, index) => (
                 editableRow === index ? (
                     <FormControl>
-                        <button onClick={() => handleSaveClick(row.id, row)} className="btn-edit">Guardar</button>
+                        <button onClick={() => handleSaveClick(row.idUsuario, row)} className="btn-edit">Guardar</button>
                     </FormControl>
                 ) : (
                     <FormControl>

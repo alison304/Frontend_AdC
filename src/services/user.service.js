@@ -1,4 +1,3 @@
-// src/services/user.service.js
 import axios from 'axios';
 
 // URL base de tu API
@@ -29,8 +28,6 @@ export const getListUser = async () => {
     console.error(error);
   }
 }
-
-
 
 export const getOneUser = (id) => {
   return api.get(`/api/user/${id}`);
@@ -66,6 +63,19 @@ export const removeUser = (id) => {
   return api.delete(`/api/user/${id}`);
 };
 
+export const reSendEmail = async (email) => {
+  const options = {
+    method: 'POST',
+    url: `${BASE_URL}/auth/resend-email?email=${email}`,
+  };
+
+  try {
+    return await axios.request(options);
+  } catch (error) {
+    console.error(error);
+  }
+}  
+
 export const login = (email, password) => {
   return axios.post(`${BASE_URL}/auth/login`, 
       {
@@ -74,8 +84,6 @@ export const login = (email, password) => {
       }
   )
 }
-
-
 
 /* Mantener sesión abierta y cerrar sesión */
 export const isAuthenticated = () => {
@@ -90,8 +98,6 @@ export const logout = () => {
   localStorage.removeItem('userId');
   localStorage.removeItem('userInitials');
 };
-
-
 
 /* Obtener usuario por email */
 export const getUserByEmail = async (userEmail) => {
