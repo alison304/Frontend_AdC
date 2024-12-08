@@ -6,7 +6,7 @@ import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import Swal from "sweetalert2";
 import "./register.css";
-import { createUser } from '../../services/user.service';
+import { createUser, reSendEmail } from '../../services/user.service';
 
 const RegisterComponent = () => {
     const { id } = useParams();
@@ -47,8 +47,11 @@ const RegisterComponent = () => {
                 icon: 'success',
                 title: 'Aura de Cristal',
                 text: 'Usuario creado',
+            }).then(async (result) => {
+                if (result.isConfirmed) {
+                    showSwalSendEmail(user.email);
+                }                
             });
-            navigate('/');
         } catch (error) {
             Swal.fire({
                 icon: 'error',
@@ -57,6 +60,25 @@ const RegisterComponent = () => {
             });
         }
     };
+
+    const showSwalSendEmail = async (email) => {
+        Swal.fire({
+            icon: 'success',
+            title: 'Aura de Cristal',
+            text: 'Se envio un correo de confirmacion a su email',
+            showCancelButton: true,
+            cancelButtonText: "Si no le llego el correo, pulse aqui para reenviar",
+            confirmButtonColor: '#000',
+            cancelButtonColor: '#8D3434CC'    
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                navigate('/');
+            } else {                
+                await reSendEmail(email);
+                showSwalSendEmail(email);                
+            }                
+        });
+    };    
 
     return (
         <React.Fragment>
