@@ -13,7 +13,6 @@ import {
 import MyDrawer from './MyDrawer';
 import logo from '../../../public/images/Logo.png';
 import { FaUser } from 'react-icons/fa';
-import { FiShoppingCart } from 'react-icons/fi';
 import { Link, useNavigate } from 'react-router-dom';
 import './Navbar.css';
 
@@ -42,16 +41,6 @@ const Navbar = ({ isAuthenticated, isAdmin, onLogout }) => {
   };
   const handleCloseCatalogo = () => {
     setAnchorElCatalogo(null);
-  };
-
-  // Estado y manejadores para el menú de Temáticas
-  const [anchorElTematicas, setAnchorElTematicas] = React.useState(null);
-  const openTematicas = Boolean(anchorElTematicas);
-  const handleClickTematicas = (event) => {
-    setAnchorElTematicas(event.currentTarget);
-  };
-  const handleCloseTematicas = () => {
-    setAnchorElTematicas(null);
   };
 
   // Estado y manejadores para el menú de Usuario

@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { getOneUser } from "../../services/user.service";
+import React, { useState } from "react";
+// import { getOneUser } from "../../services/user.service";
 import { useParams, useNavigate } from "react-router-dom";
 import { Button } from '@mui/material';
 import { Formik, Form, Field } from 'formik';
@@ -88,7 +88,7 @@ const RegisterComponent = () => {
                 validationSchema={userSchema}
                 onSubmit={sendNewUser}
             >
-                {({ values, errors, touched, setFieldValue }) => (
+                {({ errors, touched }) => (
                     <Form>
                         <div className='registro'>
                             {id ? (

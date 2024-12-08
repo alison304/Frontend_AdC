@@ -16,17 +16,12 @@ import StarBorder from '@mui/icons-material/StarBorder';
 import MenuIcon from '@mui/icons-material/Menu';
 import MailIcon from '@mui/icons-material/Mail';
 import ImportContactsIcon from '@mui/icons-material/ImportContacts';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import PersonIcon from '@mui/icons-material/Person';
-import WorkspacePremiumIcon from '@mui/icons-material/WorkspacePremium';
-import PhoneIcon from '@mui/icons-material/Phone';
-import CelebrationIcon from '@mui/icons-material/Celebration';
 import { Link, useNavigate } from 'react-router-dom';
 
 const MyDrawer = ({ isAuthenticated, isAdmin, onLogout }) => {
   const [openDrawer, setOpenDrawer] = useState(false);
   const [openCatalogo, setOpenCatalogo] = useState(false);
-  const [openTematica, setOpenTematica] = useState(false);
 
   const navigate = useNavigate();
 
@@ -38,10 +33,6 @@ const MyDrawer = ({ isAuthenticated, isAdmin, onLogout }) => {
 
   const handleClickCatalogo = () => {
     setOpenCatalogo(!openCatalogo);
-  };
-
-  const handleClickTematica = () => {
-    setOpenTematica(!openTematica);
   };
 
   return (
