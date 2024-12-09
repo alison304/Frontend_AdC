@@ -1,3 +1,4 @@
+// App.jsx
 import './App.css'
 import { Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
@@ -27,11 +28,11 @@ function App() {
     console.log('RENDERIZANDO APP');
     const { dispatch } = useProductosStates();
     const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem('authToken'));
-    const [isAdmin, setIsAdmin] = useState(localStorage.getItem('userRol') == "ADMIN" ? true : false);
+    const [isAdmin, setIsAdmin] = useState(localStorage.getItem('userRol') === "ADMIN" ? true : false);
 
     const handleLoginSuccess = () => {
         setIsAuthenticated(true);
-        setIsAdmin(localStorage.getItem('userRol') == "ADMIN" ? true : false);
+        setIsAdmin(localStorage.getItem('userRol') === "ADMIN" ? true : false);
         dispatch({ type: "REMOVE_FECHA_INICIAL", payload: null });
         dispatch({ type: "REMOVE_FECHA_FINAL", payload: null });
         dispatch({ type: "MOSTRAR_BUSQUEDA", payload: false });
@@ -219,7 +220,7 @@ function App() {
             categoria: { "idCategoria": 3 },
             imagenes: "../public/images/set_coleccion.png"
         }
-    ]); // Array de objetos con datos iniciales
+    ]);
 
     console.log('lista productos app', listaProductos);
 
@@ -231,7 +232,7 @@ function App() {
                     <Route path='/' element={<Home />} />
                     <Route path='*' element={<h2>Error 404</h2>} />
                     <Route path="/listaCategorias/:id" element={<ListaCategorias />} />
-                    <Route path="/detail/:id" element={<Detail/>} />
+                    <Route path="/detail/:id" element={<Detail />} />
                     <Route path="/gallery/:id" element={<Gallery />} />
                     <Route path='/register' element={<RegisterForm />} />
                     <Route path="/login" element={<Login onLoginSuccess={handleLoginSuccess} />} />
@@ -247,7 +248,6 @@ function App() {
                     />
 
                     {/*ADMIN - INICIO*/}
-
                     <Route
                         path='/admin'
                         element={
@@ -301,10 +301,6 @@ function App() {
                     />
 
                 </Routes>
-
-
-
-
                 <Footer />
             </div>
         </>
