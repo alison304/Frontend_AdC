@@ -13,7 +13,6 @@ import {
 import MyDrawer from './MyDrawer';
 import logo from '../../../public/images/Logo.png';
 import { FaUser } from 'react-icons/fa';
-import { FiShoppingCart } from 'react-icons/fi';
 import { Link, useNavigate } from 'react-router-dom';
 import './Navbar.css';
 
@@ -42,16 +41,6 @@ const Navbar = ({ isAuthenticated, isAdmin, onLogout }) => {
   };
   const handleCloseCatalogo = () => {
     setAnchorElCatalogo(null);
-  };
-
-  // Estado y manejadores para el menú de Temáticas
-  const [anchorElTematicas, setAnchorElTematicas] = React.useState(null);
-  const openTematicas = Boolean(anchorElTematicas);
-  const handleClickTematicas = (event) => {
-    setAnchorElTematicas(event.currentTarget);
-  };
-  const handleCloseTematicas = () => {
-    setAnchorElTematicas(null);
   };
 
   // Estado y manejadores para el menú de Usuario
@@ -130,13 +119,13 @@ const Navbar = ({ isAuthenticated, isAdmin, onLogout }) => {
                     horizontal: 'left',
                   }}
                 >
-                  <Link style={{ color: 'inherit', textDecoration: 'none' }} to="/listaProductos/1">
+                  <Link style={{ color: 'inherit', textDecoration: 'none' }} to="/listaCategorias/1">
                     <MenuItem onClick={handleCloseCatalogo}>Vajilla</MenuItem>
                   </Link>
-                  <Link style={{ color: 'inherit', textDecoration: 'none' }} to="/listaProductos/2">
+                  <Link style={{ color: 'inherit', textDecoration: 'none' }} to="/listaCategorias/2">
                     <MenuItem onClick={handleCloseCatalogo}>Cubiertos</MenuItem>
                   </Link>
-                  <Link style={{ color: 'inherit', textDecoration: 'none' }} to="/listaProductos/3">
+                  <Link style={{ color: 'inherit', textDecoration: 'none' }} to="/listaCategorias/3">
                     <MenuItem onClick={handleCloseCatalogo}>Cristalería</MenuItem>
                   </Link>
                 </Menu>
