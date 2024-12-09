@@ -236,7 +236,7 @@ function App() {
                     <Route path="/gallery/:id" element={<Gallery />} />
                     <Route path='/register' element={<RegisterForm />} />
                     <Route path="/login" element={<Login onLoginSuccess={handleLoginSuccess} />} />
-                    <Route path="/reserva" element={<Reserva />} />
+                    <Route path="/reserva/:id" element={<Reserva />} />
                     <Route path="/reservaExitosa" element={<ReservaExitosa />} />
                     <Route
                         path="/logout"

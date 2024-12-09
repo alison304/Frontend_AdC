@@ -28,22 +28,6 @@ const Detail = () => {
   const producto = location.state.producto;
   console.log("desde detail", location.state.producto.reservas)
 
-  const handleReservar = () => {
-    if (!isAuthenticated) {
-      Swal.fire({
-        icon: 'warning',
-        title: 'No estás logueado',
-        text: 'Debes iniciar sesión para realizar una reserva o seleccionar fechas.',
-        confirmButtonText: 'Ok',
-        customClass: {
-          popup: 'elSwal'
-      }
-      })
-    } else {
-      // Aquí iría la lógica para reservar si estuviera implementada. Por ahora, solo log:
-      console.log("Reservando...");
-    }
-  }
 
   return (
     <>
@@ -94,7 +78,7 @@ const Detail = () => {
                 noDisponibles={location.state.producto.reservas} 
                 isAuthenticated={isAuthenticated} 
               />
-              <button className={StylesDetail.boton} onClick={handleReservar}>RESERVAR</button>
+              <button className={StylesDetail.boton} onClick={handleReservar} >RESERVAR </button>
             </div>
           ) : (
             <div className={StylesDetail.contenedorDetalle}>
@@ -108,7 +92,24 @@ const Detail = () => {
                   noDisponibles={location.state.producto.reservas}
                   isAuthenticated={isAuthenticated}
                 />
-                <button className={StylesDetail.boton} onClick={handleReservar}>RESERVAR</button>
+{isAuthenticated ?       <Link 
+      to={{
+        pathname: '/reserva/' + location.state.producto.idProducto
+      }}
+      state={{ producto }}>
+                <button className={StylesDetail.boton} >RESERVAR</button>
+
+    </Link> : 
+                <button className={StylesDetail.boton} onClick={()=>Swal.fire({
+                  icon: 'warning',
+                  title: 'No estás logueado',
+                  text: 'Debes iniciar sesión para realizar una reserva o seleccionar fechas.',
+                  confirmButtonText: 'Ok',
+                  customClass: {
+                    popup: 'elSwal'
+                }
+                })}>RESERVAR</button>
+              }
               </div>
             </div>
           )
