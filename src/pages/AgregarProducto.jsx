@@ -1,205 +1,252 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
+import productService from "../services/producto.service"; 
 import styles from "../styles/AgregarProducto.module.css";
-import { createProduct, updateProduct } from '../services/producto.service';
-
+import { RiArrowGoBackFill } from "react-icons/ri"; // Importar el ícono
 
 const BASE_URL = "https://auradecristalapi-production.up.railway.app";
 
 const AgregarProducto = () => {
+  const [product, setProduct] = useState({
+    nombre: "",
+    descripcion: "",
+    precio_alquiler: 0,
+    categoria_id: 0,
+    tematica_id: 0,
+    imagenes: [],
+    caracteristicaIds: [],
+  });
+
   const [categorias, setCategorias] = useState([]);
   const [tematicas, setTematicas] = useState([]);
-  const [nombre, setNombre] = useState("");
-  const [descripcion, setDescripcion] = useState("");
-  const [precio, setPrecio] = useState(0);
-  const [inventario, setInventario] = useState(0);
-  const [categoriaId, setCategoriaId] = useState(0);
-  const [tematicaId, setTematicaId] = useState(0);
-  const [imagenes, setImagenes] = useState([]);
   const [caracteristicas, setCaracteristicas] = useState([]);
+  const [newFeatureId, setNewFeatureId] = useState("");
+  const [nuevaImagen, setNuevaImagen] = useState("");
   const [mensaje, setMensaje] = useState("");
 
-  // Obtener categorías y temáticas
+  // Cargar categorías y temáticas al montar el componente
   useEffect(() => {
-    axios
-      .get(BASE_URL+"/categorias/listar")
-      .then((response) => {
-        setCategorias(response.data);
-      })
-      .catch(() => {
-        console.error("Error al cargar categorías.");
-      });
-
-    axios
-      .get(BASE_URL+"/tematicas/listar")
-      .then((response) => {
-        setTematicas(response.data);
-      })
-      .catch(() => {
-        console.error("Error al cargar temáticas.");
-      });
+    axios.get(`${BASE_URL}/categorias/listar`).then((res) => setCategorias(res.data));
+    axios.get(`${BASE_URL}/tematicas/listar`).then((res) => setTematicas(res.data));
+    axios.get(`${BASE_URL}/caracteristicas/listar`).then((res) => setCaracteristicas(res.data))
+    .catch((error) => console.error("Error al cargar características:", error));
   }, []);
 
-  // Función para registrar un producto
-  const handleAgregarProducto = async (e) => {
-    e.preventDefault();
+  // Manejar cambios en el formulario
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setProduct({
+      ...product,
+      [name]: name.includes("_id") || name === "precio_alquiler" ? parseInt(value, 10) : value,
+    });
+  };
 
-    // Validar que se ha ingresado toda la información
-    if (!nombre || !descripcion || !precio || !inventario || !categoriaId || !tematicaId || imagenes.length === 0) {
-      setMensaje("Por favor complete todos los campos antes de registrar el producto.");
+  // Agregar una nueva imagen
+  const agregarImagen = () => {
+    if (nuevaImagen.trim()) {
+      setProduct({
+        ...product,
+        imagenes: [...product.imagenes, nuevaImagen.trim()],
+      });
+      setNuevaImagen("");
+    } else {
+      alert("Ingrese una URL válida.");
+    }
+  };
+
+  // Eliminar una imagen
+  const eliminarImagen = (index) => {
+    setProduct({
+      ...product,
+      imagenes: product.imagenes.filter((_, i) => i !== index),
+    });
+  };
+
+  // Agregar ID de característica
+  const addFeature = () => {
+    if (newFeatureId && !product.caracteristicaIds.includes(parseInt(newFeatureId, 10))) {
+      setProduct({
+        ...product,
+        caracteristicaIds: [...product.caracteristicaIds, parseInt(newFeatureId, 10)],
+      });
+      setNewFeatureId("");
+    } else {
+      alert("El ID de la característica es inválido o ya está agregado.");
+    }
+  };
+
+  // Eliminar una característica
+  const removeFeature = (id) => {
+    setProduct({
+      ...product,
+      caracteristicaIds: product.caracteristicaIds.filter((featureId) => featureId !== id),
+    });
+  };
+
+  // Manejar envío del formulario
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!product.nombre || !product.descripcion || product.imagenes.length === 0) {
+      setMensaje("Por favor complete todos los campos obligatorios.");
       return;
     }
 
-    const nuevoProducto = {
-      nombre,
-      descripcion,
-      precio_alquiler: precio,
-      disponibilidad: inventario, // Cambiar según el campo correspondiente en la API
-      inventario,
-      categoria_id: categoriaId,
-      tematica_id: tematicaId,
-      imagenes,
-      caracteristicaIds: caracteristicas.map((car) => parseInt(car)),
-    };
-
     try {
-      const response = await axios.post(
-        BASE_URL+"/productos/registrar",
-        nuevoProducto,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
+      // Llamada a agregarProducto con los parámetros adecuados
+      await productService.agregarProducto(
+        product.nombre,
+        product.descripcion,
+        product.precio_alquiler,
+        product.categoria_id,
+        product.tematica_id,
+        product.imagenes,
+        product.caracteristicaIds
       );
-
-      if (response.status === 200 || response.status === 201) {
-        setMensaje("Producto registrado con éxito.");
-        limpiarFormulario();
-      } else {
-        setMensaje("Hubo un error al registrar el producto.");
-      }
+      alert("Producto registrado con éxito.");
+      setProduct({
+        nombre: "",
+        descripcion: "",
+        precio_alquiler: 0,
+        categoria_id: 0,
+        tematica_id: 0,
+        imagenes: [],
+        caracteristicaIds: [],
+      });
     } catch (error) {
-      console.error("Error al registrar producto:", error);
-      setMensaje("Error al registrar el producto.");
+      console.error(error);
+      alert("Hubo un error al registrar el producto.");
     }
   };
 
-  // Limpiar formulario después de registrar el producto
-  const limpiarFormulario = () => {
-    setNombre("");
-    setDescripcion("");
-    setPrecio(0);
-    setInventario(0);
-    setCategoriaId(0);
-    setTematicaId(0);
-    setImagenes([]);
-    setCaracteristicas([]);
+  // Función para volver a la página anterior
+  const onBack = () => {
+    window.history.back();
   };
 
   return (
-    <div className={styles.container}>
-      <button className={styles.volver} onClick={() => window.history.back()}>
-        Volver
-      </button>
-      <h2 className={styles.titulo}>Agregar Producto</h2>
-      <form className={styles.formulario} onSubmit={handleAgregarProducto}>
-        <div className={styles.formGroup}>
-          <label>Nombre *</label>
+    <div>
+      <div className="btn-volv">
+        <button className="btnVolver" onClick={onBack}>
+          <RiArrowGoBackFill />
+          Volver
+        </button>
+      </div>
+      <h3 className="title-form">Agregar Producto</h3>
+
+      <div className={styles.container}>
+        <form onSubmit={handleSubmit}>
+          <label>Nombre:</label>
           <input
             type="text"
-            value={nombre}
-            onChange={(e) => setNombre(e.target.value)}
+            name="nombre"
+            value={product.nombre}
+            onChange={handleChange}
             required
           />
-        </div>
-        <div className={styles.formGroup}>
-          <label>Descripción *</label>
+
+          <label>Descripción:</label>
           <textarea
-            value={descripcion}
-            onChange={(e) => setDescripcion(e.target.value)}
+            name="descripcion"
+            value={product.descripcion}
+            onChange={handleChange}
             required
           ></textarea>
-        </div>
-        <div className={styles.formGroup}>
-          <label>Precio *</label>
+
+          <label>Precio de Alquiler:</label>
           <input
             type="number"
-            value={precio}
-            onChange={(e) => setPrecio(e.target.value)}
+            name="precio_alquiler"
+            value={product.precio_alquiler}
+            onChange={handleChange}
             required
           />
-        </div>
-        <div className={styles.formGroup}>
-          <label>Inventario *</label>
-          <input
-            type="number"
-            value={inventario}
-            onChange={(e) => setInventario(e.target.value)}
-            required
-          />
-        </div>
-        <div className={styles.formGroup}>
-          <label>Categoría *</label>
+
+          <label>Categoría:</label>
           <select
-            value={categoriaId}
-            onChange={(e) => setCategoriaId(e.target.value)}
+            name="categoria_id"
+            value={product.categoria_id}
+            onChange={handleChange}
             required
           >
-            <option value={0}>Seleccionar</option>
+            <option value="">Seleccione una categoría</option>
             {categorias.map((cat) => (
-              <option key={cat.id} value={cat.id}>
+              <option key={cat.idCategoria} value={cat.idCategoria}>
                 {cat.descripcion}
               </option>
             ))}
           </select>
-        </div>
-        <div className={styles.formGroup}>
-          <label>Temática *</label>
+
+          <label>Temática:</label>
           <select
-            value={tematicaId}
-            onChange={(e) => setTematicaId(e.target.value)}
+            name="tematica_id"
+            value={product.tematica_id}
+            onChange={handleChange}
             required
           >
-            <option value={0}>Seleccionar</option>
+            <option value="">Seleccione una temática</option>
             {tematicas.map((tem) => (
-              <option key={tem.id} value={tem.id}>
+              <option key={tem.idTematica} value={tem.idTematica}>
                 {tem.descripcion}
               </option>
             ))}
           </select>
-        </div>
-        <div className={styles.formGroup}>
-          <label>Imágenes *</label>
-          <input
-            type="file"
-            multiple
-            onChange={(e) => {
-              const files = Array.from(e.target.files).map((file) =>
-                URL.createObjectURL(file)
-              );
-              setImagenes(files);
-            }}
-          />
-        </div>
-        <div className={styles.formGroup}>
-          <label>Características</label>
-          <input
-            type="text"
-            value={caracteristicas}
-            onChange={(e) =>
-              setCaracteristicas(e.target.value.split(",").map((c) => c.trim()))
-            }
-            placeholder="Separar con comas (ej: 1, 2, 3)"
-          />
-        </div>
-        {mensaje && <p className={mensaje.includes("éxito") ? styles.success : styles.error}>{mensaje}</p>}
-        <button type="submit" className={styles.btnSubmit}>
-          Registrar Producto
-        </button>
-      </form>
+
+          <label>Imágenes (URLs):</label>
+          {product.imagenes.map((url, index) => (
+            <div key={index} className={styles.imagenContainer}>
+              <span>{url}</span>
+              <button type="button" onClick={() => eliminarImagen(index)} className={styles.eliminarBtn}>
+                Eliminar
+              </button>
+            </div>
+          ))}
+          <div>
+            <input
+              type="text"
+              value={nuevaImagen}
+              onChange={(e) => setNuevaImagen(e.target.value)}
+              placeholder="URL de la imagen"
+            />
+            <button type="button" onClick={agregarImagen} className={styles.agregarBtn}>
+              Agregar Imagen
+            </button>
+          </div>
+
+          <label>Agregar Característica:</label>
+          <select
+            value={newFeatureId}
+            onChange={(e) => setNewFeatureId(e.target.value)}
+          >
+            <option value="">Seleccione una característica</option>
+            {caracteristicas.map((carac) => (
+              <option key={carac.idCaracteristica} value={carac.idCaracteristica}>
+                {carac.nombre} - {carac.descripcion}
+              </option>
+            ))}
+          </select>
+          <button type="button" onClick={addFeature} className={styles.agregarBtn}>
+            Añadir Característica
+          </button>
+
+          <ul>
+            {product.caracteristicaIds.map((id) => (
+              <li key={id}>
+                {id}{" "}
+                <button type="button" onClick={() => removeFeature(id)}>
+                  Eliminar
+                </button>
+              </li>
+            ))}
+          </ul>
+
+          {mensaje && <p className={styles.error}>{mensaje}</p>}
+
+          <button type="submit"className={styles.submit}>Registrar Producto</button>
+        </form>
+      </div>
     </div>
   );
 };
 
 export default AgregarProducto;
+

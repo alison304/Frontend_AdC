@@ -1,26 +1,21 @@
+/* Contenedor principal */
 .container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: #f9f9f9;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  max-width: 800px; /* Ancho máximo */
+  margin: 0 auto; /* Centrar horizontalmente */
+  padding: 20px; /* Espaciado interno */
+  background-color: #fdfdfd; /* Fondo claro */
+  border-radius: 10px; /* Bordes redondeados */
+  border: 1px solid #ddd; /* Borde sutil */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra ligera */
 }
 
-.volver {
-  border: none;
-  background: none;
-  color: #007bff;
-  font-size: 16px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  margin-bottom: 20px;
-  text-decoration: underline;
-}
-
-.volver:hover {
-  color: #0056b3;
+/* Títulos */
+.title-form {
+  font-family: Kaushan Script, sans-serif;
+  font-size: 40px; /* Tamaño del título principal */
+  color: #655e5e; /* Color del texto */
+  padding-bottom: 5%;
+  text-align: center;
 }
 
 .titulo {
@@ -38,10 +33,11 @@
   color: #555;
 }
 
+/* Formulario */
 .formulario {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 15px; /* Espaciado entre elementos */
 }
 
 .formGroup {
@@ -51,48 +47,155 @@
 
 label {
   font-size: 14px;
-  margin-bottom: 5px;
   font-weight: bold;
+  margin-bottom: 5px;
   color: #333;
 }
 
+/* Inputs y select */
 input[type="text"],
 input[type="number"],
 textarea,
 select {
+  width: 100%;
   padding: 10px;
-  font-size: 14px;
+  margin-bottom: 15px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  width: 100%;
+  font-size: 14px;
+  background-color: #f9f9f9;
   box-sizing: border-box;
 }
 
 textarea {
-  resize: none;
+  resize: none; /* Desactivar redimensionamiento */
 }
 
 input[type="file"] {
   padding: 5px;
 }
 
-.btnSubmit {
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: #DBBD6B;
+  outline: none;
+  box-shadow: 0 0 5px rgba(219, 189, 107, 0.5);
+}
+
+/* Botones generales */
+button {
   padding: 10px 15px;
-  background-color: #28a745;
+  font-size: 14px;
+  font-weight: bold;
+  color: white;
+  background-color: #DBA643;
+  border: 2px solid #DBBD6B;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+  background-color: #B8974F;
+  transform: scale(1.05);
+}
+
+button:active {
+  transform: scale(0.95);
+}
+
+.submit {
+  display: block;
+  width: 250px;
+  margin: 0 auto; 
+  padding: 12px 20px;
+  background-color: #DBBD6B;
+  color: white;
+  border: 2px solid #000;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.submit:disabled {
+  background-color: #cccccc;
+  color: #666666;
+  cursor: not-allowed;
+  border: 2px solid #cccccc;
+}
+
+.agregarBtn {
+  text-transform: uppercase;
+  align-self: flex-start;
+}
+
+.eliminarBtn {
+  background-color: #e74c3c;
+}
+
+.eliminarBtn:hover {
+  background-color: #c0392b;
+}
+
+/* Botón de volver */
+.btnVolver {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background-color: #6c757d;
   color: white;
   border: none;
   border-radius: 5px;
-  font-size: 16px;
-  cursor: pointer;
+  font-size: 14px;
   text-transform: uppercase;
+  cursor: pointer;
 }
 
-.btnSubmit:hover {
-  background-color: #218838;
+.btnVolver:hover {
+  background-color: #5a6268;
 }
 
+/* Contenedor de características */
+.caracteristicaContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #e9f7e9;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.caracteristicaContainer button {
+  background-color: #DBBD6B;
+  color: white;
+}
+
+/* Contenedor de imágenes */
+.imagenContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 10px;
+  margin-bottom: 10px;
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.imagenContainer span {
+  font-size: 14px;
+  color: #333;
+}
+
+/* Mensajes */
 .error {
-  color: #ff4d4d;
+  color: #e74c3c;
   font-size: 14px;
   text-align: center;
 }
@@ -102,3 +205,5 @@ input[type="file"] {
   font-size: 14px;
   text-align: center;
 }
+
+
