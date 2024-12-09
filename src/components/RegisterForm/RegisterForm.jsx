@@ -96,13 +96,10 @@ const RegisterComponent = () => {
                             ) : (
                                 <h3 className="title-form">Crear cuenta 📋</h3>
                             )}
-                            <br />
                             <p className="text-2">Vamos a comenzar a configurar su perfil.</p>
-                            <br />
                             <div className='row'>
                                 <div className='column'>
                                     <h3 className="text">Datos de registro de usuario</h3>
-                                    <br />
                                     <div>
                                         <Field name="name" placeholder="Nombre" className="holder-style" />
                                         {errors.name && touched.name ? (
@@ -145,7 +142,6 @@ const RegisterComponent = () => {
                                     <br />
                                 </div>
                             </div>
-                            <br />
                             <br />
                             {id ? (
                                 <Button variant="contained" sx={{ borderRadius: '20px', backgroundColor: '#9575cd', display: 'inline', fontSize: 14 }} className='btn-c' type="submit">Actualizar</Button>

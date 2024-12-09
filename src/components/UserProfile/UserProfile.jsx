@@ -30,14 +30,7 @@ const UserProfile = ({ onLogout }) => {
     return (
         <div className="user-profile-container">
             <div className="user-profile-layout">
-                <div className="user-profile-tabs user-profile-tabs-vertical">
-                    <button
-                        className={`tab-link ${activeTab === 'personal-data' ? 'active' : ''}`}
-                        onClick={() => handleTabChange('personal-data')}
-                    >
-                        Datos Personales
-                    </button>
-                </div>
+                
                 <div className="user-profile-content">
                     {activeTab === 'personal-data' && (
                         <div id="personal-data" className="user-profile-tab-content active">
@@ -83,13 +76,15 @@ const UserProfile = ({ onLogout }) => {
         </div>
     );
 };
-/*
-                    <button
-                        className={`tab-link ${activeTab === 'logout' ? 'active' : ''}`}
-                        onClick={handleLogoutAndRedirect}
-                    >
-                        Cerrar Sesión
-                    </button>
 
-*/ 
+/*<div className="user-profile-tabs user-profile-tabs-vertical">
+                    <button
+                        className={`tab-link ${activeTab === 'personal-data' ? 'active' : ''}`}
+                        onClick={() => handleTabChange('personal-data')}
+                    >
+                        Datos Personales
+                    </button>
+                </div>*/
+
+                
 export default UserProfile;

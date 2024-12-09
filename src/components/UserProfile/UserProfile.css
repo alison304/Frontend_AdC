@@ -136,3 +136,18 @@
     color: #fff;
     margin-top: 20px;
 }
+
+
+
+
+@media (min-width: 300px) and (max-width: 1024px) {
+
+    .user-profile-container {
+        margin-top: 5rem;
+    }
+
+    .user-profile-content {
+        margin-top: 1rem;
+    }
+    
+}
