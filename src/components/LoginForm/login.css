@@ -1,3 +1,4 @@
+/* login.css */
 body {
   justify-content: space-evenly;
 }
@@ -41,11 +42,6 @@ body {
   text-transform: none;
 }
 
-.create-account-button {
-  margin-top: 1rem;
-  text-transform: none;
-}
-
 .login-button:hover {
   background-color: #968149;
   color: white;
@@ -57,6 +53,14 @@ body {
   color: #524c4c;
 }
 
+/* Clase personalizada para SweetAlert2 */
+.elSwal {
+  max-width: 90vw;
+  white-space: normal;
+  word-wrap: break-word;
+}
+
+/* Ajustes responsivos */
 @media (min-width: 300px) and (max-width: 1024px) {
   .login-container {
     padding-top: 5.5rem;
@@ -64,8 +68,16 @@ body {
   }
 
   .login-text-login {
-    font-size: 3px;
-    margin-bottom: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: auto;
+    width: 100%;
+    max-width: 0;
+    margin: auto;
+    padding: 0rem;
+    border-radius: 0px;
   }
 
   .login-form {

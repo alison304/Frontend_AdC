@@ -34,7 +34,10 @@ const Detail = () => {
         icon: 'warning',
         title: 'No estás logueado',
         text: 'Debes iniciar sesión para realizar una reserva o seleccionar fechas.',
-        confirmButtonText: 'Ok'
+        confirmButtonText: 'Ok',
+        customClass: {
+          popup: 'elSwal'
+      }
       })
     } else {
       // Aquí iría la lógica para reservar si estuviera implementada. Por ahora, solo log:

@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import Swal from 'sweetalert2';
-import { login, getUserByEmail } from '../../services/user.service';
+import { login } from '../../services/user.service';
 import './login.css';
 
 const userSchema = Yup.object().shape({
@@ -13,11 +13,7 @@ const userSchema = Yup.object().shape({
         .email('Email incorrecto')
         .required('Se requiere un email'),
     password: Yup.string()
-        //.min(6, 'La contraseña debe tener al menos 6 caracteres')
         .max(10, 'La contraseña no debe exceder los 10 caracteres')
-        //.matches(/(?=.*[!@#$%^&*()_\-+=<>?{}[\]~])/, 'Debe incluir al menos un carácter especial')
-        //.matches(/(?=.*[a-z])(?=.*[A-Z])/, 'Debe incluir una mayúscula y una minúscula')
-        //.matches(/(?=.*[0-9])/, 'Debe contener al menos un número')
         .required('Contraseña incorrecta'),
 });
 
@@ -41,9 +37,11 @@ function Login({ onLoginSuccess }) {
                 icon: 'success',
                 title: '¡Login exitoso!',
                 text: 'Bienvenido de nuevo',
+                customClass: {
+                  popup: 'elSwal'
+                }
             });
 
-            // Notifica el éxito del login
             if (onLoginSuccess) {
                 onLoginSuccess();
             }
@@ -55,6 +53,9 @@ function Login({ onLoginSuccess }) {
                 icon: 'error',
                 title: 'Error en el inicio de sesión',
                 text: 'Las credenciales no son válidas',
+                customClass: {
+                    popup: 'elSwal'
+                }
             });
         } finally {
             setSubmitting(false);
@@ -203,3 +204,4 @@ function Login({ onLoginSuccess }) {
 }
 
 export default Login;
+
