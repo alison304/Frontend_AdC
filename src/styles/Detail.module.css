@@ -1,20 +1,18 @@
+/* Detail.module.css */
 @import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap');
 
 .tituloVolver {
     font-family: 'Inter', sans-serif;
-    /* Cambia 'p' a cualquier otro selector según lo necesites */
     font-size: 20px;
     font-weight: 400;
     line-height: 24.2px;
     text-align: center;
     color: #565656;
     text-decoration: underline;
-    /* Subrayar todos los enlaces */
     width: 100%;
     display: flex;
     padding-left: 20px;
     padding-top: 20px;
-
 }
 
 .contenedor {
@@ -94,19 +92,15 @@
     line-height: 19.36px;
     text-align: center;
     cursor: pointer;
-
 }
 
 .botonMas {
     align-items: center;
-    -webkit-appearance: none;
-    -moz-appearance: none;
     appearance: none;
     background: none;
     border: var(--zds-line-width) solid var(--color-content-high);
     border-radius: 0 50% 50% 0;
     color: #A3A3A1;
-
     cursor: pointer;
     display: flex;
     font-family: inherit;
@@ -124,7 +118,6 @@
     position: relative;
     justify-content: space-around;
     border-radius: 30px;
-    border: 1px 0px 0px 0px;
     border: 1px solid #A3A3A1;
     width: 172px;
     height: 56px;
@@ -132,19 +125,15 @@
 
 .cantidad {
     color: #A3A3A1;
-
 }
 
 .botonMenos {
     align-items: center;
-    -webkit-appearance: none;
-    -moz-appearance: none;
     appearance: none;
     background: none;
     border: var(--zds-line-width) solid var(--color-content-high);
     border-radius: 0 50% 50% 0;
     color: #A3A3A1;
-
     cursor: pointer;
     display: flex;
     font-family: inherit;
@@ -189,14 +178,12 @@
 .textImg {
     position: absolute;
     text-align: center;
-    position-area: center;
     color: #000000;
     font-family: 'Kaushan Script';
     font-size: 16px;
     font-weight: 400;
     line-height: 23.22px;
     text-align: center;
-
 }
 
 h4 {
@@ -207,7 +194,7 @@ h4 {
     color: #000000;
 }
 
-.contenedorReserva{
+.contenedorReserva {
     display: flex;
     flex-direction: column;
     align-items: center;  
@@ -215,14 +202,14 @@ h4 {
     gap:3rem;
 }
 
-/* Cuando la pantalla es de 900px o menos */
+/* Responsive */
 @media (max-width: 900px) {
-
     .tituloVolver {
         font-size: 11px;
         padding-left: 0%;
         padding-top: 5rem;
     }
+
     .contenedor {
         display: block;
     }
@@ -246,7 +233,7 @@ h4 {
         height: 35px;
         font-size: 13px;
         font-weight: 400;
-        Line-height: 15.73px;
+        line-height: 15.73px;
         margin: auto;
     }
 
@@ -264,8 +251,8 @@ h4 {
         margin-top: 10%;
     }
 
-    .tituloDescripcion{
-        margin-bottom: 5%;;
+    .tituloDescripcion {
+        margin-bottom: 5%;
     }
 
     .descripcion,
