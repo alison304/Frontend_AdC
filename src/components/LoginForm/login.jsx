@@ -65,6 +65,10 @@ function Login({ onLoginSuccess }) {
         navigate('/register');
     };
 
+    const handleCancelarRedirect = () => {
+        navigate('/');
+    }
+
     return (
         <Box className="login-container">
             <Typography
@@ -171,6 +175,27 @@ function Login({ onLoginSuccess }) {
                     onClick={handleRegisterRedirect}
                 >
                     Registrarse
+                </Button>
+            </Box>
+            <Box className="cerrarsesion-links" sx={{ mt: 2 }}>
+                <Button
+                    className="cancelar-button"
+                    variant="contained"
+                    sx={{
+                        backgroundColor: 'darkgray',
+                        color: 'white',
+                        outlineColor: '#635b4d',
+                        borderColor: '#635b4d',
+                        fontWeight: 'bold',
+                        textTransform: 'none',
+                        width: '100%',
+                        '&:hover': {
+                            backgroundColor: 'gray',
+                        },
+                    }}
+                    onClick={handleCancelarRedirect}
+                >
+                    Cancelar
                 </Button>
             </Box>
         </Box>
