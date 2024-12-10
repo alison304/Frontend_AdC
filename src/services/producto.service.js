@@ -3,6 +3,22 @@ import axios from 'axios';
 // URL base del backend 
 const BASE_URL = 'https://auradecristalapi-production.up.railway.app';
 
+export const getListProduct = async () => {
+  const options = {
+    method: 'GET',
+    url: `${BASE_URL}/productos/listar`,
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('authToken')}`,
+    }
+  };
+
+  try {
+    return await axios.request(options);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 // Servicio para agregar un nuevo producto.
 export const agregarProducto = async (
   nombre, 

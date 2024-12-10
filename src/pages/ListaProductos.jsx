@@ -1,53 +1,94 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
+import React, { useEffect, useState } from "react";
+import DataTable from 'react-data-table-component';
+import { Button } from '@mui/material';
+import { useNavigate } from "react-router-dom";
+import { RiArrowGoBackFill } from "react-icons/ri";
 import StylesAdmin from '../styles/ListaProductos.module.css';
-import { useNavigate } from 'react-router-dom';
-import { useProductosStates } from "../utils/Context";
-
-const BASE_URL = "https://auradecristalapi-production.up.railway.app";
+import { getListProduct } from '../services/producto.service';
+import { Select, MenuItem, FormControl, InputLabel } from '@mui/material';
 
 const ListaProductos = () => {
     const [id, setId] = useState('')
     const [nombre, setNombre] = useState("");
-    const { state } = useProductosStates();
-    const listaProductos = state.lista;
     const navigate = useNavigate();
-    const [mostrarLista, setMostrarLista] = useState(true);
+    const [productList, setProductList] = useState(null);
+    
+    const onBack = () => {
+        navigate(-1)
+    }    
 
-    const botonMovil = () => {
-        navigate('/');
-    };    
+    const columns = [
+        {
+            name: 'id',
+            selector: row => row.idProducto,
+            sortable: true,
+            omit: true
+        },
+        {
+            name: 'Nombre',
+            selector: row => row.nombre,
+            sortable: true,
+        }
+    ];
+
+    useEffect(() => {
+        // declare the async data fetching function
+        const fetchData = async () => {
+            // get the data from the api
+            const list = await getListProduct();
+            // set state with the result
+            console.log(list.data);
+            setProductList(list.data);
+        }
+        // call the function
+        fetchData()
+            // make sure to catch any error
+            .catch(console.error);
+    }, [])
 
     return (
-        <>
-            <section className={StylesAdmin.seccionPrincipal}>
-                <div className={StylesAdmin.titulo}>Listar Productos</div>
-            </section>
-            {mostrarLista && (
-                <table>
-                    <thead>
-                        <tr>
-                            {/* <th>ID</th> */}
-                            <th className="tab-title">NOMBRE DE LOS PRODUCTOS EXISTENTES</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {listaProductos.map((producto) => (
-                            <tr key={producto.id}>
-                                <td>{producto.nombre}</td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-            )}
-
-            <div className={StylesAdmin.mensajeMovil}>
-                <div className={StylesAdmin.fraseMovil}>
-                    <span className={StylesAdmin.frase2Movil}>Atención</span>No es posible entrar al Panel de Administración desde este dispositivo.
+        <React.Fragment>
+            <div className="container-adm">
+                <div className="btn-volv">
+                    <Button style={{
+                        float: 'left',
+                        border: 'none',
+                        color: 'white',
+                        padding: '5px 15px',
+                        fontSize: '16px',
+                        cursor: 'pointer',
+                        backgroundColor: '#9a6d4c',
+                        borderRadius: '5px',
+                    }}
+                        onMouseEnter={(e) => (e.target.style.backgroundColor = '#f2ca4f')}
+                        onMouseLeave={(e) => (e.target.style.backgroundColor = '#d1b362')}
+                        className='' onClick={onBack}><RiArrowGoBackFill />
+                        Volver
+                    </Button>
                 </div>
-                <button onClick={botonMovil} className={StylesAdmin.botonMovil}>Volver a inicio</button>
-            </div>
-        </>
+                <h3 className="title-form">Productos registrados 📋</h3>
+                </div>
+                {
+                    productList != null ? 
+                        <React.Fragment>
+                            <div style={{ height: '650px', overflowX: 'hidden', overflowY: 'auto'}}>
+                                <DataTable
+                                    columns={columns}
+                                    data={productList}
+                                    pagination          // Enable pagination
+                                    paginationPerPage={10} // Show 5 rows per page
+                                    paginationRowsPerPageOptions={[5, 10, 15]} // Options for number of rows per page
+                                    highlightOnHover     // Optional: Highlight rows on hover
+                                    striped              // Optional: Striped rows for better readability
+                                />
+                            </div> 
+                        </React.Fragment>
+                        :
+                        <React.Fragment></React.Fragment>                 
+                }
+
+
+        </React.Fragment >
     );
 }
 
