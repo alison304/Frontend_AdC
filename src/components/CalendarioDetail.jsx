@@ -8,8 +8,10 @@ import CloseIcon from '@mui/icons-material/Close';
 import { useProductosStates } from "../utils/Context"
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.css';
+import { useNavigate } from "react-router-dom";
 
 function CalendarioDetail({ noDisponibles, isAuthenticated, userReservas = [] }) {
+  const navigate = useNavigate();
   const [fecha, setFecha] = useState(new Date());
   const [mostrarError, setmostrarError] = useState(false);
   const [mostrarErrorFechaNoDisponible, setmostrarErrorFechaNoDisponible] = useState(false);
@@ -19,7 +21,6 @@ function CalendarioDetail({ noDisponibles, isAuthenticated, userReservas = [] })
 
   let blackoutDates = [];
 
-  // Unimos las reservas noDisponibles con las del usuario
   const listaReservas = [...noDisponibles, ...userReservas];
 
   const obtenerDias = (fechaInicio, fechaFin) => {
@@ -42,14 +43,16 @@ function CalendarioDetail({ noDisponibles, isAuthenticated, userReservas = [] })
   })
 
   const handleCalendario = () => {
-    // Si el usuario no está autenticado, mostramos alerta y no abrimos el calendario
+    // Si el usuario no está autenticado, mostramos alerta y redirigimos a /login
     if (!isAuthenticated) {
       Swal.fire({
         icon: 'warning',
         title: 'No estás logueado',
         text: 'Debes iniciar sesión para seleccionar fechas.',
         confirmButtonText: 'Ok'
-      })
+      }).then(() => {
+        navigate('/login');
+      });
       return;
     }
 
