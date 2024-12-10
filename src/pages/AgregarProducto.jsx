@@ -3,6 +3,7 @@ import axios from "axios";
 import productService from "../services/producto.service"; 
 import styles from "../styles/AgregarProducto.module.css";
 import { RiArrowGoBackFill } from "react-icons/ri"; // Importar el ícono
+import Swal from "sweetalert2"; // Importar SweetAlert
 
 const BASE_URL = "https://auradecristalapi-production.up.railway.app";
 
@@ -22,9 +23,8 @@ const AgregarProducto = () => {
   const [caracteristicas, setCaracteristicas] = useState([]);
   const [newFeatureId, setNewFeatureId] = useState("");
   const [nuevaImagen, setNuevaImagen] = useState("");
-  const [mensaje, setMensaje] = useState("");
+  //const [mensaje, setMensaje] = useState("");
 
-  // Cargar categorías y temáticas al montar el componente
   useEffect(() => {
     axios.get(`${BASE_URL}/categorias/listar`).then((res) => setCategorias(res.data));
     axios.get(`${BASE_URL}/tematicas/listar`).then((res) => setTematicas(res.data));
@@ -32,16 +32,24 @@ const AgregarProducto = () => {
     .catch((error) => console.error("Error al cargar características:", error));
   }, []);
 
-  // Manejar cambios en el formulario
   const handleChange = (e) => {
     const { name, value } = e.target;
+
+    if (name === "precio_alquiler" && parseInt(value, 10) < 0) {
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "El precio de alquiler no puede ser negativo.",
+      });
+      return;
+    }
+
     setProduct({
       ...product,
       [name]: name.includes("_id") || name === "precio_alquiler" ? parseInt(value, 10) : value,
     });
   };
 
-  // Agregar una nueva imagen
   const agregarImagen = () => {
     if (nuevaImagen.trim()) {
       setProduct({
@@ -49,50 +57,89 @@ const AgregarProducto = () => {
         imagenes: [...product.imagenes, nuevaImagen.trim()],
       });
       setNuevaImagen("");
+
+      Swal.fire({
+        icon: "success",
+        title: "Éxito",
+        text: "Imagen agregada correctamente.",
+      });
     } else {
-      alert("Ingrese una URL válida.");
+      Swal.fire({
+        icon: "warning",
+        title: "Advertencia",
+        text: "Ingrese una URL válida.",
+      });
     }
   };
 
-  // Eliminar una imagen
   const eliminarImagen = (index) => {
     setProduct({
       ...product,
       imagenes: product.imagenes.filter((_, i) => i !== index),
     });
-  };
 
-  // Agregar ID de característica
-  const addFeature = () => {
-    if (newFeatureId && !product.caracteristicaIds.includes(parseInt(newFeatureId, 10))) {
-      setProduct({
-        ...product,
-        caracteristicaIds: [...product.caracteristicaIds, parseInt(newFeatureId, 10)],
-      });
-      setNewFeatureId("");
-    } else {
-      alert("El ID de la característica es inválido o ya está agregado.");
-    }
-  };
-
-  // Eliminar una característica
-  const removeFeature = (id) => {
-    setProduct({
-      ...product,
-      caracteristicaIds: product.caracteristicaIds.filter((featureId) => featureId !== id),
+    Swal.fire({
+      icon: "success",
+      title: "Éxito",
+      text: "Imagen eliminada correctamente.",
     });
   };
 
-  // Manejar envío del formulario
+  const addFeature = () => {
+    const feature = caracteristicas.find(
+      (carac) => carac.idCaracteristica === parseInt(newFeatureId, 10)
+    );
+
+    if (feature && !product.caracteristicaIds.some((f) => f.id === feature.idCaracteristica)) {
+      setProduct({
+        ...product,
+        caracteristicaIds: [
+          ...product.caracteristicaIds,
+          { id: feature.idCaracteristica, nombre: feature.nombre },
+        ],
+      });
+      setNewFeatureId("");
+
+      Swal.fire({
+        icon: "success",
+        title: "Éxito",
+        text: "Característica añadida correctamente.",
+      });
+    } else {
+      Swal.fire({
+        icon: "warning",
+        title: "Advertencia",
+        text: "La característica ya está agregada o es inválida.",
+      });
+    }
+  };
+
+  const removeFeature = (id) => {
+    setProduct({
+      ...product,
+      caracteristicaIds: product.caracteristicaIds.filter((featureId) => featureId.id !== id),
+    });
+
+    Swal.fire({
+      icon: "success",
+      title: "Éxito",
+      text: "Característica eliminada correctamente.",
+    });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     if (!product.nombre || !product.descripcion || product.imagenes.length === 0) {
-      setMensaje("Por favor complete todos los campos obligatorios.");
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "Por favor complete todos los campos obligatorios.",
+      });
       return;
     }
 
     try {
-      // Llamada a agregarProducto con los parámetros adecuados
       await productService.agregarProducto(
         product.nombre,
         product.descripcion,
@@ -102,7 +149,13 @@ const AgregarProducto = () => {
         product.imagenes,
         product.caracteristicaIds
       );
-      alert("Producto registrado con éxito.");
+
+      Swal.fire({
+        icon: "success",
+        title: "Éxito",
+        text: "Producto registrado con éxito.",
+      });
+
       setProduct({
         nombre: "",
         descripcion: "",
@@ -114,11 +167,15 @@ const AgregarProducto = () => {
       });
     } catch (error) {
       console.error(error);
-      alert("Hubo un error al registrar el producto.");
+
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "Hubo un error al registrar el producto.",
+      });
     }
   };
 
-  // Función para volver a la página anterior
   const onBack = () => {
     window.history.back();
   };
@@ -126,7 +183,7 @@ const AgregarProducto = () => {
   return (
     <div>
       <div className="btn-volv">
-        <button className="btnVolver" onClick={onBack}>
+        <button className={styles.btnVolveradm} onClick={onBack}>
           <RiArrowGoBackFill />
           Volver
         </button>
@@ -229,19 +286,23 @@ const AgregarProducto = () => {
           </button>
 
           <ul>
-            {product.caracteristicaIds.map((id) => (
-              <li key={id}>
-                {id}{" "}
-                <button type="button" onClick={() => removeFeature(id)}>
+            {product.caracteristicaIds.map((feature) => (
+              <li key={feature.id}>
+                {feature.nombre}{" "}
+                <button
+                  type="button"
+                  className={styles.eliminarBtn}
+                  onClick={() => removeFeature(feature.id)}
+                >
                   Eliminar
                 </button>
               </li>
             ))}
           </ul>
 
-          {mensaje && <p className={styles.error}>{mensaje}</p>}
-
-          <button type="submit"className={styles.submit}>Registrar Producto</button>
+          <button type="submit" className={styles.submitregistrar}>
+            Registrar Producto
+          </button>
         </form>
       </div>
     </div>
@@ -249,4 +310,5 @@ const AgregarProducto = () => {
 };
 
 export default AgregarProducto;
+
 
