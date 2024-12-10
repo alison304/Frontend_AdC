@@ -83,29 +83,8 @@ select:focus {
   box-shadow: 0 0 5px rgba(219, 189, 107, 0.5);
 }
 
-/* Botones generales */
-button {
-  padding: 10px 15px;
-  font-size: 14px;
-  font-weight: bold;
-  color: white;
-  background-color: #DBA643;
-  border: 2px solid #DBBD6B;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
 
-button:hover {
-  background-color: #B8974F;
-  transform: scale(1.05);
-}
-
-button:active {
-  transform: scale(0.95);
-}
-
-.submit {
+.submitregistrar {
   display: block;
   width: 250px;
   margin: 0 auto; 
@@ -121,7 +100,7 @@ button:active {
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.submit:disabled {
+.submitregistrar:disabled {
   background-color: #cccccc;
   color: #666666;
   cursor: not-allowed;
@@ -129,11 +108,30 @@ button:active {
 }
 
 .agregarBtn {
+  padding: 10px 15px;
+  font-size: 14px;
+  font-weight: bold;
+  color: white;
+  background-color: #DBA643;
+  border: 2px solid #DBBD6B;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
   text-transform: uppercase;
   align-self: flex-start;
 }
 
+.agregarBtn:hover {
+  background-color: #B8974F;
+  transform: scale(1.05);
+}
+
+.agregarBtn:active {
+  transform: scale(0.95);
+}
+
 .eliminarBtn {
+  font-size: 10px;
   background-color: #e74c3c;
 }
 
@@ -142,22 +140,29 @@ button:active {
 }
 
 /* Botón de volver */
-.btnVolver {
+.btnVolveradm {
   display: flex;
   align-items: center;
   gap: 8px;
   padding: 8px 12px;
-  background-color: #6c757d;
+  background-color: #B8974F;
   color: white;
   border: none;
   border-radius: 5px;
   font-size: 14px;
   text-transform: uppercase;
   cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.btnVolver:hover {
-  background-color: #5a6268;
+.btnVolveradm:hover {
+  background-color: var(--secondary-color);
+  transform: scale(1.05);
+}
+
+.btnVolveradm:focus {
+  outline: 2px solid var(--main-color);
+  outline-offset: 3px;
 }
 
 /* Contenedor de características */
