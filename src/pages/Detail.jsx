@@ -3,23 +3,35 @@ import { useNavigate, useLocation, Link } from "react-router-dom";
 import StylesDetail from '../styles/Detail.module.css';
 import { useMediaQuery, useTheme } from '@mui/material';
 import { useProductosStates } from "../utils/Context";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Caracteristicas from "../components/Caracteristicas/Caractiristicas";
 import CalendarioDetail from "../components/CalendarioDetail";
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.css';
+import { obtenerReservasPorUsuario } from "../services/reservas.service";
 
 const Detail = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
-
-  // Obtenemos si el usuario está autenticado
-  const isAuthenticated = localStorage.getItem('authToken') ? true : false;
-
-  const { state } = useProductosStates(); // Aquí tenemos las fechas del context (fechaInicial, fechaFinal)
+  const { state } = useProductosStates(); // aquí tenemos (fechaInicial, fechaFinal)
   const producto = location.state.producto;
+  
+  // Obtenemos si el usuario está autenticado
+  const isAuthenticated = !!localStorage.getItem('authToken');
+  const userId = localStorage.getItem("userId");
+
+  const [userReservas, setUserReservas] = useState([]);
+
+  useEffect(() => {
+    // Si el usuario está autenticado, obtenemos sus reservas
+    if (isAuthenticated && userId) {
+      obtenerReservasPorUsuario(userId)
+        .then(res => setUserReservas(res))
+        .catch(err => console.error(err));
+    }
+  }, [isAuthenticated, userId]);
 
   const volverHome = () => {
     navigate(-1);
@@ -53,9 +65,92 @@ const Detail = () => {
       return;
     }
 
-    // Si está logueado y las fechas están seleccionadas, redirigimos a la reserva
+    // Si al presionar reservar el rango es inválido (contiene días no disponibles), mostrar alerta
+    // Esto se validará también en CalendarioDetail, pero lo volvemos a validar aquí para asegurar
+    const listaReservas = [...producto.reservas, ...userReservas];
+    const invalidRange = isDateRangeInvalid(state.fechaInicial, state.fechaFinal, listaReservas);
+
+    if (invalidRange) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Rango inválido',
+        text: 'El rango de fechas que seleccionó contiene uno o más días no disponibles.',
+        confirmButtonText: 'Ok',
+        customClass: {
+          popup: 'elSwal'
+        }
+      });
+      return;
+    }
+
+    // Redirigimos a la reserva
     navigate(`/reserva/${producto.idProducto}`, { state: { producto } });
   };
+
+  const isDateRangeInvalid = (fechaInicialStr, fechaFinalStr, listaReservas) => {
+    if (!fechaInicialStr || !fechaFinalStr) return true;
+    const [diaI, mesI, anioI] = fechaInicialStr.split('/').map(Number);
+    const [diaF, mesF, anioF] = fechaFinalStr.split('/').map(Number);
+    const fechaInicio = new Date(anioI, mesI - 1, diaI);
+    const fechaFin = new Date(anioF, mesF - 1, diaF);
+    let blackoutDates = getBlackoutDates(listaReservas);
+
+    // Revisar si alguna fecha en el rango está bloqueada
+    let dateCheck = new Date(fechaInicio.getTime());
+    while (dateCheck <= fechaFin) {
+      if (blackoutDates.includes(dateCheck.toDateString())) {
+        return true;
+      }
+      dateCheck.setDate(dateCheck.getDate() + 1);
+    }
+    return false;
+  }
+
+  const getBlackoutDates = (reservas) => {
+    let blackoutDates = [];
+    reservas.forEach(e => {
+      let fi = new Date(e.fechaInicio);
+      let ff = new Date(e.fechaFin);
+      // Ajuste de fecha: sumamos un día a ambos extremos para mantener lógica existente
+      fi.setDate(fi.getDate() + 1);
+      ff.setDate(ff.getDate() + 1);
+      const date = new Date(fi.getTime());
+      while (date <= ff) {
+        if (!blackoutDates.includes(date.toDateString())) {
+          blackoutDates.push(date.toDateString());
+        }
+        date.setDate(date.getDate() + 1);
+      }
+    });
+    return blackoutDates;
+  }
+
+  // Validamos al ingresar a Detail si las fechas ya seleccionadas globalmente siguen siendo válidas
+  useEffect(() => {
+    if (state.fechaInicial && state.fechaFinal) {
+      const listaReservas = [...producto.reservas, ...userReservas];
+      if (isDateRangeInvalid(state.fechaInicial, state.fechaFinal, listaReservas)) {
+        Swal.fire({
+          icon: 'warning',
+          title: 'Rango inválido',
+          text: 'Las fechas seleccionadas previamente contienen días no disponibles. Por favor seleccione un nuevo rango.',
+          confirmButtonText: 'Ok',
+          customClass: {
+            popup: 'elSwal'
+          }
+        }).then(() => {
+          // Resetear fechas en el context
+          // Necesitamos el dispatch del context
+          // Podríamos usar las mismas funciones aquí. Como no tenemos el dispatch en este componente,
+          // lo tomaremos de useProductosStates
+          const { dispatch } = useProductosStates();
+          dispatch({ type: "ADD_FECHA_INICIAL", payload: null });
+          dispatch({ type: "ADD_FECHA_FINAL", payload: null });
+        });
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [userReservas]);
 
   return (
     <>
@@ -104,7 +199,8 @@ const Detail = () => {
               
               <CalendarioDetail 
                 noDisponibles={producto.reservas} 
-                isAuthenticated={isAuthenticated} 
+                isAuthenticated={isAuthenticated}
+                userReservas={userReservas}
               />
               <button className={StylesDetail.boton} onClick={handleReservar}>RESERVAR</button>
             </div>
@@ -119,16 +215,16 @@ const Detail = () => {
                 <CalendarioDetail 
                   noDisponibles={producto.reservas}
                   isAuthenticated={isAuthenticated}
+                  userReservas={userReservas}
                 />
                 {isAuthenticated ? (
                   state.fechaInicial !== null && state.fechaFinal !== null ? (
-                    <Link 
-                      to={{
-                        pathname: '/reserva/' + producto.idProducto
-                      }}
-                      state={{ producto }}>
-                      <button className={StylesDetail.boton}>RESERVAR</button>
-                    </Link>
+                    <button 
+                      className={StylesDetail.boton}
+                      onClick={handleReservar}
+                    >
+                      RESERVAR
+                    </button>
                   ) : (
                     <button 
                       className={StylesDetail.boton}
