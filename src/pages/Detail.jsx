@@ -15,7 +15,7 @@ const Detail = () => {
   const navigate = useNavigate();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
-  const { state } = useProductosStates(); // aquí tenemos (fechaInicial, fechaFinal)
+  const { state, dispatch } = useProductosStates(); // aquí tenemos (fechaInicial, fechaFinal)
   const producto = location.state.producto;
   
   // Obtenemos si el usuario está autenticado
@@ -37,7 +37,6 @@ const Detail = () => {
     navigate(-1);
   }
 
-  // Esta función se usará en vista móvil, donde el botón RESERVAR no está dentro de un Link
   const handleReservar = () => {
     if (!isAuthenticated) {
       Swal.fire({
@@ -48,6 +47,8 @@ const Detail = () => {
         customClass: {
           popup: 'elSwal'
         }
+      }).then(() => {
+        navigate('/login');
       });
       return;
     }
@@ -65,8 +66,6 @@ const Detail = () => {
       return;
     }
 
-    // Si al presionar reservar el rango es inválido (contiene días no disponibles), mostrar alerta
-    // Esto se validará también en CalendarioDetail, pero lo volvemos a validar aquí para asegurar
     const listaReservas = [...producto.reservas, ...userReservas];
     const invalidRange = isDateRangeInvalid(state.fechaInicial, state.fechaFinal, listaReservas);
 
@@ -95,7 +94,6 @@ const Detail = () => {
     const fechaFin = new Date(anioF, mesF - 1, diaF);
     let blackoutDates = getBlackoutDates(listaReservas);
 
-    // Revisar si alguna fecha en el rango está bloqueada
     let dateCheck = new Date(fechaInicio.getTime());
     while (dateCheck <= fechaFin) {
       if (blackoutDates.includes(dateCheck.toDateString())) {
@@ -111,7 +109,6 @@ const Detail = () => {
     reservas.forEach(e => {
       let fi = new Date(e.fechaInicio);
       let ff = new Date(e.fechaFin);
-      // Ajuste de fecha: sumamos un día a ambos extremos para mantener lógica existente
       fi.setDate(fi.getDate() + 1);
       ff.setDate(ff.getDate() + 1);
       const date = new Date(fi.getTime());
@@ -139,11 +136,6 @@ const Detail = () => {
             popup: 'elSwal'
           }
         }).then(() => {
-          // Resetear fechas en el context
-          // Necesitamos el dispatch del context
-          // Podríamos usar las mismas funciones aquí. Como no tenemos el dispatch en este componente,
-          // lo tomaremos de useProductosStates
-          const { dispatch } = useProductosStates();
           dispatch({ type: "ADD_FECHA_INICIAL", payload: null });
           dispatch({ type: "ADD_FECHA_FINAL", payload: null });
         });
@@ -244,15 +236,19 @@ const Detail = () => {
                 ) : (
                   <button 
                     className={StylesDetail.boton}
-                    onClick={() => Swal.fire({
-                      icon: 'warning',
-                      title: 'No estás logueado',
-                      text: 'Debes iniciar sesión para realizar una reserva o seleccionar fechas.',
-                      confirmButtonText: 'Ok',
-                      customClass: {
-                        popup: 'elSwal'
-                      }
-                    })}
+                    onClick={() => {
+                      Swal.fire({
+                        icon: 'warning',
+                        title: 'No estás logueado',
+                        text: 'Debes iniciar sesión para realizar una reserva o seleccionar fechas.',
+                        confirmButtonText: 'Ok',
+                        customClass: {
+                          popup: 'elSwal'
+                        }
+                      }).then(() => {
+                        navigate('/login');
+                      })
+                    }}
                   >
                     RESERVAR
                   </button>
