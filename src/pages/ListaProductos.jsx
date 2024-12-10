@@ -12,10 +12,10 @@ const ListaProductos = () => {
     const [nombre, setNombre] = useState("");
     const navigate = useNavigate();
     const [productList, setProductList] = useState(null);
-    
+
     const onBack = () => {
         navigate(-1)
-    }    
+    }
 
     const columns = [
         {
@@ -67,25 +67,25 @@ const ListaProductos = () => {
                     </Button>
                 </div>
                 <h3 className="title-form">Productos registrados 📋</h3>
-                </div>
-                {
-                    productList != null ? 
-                        <React.Fragment>
-                            <div style={{ height: '650px', overflowX: 'hidden', overflowY: 'auto'}}>
-                                <DataTable
-                                    columns={columns}
-                                    data={productList}
-                                    pagination          // Enable pagination
-                                    paginationPerPage={10} // Show 5 rows per page
-                                    paginationRowsPerPageOptions={[5, 10, 15]} // Options for number of rows per page
-                                    highlightOnHover     // Optional: Highlight rows on hover
-                                    striped              // Optional: Striped rows for better readability
-                                />
-                            </div> 
-                        </React.Fragment>
-                        :
-                        <React.Fragment></React.Fragment>                 
-                }
+            </div>
+            {
+                productList != null ?
+                    <React.Fragment>
+                        <div style={{ height: '650px', overflowX: 'hidden', overflowY: 'auto' }}>
+                            <DataTable
+                                columns={columns}
+                                data={productList}
+                                pagination          // Enable pagination
+                                paginationPerPage={5} // Show 5 rows per page
+                                paginationRowsPerPageOptions={[5, 10, 15]} // Options for number of rows per page
+                                highlightOnHover     // Optional: Highlight rows on hover
+                                striped              // Optional: Striped rows for better readability
+                            />
+                        </div>
+                    </React.Fragment>
+                    :
+                    <React.Fragment></React.Fragment>
+            }
 
 
         </React.Fragment >
