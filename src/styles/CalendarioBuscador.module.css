@@ -77,7 +77,7 @@
     text-decoration: underline;
 }
 
-@media (max-width: 600px) and (max-width: 1024px) {
+@media (max-width: 600px) or (max-width: 1024px) {
 
     .titulo{
         flex-direction: column;
