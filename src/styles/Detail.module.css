@@ -202,6 +202,26 @@ h4 {
     gap:3rem;
 }
 
+.contenedorPoliticasDelProducto {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    row-gap: 25px;
+    width: 261px; /* Para coincidir con el tamaño del boton de reserva*/
+}
+
+.tituloPoliticasDelProducto {
+    font-size: 18px;
+    font-weight: 800;
+}
+
+.enlacePoliticasDelProducto {
+    font-style: italic;
+    text-decoration: underline !important;
+    color: currentColor;
+}
+
 /* Responsive */
 @media (max-width: 900px) {
     .tituloVolver {
@@ -265,3 +285,4 @@ h4 {
         font-size: 11px;
     }
 }
+

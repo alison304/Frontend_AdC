@@ -16,7 +16,6 @@ import Login from './components/LoginForm/login';
 import AdministrarCategorias from './pages/AdministrarCategorias';
 import UserProfile from './components/UserProfile/UserProfile';
 import ProtectedRoute from './components/LoginForm/ProtectedRoute';
-import AdministrarCaracteristicas from './pages/AdministrarCaracteristicas';
 import Logout from './components/Logout/Logout';
 import UserList from './components/User/UserList';
 import { useProductosStates } from "./utils/Context"
@@ -269,14 +268,6 @@ function App() {
                         element={
                             <ProtectedRoute isAuthenticated={isAuthenticated} isAdmin={isAdmin}>
                                 <AgregarProducto listaProductos={listaProductos} />
-                            </ProtectedRoute>
-                        }
-                    />
-                    <Route
-                        path="/admin/administrar-caracteristicas"
-                        element={
-                            <ProtectedRoute isAuthenticated={isAuthenticated} isAdmin={isAdmin}>
-                                <AdministrarCaracteristicas listaProductos={listaProductos} />
                             </ProtectedRoute>
                         }
                     />

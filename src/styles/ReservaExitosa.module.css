@@ -7,8 +7,7 @@
 .imagen {
     width: 150px;      /* La imagen se ajusta al ancho del contenedor */
     height: 150px;     /* La altura se ajusta para mantener la proporción */
-    object-fit: cover; /* Asegura que la imagen llene el contenedor sin deformarse */ 
-    border: solid red 1px;  
+    object-fit: cover; /* Asegura que la imagen llene el contenedor sin deformarse */  
 }
 
 .nombreProducto{
@@ -25,11 +24,6 @@
     font-weight: 300;
     font-family: 'Inter', sans-serif;
     text-align: left;
-}
-
-.div1_1{
-    border: solid green 1px; 
-    width: 35%; 
 }
 
 .div1_2_desde, .div1_2_hasta{
@@ -64,7 +58,6 @@
 }
 
 .principal{
-    border: 1px solid blue;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -74,7 +67,6 @@
 }
 
 .titulo{
-    border: solid 1px yellow;
     background-color: transparent;
     width: 50%;
     text-align: center;
@@ -88,7 +80,6 @@
     font-size: 23px;
     font-family: 'Inter', sans-serif;
     font-weight: 500;
-    border: solid 2px green;
 }
 
 .informacion{
@@ -97,20 +88,17 @@
 
 .nombre, .correo{
     font-size: 18px;
-    border: solid 1px rgb(20, 31, 230);
     width: 45%;
 }
 
 .datosUsuario{
     font-size: 16px;
-    border: solid 1px rgb(230, 20, 157);
     text-align: center;
     width: 45%;
 }
 
 .datosPoliticas{
     font-size: 16px;
-    border: solid 1px rgb(230, 20, 157);
     text-align: left;
     width: 100%;
     padding-left: 1rem;
@@ -128,7 +116,6 @@
 }
 
 .div2_1{
-    border: solid 2px  blueviolet;
     display: flex;
     justify-content: space-around;
 
@@ -141,16 +128,6 @@
 
 .informacion2{
     width: 45%;
-}
-
-.divBotones{
-    width: 50%;
-    display: flex;
-    justify-content: space-between;
-    font-family: 'Inter', sans-serif;
-    font-size: 1.2rem;
-    font-weight: 400;
-    border: 1px solid red;
 }
 
 .botonCancelar, .botonReservar{
@@ -173,12 +150,24 @@
     display: flex;
     justify-content: space-between;
     width: 100%;
-    border: solid 1px blue;
 }
 
 .div1_fechas{
-    border: solid 1px black;
     display: flex;
+}
+
+.tituloVolver {
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24.2px;
+    text-align: center;
+    color: #565656;
+    text-decoration: underline;
+    width: 100%;
+    display: flex;
+    padding-left: 20px;
+    padding-top: 20px;
 }
 
 /* Cuando la pantalla es de 900px o menos */
@@ -213,5 +202,7 @@
     width: 100%;
 }
 
-
+.tituloVolver {
+    margin-top: 20px;
+}
 }

@@ -51,11 +51,11 @@ Rol: Usuario Administrador ♔
 
 - *Panel administrador* : Aquí se muestran las secciones a las que puede acceder un administrador, se le permite acceder a añadir o quitar permisos, crear nuevos productos, acceder al registro de usuarios registrados.
 
+- *Listar productos* : Aquí se muestran una tabla con el registro de todos los productos, se muestra el nombre completo del producto.
+
 - *Agregar producto* : Aquí se muestran un formulario para poder agregar y registrar un producto, sale nombre, descripción, precio, inventario, categoría, temática, imágenes y características.
 
-- *Administrar caracteristicas* : Aquí se muestran una tabla con todas las características que puede tener un producto, se permite editar y eliminar.
-
-- *Administrar usuarios* : Aquí se muestran una tabla con el registro de todos los usuarios registrados por nombre, apellido, email y rol.
+- *Administrar usuarios* : Aquí se muestran una tabla con el registro de todos los usuarios, se muestra el nombre, apellido, email, rol y la acción de editar rol.
 
 ---
 ### Librerías usadas 🍷
@@ -68,6 +68,7 @@ Rol: Usuario Administrador ♔
 - Maven: Es un administrador de compilación y dependencia, le permite crear su código y, al mismo tiempo, administrar sus dependencias para no tener que descargar archivos jar manualmente.
 - MySQL: Es un sistema de gestión de bases de datos (DBMS, por sus siglas en inglés) de código abierto desarrollado por Oracle.
 - Styled Components: Es una biblioteca de JavaScript que permite utilizar CSS dentro de los componentes de React.
+- Sweetalert2: Es una librería de JavaScript que permite crear alertas personalizadas, atractivas y fáciles de usar en aplicaciones web.
 - Mui: Es una biblioteca de componentes React sencilla, personalizable y accesible.
 - React-Bootstrap: Permite construir páginas web responsives de una forma más rápida y sencilla.
 - Git/Github: Sistema de control de versiones utilizado para consolidar piezas de código, así como desarrollo ágil de software y puntos de recuperación del mismo.

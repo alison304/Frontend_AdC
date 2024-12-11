@@ -55,7 +55,7 @@ function ListaCategorias() {
     const navigate = useNavigate();
 
     const onBack = () => {
-        navigate(-1)
+        navigate('/');
     }
 
     return (

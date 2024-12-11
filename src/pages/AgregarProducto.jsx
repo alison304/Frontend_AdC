@@ -1,11 +1,9 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
 import productService from "../services/producto.service"; 
 import styles from "../styles/AgregarProducto.module.css";
 import { RiArrowGoBackFill } from "react-icons/ri"; // Importar el ícono
 import Swal from "sweetalert2"; // Importar SweetAlert
 
-const BASE_URL = "https://auradecristalapi-production.up.railway.app";
 
 const AgregarProducto = () => {
   const [product, setProduct] = useState({
@@ -21,16 +19,32 @@ const AgregarProducto = () => {
   const [categorias, setCategorias] = useState([]);
   const [tematicas, setTematicas] = useState([]);
   const [caracteristicas, setCaracteristicas] = useState([]);
-  const [newFeatureId, setNewFeatureId] = useState("");
+  const [newFeature, setNewFeature] = useState("");
   const [nuevaImagen, setNuevaImagen] = useState("");
+  
 
 
+//Cargar las categorías, temáticas y características al montar el componente
   useEffect(() => {
-    axios.get(`${BASE_URL}/categorias/listar`).then((res) => setCategorias(res.data));
-    axios.get(`${BASE_URL}/tematicas/listar`).then((res) => setTematicas(res.data));
-    axios.get(`${BASE_URL}/caracteristicas/listar`).then((res) => setCaracteristicas(res.data))
-    .catch((error) => console.error("Error al cargar características:", error));
-  }, []);
+    const fetchData = async () => {
+      try {
+        const categoriasData = await productService.obtenerCategorias();
+        setCategorias(categoriasData.data);
+
+        const tematicasData = await productService.obtenerTematicas();
+        setTematicas(tematicasData.data);
+
+        const caracteristicasData = await productService.obtenerCaracteristicas();
+        setCaracteristicas(caracteristicasData.data);
+      } catch (error) {
+        console.error("Error al obtener datos:", error);
+      }
+    };
+
+    fetchData(); // Llamar a la función fetchData
+  }, []); // Ejecutar solo al montar el componente
+
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -84,31 +98,42 @@ const AgregarProducto = () => {
       text: "Imagen eliminada correctamente.",
     });
   };
-  // Agregar ID de característica
-const addFeature = () => {
-  const featureId = parseInt(newFeatureId, 10);
-  
-  if (newFeatureId && !product.caracteristicaIds.includes(featureId)) {
-    setProduct({
-      ...product,
-      caracteristicaIds: [...product.caracteristicaIds, featureId],
-    });
-    setNewFeatureId("");
 
-    Swal.fire({
-      icon: "success",
-      title: "Éxito",
-      text: "Característica añadida correctamente.",
-    });
-  } else {
-    Swal.fire({
-      icon: "warning",
-      title: "Advertencia",
-      text: "La característica ya está agregada o es inválida.",
-    });
-  }
-};
-  // Eliminar una característica
+  const addFeature = () => {
+    // Buscar la característica por su ID
+
+    const feature = caracteristicas.find(
+      (carac) => carac.idCaracteristica === parseInt(newFeature, 10)
+    );
+
+    // Verificar si la característica no está ya agregada    
+    if (feature && !product.caracteristicaIds.some((f) => f.id === feature.idCaracteristica)) {
+      setProduct({
+        ...product,
+        caracteristicaIds: [
+          ...product.caracteristicaIds,
+          feature.idCaracteristica,
+        ],
+      });
+
+      setNewFeature("");
+      
+      //agregar un objeto de caracteristica a 
+
+      Swal.fire({
+        icon: "success",
+        title: "Éxito",
+        text: "Característica añadida correctamente.",
+      });
+    } else {
+      Swal.fire({
+        icon: "warning",
+        title: "Advertencia",
+        text: "La característica ya está agregada o es inválida.",
+      });
+    }
+  };
+
   const removeFeature = (id) => {
     setProduct({
       ...product,
@@ -257,7 +282,7 @@ const addFeature = () => {
               type="text"
               value={nuevaImagen}
               onChange={(e) => setNuevaImagen(e.target.value)}
-              placeholder="URL de la imagen"
+              placeholder="Por favor, ingresa las 5 URLs correspondientes a las imágenes."
             />
             <button type="button" onClick={agregarImagen} className={styles.agregarBtn}>
               Agregar Imagen
@@ -266,8 +291,8 @@ const addFeature = () => {
 
           <label>Agregar Característica:</label>
           <select
-            value={newFeatureId}
-            onChange={(e) => setNewFeatureId(e.target.value)}
+            value={caracteristicas.idCaracteristica}
+            onChange={(e) => setNewFeature(e.target.value)}
           >
             <option value="">Seleccione una característica</option>
             {caracteristicas.map((carac) => (
@@ -276,20 +301,28 @@ const addFeature = () => {
               </option>
             ))}
           </select>
-          <button type="button" onClick={addFeature}className={styles.agregarBtn}>
+          <button type="button" onClick={addFeature} className={styles.agregarBtn}>
             Añadir Característica
           </button>
 
-          <ul>
-            {product.caracteristicaIds.map((id) => (
-              <li key={id}>
-                {id}{" "}
-                <button type="button" className={styles.eliminarBtn} onClick={() => removeFeature(id)}>
-                  Eliminar
-                </button>
-              </li>
-            ))}
-          </ul>
+          <ul className={styles.listaCaracteristicas}>
+  {product.caracteristicaIds.map((feature) => (
+    <li key={feature} className={styles.itemCaracteristica}>
+      {(() => {
+        const carac = caracteristicas.find((c) => c.idCaracteristica === feature);
+        return carac ? `${carac.nombre} - ${carac.descripcion}` : "Característica no encontrada";
+      })()}
+
+      <button
+        type="button"
+        className={styles.eliminarBtn}
+        onClick={() => removeFeature(feature)}
+      >
+        Eliminar
+      </button>
+    </li>
+  ))}
+</ul>
 
 
           <button type="submit" className={styles.submitregistrar}>
@@ -302,5 +335,6 @@ const addFeature = () => {
 };
 
 export default AgregarProducto;
+
 
 
