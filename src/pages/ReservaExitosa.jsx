@@ -70,11 +70,21 @@ function ReservaExitosa() {
                 <p className={StylesReservaExitosa.datosUsuario}>{emailUsuario}</p>
             </div>
         </div>
+
+        
         
         <div className={StylesReservaExitosa.div2}>
-            <p className={StylesReservaExitosa.informacion}>Politicas del producto</p>
-            <div className={StylesReservaExitosa.div2_1}>
-                <p className={StylesReservaExitosa.datosPoliticas}>Politicas de cancelación</p>    
+            <div className={StylesReservaExitosa.contenedorPoliticasDelProducto}>
+                <p className={StylesReservaExitosa.tituloPoliticasDelProducto}>
+                    Politicas del producto
+                </p>
+                <a 
+                    className={StylesReservaExitosa.enlacePoliticasDelProducto} 
+                    download="politica-de-cancelacion.pdf"
+                    href="https://aura-de-cristal.s3.us-east-1.amazonaws.com/politicas-del-producto/politica-de-cancelacion.pdf"
+                    target="_blank">
+                    Politica de Cancelacion
+                </a>
             </div>
         </div>
 
@@ -89,5 +99,4 @@ function ReservaExitosa() {
 </>
   )
 }
-
 export default ReservaExitosa

@@ -170,6 +170,26 @@
     padding-top: 20px;
 }
 
+.contenedorPoliticasDelProducto {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-inline: 1.3rem;
+    row-gap: 25px;
+    width: 261px; /* Para coincidir con el tamaño del boton de reserva*/
+}
+
+.tituloPoliticasDelProducto {
+    font-size: 18px;
+    font-weight: 800;
+}
+
+.enlacePoliticasDelProducto {
+    font-style: italic;
+    text-decoration: underline !important;
+    color: currentColor;
+}
+
 /* Cuando la pantalla es de 900px o menos */
 @media (max-width: 600px) or (max-width: 1024px) {
 
