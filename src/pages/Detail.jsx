@@ -158,7 +158,7 @@ const Detail = () => {
             <img src={producto.imagenes[2].url} className={StylesDetail.imgPequeña} alt="imagen producto"/>
             <img src={producto.imagenes[3].url} className={StylesDetail.imgPequeña} alt="imagen producto"/>
 
-            <Link 
+            <Link
               to={{
                 pathname: '/gallery/' + producto.idProducto
               }}
@@ -188,13 +188,30 @@ const Detail = () => {
               <h3 className={StylesDetail.tituloDescripcion}>Descripción:</h3>
               <p className={StylesDetail.descripcion}>{producto.descripcion}</p>
               <h3 className={StylesDetail.precio}>S/.{producto.precio_alquiler}</h3>
-              
-              <CalendarioDetail 
-                noDisponibles={producto.reservas} 
+
+              <CalendarioDetail
+                noDisponibles={producto.reservas}
                 isAuthenticated={isAuthenticated}
                 userReservas={userReservas}
               />
-              <button className={StylesDetail.boton} onClick={handleReservar}>RESERVAR</button>
+              {isAuthenticated ? <Link
+                to={{
+                  pathname: '/reserva/' + producto.idProducto
+                }}
+                state={{ producto }}>
+                <button className={StylesDetail.boton} >RESERVAR</button>
+
+              </Link> :
+                <button className={StylesDetail.boton} onClick={() => Swal.fire({
+                  icon: 'warning',
+                  title: 'No estás logueado',
+                  text: 'Debes iniciar sesión para realizar una reserva o seleccionar fechas.',
+                  confirmButtonText: 'Ok',
+                  customClass: {
+                    popup: 'elSwal'
+                  }
+                })}>RESERVAR</button>
+              }
             </div>
           ) : (
             <div className={StylesDetail.contenedorDetalle}>

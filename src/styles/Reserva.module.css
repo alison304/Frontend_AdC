@@ -155,3 +155,10 @@
  .botonReservar{
    background-color: #8D3434CC;
 }
+
+/* Cuando la pantalla es de 900px o menos */
+@media (max-width: 900px) {
+    .articulo{
+        width: 90%;
+    }
+}

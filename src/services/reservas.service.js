@@ -2,7 +2,7 @@
 
 import { BASE_URL } from "./user.service";
 
-const getToken = () => localStorage.getItem("userToken");
+const getToken = () => localStorage.getItem("authToken");
 const getUserId = () => localStorage.getItem("userId");
 
 const headers = {
@@ -10,6 +10,12 @@ const headers = {
   'Authorization': `Bearer ${getToken()}`,
 };
 
+const getHeaders = () => {
+  return {
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${localStorage.getItem("authToken")}`,
+  };
+}
 // PUT: Actualizar reserva
 export const actualizarReserva = async (idReserva, productoId, usuarioId, fechaInicio, fechaFin) => {
   try {
@@ -38,7 +44,7 @@ export const registrarReserva = async (productoId, usuarioId, fechaInicio, fecha
   try {
     const response = await fetch(`${BASE_URL}/reservas/registrar`, {
       method: 'POST',
-      headers: headers,
+      headers: getHeaders(),
       body: JSON.stringify({
         productoId,
         usuarioId,
