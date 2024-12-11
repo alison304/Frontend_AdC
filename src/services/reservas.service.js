@@ -53,7 +53,7 @@ export const registrarReserva = async (productoId, usuarioId, fechaInicio, fecha
       }),
     });
     if (!response.ok) {
-      throw new Error('Error al registrar la reserva');
+      return await response.text();
     }
     return await response.json();
   } catch (error) {
