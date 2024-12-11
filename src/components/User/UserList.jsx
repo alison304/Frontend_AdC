@@ -144,7 +144,7 @@ const UserList = () => {
                 {
                     userList != null ? 
                         <React.Fragment>
-                            <div style={{ height: '650px', overflowX: 'hidden', overflowY: 'auto'}}>
+                            <div style={{ height: '650px', overflowX: 'hidden', overflowY: 'auto', margin: '5% 5%'}}>
                                 <DataTable
                                     columns={columns}
                                     data={userList}

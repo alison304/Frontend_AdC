@@ -71,7 +71,7 @@ const ListaProductos = () => {
             {
                 productList != null ?
                     <React.Fragment>
-                        <div style={{ height: '650px', overflowX: 'hidden', overflowY: 'auto' }}>
+                        <div style={{ height: '650px', overflowX: 'hidden', overflowY: 'auto', margin: '3% 3%' }}>
                             <DataTable
                                 columns={columns}
                                 data={productList}
