@@ -7,8 +7,7 @@
 .imagen {
     width: 150px;      /* La imagen se ajusta al ancho del contenedor */
     height: 150px;     /* La altura se ajusta para mantener la proporción */
-    object-fit: cover; /* Asegura que la imagen llene el contenedor sin deformarse */ 
-    border: solid red 1px;  
+    object-fit: cover; /* Asegura que la imagen llene el contenedor sin deformarse */  
 }
 
 .nombreProducto{
@@ -25,11 +24,6 @@
     font-weight: 300;
     font-family: 'Inter', sans-serif;
     text-align: left;
-}
-
-.div1_1{
-    border: solid green 1px; 
-    width: 35%; 
 }
 
 .div1_2_desde, .div1_2_hasta{
@@ -88,7 +82,6 @@
     font-size: 23px;
     font-family: 'Inter', sans-serif;
     font-weight: 500;
-    border: solid 2px green;
 }
 
 .informacion{
@@ -173,11 +166,9 @@
     display: flex;
     justify-content: space-between;
     width: 100%;
-    border: solid 1px blue;
 }
 
 .div1_fechas{
-    border: solid 1px black;
     display: flex;
 }
 
