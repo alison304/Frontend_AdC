@@ -52,6 +52,18 @@ function Reserva() {
         try {
             const response = await registrarReserva(producto.idProducto, parseInt(localStorage.getItem('userId')), formatearFecha(fechaInicial), formatearFecha(fechaFinal));
             console.log("reserva guardada", response.data)
+             // Redirigir a la Página de reserva exitosa y pasar el objeto producto
+             const datosReservaExitosa = {
+                producto,
+                nombreUsuario: nombre + " " + apellido,
+                emailUsuario: email,
+                fechaInicial,
+                fechaFinal,
+                totalPrecio: producto.precio_alquiler * totalDias
+            };
+
+            navigate('/reservaExitosa', { state: datosReservaExitosa });
+
         } catch (error) {
             console.log("error en reserva", error)
         }
