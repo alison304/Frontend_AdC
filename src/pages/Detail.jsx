@@ -3,7 +3,7 @@ import { useNavigate, useLocation, Link } from "react-router-dom";
 import StylesDetail from '../styles/Detail.module.css';
 import { useMediaQuery, useTheme } from '@mui/material';
 import { useProductosStates } from "../utils/Context";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import Caracteristicas from "../components/Caracteristicas/Caractiristicas";
 import CalendarioDetail from "../components/CalendarioDetail";
 import Swal from 'sweetalert2';
@@ -17,6 +17,34 @@ const Detail = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const { state, dispatch } = useProductosStates(); // aquí tenemos (fechaInicial, fechaFinal)
   const producto = location.state.producto;
+  const politicasDelProducto = useMemo(() => (
+    <div className={StylesDetail.contenedorPoliticasDelProducto}>
+      <p className={StylesDetail.tituloPoliticasDelProducto}>
+        Politicas del producto
+      </p>
+      <a
+        className={StylesDetail.enlacePoliticasDelProducto} 
+        download="guia-de-cuidado-de-producto.pdf"
+        href="https://aura-de-cristal.s3.us-east-1.amazonaws.com/politicas-del-producto/guia-de-cuidado-de-producto.pdf"
+        target="_blank">
+          Guia de Cuidado de Producto
+      </a>
+      <a 
+        className={StylesDetail.enlacePoliticasDelProducto} 
+        download="condiciones-para-la-garantia.pdf"
+        href="https://aura-de-cristal.s3.us-east-1.amazonaws.com/politicas-del-producto/condiciones-para-la-garantia.pdf"
+        target="_blank">
+          Condiciones para la Garantia
+      </a>
+      <a 
+        className={StylesDetail.enlacePoliticasDelProducto} 
+        download="politica-de-cancelacion.pdf"
+        href="https://aura-de-cristal.s3.us-east-1.amazonaws.com/politicas-del-producto/politica-de-cancelacion.pdf"
+        target="_blank">
+          Politica de Cancelacion
+      </a>
+    </div>
+  ), []);
   
   // Obtenemos si el usuario está autenticado
   const isAuthenticated = !!localStorage.getItem('authToken');
@@ -212,6 +240,7 @@ const Detail = () => {
                   }
                 })}>RESERVAR</button>
               }
+              {politicasDelProducto}
             </div>
           ) : (
             <div className={StylesDetail.contenedorDetalle}>
@@ -270,6 +299,7 @@ const Detail = () => {
                     RESERVAR
                   </button>
                 )}
+                {politicasDelProducto}
               </div>
             </div>
           )
