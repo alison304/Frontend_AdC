@@ -25,7 +25,7 @@ function Reserva() {
     const fechaInicio = new Date(formatearFecha(fechaInicial)).getTime();
     const fechaFin = new Date(formatearFecha(fechaFinal)).getTime();
     const diff = fechaFin - fechaInicio;
-    const totalDias = diff / (1000 * 60 * 60 * 24);
+    const totalDias = (diff / (1000 * 60 * 60 * 24)) + 1;
   const navigate = useNavigate();
 
     const botonCancelar = () => {
@@ -51,7 +51,7 @@ function Reserva() {
     const reserva = async () => {
         try {
             const response = await registrarReserva(producto.idProducto, parseInt(localStorage.getItem('userId')), formatearFecha(fechaInicial), formatearFecha(fechaFinal));
-            console.log("reserva guardada", response.data)
+            console.log("reserva ", response)
              // Redirigir a la Página de reserva exitosa y pasar el objeto producto
              const datosReservaExitosa = {
                 producto,
