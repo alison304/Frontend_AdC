@@ -1,7 +1,7 @@
 import React from 'react'
 import StylesReserva from '../styles/Reserva.module.css'
 import Swal from 'sweetalert2';
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { registrarReserva } from '../services/reservas.service';
 import { useMediaQuery, useTheme } from '@mui/material';
 
@@ -15,7 +15,6 @@ function Reserva() {
     const email = localStorage.getItem('userEmail');
     const fechaInicial = sessionStorage.getItem('fechaInicial')?.replaceAll("\"", "");
     const fechaFinal = sessionStorage.getItem('fechaFinal')?.replaceAll("\"", "");
-    console.log("reserva", producto)
     const formatearFecha = (fecha) => {
         let campos = fecha.split("/")
         if (campos.length == 3) {
@@ -27,7 +26,11 @@ function Reserva() {
     const fechaFin = new Date(formatearFecha(fechaFinal)).getTime();
     const diff = fechaFin - fechaInicio;
     const totalDias = diff / (1000 * 60 * 60 * 24);
+  const navigate = useNavigate();
 
+    const botonCancelar = () => {
+        navigate(-1);
+      }
     const errorEnLaReserva = () => {
         Swal.fire({
             title: "Aura de Cristal",
@@ -72,7 +75,7 @@ function Reserva() {
                         <p className={StylesReserva.nombreProducto}>{producto.nombre}</p>
                         <p className={StylesReserva.descripcionProducto}>{producto.descripcion}</p>
                     </div>
-                    <div className={StylesReserva.div1_2}>
+                    <div >
                         <p className={StylesReserva.fechasSeleccionada}>Fechas</p>
                         <p className={StylesReserva.fechasSeleccionada}>{fechaInicial + "-" + fechaFinal}</p>
                     </div>
@@ -106,7 +109,7 @@ function Reserva() {
                 </div>
             </article>
             <div className={StylesReserva.divBotones}>
-                <button className={StylesReserva.botonCancelar}>Cancelar</button>
+                <button className={StylesReserva.botonCancelar} onClick={botonCancelar}>Cancelar</button>
                 <button className={StylesReserva.botonReservar} onClick={reserva}>Solicitar reserva</button>
             </div>
         </section>
