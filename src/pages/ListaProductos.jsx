@@ -1,90 +1,94 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
+import React, { useEffect, useState } from "react";
+import DataTable from 'react-data-table-component';
+import { Button } from '@mui/material';
+import { useNavigate } from "react-router-dom";
+import { RiArrowGoBackFill } from "react-icons/ri";
 import StylesAdmin from '../styles/ListaProductos.module.css';
-import { useNavigate } from 'react-router-dom';
-import { useProductosStates } from "../utils/Context";
-import Swal from 'sweetalert2';
-
-const BASE_URL = "https://auradecristalapi-production.up.railway.app";
+import { getListProduct } from '../services/producto.service';
+import { Select, MenuItem, FormControl, InputLabel } from '@mui/material';
 
 const ListaProductos = () => {
     const [id, setId] = useState('')
     const [nombre, setNombre] = useState("");
-    const [acciones, setAcciones] = useState("");
-    const [categorias, setCategorias] = useState([]);
-    const { state } = useProductosStates();
-    const listaProductos = state.lista;
     const navigate = useNavigate();
-    const [mostrarLista, setMostrarLista] = useState(true);
+    const [productList, setProductList] = useState(null);
+
+    const onBack = () => {
+        navigate(-1)
+    }
+
+    const columns = [
+        {
+            name: 'id',
+            selector: row => row.idProducto,
+            sortable: true,
+            omit: true
+        },
+        {
+            name: 'Nombre',
+            selector: row => row.nombre,
+            sortable: true,
+        }
+    ];
 
     useEffect(() => {
-
-    })
-
-    const botonMovil = () => {
-        navigate('/');
-    };
-
-    const eliminarProducto = (id) => {
-        Swal.fire({
-            title: "Aura de Cristal",
-            text: "Deseas eliminar este producto?",
-            icon: "question",
-            showCancelButton: true,
-            confirmButtonText: "Eliminar",
-            cancelButtonText: "Cancelar",
-            confirmButtonColor: '#000',
-            cancelButtonColor: '#8D3434CC'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                console.log('eliminar');
-            }
-        });
-    };
-
-    
+        // declare the async data fetching function
+        const fetchData = async () => {
+            // get the data from the api
+            const list = await getListProduct();
+            // set state with the result
+            console.log(list.data);
+            setProductList(list.data);
+        }
+        // call the function
+        fetchData()
+            // make sure to catch any error
+            .catch(console.error);
+    }, [])
 
     return (
-        <>
-            <section className={StylesAdmin.seccionPrincipal}>
-                <div className={StylesAdmin.titulo}>Listar Productos</div>
-                <div className={StylesAdmin.botones}>
+        <React.Fragment>
+            <div className="container-adm">
+                <div className="btn-volv">
+                    <Button style={{
+                        float: 'left',
+                        border: 'none',
+                        color: 'white',
+                        padding: '5px 15px',
+                        fontSize: '16px',
+                        cursor: 'pointer',
+                        backgroundColor: '#9a6d4c',
+                        borderRadius: '5px',
+                    }}
+                        onMouseEnter={(e) => (e.target.style.backgroundColor = '#f2ca4f')}
+                        onMouseLeave={(e) => (e.target.style.backgroundColor = '#d1b362')}
+                        className='' onClick={onBack}><RiArrowGoBackFill />
+                        Volver
+                    </Button>
                 </div>
-            </section>
-            {mostrarLista && (
-                <table>
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>NOMBRE</th>
-                            <th>ACCIONES</th>
-                            <th>CATEGORIA</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {listaProductos.map((producto) => (
-                            <tr key={producto.id}>
-                                <td>{producto.id}</td>
-                                <td>{producto.nombre}</td>
-                                <td>
-                                    <div className="cambios-estados">
-                                        <button className={StylesAdmin.botonesEditar}>Editar</button>
-                                        <button onClick={() => eliminarProducto(producto.id)} className={StylesAdmin.botonesEliminar}>Eliminar</button>
-                                    </div>
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-            )}
-
-            <div className={StylesAdmin.mensajeMovil}>
-                <div className={StylesAdmin.fraseMovil}>
-                    <span className={StylesAdmin.frase2Movil}>Atención</span>No es posible entrar al Panel de Administración desde este dispositivo.
-                </div>
-                <button onClick={botonMovil} className={StylesAdmin.botonMovil}>Volver a inicio</button>
+                <h3 className="title-form">Productos registrados 📋</h3>
             </div>
-        </>
+            {
+                productList != null ?
+                    <React.Fragment>
+                        <div style={{ height: '650px', overflowX: 'hidden', overflowY: 'auto' }}>
+                            <DataTable
+                                columns={columns}
+                                data={productList}
+                                pagination          // Enable pagination
+                                paginationPerPage={5} // Show 5 rows per page
+                                paginationRowsPerPageOptions={[5, 10, 15]} // Options for number of rows per page
+                                highlightOnHover     // Optional: Highlight rows on hover
+                                striped              // Optional: Striped rows for better readability
+                            />
+                        </div>
+                    </React.Fragment>
+                    :
+                    <React.Fragment></React.Fragment>
+            }
+
+
+        </React.Fragment >
     );
 }
 

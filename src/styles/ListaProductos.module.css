@@ -15,7 +15,7 @@
     border-radius: 20px;
     border: 1px black solid;
     background-color:#DBBD6B66; 
-    font-family: 'Inter', sans-serif; /* Cambia 'p' a cualquier otro selector según lo necesites */
+    font-family: 'Inter', sans-serif;
     font-size: 16px;
     font-style: italic;
     font-weight: 600;
@@ -35,7 +35,7 @@
 .seccionPrincipal{
     display: flex;
     flex-direction: column;
-    height: 490px;
+    height: 200px;
     align-items: center;
     justify-content: center;
     gap:40px;
@@ -52,7 +52,6 @@
     width: 100%;
     display: flex;
     padding-left: 15%;
-   
 }
 
 .divTituloAgregar{
@@ -63,7 +62,6 @@
     background-color: white;
     display: flex;
     flex-direction: column;
-
 }
 
 .tituloAgregar{
@@ -86,13 +84,11 @@
     justify-content: space-between;
     gap: 14px;
 }
-
 .inputsFormulario{
     padding: 5px 30px; /* 10px arriba y abajo, 20px a los lados */
     background-color: transparent; /* Sin color de fondo */
     outline: none; 
 }
-
 .botoneRegistrar{
     width: 200px;
     height: 43px;
@@ -111,17 +107,7 @@
     display: none; /* Mensaje de móvil oculto */
 }
 
-.botonMovil{
-    display: none; /* Mensaje de móvil oculto */
-}
-
-.fraseMovil{
-    display: none; /* Mensaje de móvil oculto */
-}
-
-.frase2Movil{
-    display: none; /* Mensaje de móvil oculto */
-}
+/* aqui inicio */
 
 .botonesEliminar, .botonesEditar{
     background-color: #000000;
@@ -136,10 +122,16 @@
     text-align: center;
     margin: 10px;
 }
-
 .botonesEliminar{
     background-color: #8D3434CC;
 }
+
+/* aqui fin */
+
+
+
+
+/* estilos tabla inicio */
 
 table {
     width: 70%;
@@ -153,6 +145,24 @@ th, td {
     text-align: center;
 }
 
+/* estilos tabla fin */
+
+/* Mensaje de móvil oculto */
+
+.botonMovil{
+    display: none; /* Mensaje de móvil oculto */
+}
+
+.fraseMovil{
+    display: none; /* Mensaje de móvil oculto */
+}
+
+.frase2Movil{
+    display: none; /* Mensaje de móvil oculto */
+}
+
+/* Mensaje de móvil oculto fin */
+
 .mensajeForm{
     font-family: 'Inter', sans-serif; /* Cambia 'p' a cualquier otro selector según lo necesites */
     font-size: 22px;
@@ -162,13 +172,86 @@ th, td {
     text-align: center;
 }
 
+/* estilo producto */
+.productos{
+    width: 90vw;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+    gap:60px;
+}
+.cardGrid{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Crea dos columnas de igual tamaño */
+    gap:40px;
+}
+.cardImg {
+    width: 90%;      /* La imagen se ajusta al ancho del contenedor */
+    height: 250px;     /* La altura se ajusta para mantener la proporción */
+    object-fit: cover; /* Asegura que la imagen llene el contenedor sin deformarse */
+    border-radius: 40px;   
+}
+.card{
+  display: flex;
+  }
+  
+.nombreProducto,.descripcionProducto,.precioProducto{
+    font-family: 'Kaushan Script', cursive;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 34.82px;
+    text-align: center;
+}
+.link{
+    text-align: center;
+    width: 45%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.descripcionProducto{
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    height: auto;
+}
+.precioProducto{
+    font-size: 14px;
+    font-weight: 500;
+}
+.datos{
+    width: 50%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
 
+/* Fin estilo producto */
 
 /* Cuando la pantalla es de 900px o menos */
 @media (max-width: 600px) and (max-width: 1024px) {
     .seccionPrincipal, .registrarProducto{
         display: none; /* Oculta el mensaje de escritorio */
     }
+    
+/* reagregado inicio*/
+    .cardImg {
+        height: 350px;     /* La altura se ajusta para mantener la proporción */
+    }
+    .cardGrid{
+        display: grid;
+        grid-template-columns: repeat(1, 1fr); /* Crea dos columnas de igual tamaño */
+        gap:40px;
+        width: 100%;
+    }
+    .productos{
+        padding: 10px;
+    }
+/* reagregado fin*/
 
     .mensajeMovil{
         display: block; /* Muestra el mensaje de móvil */
@@ -215,86 +298,4 @@ th, td {
         text-align: center;
         margin: auto;
     }
-}
-
-.productos{
-    width: 90vw;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 30px;
-    gap:60px;
-}
-
-.cardGrid{
-    display: grid;
-    grid-template-columns: repeat(2, 1fr); /* Crea dos columnas de igual tamaño */
-    gap:40px;
-}
-
-.cardImg {
-    width: 90%;      /* La imagen se ajusta al ancho del contenedor */
-    height: 250px;     /* La altura se ajusta para mantener la proporción */
-    object-fit: cover; /* Asegura que la imagen llene el contenedor sin deformarse */
-    border-radius: 40px;   
-}
-
-.card{
-  display: flex;
-  }
-  
-.nombreProducto,.descripcionProducto,.precioProducto{
-    font-family: 'Kaushan Script', cursive;
-    font-size: 24px;
-    font-weight: 400;
-    line-height: 34.82px;
-    text-align: center;
-}
-
-.link{
-    text-align: center;
-    width: 45%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.descripcionProducto{
-    font-family: 'Inter', sans-serif;
-    font-size: 14px;
-    font-weight: 300;
-    height: auto;
-}
-
-.precioProducto{
-    font-size: 14px;
-    font-weight: 500;
-}
-
-.datos{
-width: 50%;
-text-align: center;
-display: flex;
-flex-direction: column;
-justify-content: center;
-}
-
-/* Cuando la pantalla es de 900px o menos */
-@media (max-width: 600px) and (max-width: 1024px)  {
-.cardImg {
-    height: 350px;     /* La altura se ajusta para mantener la proporción */
-}
-.cardGrid{
-    display: grid;
-    grid-template-columns: repeat(1, 1fr); /* Crea dos columnas de igual tamaño */
-    gap:40px;
-    width: 100%;
-}
-
-.productos{
-    padding: 10px;
-}
-
 }

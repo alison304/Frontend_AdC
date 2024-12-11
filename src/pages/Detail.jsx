@@ -1,55 +1,170 @@
 // Detail.jsx
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import StylesDetail from '../styles/Detail.module.css';
 import { useMediaQuery, useTheme } from '@mui/material';
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useProductosStates } from "../utils/Context";
+import { useState, useEffect } from "react";
 import Caracteristicas from "../components/Caracteristicas/Caractiristicas";
 import CalendarioDetail from "../components/CalendarioDetail";
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.css';
+import { obtenerReservasPorUsuario } from "../services/reservas.service";
 
 const Detail = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  const { state, dispatch } = useProductosStates(); // aquí tenemos (fechaInicial, fechaFinal)
+  const producto = location.state.producto;
+  
+  // Obtenemos si el usuario está autenticado
+  const isAuthenticated = !!localStorage.getItem('authToken');
+  const userId = localStorage.getItem("userId");
 
-  // Aquí deberías obtener el estado real de autenticación desde tu contexto o lógica real
-  // Ejemplo:
-  // const { isAuthenticated } = useAuth();
-  // Para este ejemplo asumiremos una variable (cambiar a tu lógica real):
-  const isAuthenticated = localStorage.getItem('authToken') ? true : false;
+  const [userReservas, setUserReservas] = useState([]);
+
+  useEffect(() => {
+    // Si el usuario está autenticado, obtenemos sus reservas
+    if (isAuthenticated && userId) {
+      obtenerReservasPorUsuario(userId)
+        .then(res => setUserReservas(res))
+        .catch(err => console.error(err));
+    }
+  }, [isAuthenticated, userId]);
 
   const volverHome = () => {
     navigate(-1);
   }
 
-  const producto = location.state.producto;
-  console.log("desde detail", location.state.producto.reservas)
+  const handleReservar = () => {
+    if (!isAuthenticated) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'No estás logueado',
+        text: 'Debes iniciar sesión para realizar una reserva o seleccionar fechas.',
+        confirmButtonText: 'Ok',
+        customClass: {
+          popup: 'elSwal'
+        }
+      }).then(() => {
+        navigate('/login');
+      });
+      return;
+    }
 
+    if (state.fechaInicial === null || state.fechaFinal === null) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Fechas no seleccionadas',
+        text: 'Debe seleccionar una fecha inicial y una fecha final antes de reservar.',
+        confirmButtonText: 'Ok',
+        customClass: {
+          popup: 'elSwal'
+        }
+      });
+      return;
+    }
+
+    const listaReservas = [...producto.reservas, ...userReservas];
+    const invalidRange = isDateRangeInvalid(state.fechaInicial, state.fechaFinal, listaReservas);
+
+    if (invalidRange) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Rango inválido',
+        text: 'El rango de fechas que seleccionó contiene uno o más días no disponibles.',
+        confirmButtonText: 'Ok',
+        customClass: {
+          popup: 'elSwal'
+        }
+      });
+      return;
+    }
+
+    // Redirigimos a la reserva
+    navigate(`/reserva/${producto.idProducto}`, { state: { producto } });
+  };
+
+  const isDateRangeInvalid = (fechaInicialStr, fechaFinalStr, listaReservas) => {
+    if (!fechaInicialStr || !fechaFinalStr) return true;
+    const [diaI, mesI, anioI] = fechaInicialStr.split('/').map(Number);
+    const [diaF, mesF, anioF] = fechaFinalStr.split('/').map(Number);
+    const fechaInicio = new Date(anioI, mesI - 1, diaI);
+    const fechaFin = new Date(anioF, mesF - 1, diaF);
+    let blackoutDates = getBlackoutDates(listaReservas);
+
+    let dateCheck = new Date(fechaInicio.getTime());
+    while (dateCheck <= fechaFin) {
+      if (blackoutDates.includes(dateCheck.toDateString())) {
+        return true;
+      }
+      dateCheck.setDate(dateCheck.getDate() + 1);
+    }
+    return false;
+  }
+
+  const getBlackoutDates = (reservas) => {
+    let blackoutDates = [];
+    reservas.forEach(e => {
+      let fi = new Date(e.fechaInicio);
+      let ff = new Date(e.fechaFin);
+      fi.setDate(fi.getDate() + 1);
+      ff.setDate(ff.getDate() + 1);
+      const date = new Date(fi.getTime());
+      while (date <= ff) {
+        if (!blackoutDates.includes(date.toDateString())) {
+          blackoutDates.push(date.toDateString());
+        }
+        date.setDate(date.getDate() + 1);
+      }
+    });
+    return blackoutDates;
+  }
+
+  // Validamos al ingresar a Detail si las fechas ya seleccionadas globalmente siguen siendo válidas
+  useEffect(() => {
+    if (state.fechaInicial && state.fechaFinal) {
+      const listaReservas = [...producto.reservas, ...userReservas];
+      if (isDateRangeInvalid(state.fechaInicial, state.fechaFinal, listaReservas)) {
+        Swal.fire({
+          icon: 'warning',
+          title: 'Rango inválido',
+          text: 'Las fechas seleccionadas previamente contienen días no disponibles. Por favor seleccione un nuevo rango.',
+          confirmButtonText: 'Ok',
+          customClass: {
+            popup: 'elSwal'
+          }
+        }).then(() => {
+          dispatch({ type: "ADD_FECHA_INICIAL", payload: null });
+          dispatch({ type: "ADD_FECHA_FINAL", payload: null });
+        });
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [userReservas]);
 
   return (
     <>
       <a onClick={volverHome} className={StylesDetail.tituloVolver}>Volver</a>
       <section className={StylesDetail.contenedor}>
-        {isMobile && (<h3 className={StylesDetail.nombre}>{location.state.producto.nombre}</h3>)}
-
+        {isMobile && (<h3 className={StylesDetail.nombre}>{producto.nombre}</h3>)}
+        
         <div className={StylesDetail.contenedorImg}>
-          <img src={location.state.producto.imagenes[0].url} className={StylesDetail.imgGrande} alt={location.state.producto.nombre} />
+          <img src={producto.imagenes[0].url} className={StylesDetail.imgGrande} alt={producto.nombre}/>
 
           <div className={StylesDetail.contenedorImgPequeñas}>
-            <img src={location.state.producto.imagenes[1].url} className={StylesDetail.imgPequeña} alt="imagen producto" />
-            <img src={location.state.producto.imagenes[2].url} className={StylesDetail.imgPequeña} alt="imagen producto" />
-            <img src={location.state.producto.imagenes[3].url} className={StylesDetail.imgPequeña} alt="imagen producto" />
+            <img src={producto.imagenes[1].url} className={StylesDetail.imgPequeña} alt="imagen producto"/>
+            <img src={producto.imagenes[2].url} className={StylesDetail.imgPequeña} alt="imagen producto"/>
+            <img src={producto.imagenes[3].url} className={StylesDetail.imgPequeña} alt="imagen producto"/>
 
             <Link
               to={{
-                pathname: '/gallery/' + location.state.producto.idProducto
+                pathname: '/gallery/' + producto.idProducto
               }}
               state={{ producto }}>
               <div className={StylesDetail.divImg}>
-                <img src={location.state.producto.imagenes[0].url} className={StylesDetail.imgPequeñaOpacity} alt="imagen producto" />
+                <img src={producto.imagenes[0].url} className={StylesDetail.imgPequeñaOpacity} alt="imagen producto"/>
                 {isMobile ? (<p className={StylesDetail.textImg}>Ver Más</p>) : (<p className={StylesDetail.textImg}>Ver todas las fotos</p>)}
               </div>
             </Link>
@@ -71,16 +186,17 @@ const Detail = () => {
           isMobile ? (
             <div className={StylesDetail.contenedorDetalle}>
               <h3 className={StylesDetail.tituloDescripcion}>Descripción:</h3>
-              <p className={StylesDetail.descripcion}>{location.state.producto.descripcion}</p>
-              <h3 className={StylesDetail.precio}>S/.{location.state.producto.precio_alquiler}</h3>
+              <p className={StylesDetail.descripcion}>{producto.descripcion}</p>
+              <h3 className={StylesDetail.precio}>S/.{producto.precio_alquiler}</h3>
 
               <CalendarioDetail
-                noDisponibles={location.state.producto.reservas}
+                noDisponibles={producto.reservas}
                 isAuthenticated={isAuthenticated}
+                userReservas={userReservas}
               />
               {isAuthenticated ? <Link
                 to={{
-                  pathname: '/reserva/' + location.state.producto.idProducto
+                  pathname: '/reserva/' + producto.idProducto
                 }}
                 state={{ producto }}>
                 <button className={StylesDetail.boton} >RESERVAR</button>
@@ -99,34 +215,61 @@ const Detail = () => {
             </div>
           ) : (
             <div className={StylesDetail.contenedorDetalle}>
-              <h3 className={StylesDetail.nombre}>{location.state.producto.nombre}</h3>
-              <h3 className={StylesDetail.precio}>S/.{location.state.producto.precio_alquiler}</h3>
+              <h3 className={StylesDetail.nombre}>{producto.nombre}</h3>
+              <h3 className={StylesDetail.precio}>S/.{producto.precio_alquiler}</h3>
               <h3 className={StylesDetail.tituloDescripcion}>Descripción:</h3>
-              <p className={StylesDetail.descripcion}>{location.state.producto.descripcion}</p>
-
+              <p className={StylesDetail.descripcion}>{producto.descripcion}</p>
+              
               <div className={StylesDetail.contenedorReserva}>
-                <CalendarioDetail
-                  noDisponibles={location.state.producto.reservas}
+                <CalendarioDetail 
+                  noDisponibles={producto.reservas}
                   isAuthenticated={isAuthenticated}
+                  userReservas={userReservas}
                 />
-                {isAuthenticated ? <Link
-                  to={{
-                    pathname: '/reserva/' + location.state.producto.idProducto
-                  }}
-                  state={{ producto }}>
-                  <button className={StylesDetail.boton} >RESERVAR</button>
-
-                </Link> :
-                  <button className={StylesDetail.boton} onClick={() => Swal.fire({
-                    icon: 'warning',
-                    title: 'No estás logueado',
-                    text: 'Debes iniciar sesión para realizar una reserva o seleccionar fechas.',
-                    confirmButtonText: 'Ok',
-                    customClass: {
-                      popup: 'elSwal'
-                    }
-                  })}>RESERVAR</button>
-                }
+                {isAuthenticated ? (
+                  state.fechaInicial !== null && state.fechaFinal !== null ? (
+                    <button 
+                      className={StylesDetail.boton}
+                      onClick={handleReservar}
+                    >
+                      RESERVAR
+                    </button>
+                  ) : (
+                    <button 
+                      className={StylesDetail.boton}
+                      onClick={() => Swal.fire({
+                        icon: 'warning',
+                        title: 'Fechas no seleccionadas',
+                        text: 'Debe seleccionar una fecha inicial y una fecha final antes de reservar.',
+                        confirmButtonText: 'Ok',
+                        customClass: {
+                          popup: 'elSwal'
+                        }
+                      })}
+                    >
+                      RESERVAR
+                    </button>
+                  )
+                ) : (
+                  <button 
+                    className={StylesDetail.boton}
+                    onClick={() => {
+                      Swal.fire({
+                        icon: 'warning',
+                        title: 'No estás logueado',
+                        text: 'Debes iniciar sesión para realizar una reserva o seleccionar fechas.',
+                        confirmButtonText: 'Ok',
+                        customClass: {
+                          popup: 'elSwal'
+                        }
+                      }).then(() => {
+                        navigate('/login');
+                      })
+                    }}
+                  >
+                    RESERVAR
+                  </button>
+                )}
               </div>
             </div>
           )

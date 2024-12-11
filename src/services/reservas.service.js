@@ -1,5 +1,6 @@
 // src/services/reservas.service.js
-const BASE_URL = 'https://auradecristalapi-production.up.railway.app'; // Cambiar por la URL base del servidor
+
+import { BASE_URL } from "./user.service";
 
 const getToken = () => localStorage.getItem("authToken");
 const getUserId = () => localStorage.getItem("userId");

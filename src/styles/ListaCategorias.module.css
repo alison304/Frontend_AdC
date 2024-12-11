@@ -76,7 +76,7 @@
 }
 
 /* Cuando la pantalla es de 900px o menos */
-@media (max-width: 600px) and (max-width: 1024px) {
+@media (max-width: 600px) or (max-width: 1024px) {
   .cardImg {
     height: 350px; /* La altura se ajusta para mantener la proporción */
   }

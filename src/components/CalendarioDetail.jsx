@@ -1,5 +1,5 @@
 // CalendarioDetail.jsx
-import { React, useLayoutEffect, useState } from 'react'
+import { React, useState, useEffect } from 'react'
 import StylesCalendario from '../styles/CalendarioDetail.module.css'
 import Calendar from 'react-calendar';
 import "react-calendar/dist/Calendar.css";
@@ -8,20 +8,23 @@ import CloseIcon from '@mui/icons-material/Close';
 import { useProductosStates } from "../utils/Context"
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.css';
+import { useNavigate } from "react-router-dom";
 
-function CalendarioDetail({ noDisponibles, isAuthenticated }) {
+function CalendarioDetail({ noDisponibles, isAuthenticated, userReservas = [] }) {
+  const navigate = useNavigate();
   const [fecha, setFecha] = useState(new Date());
   const [mostrarError, setmostrarError] = useState(false);
   const [mostrarErrorFechaNoDisponible, setmostrarErrorFechaNoDisponible] = useState(false);
   const [mostrarExito, setmostrarExito] = useState(false);
   const { state, dispatch } = useProductosStates();
   const [mostrarCalendario, setmostrarCalendario] = useState(false);
-  console.log("desde calendario", noDisponibles)
-  let blackoutDates = []
 
-  const listaReservas = noDisponibles
+  let blackoutDates = [];
+
+  const listaReservas = [...noDisponibles, ...userReservas];
 
   const obtenerDias = (fechaInicio, fechaFin) => {
+    // Ajuste a las fechas
     fechaInicio.setDate(fechaInicio.getDate() + 1);
     fechaFin.setDate(fechaFin.getDate() + 1);
 
@@ -35,15 +38,21 @@ function CalendarioDetail({ noDisponibles, isAuthenticated }) {
     return blackoutDates;
   }
 
+  listaReservas.forEach(e=>{
+    obtenerDias(new Date(e.fechaInicio),new Date(e.fechaFin))
+  })
+
   const handleCalendario = () => {
-    // Si el usuario no está autenticado, mostramos alerta y no abrimos el calendario
+    // Si el usuario no está autenticado, mostramos alerta y redirigimos a /login
     if (!isAuthenticated) {
       Swal.fire({
         icon: 'warning',
         title: 'No estás logueado',
         text: 'Debes iniciar sesión para seleccionar fechas.',
         confirmButtonText: 'Ok'
-      })
+      }).then(() => {
+        navigate('/login');
+      });
       return;
     }
 
@@ -66,28 +75,23 @@ function CalendarioDetail({ noDisponibles, isAuthenticated }) {
     return `${dia}/${mes}/${anio}`;
   };
 
-  const cambiarFecha = (newDate) => {
-    setFecha(newDate);
-  };
-
   const guardarFechas = () => {
-    if (new Date(fecha[0]).toDateString() !== "Invalid Date") {
-      setmostrarError(false);
-      setmostrarExito(true);
+    if (Array.isArray(fecha) && new Date(fecha[0]).toDateString() !== "Invalid Date") {
       const diaInicio = new Date(fecha[0]);
       const diaFin = new Date(fecha[1]);
-      dispatch({ type: "ADD_FECHA_INICIAL", payload: formatoFecha(diaInicio) });
-      dispatch({ type: "ADD_FECHA_FINAL", payload: formatoFecha(diaFin) });
-      blackoutDates.map((x) => {
-        let xDate = new Date(x);
-        if (diaInicio.getTime() <= xDate.getTime() && diaFin.getTime() >= xDate.getTime()) {
-          console.log("estas tomando un rango que contiene un dia no disponible", diaInicio, diaFin, noDisponibles)
-          setmostrarErrorFechaNoDisponible(true)
-          setmostrarExito(false);
-        }
-      })
-    }
-    else {
+
+      // Validar si rango es inválido
+      if (rangoInvalido(diaInicio, diaFin)) {
+        setmostrarError(false);
+        setmostrarExito(false);
+        setmostrarErrorFechaNoDisponible(true);
+      } else {
+        setmostrarError(false);
+        setmostrarExito(true);
+        dispatch({ type: "ADD_FECHA_INICIAL", payload: formatoFecha(diaInicio) });
+        dispatch({ type: "ADD_FECHA_FINAL", payload: formatoFecha(diaFin) });
+      }
+    } else {
       setmostrarError(true);
       setmostrarExito(false);
     }
@@ -95,15 +99,44 @@ function CalendarioDetail({ noDisponibles, isAuthenticated }) {
     handleCalendario();
   }
 
-  listaReservas.map(e=>{
-    obtenerDias(new Date(e.fechaInicio),new Date(e.fechaFin))
-  })
+  const rangoInvalido = (inicio, fin) => {
+    let dateCheck = new Date(inicio.getTime());
+    while (dateCheck <= fin) {
+      if (blackoutDates.includes(dateCheck.toDateString())) {
+        return true;
+      }
+      dateCheck.setDate(dateCheck.getDate() + 1);
+    }
+    return false;
+  }
+
+  // Al montar, si ya hay fechas seleccionadas, validar si son válidas
+  useEffect(() => {
+    if (state.fechaInicial && state.fechaFinal) {
+      const [diaI, mesI, anioI] = state.fechaInicial.split('/').map(Number);
+      const [diaF, mesF, anioF] = state.fechaFinal.split('/').map(Number);
+      const fechaInicio = new Date(anioI, mesI - 1, diaI);
+      const fechaFin = new Date(anioF, mesF - 1, diaF);
+
+      if (rangoInvalido(fechaInicio, fechaFin)) {
+        Swal.fire({
+          icon: 'warning',
+          title: 'Rango inválido',
+          text: 'Las fechas seleccionadas previamente contienen días no disponibles. Por favor seleccione un nuevo rango.',
+          confirmButtonText: 'Ok'
+        }).then(() => {
+          dispatch({ type: "ADD_FECHA_INICIAL", payload: null });
+          dispatch({ type: "ADD_FECHA_FINAL", payload: null });
+        });
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [userReservas, noDisponibles]);
 
   return (
     <div className={StylesCalendario.divPrincipal}>
-
       {mostrarError && (<p className={StylesCalendario.mensajeError}>Debe Seleccionar una fecha inicial y una fecha final</p>)}
-      {mostrarErrorFechaNoDisponible && (<p className={StylesCalendario.mensajeError}>El rango de fechas que seleccionó contiene uno o más días no disponibles</p>)}
+      {mostrarErrorFechaNoDisponible && (<p className={StylesCalendario.mensajeError}>El rango seleccionado contiene uno o más días no disponibles</p>)}
       {mostrarExito && (<p className={StylesCalendario.mensajeExito}>Se ha guardado la fecha seleccionada</p>)}
 
       <div className={StylesCalendario.titulo} >
@@ -138,13 +171,12 @@ function CalendarioDetail({ noDisponibles, isAuthenticated }) {
               showDoubleView={true}
               returnValue='range'
               selectRange
-              onChange={cambiarFecha}
+              onChange={(newDate) => setFecha(newDate)}
               locale='es-ES'
               tileDisabled={({ date }) => validateDisabled(date)}
             />
           </div>
         </> : <></>}
-
     </div>
   )
 }

@@ -97,7 +97,7 @@
     padding-bottom: 30px;
 }
 /* Cuando la pantalla es de 900px o menos */
-@media (max-width: 600px) and (max-width: 1024px)  {
+@media (max-width: 600px) or (max-width: 1024px)  {
     .piezas, .calificacion{
         font-size: 14px;       
     }

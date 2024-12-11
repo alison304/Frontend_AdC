@@ -53,10 +53,11 @@ const RegisterComponent = () => {
                 }                
             });
         } catch (error) {
+            let message = error.response.data;
             Swal.fire({
                 icon: 'error',
                 title: 'Aura de Cristal',
-                text: 'Usuario no creado',
+                text: `${message}`,
             });
         }
     };
