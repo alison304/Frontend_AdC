@@ -23,7 +23,7 @@ const AgregarProducto = () => {
   const [caracteristicas, setCaracteristicas] = useState([]);
   const [newFeatureId, setNewFeatureId] = useState("");
   const [nuevaImagen, setNuevaImagen] = useState("");
-  //const [mensaje, setMensaje] = useState("");
+
 
   useEffect(() => {
     axios.get(`${BASE_URL}/categorias/listar`).then((res) => setCategorias(res.data));
@@ -84,36 +84,31 @@ const AgregarProducto = () => {
       text: "Imagen eliminada correctamente.",
     });
   };
+  // Agregar ID de característica
+const addFeature = () => {
+  const featureId = parseInt(newFeatureId, 10);
+  
+  if (newFeatureId && !product.caracteristicaIds.includes(featureId)) {
+    setProduct({
+      ...product,
+      caracteristicaIds: [...product.caracteristicaIds, featureId],
+    });
+    setNewFeatureId("");
 
-  const addFeature = () => {
-    const feature = caracteristicas.find(
-      (carac) => carac.idCaracteristica === parseInt(newFeatureId, 10)
-    );
-
-    if (feature && !product.caracteristicaIds.some((f) => f.id === feature.idCaracteristica)) {
-      setProduct({
-        ...product,
-        caracteristicaIds: [
-          ...product.caracteristicaIds,
-          { id: feature.idCaracteristica, nombre: feature.nombre },
-        ],
-      });
-      setNewFeatureId("");
-
-      Swal.fire({
-        icon: "success",
-        title: "Éxito",
-        text: "Característica añadida correctamente.",
-      });
-    } else {
-      Swal.fire({
-        icon: "warning",
-        title: "Advertencia",
-        text: "La característica ya está agregada o es inválida.",
-      });
-    }
-  };
-
+    Swal.fire({
+      icon: "success",
+      title: "Éxito",
+      text: "Característica añadida correctamente.",
+    });
+  } else {
+    Swal.fire({
+      icon: "warning",
+      title: "Advertencia",
+      text: "La característica ya está agregada o es inválida.",
+    });
+  }
+};
+  // Eliminar una característica
   const removeFeature = (id) => {
     setProduct({
       ...product,
@@ -281,24 +276,21 @@ const AgregarProducto = () => {
               </option>
             ))}
           </select>
-          <button type="button" onClick={addFeature} className={styles.agregarBtn}>
+          <button type="button" onClick={addFeature}className={styles.agregarBtn}>
             Añadir Característica
           </button>
 
           <ul>
-            {product.caracteristicaIds.map((feature) => (
-              <li key={feature.id}>
-                {feature.nombre}{" "}
-                <button
-                  type="button"
-                  className={styles.eliminarBtn}
-                  onClick={() => removeFeature(feature.id)}
-                >
+            {product.caracteristicaIds.map((id) => (
+              <li key={id}>
+                {id}{" "}
+                <button type="button" className={styles.eliminarBtn} onClick={() => removeFeature(id)}>
                   Eliminar
                 </button>
               </li>
             ))}
           </ul>
+
 
           <button type="submit" className={styles.submitregistrar}>
             Registrar Producto
