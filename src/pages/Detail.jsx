@@ -10,6 +10,7 @@ import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.css';
 import { obtenerReservasPorUsuario } from "../services/reservas.service";
 
+
 const Detail = () => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -200,12 +201,10 @@ const Detail = () => {
 
           <div>
             {
-              !isMobile && (
                 <>
                   <h4>Características:</h4>
                   <Caracteristicas idProducto={producto.idProducto}></Caracteristicas>
                 </>
-              )
             }
           </div>
         </div>

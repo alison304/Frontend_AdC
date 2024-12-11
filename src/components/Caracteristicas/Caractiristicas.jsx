@@ -1,6 +1,6 @@
 import { getCaracteristica } from "../../services/caracteristicas.service";
 import { useEffect, useState } from "react";
-
+import PropTypes from 'prop-types';  // Importa PropTypes
 import "./Caracteristicas.css";
 
 const iconos = {
@@ -56,5 +56,11 @@ const Caracteristicas = ({ idProducto }) => {
   );
 };
 
+// Añadir validación de propTypes
+Caracteristicas.propTypes = {
+  idProducto: PropTypes.string.isRequired, // Suponiendo que idProducto es una cadena de texto
+};
+
 export default Caracteristicas;
+
 

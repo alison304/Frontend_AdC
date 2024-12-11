@@ -2,7 +2,6 @@ import axios from 'axios';
 
 // URL base del backend 
 const BASE_URL = 'https://auradecristalapi-production.up.railway.app';
-
 export const getListProduct = async () => {
   const options = {
     method: 'GET',
@@ -18,7 +17,6 @@ export const getListProduct = async () => {
     console.error(error);
   }
 }
-
 // Servicio para agregar un nuevo producto.
 export const agregarProducto = async (
   nombre, 
@@ -36,6 +34,16 @@ export const agregarProducto = async (
     throw new Error("No se encontró un token de autenticación.");
   }
 
+  console.log("nombre", nombre);
+  console.log("descripcion", descripcion);
+  console.log("precioAlquiler", precioAlquiler);
+  console.log("categoriaId", categoriaId);
+  console.log("tematicaId", tematicaId);
+  console.log("imagenes", imagenes);
+  console.log("caracteristicaIds", caracteristicaIds);
+
+
+
   try {
     const response = await axios.post(
       `${BASE_URL}/productos/registrar`,
@@ -43,8 +51,8 @@ export const agregarProducto = async (
         "nombre": nombre,
         "descripcion": descripcion,
         "precio_alquiler": precioAlquiler, 
-        "categoria_id": +categoriaId,
-        "tematica_id": +tematicaId,
+        "categoria_id": categoriaId,
+        "tematica_id": tematicaId,
         "imagenes": imagenes,
         "caracteristicaIds": caracteristicaIds,        
       },
@@ -112,9 +120,42 @@ export const actualizarProducto = (id, nombre, descripcion, precioAlquiler, disp
   );
 };
 
+export const obtenerCategorias = () => {
+  const token = localStorage.getItem('authToken');
+  return axios.get(`${BASE_URL}/categorias/listar`, {
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`,
+    },
+  });
+};
+
+export const obtenerTematicas = () => {
+  const token = localStorage.getItem('authToken');
+  return axios.get(`${BASE_URL}/tematicas/listar`, {
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`,
+    },
+  });
+}
+
+export const obtenerCaracteristicas = () => {
+  const token = localStorage.getItem('authToken');
+  return axios.get(`${BASE_URL}/caracteristicas/listar`, {
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`,
+    },
+  });
+}
+
 export default {
   agregarProducto,
   obtenerProductos,
   eliminarProducto,
   actualizarProducto,
+  obtenerCategorias,
+  obtenerTematicas,
+  obtenerCaracteristicas,
 };

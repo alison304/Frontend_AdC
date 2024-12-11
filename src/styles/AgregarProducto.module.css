@@ -131,7 +131,7 @@ select:focus {
 }
 
 .eliminarBtn {
-  font-size: 10px;
+  font-size: 12px;
   background-color: #e74c3c;
 }
 
@@ -211,4 +211,13 @@ select:focus {
   text-align: center;
 }
 
+.listaCaracteristicas {
+  list-style-type: none; /* Opcional: elimina los puntos de lista */
+  padding: 0;            /* Opcional: elimina el espaciado interno predeterminado */
+  margin: 0;             /* Opcional: elimina el margen predeterminado */
+}
 
+.itemCaracteristica {
+  display: block; /* Asegura que cada elemento ocupe una línea */
+  margin-bottom: 10px; /* Espaciado opcional entre elementos */
+}
