@@ -58,7 +58,6 @@
 }
 
 .principal{
-    border: 1px solid blue;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -68,7 +67,6 @@
 }
 
 .titulo{
-    border: solid 1px yellow;
     background-color: transparent;
     width: 50%;
     text-align: center;
@@ -90,20 +88,17 @@
 
 .nombre, .correo{
     font-size: 18px;
-    border: solid 1px rgb(20, 31, 230);
     width: 45%;
 }
 
 .datosUsuario{
     font-size: 16px;
-    border: solid 1px rgb(230, 20, 157);
     text-align: center;
     width: 45%;
 }
 
 .datosPoliticas{
     font-size: 16px;
-    border: solid 1px rgb(230, 20, 157);
     text-align: left;
     width: 100%;
     padding-left: 1rem;
@@ -121,7 +116,6 @@
 }
 
 .div2_1{
-    border: solid 2px  blueviolet;
     display: flex;
     justify-content: space-around;
 
@@ -134,16 +128,6 @@
 
 .informacion2{
     width: 45%;
-}
-
-.divBotones{
-    width: 50%;
-    display: flex;
-    justify-content: space-between;
-    font-family: 'Inter', sans-serif;
-    font-size: 1.2rem;
-    font-weight: 400;
-    border: 1px solid red;
 }
 
 .botonCancelar, .botonReservar{
@@ -170,6 +154,20 @@
 
 .div1_fechas{
     display: flex;
+}
+
+.tituloVolver {
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24.2px;
+    text-align: center;
+    color: #565656;
+    text-decoration: underline;
+    width: 100%;
+    display: flex;
+    padding-left: 20px;
+    padding-top: 20px;
 }
 
 /* Cuando la pantalla es de 900px o menos */
@@ -204,5 +202,7 @@
     width: 100%;
 }
 
-
+.tituloVolver {
+    margin-top: 20px;
+}
 }
