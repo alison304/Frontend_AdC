@@ -1,9 +1,11 @@
 import React from 'react'
 import StylesReservaExitosa from '../styles/ReservaExitosa.module.css'
-import { useLocation } from "react-router-dom";
+import { useLocation, Link} from "react-router-dom";
+import {useProductosStates} from "../utils/Context"
 
 function ReservaExitosa() {
 
+    const {dispatch} = useProductosStates();
     const location = useLocation();
     const {
         producto,
@@ -13,10 +15,24 @@ function ReservaExitosa() {
         fechaFinal,
         totalPrecio
     } = location.state || {}; // Aquí accedemos a todos los datos que pasamos
+    
 
-    console.log("reservae", producto)
+    console.log("reserva Exitosa", producto)
+
+    const borrarFechas = () => {
+        dispatch({type:"REMOVE_FECHA_INICIAL", payload:null});
+        dispatch({type:"REMOVE_FECHA_FINAL", payload:null});
+      }
     
   return (
+  <>
+      <Link to={{
+        pathname: '/detail/' + producto.idProducto
+      }}
+        state={{ producto }}
+        >
+        <a onClick={borrarFechas} className={StylesReservaExitosa.tituloVolver}>Volver</a>
+      </Link>
     <section className={StylesReservaExitosa.principal}>
     <p className={StylesReservaExitosa.titulo}>Ya esta lista tu reserva</p>
     <article className={StylesReservaExitosa.articulo}>
@@ -69,11 +85,8 @@ function ReservaExitosa() {
             </div>
         </div>            
     </article>
-    <div className={StylesReservaExitosa.divBotones}>
-        <button className={StylesReservaExitosa.botonCancelar}>Cancelar</button>
-        <button className={StylesReservaExitosa.botonReservar}>Solicitar reserva</button>
-    </div>
 </section>
+</>
   )
 }
 

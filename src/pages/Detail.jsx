@@ -62,7 +62,7 @@ const Detail = () => {
   }, [isAuthenticated, userId]);
 
   const volverHome = () => {
-    navigate(-1);
+    navigate(`/listaCategorias/${producto.categoria.idCategoria}`);
   }
 
   const handleReservar = () => {

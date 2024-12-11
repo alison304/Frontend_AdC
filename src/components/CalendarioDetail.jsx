@@ -170,7 +170,7 @@ function CalendarioDetail({ noDisponibles, isAuthenticated, userReservas = [] })
             <Calendar
               showDoubleView={true}
               returnValue='range'
-              selectRange
+              selectRange = {true}
               onChange={(newDate) => setFecha(newDate)}
               locale='es-ES'
               tileDisabled={({ date }) => validateDisabled(date)}
