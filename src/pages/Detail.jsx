@@ -34,22 +34,22 @@ const Detail = () => {
       <a onClick={volverHome} className={StylesDetail.tituloVolver}>Volver</a>
       <section className={StylesDetail.contenedor}>
         {isMobile && (<h3 className={StylesDetail.nombre}>{location.state.producto.nombre}</h3>)}
-        
+
         <div className={StylesDetail.contenedorImg}>
-          <img src={location.state.producto.imagenes[0].url} className={StylesDetail.imgGrande} alt={location.state.producto.nombre}/>
+          <img src={location.state.producto.imagenes[0].url} className={StylesDetail.imgGrande} alt={location.state.producto.nombre} />
 
           <div className={StylesDetail.contenedorImgPequeñas}>
-            <img src={location.state.producto.imagenes[1].url} className={StylesDetail.imgPequeña} alt="imagen producto"/>
-            <img src={location.state.producto.imagenes[2].url} className={StylesDetail.imgPequeña} alt="imagen producto"/>
-            <img src={location.state.producto.imagenes[3].url} className={StylesDetail.imgPequeña} alt="imagen producto"/>
+            <img src={location.state.producto.imagenes[1].url} className={StylesDetail.imgPequeña} alt="imagen producto" />
+            <img src={location.state.producto.imagenes[2].url} className={StylesDetail.imgPequeña} alt="imagen producto" />
+            <img src={location.state.producto.imagenes[3].url} className={StylesDetail.imgPequeña} alt="imagen producto" />
 
-            <Link 
+            <Link
               to={{
                 pathname: '/gallery/' + location.state.producto.idProducto
               }}
               state={{ producto }}>
               <div className={StylesDetail.divImg}>
-                <img src={location.state.producto.imagenes[0].url} className={StylesDetail.imgPequeñaOpacity} alt="imagen producto"/>
+                <img src={location.state.producto.imagenes[0].url} className={StylesDetail.imgPequeñaOpacity} alt="imagen producto" />
                 {isMobile ? (<p className={StylesDetail.textImg}>Ver Más</p>) : (<p className={StylesDetail.textImg}>Ver todas las fotos</p>)}
               </div>
             </Link>
@@ -73,12 +73,29 @@ const Detail = () => {
               <h3 className={StylesDetail.tituloDescripcion}>Descripción:</h3>
               <p className={StylesDetail.descripcion}>{location.state.producto.descripcion}</p>
               <h3 className={StylesDetail.precio}>S/.{location.state.producto.precio_alquiler}</h3>
-              
-              <CalendarioDetail 
-                noDisponibles={location.state.producto.reservas} 
-                isAuthenticated={isAuthenticated} 
+
+              <CalendarioDetail
+                noDisponibles={location.state.producto.reservas}
+                isAuthenticated={isAuthenticated}
               />
-              <button className={StylesDetail.boton} onClick={handleReservar} >RESERVAR </button>
+              {isAuthenticated ? <Link
+                to={{
+                  pathname: '/reserva/' + location.state.producto.idProducto
+                }}
+                state={{ producto }}>
+                <button className={StylesDetail.boton} >RESERVAR</button>
+
+              </Link> :
+                <button className={StylesDetail.boton} onClick={() => Swal.fire({
+                  icon: 'warning',
+                  title: 'No estás logueado',
+                  text: 'Debes iniciar sesión para realizar una reserva o seleccionar fechas.',
+                  confirmButtonText: 'Ok',
+                  customClass: {
+                    popup: 'elSwal'
+                  }
+                })}>RESERVAR</button>
+              }
             </div>
           ) : (
             <div className={StylesDetail.contenedorDetalle}>
@@ -86,30 +103,30 @@ const Detail = () => {
               <h3 className={StylesDetail.precio}>S/.{location.state.producto.precio_alquiler}</h3>
               <h3 className={StylesDetail.tituloDescripcion}>Descripción:</h3>
               <p className={StylesDetail.descripcion}>{location.state.producto.descripcion}</p>
-              
+
               <div className={StylesDetail.contenedorReserva}>
-                <CalendarioDetail 
+                <CalendarioDetail
                   noDisponibles={location.state.producto.reservas}
                   isAuthenticated={isAuthenticated}
                 />
-{isAuthenticated ?       <Link 
-      to={{
-        pathname: '/reserva/' + location.state.producto.idProducto
-      }}
-      state={{ producto }}>
-                <button className={StylesDetail.boton} >RESERVAR</button>
+                {isAuthenticated ? <Link
+                  to={{
+                    pathname: '/reserva/' + location.state.producto.idProducto
+                  }}
+                  state={{ producto }}>
+                  <button className={StylesDetail.boton} >RESERVAR</button>
 
-    </Link> : 
-                <button className={StylesDetail.boton} onClick={()=>Swal.fire({
-                  icon: 'warning',
-                  title: 'No estás logueado',
-                  text: 'Debes iniciar sesión para realizar una reserva o seleccionar fechas.',
-                  confirmButtonText: 'Ok',
-                  customClass: {
-                    popup: 'elSwal'
+                </Link> :
+                  <button className={StylesDetail.boton} onClick={() => Swal.fire({
+                    icon: 'warning',
+                    title: 'No estás logueado',
+                    text: 'Debes iniciar sesión para realizar una reserva o seleccionar fechas.',
+                    confirmButtonText: 'Ok',
+                    customClass: {
+                      popup: 'elSwal'
+                    }
+                  })}>RESERVAR</button>
                 }
-                })}>RESERVAR</button>
-              }
               </div>
             </div>
           )
