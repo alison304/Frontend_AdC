@@ -13,7 +13,6 @@ import RegisterForm from './components/RegisterForm/RegisterForm';
 import ListaProductos from './pages/ListaProductos';
 import ListaCategorias from './pages/ListaCategorias';
 import Login from './components/LoginForm/login';
-import AdministrarCategorias from './pages/AdministrarCategorias';
 import UserProfile from './components/UserProfile/UserProfile';
 import ProtectedRoute from './components/LoginForm/ProtectedRoute';
 import Logout from './components/Logout/Logout';
