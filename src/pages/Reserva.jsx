@@ -56,6 +56,8 @@ function Reserva() {
                 errorEnLaReserva('Error en los datos enviados o las fechas seleccionadas se encuentran ocupadas. Por favor, contacte con soporte.');
             }else if(response.status === 500){
                 errorEnLaReserva('Error en el servidor. Por favor, contacte con soporte.');
+            }else if(response.status === 403){
+                errorEnLaReserva('Por tu perfil no puedes realizar reservas. Por favor, contacte con soporte.');
             }if (response.status === 201){
                 console.log('reserva exitosa')
                 // Redirigir a la Página de reserva exitosa y pasar el objeto producto
