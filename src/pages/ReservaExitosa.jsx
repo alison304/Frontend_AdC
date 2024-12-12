@@ -30,8 +30,10 @@ function ReservaExitosa() {
         pathname: '/detail/' + producto.idProducto
       }}
         state={{ producto }}
+        onClick={borrarFechas}
+        className={StylesReservaExitosa.tituloVolver}
         >
-        <a onClick={borrarFechas} className={StylesReservaExitosa.tituloVolver}>Volver</a>
+        Volver
       </Link>
     <section className={StylesReservaExitosa.principal}>
     <p className={StylesReservaExitosa.titulo}>Ya esta lista tu reserva</p>

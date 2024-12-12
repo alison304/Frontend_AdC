@@ -115,4 +115,13 @@
     .recomendacionesPiezas, .precioBusqueda{
         display: contents;
     }
+
+    .nombreCategorias, .tituloNoResultados{
+        font-family: 'Kaushan Script', cursive;
+        font-size: 20px;
+        font-weight: 400;
+        line-height: 34.82px;
+        text-align: center;
+        color: black;
+    }
 }
