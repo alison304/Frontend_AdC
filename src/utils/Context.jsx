@@ -7,12 +7,17 @@ const productosStates= createContext();
 const fechaInicial = JSON.parse(sessionStorage.getItem("fechaInicial")) || null;
 const fechaFinal = JSON.parse(sessionStorage.getItem("fechaFinal")) || null;
 
+const fechaInicialReserva = JSON.parse(sessionStorage.getItem("fechaInicialReserva")) || null;
+const fechaFinalReserva = JSON.parse(sessionStorage.getItem("fechaFinalReserva")) || null;
+
 const initialState = {
   lista:[],
   listaCategorias:[],
   listaProductosAleatorios:[],
   fechaInicial:fechaInicial,
   fechaFinal:fechaFinal,
+  fechaInicialReserva:fechaInicialReserva,
+  fechaFinalReserva:fechaFinalReserva,
   mostrarBusqueda:false,
   palabraDescripcion:"",
   tipo_Busqueda:3, 
@@ -75,6 +80,12 @@ console.log('fecDes',urlBuscarProductosDescripcionFechas);
     sessionStorage.setItem("fechaInicial", JSON.stringify(state.fechaInicial));
     sessionStorage.setItem("fechaFinal", JSON.stringify(state.fechaFinal));
   }, [state.fechaInicial, state.fechaFinal]);
+  
+  //fechasReserva
+  useEffect(() => {
+    sessionStorage.setItem("fechaInicialReserva", JSON.stringify(state.fechaInicialReserva));
+    sessionStorage.setItem("fechaFinalReserva", JSON.stringify(state.fechaFinalReserva));
+  }, [state.fechaInicialReserva, state.fechaFinalReserva]);
 
   //buscador
   if(state.tipo_Busqueda === 1){
