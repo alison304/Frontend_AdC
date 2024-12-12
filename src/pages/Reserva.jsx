@@ -30,42 +30,53 @@ function Reserva() {
 
     const botonCancelar = () => {
         navigate(-1);
-      }
-    const errorEnLaReserva = () => {
+    }
+
+    const errorEnLaReserva = (mensaje) => {
         Swal.fire({
             title: "Aura de Cristal",
-            text: "Hubo un problema con el método de pago",
-            icon: "question",
-            showCancelButton: true,
+            text: mensaje,
+            icon: "error",
+            showCancelButton: false,
             confirmButtonText: "Volver",
-            cancelButtonText: "Más info",
-            confirmButtonColor: '#000',
-            cancelButtonColor: '#8D3434CC'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                console.log('error reserva hola');
-            }
+            confirmButtonColor: '#000'
         });
     };
+
 
     const reserva = async () => {
         try {
             const response = await registrarReserva(producto.idProducto, parseInt(localStorage.getItem('userId')), formatearFecha(fechaInicialReserva), formatearFecha(fechaFinalReserva));
+            
             console.log("reserva ", response)
-             // Redirigir a la Página de reserva exitosa y pasar el objeto producto
-             const datosReservaExitosa = {
-                producto,
-                nombreUsuario: nombre + " " + apellido,
-                emailUsuario: email,
-                fechaInicialReserva,
-                fechaFinalReserva,
-                totalPrecio: producto.precio_alquiler * totalDias
-            };
 
-            navigate('/reservaExitosa', { state: datosReservaExitosa });
+            if (response === 404) {
+                errorEnLaReserva('El id del usuario o el id del producto no existe. Por favor, contacte con soporte.');
+            }else if(response.status === 400){
+                errorEnLaReserva('Error en los datos enviados o las fechas seleccionadas se encuentran ocupadas. Por favor, contacte con soporte.');
+            }else if(response.status === 500){
+                errorEnLaReserva('Error en el servidor. Por favor, contacte con soporte.');
+            }if (response.status === 201){
+                console.log('reserva exitosa')
+                // Redirigir a la Página de reserva exitosa y pasar el objeto producto
+                const datosReservaExitosa = {
+                    producto,
+                    nombreUsuario: nombre + " " + apellido,
+                    emailUsuario: email,
+                    fechaInicialReserva,
+                    fechaFinalReserva,
+                    totalPrecio: producto.precio_alquiler * totalDias
+                };
 
+                navigate('/reservaExitosa', { state: datosReservaExitosa });
+
+            }
+            else{
+                console.log('otro error')
+            }
         } catch (error) {
             console.log("error en reserva", error)
+            errorEnLaReserva('Se ha presentando un error. Por favor, contacte con soporte.');
         }
     }
 

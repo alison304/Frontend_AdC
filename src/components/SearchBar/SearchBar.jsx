@@ -58,7 +58,7 @@ const SearchBar = () => {
             <form className='form'>
                 <div className ='search-bar'>
                     <input 
-                    type="text" style={{fontSize: '1rem', width :'80%',border:'none', borderRadius: '0px'}} 
+                    type="text" style={{fontSize: '1rem', width :'80%',border:'none', borderRadius: '0px', backgroundColor:'transparent'}} 
                     placeholder="Que estás buscando?" className="search-input" 
                     value={state.busqueda} onChange={handleChangeBuscador}/>
                 </div>

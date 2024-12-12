@@ -222,7 +222,13 @@
     width: 100%;
 }
 
-.tituloVolver {
-    margin-top: 20px;
+.tituloVolver{
+    margin-top: 50px;
 }
+
+.principal{
+    margin-top: 10px;
+}
+
+
 }

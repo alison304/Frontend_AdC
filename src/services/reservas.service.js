@@ -53,9 +53,13 @@ export const registrarReserva = async (productoId, usuarioId, fechaInicio, fecha
       }),
     });
     if (!response.ok) {
-      return await response.text();
+      return response.status;
     }
-    return await response.json();
+    const data = await response.json();  // Esperamos que la respuesta se convierta en JSON
+      return {
+        status: response.status,  // Código de estado HTTP
+        data  // Los datos de la respuesta
+      };
   } catch (error) {
     console.error(error);
     throw error;
