@@ -164,6 +164,7 @@
     text-align: center;
     color: #565656;
     text-decoration: underline;
+    border: solid 1px red;
     width: 100%;
     display: flex;
     padding-left: 20px;

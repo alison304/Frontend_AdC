@@ -28,5 +28,9 @@ export const reducer = (state,action) =>{
             return {...state, busqueda:action.payload};
         case "PRODUCTOS_BUSQUEDA":
             return {...state, productosBusqueda:action.payload};
+        case "REMOVE_FECHA_INICIAL_RESERVA":
+            return {...state, fechaInicialReserva: action.payload};
+        case "REMOVE_FECHA_FINAL_RESERVA":
+            return {...state, fechaFinalReserva: action.payload};
         }       
 }
