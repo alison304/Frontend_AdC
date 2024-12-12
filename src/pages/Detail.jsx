@@ -90,7 +90,7 @@ const Detail = () => {
       return;
     }
 
-    if (state.fechaInicial === null || state.fechaFinal === null) {
+    if (state.fechaInicialReserva === null || state.fechaFinalReserva === null) {
       Swal.fire({
         icon: 'warning',
         title: 'Fechas no seleccionadas',
@@ -104,7 +104,7 @@ const Detail = () => {
     }
 
     const listaReservas = [...producto.reservas, ...userReservas];
-    const invalidRange = isDateRangeInvalid(state.fechaInicial, state.fechaFinal, listaReservas);
+    const invalidRange = isDateRangeInvalid(state.fechaInicialReserva, state.fechaFinalReserva, listaReservas);
 
     if (invalidRange) {
       Swal.fire({
@@ -161,9 +161,9 @@ const Detail = () => {
 
   // Validamos al ingresar a Detail si las fechas ya seleccionadas globalmente siguen siendo válidas
   useEffect(() => {
-    if (state.fechaInicial && state.fechaFinal) {
+    if (state.fechaInicialReserva && state.fechaFinalReserva) {
       const listaReservas = [...producto.reservas, ...userReservas];
-      if (isDateRangeInvalid(state.fechaInicial, state.fechaFinal, listaReservas)) {
+      if (isDateRangeInvalid(state.fechaInicialReserva, state.fechaFinalReserva, listaReservas)) {
         Swal.fire({
           icon: 'warning',
           title: 'Rango inválido',
@@ -263,7 +263,7 @@ const Detail = () => {
                   userReservas={userReservas}
                 />
                 {isAuthenticated ? (
-                  state.fechaInicial !== null && state.fechaFinal !== null ? (
+                  state.fechaInicialReserva !== null && state.fechaFinalReserva !== null ? (
                     <button 
                       className={StylesDetail.boton}
                       onClick={handleReservar}

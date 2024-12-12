@@ -88,8 +88,8 @@ function CalendarioDetail({ noDisponibles, isAuthenticated, userReservas = [] })
       } else {
         setmostrarError(false);
         setmostrarExito(true);
-        dispatch({ type: "ADD_FECHA_INICIAL", payload: formatoFecha(diaInicio) });
-        dispatch({ type: "ADD_FECHA_FINAL", payload: formatoFecha(diaFin) });
+        dispatch({ type: "ADD_FECHA_INICIAL_RESERVA", payload: formatoFecha(diaInicio) });
+        dispatch({ type: "ADD_FECHA_FINAL_RESERVA", payload: formatoFecha(diaFin) });
       }
     } else {
       setmostrarError(true);
@@ -112,9 +112,9 @@ function CalendarioDetail({ noDisponibles, isAuthenticated, userReservas = [] })
 
   // Al montar, si ya hay fechas seleccionadas, validar si son válidas
   useEffect(() => {
-    if (state.fechaInicial && state.fechaFinal) {
-      const [diaI, mesI, anioI] = state.fechaInicial.split('/').map(Number);
-      const [diaF, mesF, anioF] = state.fechaFinal.split('/').map(Number);
+    if (state.fechaInicialReserva && state.fechaFinalReserva) {
+      const [diaI, mesI, anioI] = state.fechaInicialReserva.split('/').map(Number);
+      const [diaF, mesF, anioF] = state.fechaFinalReserva.split('/').map(Number);
       const fechaInicio = new Date(anioI, mesI - 1, diaI);
       const fechaFin = new Date(anioF, mesF - 1, diaF);
 
@@ -125,8 +125,8 @@ function CalendarioDetail({ noDisponibles, isAuthenticated, userReservas = [] })
           text: 'Las fechas seleccionadas previamente contienen días no disponibles. Por favor seleccione un nuevo rango.',
           confirmButtonText: 'Ok'
         }).then(() => {
-          dispatch({ type: "ADD_FECHA_INICIAL", payload: null });
-          dispatch({ type: "ADD_FECHA_FINAL", payload: null });
+          dispatch({ type: "ADD_FECHA_INICIAL_RESERVA", payload: null });
+          dispatch({ type: "ADD_FECHA_FINAL_RESERVA", payload: null });
         });
       }
     }
@@ -143,18 +143,18 @@ function CalendarioDetail({ noDisponibles, isAuthenticated, userReservas = [] })
         <button className={StylesCalendario.botonFechas} onClick={handleCalendario}>
           <p className={StylesCalendario.fechasSeleccionada}> Desde
             <span className={StylesCalendario.fechas}>
-            {state.fechaInicial === null ?
+            {state.fechaInicialReserva === null ?
               ('DD/MM/YYYY') :
-              (state.fechaInicial)}</span>
+              (state.fechaInicialReserva)}</span>
           </p>
         </button>
         <ArrowForwardIcon />
         <button className={StylesCalendario.botonFechas} onClick={handleCalendario}>
           <p className={StylesCalendario.fechasSeleccionada}>Hasta
             <span className={StylesCalendario.fechas}>
-            {state.fechaFinal === null ?
+            {state.fechaFinalReserva === null ?
               ('DD/MM/YYYY') :
-              (state.fechaFinal)}</span>
+              (state.fechaFinalReserva)}</span>
           </p>
         </button>
       </div>

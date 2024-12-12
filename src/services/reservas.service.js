@@ -67,7 +67,7 @@ export const obtenerReservasPorUsuario = async (usuarioId) => {
   try {
     const response = await fetch(`${BASE_URL}/reservas/usuario/${usuarioId}`, {
       method: 'GET',
-      headers: headers,
+      headers: getHeaders(),
     });
     if (!response.ok) {
       throw new Error('Error al obtener las reservas del usuario');

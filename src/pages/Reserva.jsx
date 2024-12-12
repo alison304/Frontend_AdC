@@ -13,8 +13,8 @@ function Reserva() {
     const nombre = localStorage.getItem('userNombre');
     const apellido = localStorage.getItem('userApellido');
     const email = localStorage.getItem('userEmail');
-    const fechaInicial = sessionStorage.getItem('fechaInicial')?.replaceAll("\"", "");
-    const fechaFinal = sessionStorage.getItem('fechaFinal')?.replaceAll("\"", "");
+    const fechaInicialReserva = sessionStorage.getItem('fechaInicialReserva')?.replaceAll("\"", "");
+    const fechaFinalReserva = sessionStorage.getItem('fechaFinalReserva')?.replaceAll("\"", "");
     const formatearFecha = (fecha) => {
         let campos = fecha.split("/")
         if (campos.length == 3) {
@@ -22,8 +22,8 @@ function Reserva() {
         }
         return fecha
     }
-    const fechaInicio = new Date(formatearFecha(fechaInicial)).getTime();
-    const fechaFin = new Date(formatearFecha(fechaFinal)).getTime();
+    const fechaInicio = new Date(formatearFecha(fechaInicialReserva)).getTime();
+    const fechaFin = new Date(formatearFecha(fechaFinalReserva)).getTime();
     const diff = fechaFin - fechaInicio;
     const totalDias = (diff / (1000 * 60 * 60 * 24)) + 1;
   const navigate = useNavigate();
@@ -50,15 +50,15 @@ function Reserva() {
 
     const reserva = async () => {
         try {
-            const response = await registrarReserva(producto.idProducto, parseInt(localStorage.getItem('userId')), formatearFecha(fechaInicial), formatearFecha(fechaFinal));
+            const response = await registrarReserva(producto.idProducto, parseInt(localStorage.getItem('userId')), formatearFecha(fechaInicialReserva), formatearFecha(fechaFinalReserva));
             console.log("reserva ", response)
              // Redirigir a la Página de reserva exitosa y pasar el objeto producto
              const datosReservaExitosa = {
                 producto,
                 nombreUsuario: nombre + " " + apellido,
                 emailUsuario: email,
-                fechaInicial,
-                fechaFinal,
+                fechaInicialReserva,
+                fechaFinalReserva,
                 totalPrecio: producto.precio_alquiler * totalDias
             };
 
@@ -79,7 +79,7 @@ function Reserva() {
                         <p className={StylesReserva.nombreProducto}>{producto.nombre}</p>
                         <p className={StylesReserva.descripcionProducto}>{producto.descripcion}</p>
                         <p className={StylesReserva.fechasSeleccionada}>Fechas</p>
-                        <p className={StylesReserva.fechasSeleccionada}>{fechaInicial + "-" + fechaFinal}</p>
+                        <p className={StylesReserva.fechasSeleccionada}>{fechaInicialReserva + "-" + fechaFinalReserva}</p>
                     </div>
                 </div> : <div className={StylesReserva.div1}>
                     <img src={producto.imagenes[0].url} className={StylesReserva.imagen} />
@@ -89,7 +89,7 @@ function Reserva() {
                     </div>
                     <div >
                         <p className={StylesReserva.fechasSeleccionada}>Fechas</p>
-                        <p className={StylesReserva.fechasSeleccionada}>{fechaInicial + "-" + fechaFinal}</p>
+                        <p className={StylesReserva.fechasSeleccionada}>{fechaInicialReserva + "-" + fechaFinalReserva}</p>
                     </div>
                 </div>}
 
