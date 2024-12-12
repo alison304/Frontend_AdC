@@ -18,6 +18,10 @@ const Detail = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const { state, dispatch } = useProductosStates(); // aquí tenemos (fechaInicial, fechaFinal)
   const producto = location.state.producto;
+  const esRecomendacion = location.state.esRecomendacion;
+  console.log('pro', producto);
+  console.log('reco', esRecomendacion);
+  
   const politicasDelProducto = useMemo(() => (
     <div className={StylesDetail.contenedorPoliticasDelProducto}>
       <p className={StylesDetail.tituloPoliticasDelProducto}>
@@ -63,7 +67,11 @@ const Detail = () => {
   }, [isAuthenticated, userId]);
 
   const volverHome = () => {
+    if(esRecomendacion){
+      navigate(-1);
+    }else{
     navigate(`/listaCategorias/${producto.categoria.idCategoria}`);
+    }
   }
 
   const handleReservar = () => {

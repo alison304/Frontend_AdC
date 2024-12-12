@@ -1,12 +1,18 @@
 import React from "react";
 import StylesHome from '../styles/Home.module.css'
 import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 const Card = ({ dato, esCategoria, productos, esBusqueda }) => {
 
   console.log('RENDERIZANDO CARD')
+  const [producto, setProducto] = useState(dato);
 
-  const producto = dato;
+  useEffect(() => {
+    // Si el objeto en las props cambia, actualizamos el estado
+    setProducto(producto);
+  }, [producto]);
+
 
   let productoCategoria = {};
   if (esCategoria) {
@@ -21,6 +27,7 @@ const Card = ({ dato, esCategoria, productos, esBusqueda }) => {
     }
 
   }
+
   console.log('productoCategoria', productoCategoria);
 
 
@@ -41,7 +48,10 @@ const Card = ({ dato, esCategoria, productos, esBusqueda }) => {
               <Link to={{
                 pathname: '/detail/' + dato.idProducto
               }}
-                state={{ producto }} className={StylesHome.link}>
+                state={{ 
+                  producto,
+                  esRecomendacion:false
+                  }} className={StylesHome.link}>
                 <h3 className={StylesHome.nombreCategorias} >{dato.nombre}</h3>
                 <img src={dato.imagenes[0].url} className={StylesHome.cardImg} />
               </Link>
@@ -55,7 +65,9 @@ const Card = ({ dato, esCategoria, productos, esBusqueda }) => {
               <Link to={{
                 pathname: '/detail/' + dato.idProducto
               }}
-                state={{ producto }} className={StylesHome.link}>
+                state={{  producto,
+                  esRecomendacion: true  // Asignamos directamente `true` al estado
+                }} className={StylesHome.link}>
                 <h3 className={StylesHome.nombreCategorias} >{dato.nombre}</h3>
                 <img src={dato.imagenes[0].url} className={StylesHome.cardImg} />
               </Link>
