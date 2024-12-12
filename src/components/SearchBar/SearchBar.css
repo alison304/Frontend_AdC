@@ -115,7 +115,8 @@
 
     .buscadorParte2{
         justify-content: space-between;
-        width: 50%;      
+        align-items: center;
+        width: 50%;     
     }
     
 

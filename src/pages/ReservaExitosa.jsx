@@ -32,6 +32,7 @@ function ReservaExitosa() {
         state={{ producto }}
         onClick={borrarFechas}
         className={StylesReservaExitosa.tituloVolver}
+        style={{textDecoration:'underline'}}
         >
         Volver
       </Link>
