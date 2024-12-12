@@ -11,8 +11,8 @@ function ReservaExitosa() {
         producto,
         nombreUsuario,
         emailUsuario,
-        fechaInicial,
-        fechaFinal,
+        fechaInicialReserva,
+        fechaFinalReserva,
         totalPrecio
     } = location.state || {}; // Aquí accedemos a todos los datos que pasamos
     
@@ -20,8 +20,8 @@ function ReservaExitosa() {
     console.log("reserva Exitosa", producto)
 
     const borrarFechas = () => {
-        dispatch({type:"REMOVE_FECHA_INICIAL", payload:null});
-        dispatch({type:"REMOVE_FECHA_FINAL", payload:null});
+        dispatch({type:"REMOVE_FECHA_INICIAL_RESERVA", payload:null});
+        dispatch({type:"REMOVE_FECHA_FINAL_RESERVA", payload:null});
       }
     
   return (
@@ -52,11 +52,11 @@ function ReservaExitosa() {
             <div className={StylesReservaExitosa.div1_fechas}>
                 <div className={StylesReservaExitosa.div1_2_desde}>                  
                     <p className={StylesReservaExitosa.fechasSeleccionada}>Desde</p>
-                    <p className={StylesReservaExitosa.fechasSeleccionada}>{fechaInicial}</p>             
+                    <p className={StylesReservaExitosa.fechasSeleccionada}>{fechaInicialReserva}</p>             
                 </div>
                 <div className={StylesReservaExitosa.div1_2_hasta}>                  
                     <p className={StylesReservaExitosa.fechasSeleccionada}>Hasta</p>
-                    <p className={StylesReservaExitosa.fechasSeleccionada}>{fechaFinal}</p>             
+                    <p className={StylesReservaExitosa.fechasSeleccionada}>{fechaFinalReserva}</p>             
                 </div>
             </div>
             
